@@ -32,7 +32,7 @@ public class User {
 
     }
 
-    //For Student Edit profile
+    //For user Edit profile
     public User(String name, String email, String pass, String rfid, String mobile, String city, String profile_pic) {
         this.setRefid(rfid);
         this.setName(name);
