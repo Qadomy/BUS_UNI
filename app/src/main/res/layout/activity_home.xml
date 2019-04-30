@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blackColor"
+    tools:context=".Home">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:id="@+id/busLocation_ImagView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="busLocationClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bus_location" />
+
+            <TextView
+                android:id="@+id/busLocation_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="busLocationClick"
+                android:text="@string/bus_locations"
+                android:textColor="@color/whitecolor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/busLocation_ImagView"
+                app:layout_constraintRight_toRightOf="@id/busLocation_ImagView"
+                app:layout_constraintTop_toTopOf="@id/busLocation_ImagView" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="200dp"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:id="@+id/busShcedule_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="busScheduleClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bus_location" />
+
+            <TextView
+                android:id="@+id/busSchedule_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="busScheduleClick"
+                android:text="@string/bus_schedule"
+                android:textColor="@color/whitecolor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/busShcedule_ImageView"
+                app:layout_constraintRight_toRightOf="@id/busShcedule_ImageView"
+                app:layout_constraintTop_toTopOf="@id/busShcedule_ImageView" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="200dp"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:id="@+id/streetView_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="streetNewsClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bus_location" />
+
+            <TextView
+                android:id="@+id/streetNews_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="streetNewsClick"
+                android:text="@string/street_news"
+                android:textColor="@color/whitecolor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/streetView_ImageView"
+                app:layout_constraintRight_toRightOf="@id/streetView_ImageView"
+                app:layout_constraintTop_toTopOf="@id/streetView_ImageView" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="200dp"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:id="@+id/BookingSeat_ImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="bookinSeatClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bus_location" />
+
+            <TextView
+                android:id="@+id/bookingSeat_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="bookinSeatClick"
+                android:text="@string/booking_seat"
+                android:textColor="@color/whitecolor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/BookingSeat_ImageView"
+                app:layout_constraintRight_toRightOf="@id/BookingSeat_ImageView"
+                app:layout_constraintTop_toTopOf="@id/BookingSeat_ImageView" />
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

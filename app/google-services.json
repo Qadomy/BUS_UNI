@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "52784007468",
+    "firebase_url": "https://unibus-5f23b.firebaseio.com",
+    "project_id": "unibus-5f23b",
+    "storage_bucket": "unibus-5f23b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52784007468:android:e84d6b5a71909522",
+        "android_client_info": {
+          "package_name": "com.example.bus_uni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52784007468-q5lcl4t8p37p8etcp2rkrg08bvp8d36n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bus_uni",
+            "certificate_hash": "bca107b41e8610b6eb63c98db6e791dff22c70ab"
+          }
+        },
+        {
+          "client_id": "52784007468-6c9mrnhmc6cf9i0nh7q6ih4efcgd8foi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn67R7D5z755rVLnzLR4qbWF1VB1ixFIk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52784007468-6c9mrnhmc6cf9i0nh7q6ih4efcgd8foi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

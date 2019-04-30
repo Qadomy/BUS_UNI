@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="whitecolor">#ffffff</color>
+    <color name="blackColor">#000000</color>
+    <color name="yellowColor">#FFEB3B</color>
+    <color name="redColor">#F44336</color>
+    <color name="connectUScolor">#03A9F4</color>\
+    <color name="barThemeColor">#F8B500</color>
+    <color name="blueStart">#0099FF</color>
+    <color name="blueEnd">#003D66</color>
+    <color name="grayStart">#D9C7C7</color>
+
+
+
+</resources>

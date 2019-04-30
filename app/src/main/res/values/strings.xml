@@ -1,0 +1,153 @@
+<resources>
+    <string name="app_name">BUS-UNI</string>
+    <string name="user_homescreen">User</string>
+    <string name="driver_homescreen">Bus Driver</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="signin">Sign In</string>
+    <string name="driver_id">Enter Driver ID</string>
+    <string name="driver_password">Enter Driver Password</string>
+    <string name="user_rfid">Enter Your RFID Number</string>
+    <string name="user_password">Enter Your Password</string>
+    <string name="enterRFID">Enter Your RFID Number</string>
+    <string name="enterPassword">Enter Your Password</string>
+    <string name="enterName">Enter Your Name</string>
+    <string name="enterEmail">Email</string>
+    <string name="enterMobileNumber">Enter Your Mobile Number</string>
+    <string name="connectDevaloper">Connect With Us</string>
+    <string name="not_registered_yet">Not registered yet ?</string>
+    <string name="are_you_user">Are You User</string>
+    <string name="are_you_driver">Are You Driver</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Log Out</string>
+    <string name="about">About</string>
+    <string name="are_you_Bus_Driver">Are You Bus Driver ?</string>
+    <string name="press_here">Press Here</string>
+    <string name="exit">Exit</string>
+    <string name="help">Help</string>
+    <string name="Password">Password</string>
+    <string name="Username">Username</string>
+    <string name="signUpFree">Sign Up For Free</string>
+    <string name="alreadyHaveAccount">Already have an account?</string>
+    <string name="create">Create</string>
+    <string name="profile">Profile</string>
+    <string name="my_name">Ali Qadomy</string>
+    <string name="homeTown">Home Town</string>
+    <string name="university">University</string>
+    <string name="re_password">Confirm Password</string>
+    <string name="please_accept_permissions">Please accept for required permission</string>
+    <string name="signupANDlogin">Sign up/Sign In</string>
+    <string name="fieldsMessageError">Please fill out all fields</string>
+    <string name="accountCreated">Account Created</string>
+    <string name="accountCreationFaild">Account Creation Failed</string>
+    <string name="registerCompleate">Register Complete</string>
+    <string name="errorMessage">Error</string>
+    <string name="passwordNOTmatch">Your password not match</string>
+    <string name="successfully">Successfully</string>
+    <string name="forget_your_password">Forget your password ?</string>
+    <string name="need_regester">We just need your registered Email Id to sent you password reset instructions</string>
+    <string name="back"><![CDATA[<< Back]]></string>
+    <string name="resetPassword">Reset Password</string>
+    <string name="enterYourEmail">Enter your registered email</string>
+    <string name="sendEmailForReset">We have sent you instructions to reset your password!</string>
+    <string name="faildSendEmailReset">Failed to send reset email!</string>
+    <string name="accountSignin">Account Sign In</string>
+    <string name="accountSignInFaild">Account Sign In Faild</string>
+    <string name="messgesWillbeHere">Messages will be here</string>
+    <string name="typeMessageHere">Type message here</string>
+    <string name="send">Send</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="rfid">RFID NO.</string>
+    <string name="mobile">Mobile NO.</string>
+    <string name="city">City</string>
+    <string name="bus_locations">Bus Locations</string>
+    <string name="bus_schedule">Bus Schedule</string>
+    <string name="street_news">Street News</string>
+    <string name="booking_seat">Booking Seat</string>
+    <string name="enter_your_new_name">Enter your new name</string>
+    <string name="enter_your_new_rfid_number">Enter your new RFID number</string>
+    <string name="enter_you_new_mobile_number">Enter you new mobile number</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="nothingToShow">------------------------</string>
+    <string name="enter_your_new_email">Enter your new email</string>
+    <string name="accountSaved">Your data saved</string>
+    <string name="accountSavedFaild">Your data failed save</string>
+    <string name="photoSavedFaild">Photo failed saved</string>
+    <string name="add_your_post">Add your post</string>
+    <string name="add_post">Add post</string>
+    <string name="addPhoto_or_text">Please add photo or text to post</string>
+    <string name="bottom_home_text">Home</string>
+    <string name="bottom_notification_text">Notification</string>
+    <string name="bottom_ac_text">Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="postAddSuccessfully">Your post added successfully</string>
+    <string name="imageUploadSuccessfully">The Image Uploaded Successfully</string>
+    <string name="postError">Your post failed</string>
+    <string name="try_as_guest">Try as guest</string>
+    <string name="YourPostFaildAdded">Your Post Faild Added</string>
+    <string name="enter_origin">Choose origin</string>
+    <string name="enter_destination">Choose destination</string>
+
+    <string name="top_locations">Top Locations</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="error_message">Data can\'t be loaded</string>
+    <string name="seats">Seats</string>
+    <string name="station_no">Station No.</string>
+    <string name="current_location">Current location</string>
+    <string name="driver_name">Driver name</string>
+    <string name="driver_phone">Driver Phone</string>
+    <string name="bus_number">Bus Number</string>
+    <string name="add_new_driver">Add New Driver</string>
+    <string name="register_new_driver">Register new driver</string>
+    <string name="available">Available</string>
+    <string name="saet_numbers">Saet numbers</string>
+    <string name="tracking_all_buses">Tracking all buses</string>
+    <string name="about_company">About Company</string>
+    <string name="company_email">Company Email</string>
+    <string name="bus_numbers">Bus Numbers</string>
+    <string name="drivers_information_s">Drivers Information\'s</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_phone">Company Phone</string>
+    <string name="rfid_number">RFID number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="city_name">City Name</string>
+    <string name="line_name">Line Name</string>
+    <string name="company_drivers">Company drivers</string>
+    <string name="phone">Phone</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="edit_bus_schedule">Edit Bus schedule</string>
+    <string name="check_bookings">Check bookings</string>
+    <string name="driver_email">Driver email</string>
+    <string name="bus_company">Bus company</string>
+    <string name="click_at_photo_to_change_it">Click at photo to change it:</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+
+    <string-array name="bus_line_names">
+        <item>AAUJ-Tulkarm</item>
+        <item>AAUJ-Jenin</item>
+        <item>AAUJ-Ya`bad</item>
+        <item>AAUJ-Tubas</item>
+        <item>AAUJ-Selfet</item>
+        <item>AAUJ-Arrabeh</item>
+        <item>AAUJ-Borqen</item>
+        <item>AAUJ-Zababdeh</item>
+    </string-array>
+    <string-array name="cities_names">
+        <item>Tulkarm</item>
+        <item>Jenin</item>
+        <item>Ya`bad</item>
+        <item>Tubas</item>
+        <item>Selfet</item>
+        <item>Arrabeh</item>
+        <item>Borqen</item>
+        <item>Zababdeh</item>
+    </string-array>
+
+</resources>
