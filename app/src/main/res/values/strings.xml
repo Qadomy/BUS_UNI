@@ -128,6 +128,7 @@
     <string name="click_at_photo_to_change_it">Click at photo to change it:</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="seat_numbers">Seat numbers</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

@@ -24,7 +24,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
 
     ImageView driverImage, editProfile;
     TextView driverName, driverEmail, driverPhone, driverBusCompany,
-            driverBusNumber, driverLineName, driverLongitude, driverLatitude;
+            driverBusNumber, driverSeatNum, driverLineName, driverLongitude, driverLatitude;
 
 
     // here for get the id of current user and save in the string
@@ -49,6 +49,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
         driverBusCompany = (TextView) findViewById(R.id.driverProfile_busCompany);
         driverBusNumber = (TextView) findViewById(R.id.driverProfile_BusNumber);
         driverLineName = (TextView) findViewById(R.id.driverProfile_LineName);
+        driverSeatNum = (TextView) findViewById(R.id.driverProfile_seatNum);
 
         driverLongitude = (TextView) findViewById(R.id.driverProfile_longitude);
         driverLatitude = (TextView) findViewById(R.id.driverProfile_latitude);
@@ -73,6 +74,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
                 String busCompany = dataSnapshot.child("bus_company").getValue().toString();
                 String busNum = dataSnapshot.child("bus_num").getValue().toString();
                 String lineName = dataSnapshot.child("bus_line").getValue().toString();
+                String seatNum = dataSnapshot.child("bus_seat").getValue().toString();
 
                 String longitude = dataSnapshot.child("longitude").getValue().toString();
                 String latitude = dataSnapshot.child("latitude").getValue().toString();
@@ -85,6 +87,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
                 driverBusCompany.setText(busCompany);
                 driverBusNumber.setText(busNum);
                 driverLineName.setText(lineName);
+                driverSeatNum.setText(seatNum);
 
                 driverLongitude.setText(longitude);
                 driverLatitude.setText(latitude);

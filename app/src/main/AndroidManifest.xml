@@ -44,6 +44,8 @@
         <activity android:name=".BusSchedule.Choose_Locations" />
         <activity android:name=".Home" >
 
+            <!--Home -->
+
         </activity>
         <activity android:name=".ResetPassword">
             <meta-data

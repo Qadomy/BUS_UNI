@@ -40,7 +40,7 @@ public class User {
 
     }
 
-    //For user Edit profile
+    //For user Edit profile with updated password
     public User(String name, String email, String pass, String rfid, String mobile, String city, String profile_pic) {
         this.setRefid(rfid);
         this.setName(name);

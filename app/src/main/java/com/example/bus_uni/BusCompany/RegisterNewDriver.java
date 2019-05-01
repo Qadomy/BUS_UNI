@@ -2,7 +2,6 @@ package com.example.bus_uni.BusCompany;
 
 import android.app.ActionBar;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.bus_uni.Encrypt;
 import com.example.bus_uni.R;
@@ -139,7 +139,6 @@ public class RegisterNewDriver extends AppCompatActivity {
                                     .getReference("Users").child(uid);
 
 
-
                             mDatabaseReference.child(uid).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -155,9 +154,8 @@ public class RegisterNewDriver extends AppCompatActivity {
                             });
 
 
-
                             // TODO: here we get the name of current company and put it in bus company
-                            String busCompany="";
+                            String busCompany = "";
                             User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompany);
 
                             addNewDriver.setVisibility(View.INVISIBLE);
@@ -167,18 +165,21 @@ public class RegisterNewDriver extends AppCompatActivity {
                             showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
                                     R.drawable.ic_check_circle_30dp);
 
-                            mDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
+                            mDatabaseReference.setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
 
-                                        Intent mainIntent = new Intent(RegisterNewDriver.this, CompanyHome.class);
-                                        // TODO make sure:  from stack over flow
-                                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(mainIntent);
-                                    }
-                                }
-                            });
+//                                        Intent mainIntent = new Intent(RegisterNewDriver.this, CompanyHome.class);
+//                                        // TODO make sure:  from stack over flow
+//                                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                        startActivity(mainIntent);
+
+                                                Toast.makeText(RegisterNewDriver.this, "Driver " + name + "  added successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
                         } else {
 

@@ -56,7 +56,7 @@ public class EditDriverProfile extends AppCompatActivity {
     private TextView clickHereChangePhoto, driver_longitude, driver_latitude;
     private Button save, cancel;
     private EditText newDriverName, newDriverEmail, newDriverPhone, newDriverBusCompany,
-            newDriverBusNum, newDriverLineName;
+            newDriverBusNum, newDriverLineName, newDriverSeatNum;
     private ProgressBar progressBarSave;
     ////
     ////
@@ -91,10 +91,8 @@ public class EditDriverProfile extends AppCompatActivity {
         newDriverBusCompany = (EditText) findViewById(R.id.newDriverProfile_busCompany);
         newDriverBusNum = (EditText) findViewById(R.id.newDriverProfile__BusNumber);
         newDriverLineName = (EditText) findViewById(R.id.newDriverProfile__LineName);
+        newDriverSeatNum = (EditText)findViewById(R.id.newDriverProfile_SeatNum);
         //
-
-        driver_longitude=(TextView)findViewById(R.id.newDriverProfile_longitude);
-        driver_latitude=(TextView)findViewById(R.id.newDriverProfile_latitude);
         //
         progressBarSave = (ProgressBar) findViewById(R.id.driverProgressBarSave);
         progressBarSave.setVisibility(View.INVISIBLE);
@@ -143,6 +141,7 @@ public class EditDriverProfile extends AppCompatActivity {
                 String busCompany = dataSnapshot.child("bus_company").getValue().toString();
                 String busNum = dataSnapshot.child("bus_num").getValue().toString();
                 String lineName = dataSnapshot.child("bus_line").getValue().toString();
+                String busSeat = dataSnapshot.child("bus_seat").getValue().toString();
 
 
                 // here we get the data from
@@ -152,6 +151,7 @@ public class EditDriverProfile extends AppCompatActivity {
                 newDriverBusCompany.setText(busCompany);
                 newDriverBusNum.setText(busNum);
                 newDriverLineName.setText(lineName);
+                newDriverSeatNum.setText(busSeat);
 
             }
 
@@ -177,12 +177,14 @@ public class EditDriverProfile extends AppCompatActivity {
                 final String busCompany = newDriverBusCompany.getText().toString();
                 final String busNum = newDriverBusNum.getText().toString();
                 final String lineName = newDriverLineName.getText().toString();
+                final String busSeat = newDriverSeatNum.getText().toString();
 
                 if (pickedImageUri != null) {
 
-                    newDriverProfilePhoto.setVisibility(View.INVISIBLE);
-                    //
-                    progressBarSave.setVisibility(View.VISIBLE);
+//                    newDriverProfilePhoto.setVisibility(View.INVISIBLE);
+//                    //
+//                    progressBarSave.setVisibility(View.VISIBLE);
+
 
                     // smart thing to save the image in link contain the id for photo and id for the
                     // current user who upload this photo
@@ -208,7 +210,7 @@ public class EditDriverProfile extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         String downloadUri = uri.toString();
-                                        saveNewDriverData(name, email, phone, busCompany, busNum, lineName, downloadUri);
+                                        saveNewDriverData(name, email, phone, busCompany, busNum, busSeat, lineName, downloadUri);
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -235,6 +237,10 @@ public class EditDriverProfile extends AppCompatActivity {
                         }
                     });
 
+
+                } else {
+                    String downloadUri = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
+                    saveNewDriverData(name, email, phone, busCompany, busNum, busSeat, lineName, downloadUri);
 
                 }
             }
@@ -268,14 +274,11 @@ public class EditDriverProfile extends AppCompatActivity {
     }// end of onCreate
 
     private void saveNewDriverData(String name, String email, String phone, String busCompany,
-                                   String busNum, String lineName, String downloadUri) {
+                                   String busNum, String busSeat, String lineName, String downloadUri) {
 
 
         // this String null just for User parameters in constructor in User class
-        String bus_seat="";
-
-        User user = new User(name, email, phone, busNum, bus_seat, lineName, 2, busCompany, downloadUri);
-
+        User user = new User(name, email, phone, busNum, busSeat, lineName, 2, busCompany, downloadUri);
 
 
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);

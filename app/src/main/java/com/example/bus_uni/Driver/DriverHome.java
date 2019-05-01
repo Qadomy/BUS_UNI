@@ -7,7 +7,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,56 +15,67 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bus_uni.LoginUserActivity;
 import com.example.bus_uni.R;
-import com.example.bus_uni.Register.User;
 import com.example.bus_uni.Street_Information;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Map;
-
-public class DriverHome extends AppCompatActivity implements LocationListener {
+public class DriverHome extends AppCompatActivity implements LocationListener, OnMapReadyCallback {
 
 
-    ImageView driverImage;
-    TextView driverName;
+    GoogleMap map;
+
     Button checkBookings, editBusSchedule, addPost, profile;
     //
+    //
+    //...///////......
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    MapFragment mapFragment;
+
+    //
+    //
+
+    //
     //
     // firebase auth
     private FirebaseAuth firebaseAuth;
+    //
     //......//
     // firebase database
     private DatabaseReference mUserDatabaseReference;
-
-
+    //
+    ////
+    //
     // for locations
     private LocationManager locationManager;
 
-
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_home);
 
 
-        driverImage = (ImageView) findViewById(R.id.driverImagePhoto);
-        driverName = (TextView) findViewById(R.id.driverHome_name);
         checkBookings = (Button) findViewById(R.id.checkBookingsButton);
         editBusSchedule = (Button) findViewById(R.id.editBusSchedule);
         addPost = (Button) findViewById(R.id.driverAddPostButton);
         profile = (Button) findViewById(R.id.driverProfileButton);
 
+
+        // init the fragment of map
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.driverMap_currentLocations);
+        mapFragment.getMapAsync(this);
 
         //
         // init firebase auth
@@ -73,7 +83,7 @@ public class DriverHome extends AppCompatActivity implements LocationListener {
 
 
         // init database reference
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
 
 
@@ -151,17 +161,36 @@ public class DriverHome extends AppCompatActivity implements LocationListener {
 
     }// end of onCreate
 
+    // method for OnMapReadyCallback interface
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        map = googleMap;
+
+
+        LatLng currentLocation = new LatLng(32.282404, 35.0524);
+        map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+
+        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(11).build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+
+    }
+
+    // 4 methods for LocationListener interface
     @Override
     public void onLocationChanged(Location location) {
 
+
         // here for get the longitude and latitude
-        double getLongitude = location.getLongitude();
+
+        //TODO: here we want to reuse the getLatitude, getLonitude again in onMapReady method
         double getLatitude = location.getLatitude();
+        double getLongitude = location.getLongitude();
 
 
         // after we get the longitude and latitude we uploaded to firebase
-        mUserDatabaseReference.child("Users").child(currentuser).child("longitude").setValue(getLongitude);
-        mUserDatabaseReference.child("Users").child(currentuser).child("latitude").setValue(getLatitude);
+        mUserDatabaseReference.child(currentuser).child("latitude").setValue(getLatitude);
+        mUserDatabaseReference.child(currentuser).child("longitude").setValue(getLongitude);
 
     }
 
@@ -216,4 +245,5 @@ public class DriverHome extends AppCompatActivity implements LocationListener {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
