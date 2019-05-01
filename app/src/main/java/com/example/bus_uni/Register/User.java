@@ -1,26 +1,34 @@
 package com.example.bus_uni.Register;
 
 public class User {
-    private String longitude;
-    private String latitude;
+
+    private double longitude;
+    private double latitude;
     private String name;
     private String email;
     private String password;
-    private String rfid = "NULL";
-    private String mobile = "NULL";
-    private String city = "NULL";
-    private String bus_num = "NULL";// here for bus number
-    private String bus_line = "NULL";
-    private String bus_seat = "NULL";
-    private String bus_company = "NULL";
-    private String buses_numbers = "NULL"; // here for how company buses numbers have
+    private String rfid = "";
+    private String mobile = "";
+    private String city = "";
+    private String bus_num = "";// here for bus number
+    private String bus_line = "";
+    private String bus_seat = "";
+    private String bus_company = ""; // here the name of company for each driver
+    private String buses_numbers = ""; // here for how company buses numbers have
     private String profile_pic = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
     private int type; // 0: Student , 1: Company , 2: Driver
+
     //private ArrayList<Post> posts = new ArrayList<>();
 
     //Default Const. for retrieving User Obj from firebase
     public User() {
 
+    }
+
+    // here for longitude and latitude
+    public User(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     //For User sign up (first time)
@@ -210,21 +218,22 @@ public class User {
     ////////
     ////
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
 
     //No need for this, we initialize type once when register "constructor"
    /* public void setType(int type) {

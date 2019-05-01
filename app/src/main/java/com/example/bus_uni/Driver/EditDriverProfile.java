@@ -271,9 +271,9 @@ public class EditDriverProfile extends AppCompatActivity {
                                    String busNum, String lineName, String downloadUri) {
 
 
-        // these 2 Strings null just for User parameters in constructor in User class
-        String encPass="";
+        // this String null just for User parameters in constructor in User class
         String bus_seat="";
+
         User user = new User(name, email, phone, busNum, bus_seat, lineName, 2, busCompany, downloadUri);
 
 

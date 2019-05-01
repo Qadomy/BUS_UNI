@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bus_uni.Profile_user;
 import com.example.bus_uni.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +23,16 @@ public class DriverProfile_for_driver extends AppCompatActivity {
 
 
     ImageView driverImage, editProfile;
-    TextView driverName, driverEmail, driverPhone, driverBusCompany, driverBusNumber, driverLineName;
+    TextView driverName, driverEmail, driverPhone, driverBusCompany,
+            driverBusNumber, driverLineName, driverLongitude, driverLatitude;
+
+
+    // here for get the id of current user and save in the string
+    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
     // firebase database
     private DatabaseReference mUserDatabaseReference;
-
 
 
     @Override
@@ -47,9 +50,8 @@ public class DriverProfile_for_driver extends AppCompatActivity {
         driverBusNumber = (TextView) findViewById(R.id.driverProfile_BusNumber);
         driverLineName = (TextView) findViewById(R.id.driverProfile_LineName);
 
-
-        // here for get the id of current user and save in the string
-        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        driverLongitude = (TextView) findViewById(R.id.driverProfile_longitude);
+        driverLatitude = (TextView) findViewById(R.id.driverProfile_latitude);
 
 
         // init firebase database
@@ -65,7 +67,6 @@ public class DriverProfile_for_driver extends AppCompatActivity {
                 Picasso.with(DriverProfile_for_driver.this).load(imageUrl).into(driverImage);
 
 
-
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
                 String mobile = dataSnapshot.child("mobile").getValue().toString();
@@ -73,12 +74,20 @@ public class DriverProfile_for_driver extends AppCompatActivity {
                 String busNum = dataSnapshot.child("bus_num").getValue().toString();
                 String lineName = dataSnapshot.child("bus_line").getValue().toString();
 
+                String longitude = dataSnapshot.child("longitude").getValue().toString();
+                String latitude = dataSnapshot.child("latitude").getValue().toString();
+
+
+                //
                 driverName.setText(name);
                 driverEmail.setText(email);
                 driverPhone.setText(mobile);
                 driverBusCompany.setText(busCompany);
                 driverBusNumber.setText(busNum);
                 driverLineName.setText(lineName);
+
+                driverLongitude.setText(longitude);
+                driverLatitude.setText(latitude);
             }
 
             @Override
@@ -96,10 +105,10 @@ public class DriverProfile_for_driver extends AppCompatActivity {
             }
         });
 
-    }
+    } // end of onCreate
 
 
-
+    // here for back symbol in action bar
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.home) {
             ActionBar actionBar = getActionBar();

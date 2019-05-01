@@ -23,8 +23,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import javax.crypto.SecretKey;
 
@@ -89,7 +92,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                 final String busSeat = dBusSeat_Num.getText().toString();
                 final String bus_line = bus_line_spinner.getSelectedItem().toString();
 
-//                TODO: here fo rditing the code, here anything company entered can saved in
+//                TODO: here fo editing the code, here anything company entered can saved in
 //                 Firebase, just email and password not optional
 
 
@@ -135,9 +138,30 @@ public class RegisterNewDriver extends AppCompatActivity {
                             mDatabaseReference = FirebaseDatabase.getInstance()
                                     .getReference("Users").child(uid);
 
-                            // TODO: here busCompany we must get her from current company logged in
+
+
+                            mDatabaseReference.child(uid).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String busCompany = dataSnapshot.child("name").getValue().toString();
+
+                                    // here must send it to user below
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+
+                            // TODO: here we get the name of current company and put it in bus company
                             String busCompany="";
                             User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompany);
+
+                            addNewDriver.setVisibility(View.INVISIBLE);
+                            loadingProgress.setVisibility(View.VISIBLE);
 
                             // Driver account created successfully
                             showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
@@ -148,7 +172,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
 
-                                        Intent mainIntent = new Intent(RegisterNewDriver.this, RegisterNewDriver.class);
+                                        Intent mainIntent = new Intent(RegisterNewDriver.this, CompanyHome.class);
                                         // TODO make sure:  from stack over flow
                                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(mainIntent);
@@ -166,7 +190,8 @@ public class RegisterNewDriver extends AppCompatActivity {
                         }
                     }
                 });
-    }
+
+    }// end of onCreate
 
 
     private void showMessageDialog(String title, String message, int messageIcon) {

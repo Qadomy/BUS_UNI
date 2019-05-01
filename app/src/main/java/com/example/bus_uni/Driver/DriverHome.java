@@ -1,7 +1,15 @@
 package com.example.bus_uni.Driver;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,22 +18,39 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bus_uni.LoginUserActivity;
 import com.example.bus_uni.R;
+import com.example.bus_uni.Register.User;
 import com.example.bus_uni.Street_Information;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class DriverHome extends AppCompatActivity {
+import java.util.Map;
+
+public class DriverHome extends AppCompatActivity implements LocationListener {
 
 
     ImageView driverImage;
     TextView driverName;
     Button checkBookings, editBusSchedule, addPost, profile;
-
+    //
+    // here for get the id of current user and save in the string
+    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
     // firebase auth
     private FirebaseAuth firebaseAuth;
+    //......//
+    // firebase database
+    private DatabaseReference mUserDatabaseReference;
+
+
+    // for locations
+    private LocationManager locationManager;
 
 
     @Override
@@ -47,13 +72,49 @@ public class DriverHome extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
+        // init database reference
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        //
-        ///
-        ////
-        ///
-        //
-        ///
+
+
+        /*
+         *
+         * here for getting the current locations
+         *
+         * */
+
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+            }, 101);
+
+        }
+
+
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    5000, 5, this);
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        /*
+         *
+         * // end of getting the current locations
+         *
+         * */
 
 
         checkBookings.setOnClickListener(new View.OnClickListener() {
@@ -88,9 +149,41 @@ public class DriverHome extends AppCompatActivity {
             }
         });
 
+    }// end of onCreate
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        // here for get the longitude and latitude
+        double getLongitude = location.getLongitude();
+        double getLatitude = location.getLatitude();
+
+
+        // after we get the longitude and latitude we uploaded to firebase
+        mUserDatabaseReference.child("Users").child(currentuser).child("longitude").setValue(getLongitude);
+        mUserDatabaseReference.child("Users").child(currentuser).child("latitude").setValue(getLatitude);
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
 
+    //
+    //
+    //
     // Here for shown the menu on the XML activity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
