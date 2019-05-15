@@ -161,6 +161,8 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
 
     }// end of onCreate
 
+//    double longitude, latitude;
+
     // method for OnMapReadyCallback interface
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -168,7 +170,7 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
         map = googleMap;
 
 
-        LatLng currentLocation = new LatLng(32.282404, 35.0524);
+        LatLng currentLocation = new LatLng(0, 0);
         map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
 
         CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(11).build();
@@ -183,7 +185,7 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
 
         // here for get the longitude and latitude
 
-        //TODO: here we want to reuse the getLatitude, getLonitude again in onMapReady method
+        //TODO: How I can reuse the getLatitude, getLongitude again in onMapReady method
         double getLatitude = location.getLatitude();
         double getLongitude = location.getLongitude();
 
@@ -191,6 +193,9 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
         // after we get the longitude and latitude we uploaded to firebase
         mUserDatabaseReference.child(currentuser).child("latitude").setValue(getLatitude);
         mUserDatabaseReference.child(currentuser).child("longitude").setValue(getLongitude);
+
+//        longitude = getLongitude;
+//        latitude = getLatitude;
 
     }
 

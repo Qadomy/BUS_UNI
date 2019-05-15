@@ -1,7 +1,5 @@
 
 
-###########hello from another laptop
-
 we can save the coordinates of every bus driver in database in firebase
 and every time driver connect with internet update the new coordinates
 in firebase,, and in user application when want to tracking the last

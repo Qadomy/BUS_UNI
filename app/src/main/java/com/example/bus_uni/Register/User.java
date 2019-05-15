@@ -100,6 +100,9 @@ public class User {
         this.setBus_company(busCompany);
     }
 
+
+
+
     //////////////////////////////////////////////////////// end of constructors
     public String getCity() {
         return city;

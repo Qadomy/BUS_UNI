@@ -103,9 +103,8 @@ public class Fragment_Home extends Fragment implements PostAdapter.PostAdapterOn
 
     @Override
     public void onClick(Post post) {
-        // Intent intent = new Intent(this, DetailsActivity.class);
-        //intent.putExtra("Recipe", recipe);
-        // startActivity(intent);
+
+        //If we need to do something when clicking on any post
     }
 
 

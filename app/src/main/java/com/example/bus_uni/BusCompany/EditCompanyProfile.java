@@ -119,6 +119,8 @@ public class EditCompanyProfile extends AppCompatActivity {
         //
 
 
+        final String[] oldImage = new String[1];
+
         mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -127,6 +129,8 @@ public class EditCompanyProfile extends AppCompatActivity {
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
                 Picasso.with(EditCompanyProfile.this).load(imageUrl).into(companyProfilePhoto);
 
+                // oldImage[0] this we save the string of link of existing image
+                oldImage[0] = imageUrl;
 
                 // here we get the data from database and shown in applicationsa
                 String name = dataSnapshot.child("name").getValue().toString();
@@ -225,7 +229,12 @@ public class EditCompanyProfile extends AppCompatActivity {
                     });
 
 
-                }//TODO: here we create a else statement for if there is no image profile picked
+                }else{
+
+                    // if we don`t change the image in edit profile we send the real image again to firebase when we save
+                    saveNewCompanyData(name, email, phone, busesNum, lineName, oldImage[0]);
+
+                }
             }
         });
 

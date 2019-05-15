@@ -125,6 +125,7 @@ public class EditDriverProfile extends AppCompatActivity {
         //
 
 
+        final String[] oldImage = {""};
         mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -132,6 +133,10 @@ public class EditDriverProfile extends AppCompatActivity {
                 // here using Picasso for get the image url and set in ImageView
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
                 Picasso.with(EditDriverProfile.this).load(imageUrl).into(newDriverProfilePhoto);
+
+
+                // oldImage[0] this we save the string of link of existing image
+                oldImage[0] = imageUrl;
 
 
                 // here we get the data from database and shown in applicationsa
@@ -239,8 +244,9 @@ public class EditDriverProfile extends AppCompatActivity {
 
 
                 } else {
-                    String downloadUri = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
-                    saveNewDriverData(name, email, phone, busCompany, busNum, busSeat, lineName, downloadUri);
+
+                    // if we don`t change the image in edit profile we send the real image again to firebase when we save
+                    saveNewDriverData(name, email, phone, busCompany, busNum, busSeat, lineName, oldImage[0]);
 
                 }
             }
