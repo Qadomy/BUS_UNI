@@ -45,7 +45,8 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
 
     //
     //
-
+    double getLatitude;
+    double getLongitude;
     //
     //
     // firebase auth
@@ -54,6 +55,10 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
     //......//
     // firebase database
     private DatabaseReference mUserDatabaseReference;
+
+
+//    double longitude[] = new double[1];
+//    double latitude[] = new double[1];
     //
     ////
     //
@@ -161,41 +166,42 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
 
     }// end of onCreate
 
-//    double longitude, latitude;
-
-    // method for OnMapReadyCallback interface
+    // method for OnMapReadyCallback abstract
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+//        Location location = null;
+//        onLocationChanged(location);
         map = googleMap;
 
 
-        LatLng currentLocation = new LatLng(0, 0);
-        map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-
-        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(11).build();
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-
     }
 
-    // 4 methods for LocationListener interface
+    // 4 methods for LocationListener Listener
     @Override
     public void onLocationChanged(Location location) {
 
 
         // here for get the longitude and latitude
-
-        //TODO: How I can reuse the getLatitude, getLongitude again in onMapReady method
-        double getLatitude = location.getLatitude();
-        double getLongitude = location.getLongitude();
+        getLatitude = location.getLatitude();
+        getLongitude = location.getLongitude();
 
 
+        //
         // after we get the longitude and latitude we uploaded to firebase
         mUserDatabaseReference.child(currentuser).child("latitude").setValue(getLatitude);
         mUserDatabaseReference.child(currentuser).child("longitude").setValue(getLongitude);
 
-//        longitude = getLongitude;
-//        latitude = getLatitude;
+
+        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+
+        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(15).build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+
+
+//        longitude[0] = getLongitude;
+//        latitude[0] = getLatitude;
 
     }
 
