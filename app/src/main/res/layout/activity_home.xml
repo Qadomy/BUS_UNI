@@ -17,34 +17,6 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="11dp">
-
-            <ImageView
-                android:id="@+id/busLocation_ImagView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:onClick="busLocationClick"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bus_location" />
-
-            <TextView
-                android:id="@+id/busLocation_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="busLocationClick"
-                android:text="@string/bus_locations"
-                android:textColor="@color/whitecolor"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/busLocation_ImagView"
-                app:layout_constraintRight_toRightOf="@id/busLocation_ImagView"
-                app:layout_constraintTop_toTopOf="@id/busLocation_ImagView" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
 
             android:layout_height="200dp"
             android:layout_marginBottom="11dp">
@@ -71,6 +43,37 @@
                 app:layout_constraintRight_toRightOf="@id/busShcedule_ImageView"
                 app:layout_constraintTop_toTopOf="@id/busShcedule_ImageView" />
         </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:id="@+id/busLocation_ImagView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="busLocationClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bus_location"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:layout_editor_absoluteY="167dp" />
+
+            <TextView
+                android:id="@+id/busLocation_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:onClick="busLocationClick"
+                android:text="@string/bus_locations"
+                android:textColor="@color/whitecolor"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/busLocation_ImagView"
+                app:layout_constraintRight_toRightOf="@id/busLocation_ImagView"
+                app:layout_constraintTop_toTopOf="@id/busLocation_ImagView" />
+        </android.support.constraint.ConstraintLayout>
+
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

@@ -58,7 +58,7 @@
                         android:src="@drawable/ic_line_bus" />
 
                     <TextView
-                        android:id="@+id/busRouteLine"
+                        android:id="@+id/busRuteLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
