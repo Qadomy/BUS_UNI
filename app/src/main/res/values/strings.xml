@@ -129,6 +129,12 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="seat_numbers">Seat numbers</string>
+    <string name="spinner_title">Filter</string>
+    <string name="passenger_name">Passenger Name</string>
+    <string name="leaving_time">Leaving Time</string>
+    <string name="arrival_time">Arrival Time</string>
+    <string name="gate_number">Gate number</string>
+    <string name="seat_label">Seat label</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

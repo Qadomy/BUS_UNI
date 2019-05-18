@@ -72,17 +72,14 @@ public class Splash_Screen extends AppCompatActivity {
 
             }
         }, SPLASH_TIME_OUT);
+    }// end of onCreate
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
-
-
-//    @Override
-//    protected void onStart(){
-//        super.onStart();
-//
-//
-//
-//
-//    }
 
 
     /// method for check the type of user and send for right activity
