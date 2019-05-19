@@ -45,7 +45,6 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
 
 
-
     // here for using map and google servies
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'

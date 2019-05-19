@@ -1,14 +1,16 @@
 
 
-we can save the coordinates of every bus driver in database in firebase
-and every time driver connect with internet update the new coordinates
-in firebase,, and in user application when want to tracking the last
-update of coordinate get from database
-
-
 
 in register drivers activity we make a key in firebase with the name
 of the company and just when we want to recall all drivers for same company
+
+
+
+
+so we consider the orign it`s the current locations, and the destnation locations
+the bus rute line
+
+
 
 
 

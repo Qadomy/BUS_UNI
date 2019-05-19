@@ -12,7 +12,8 @@ import com.example.bus_uni.R;
 
 import java.util.ArrayList;
 //Bus == BusLine?
-public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
+public class  BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
+
     private ArrayList<Bus> buses=new ArrayList<>();
 
     private final BusAdapterOnClickHandler mClickHandler;
@@ -22,6 +23,7 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
         void onClick(Bus bus);
     }
 
+    // constructor
     public BusAdapter(Context context, BusAdapterOnClickHandler clickHandler) {
         mClickHandler = clickHandler;
         this.context = context;
@@ -46,11 +48,6 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
         busViewHolder.busName.setText(bus.getName());
         busViewHolder.seats_num.setText(String.valueOf(bus.getSeats_num()));
         busViewHolder.leaving_time.setText(bus.getLeavingTime());
-        //busViewHolder.station_num.setText(bus.getStation_num());
-
-     //   Picasso.with(context)
-       //         .load(bus.getImage_url())
-         //       .into(PostViewHolder.busImage);
 
     }
 
@@ -69,7 +66,6 @@ public class BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> {
             busName = itemView.findViewById(R.id.busLineName);
             seats_num=itemView.findViewById(R.id.seatsNumber);
             leaving_time=itemView.findViewById(R.id.busLeavingTime);
-            //station_num=itemView.findViewById(R.id.numberOfStation);
             itemView.setOnClickListener(this);
         }
 

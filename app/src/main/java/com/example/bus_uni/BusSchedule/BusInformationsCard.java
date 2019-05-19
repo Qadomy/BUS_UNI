@@ -1,12 +1,15 @@
 package com.example.bus_uni.BusSchedule;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bus_uni.BookingSeat;
 import com.example.bus_uni.R;
@@ -54,28 +57,34 @@ public class BusInformationsCard extends AppCompatActivity {
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
 
+        final String[] busCityData = new String[1];
+        final String[] busRuteLineData = new String[1];
+        final String[] busCompanyNameData = new String[1];
+        final String[] driverNameData = new String[1];
+        final String[] driverPhoneData = new String[1];
+        final String[] busTimeData = new String[1];
         mUserDatabaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
                 //TODO: here we change the strings in child s
-                String busCityData = dataSnapshot.child("name").getValue().toString();
-                String busRuteLineData = dataSnapshot.child("email").getValue().toString();
-                String busCompanyNameData = dataSnapshot.child("mobile").getValue().toString();
-                String driverNameData = dataSnapshot.child("refid").getValue().toString();
-                String driverPhoneData = dataSnapshot.child("city").getValue().toString();
+                busCityData[0] = dataSnapshot.child("name").getValue().toString();
+                busRuteLineData[0] = dataSnapshot.child("email").getValue().toString();
+                busCompanyNameData[0] = dataSnapshot.child("mobile").getValue().toString();
+                driverNameData[0] = dataSnapshot.child("refid").getValue().toString();
+                driverPhoneData[0] = dataSnapshot.child("city").getValue().toString();
                 String busSeatNumbersData = dataSnapshot.child("city").getValue().toString();
-                String busTimeData = dataSnapshot.child("city").getValue().toString();
+                busTimeData[0] = dataSnapshot.child("city").getValue().toString();
 
 
-                busCity.setText(busCityData);
-                busRuteLine.setText(busRuteLineData);
-                busCompanyName.setText(busCompanyNameData);
-                driverName.setText(driverNameData);
-                driverPhone.setText(driverPhoneData);
+                busCity.setText(busCityData[0]);
+                busRuteLine.setText(busRuteLineData[0]);
+                busCompanyName.setText(busCompanyNameData[0]);
+                driverName.setText(driverNameData[0]);
+                driverPhone.setText(driverPhoneData[0]);
                 busSeatNumbers.setText(busSeatNumbersData);
-                busTime.setText(busTimeData);
+                busTime.setText(busTimeData[0]);
             }
 
             @Override
@@ -88,8 +97,63 @@ public class BusInformationsCard extends AppCompatActivity {
         bookingSeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent bookingSeat = new Intent(BusInformationsCard.this, BookingSeat.class);
-                startActivity(bookingSeat);
+
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                        BusInformationsCard.this);
+
+                alertDialog.setTitle("Confirm Delete...");
+                alertDialog.setMessage("Are you sure you want booking this ticket?");
+                alertDialog.setIcon(R.drawable.call_icon);
+                alertDialog.setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Write your code here to execute after dialog
+
+                                //TODO: here we send all the data
+                                Toast.makeText(getApplicationContext(),
+                                        "You clicked on YES", Toast.LENGTH_SHORT)
+                                        .show();
+
+
+                                /*
+                                 *
+                                 *
+                                 * here to send the data in info card to booking seat(tickets)
+                                 *
+                                 * */
+
+                                Intent sendData = new Intent(BusInformationsCard.this, BookingSeat.class);
+                                //TODO: here if there a error will be the [0] in the strings
+                                //sendData.putExtra("busCityData", busCityData);
+                                sendData.putExtra("busRuteLineData", busRuteLineData);
+                                sendData.putExtra("busCompanyNameData", busCompanyNameData);
+                                sendData.putExtra("driverNameData", driverNameData);
+                                sendData.putExtra("driverPhoneData", driverPhoneData);
+                                sendData.putExtra("busTimeData", busTimeData);
+                                startActivity(sendData);
+
+                                /*
+                                 *
+                                 *
+                                 * */
+
+                                Intent bookingSeat = new Intent(BusInformationsCard.this, BookingSeat.class);
+                                startActivity(bookingSeat);
+                            }
+                        });
+
+                // here when we clicked No in message dialog
+                alertDialog.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+
             }
         });
 

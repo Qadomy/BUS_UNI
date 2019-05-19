@@ -135,6 +135,10 @@
     <string name="arrival_time">Arrival Time</string>
     <string name="gate_number">Gate number</string>
     <string name="seat_label">Seat label</string>
+    <string name="choose_new_time">Choose new time:</string>
+    <string name="add_new_date">Add new date</string>
+    <string name="add_ticket_price">Example: 12 ILS</string>
+    <string name="ticket_price">Ticket Price</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

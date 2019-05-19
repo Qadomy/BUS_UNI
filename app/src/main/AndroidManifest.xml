@@ -16,13 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Driver.EditDriverProfile">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverProfile_for_driver" />
         </activity>
         <activity android:name=".Driver.DriverProfile_for_user" />
-        <activity android:name=".Driver.DriverProfile_for_driver" >
+        <activity android:name=".Driver.DriverProfile_for_driver">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
@@ -34,17 +33,13 @@
         <activity android:name=".BusCompany.EditCompanyProfile" />
         <activity android:name=".BusCompany.AboutCompany_for_users" />
         <activity android:name=".BusCompany.AboutCompany_for_company" />
-        <activity android:name=".BusCompany.CompanyHome" >
-
-        </activity>
+        <activity android:name=".BusCompany.CompanyHome"></activity>
         <activity android:name=".BusCompany.RegisterNewDriver" />
-        <activity android:name=".BusSchedule.CurrentLocation">
-
-        </activity>
+        <activity android:name=".BusSchedule.CurrentLocation"></activity>
         <activity android:name=".BusSchedule.Choose_Locations" />
-        <activity android:name=".Home" >
+        <activity android:name=".Home">
 
-            <!--Home -->
+            <!-- Home -->
 
         </activity>
         <activity android:name=".ResetPassword">
@@ -71,10 +66,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".HelpActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />

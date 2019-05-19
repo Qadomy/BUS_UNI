@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,6 +18,9 @@ import com.example.bus_uni.R;
 import java.util.ArrayList;
 
 public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAdapterOnClickHandler {
+
+
+    private static final String Tag = "BusSchedule";
 
     private RecyclerView mRecyclerView;
     private BusAdapter mBusAdapter;
@@ -31,6 +35,9 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus__schedule);
+
+
+        Log.d(Tag, "onCreate: started.");
 
 
         mRecyclerView = findViewById(R.id.buses_rv);
@@ -51,20 +58,14 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 
         showRecyclerView();
 
-    }
+    }// end onCreate
 
     private void showRecyclerView() {
-        // if (findViewById(R.id.tablet) == null)
-        //gridLayoutManager=new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false);
-        //{
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-    /*    } else {
-            gridLayoutManager = new GridLayoutManager(this, 3);
-            mRecyclerView.setLayoutManager(gridLayoutManager);
-        }
-    */
         mRecyclerView.setHasFixedSize(true);
         mBusAdapter = new BusAdapter(Bus_Schedule.this, this);
         mRecyclerView.setAdapter(mBusAdapter);
@@ -92,15 +93,10 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.home) {
-            ActionBar actionBar = getActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
+    //
+    //
+    //
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -121,6 +117,17 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
     public void chooseDestination(View view) {
         Intent intent = new Intent(this, Choose_Locations.class);
         startActivityForResult(intent, 2);
+    }
+
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home) {
+            ActionBar actionBar = getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.bus_uni;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -30,6 +31,23 @@ public class BookingSeat extends AppCompatActivity {
         driverPhone = (TextView) findViewById(R.id.driverPhone_bookingSeat);
         companyName = (TextView) findViewById(R.id.companyName_bookingSeat);
         rfidNumber = (TextView) findViewById(R.id.rfidNumber_bookingSeat);
+
+
+        Intent getData = getIntent();
+        //String busCityData = getData.getStringExtra("busCityData");
+        String busRuteLineData = getData.getStringExtra("busRuteLineData");
+        String busCompanyNameData = getData.getStringExtra("busCompanyNameData");
+        String driverNameData = getData.getStringExtra("driverNameData");
+        String driverPhoneData = getData.getStringExtra("driverPhoneData");
+        String busTimeData = getData.getStringExtra("busTimeData");
+
+
+        orignLocation.setText(busRuteLineData);
+        leavingTime.setText(busTimeData);
+        companyName.setText(busCompanyNameData);
+        driverName.setText(driverNameData);
+        driverPhone.setText(driverPhoneData);
+
     }
 
 
