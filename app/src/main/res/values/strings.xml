@@ -139,6 +139,7 @@
     <string name="add_new_date">Add new date</string>
     <string name="add_ticket_price">Example: 12 ILS</string>
     <string name="ticket_price">Ticket Price</string>
+    <string name="yourNewDateAded">Your new date added</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

@@ -13,7 +13,10 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.bus_uni.ProfileEdit_user;
 import com.example.bus_uni.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,11 +28,10 @@ import java.util.Calendar;
 
 public class EditBusSchedule extends AppCompatActivity {
 
+    String busLine;
     private Calendar calendar;
-
-
     // firebase database
-    private DatabaseReference mUserDatabaseReference;
+    private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
         // init firebase database
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
 
 
         mUserDatabaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
@@ -51,7 +54,7 @@ public class EditBusSchedule extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                String busLine = dataSnapshot.child("bus_line").getValue().toString();
+                busLine = dataSnapshot.child("bus_line").getValue().toString();
 
             }
 
@@ -89,8 +92,15 @@ public class EditBusSchedule extends AppCompatActivity {
         final int hour = c.get(Calendar.HOUR_OF_DAY);
         final int min = c.get(Calendar.MINUTE);
 
+        // save the hour and minute in one string
+        final String time = hour + ":" + min;
+
         //TODO: here why text not saved in new String >>> ??
         final String newTicketPrice = ticketPrice.getText().toString();
+
+
+        // class Ticket to send data to save it in database reference
+        final Ticket ticket = new Ticket(busLine, newTicketPrice, time);
 
 
         // set dialog message
@@ -102,8 +112,24 @@ public class EditBusSchedule extends AppCompatActivity {
                                 // get time input and set it to result
                                 // edit text
 
-                                //TODO: here we send time and ticket price to firebase
-                                Toast.makeText(EditBusSchedule.this, newTicketPrice + "ILS", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(EditBusSchedule.this, time, Toast.LENGTH_SHORT).show();
+
+                                mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")
+                                        .child(busLine);
+
+                                mTicketDatabaseReference.setValue(ticket)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        showMessageDialog(getString(R.string.yourNewDateAded),
+                                                getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+
+
+                                    }
+                                });
+
+
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -117,6 +143,26 @@ public class EditBusSchedule extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
 
         // show it
+        alertDialog.show();
+    }
+
+
+
+    // here method for make a message dialog on android
+    private void showMessageDialog(String title, String message, int messageIcon) {
+        // here method for messages dialogs:
+        AlertDialog alertDialog = new AlertDialog.Builder(EditBusSchedule.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(messageIcon);
+
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do stuff
+                    }
+                });
         alertDialog.show();
     }
 

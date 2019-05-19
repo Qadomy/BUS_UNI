@@ -5,16 +5,6 @@
     android:orientation="vertical">
 
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="10dp"-->
-        <!--android:text="@string/choose_new_time"-->
-        <!--android:textColor="@color/blueStart"-->
-        <!--android:textSize="31sp"-->
-        <!--android:textStyle="bold" />-->
-
     <TimePicker
         android:id="@+id/timePicker_addNewDate"
         android:layout_width="wrap_content"
@@ -30,6 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:text="@string/ticket_price"
             android:textSize="20sp"
@@ -43,7 +34,7 @@
             android:layout_marginLeft="10dp"
             android:hint="@string/add_ticket_price"
             android:inputType="number"
-            android:textSize="10sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 
