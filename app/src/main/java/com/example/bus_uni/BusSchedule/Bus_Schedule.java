@@ -3,6 +3,7 @@ package com.example.bus_uni.BusSchedule;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,6 +41,10 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
     private ProgressBar mLoadingIndicator;
     // private GridLayoutManager gridLayoutManager;
 
+
+    // databasereference
+    private DatabaseReference mTicketDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +60,52 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 
         origin = findViewById(R.id.origin);
         destination = findViewById(R.id.destination);
+
+
+        mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+
+
+        // so here we get the data ordered by leaving time to show it in bus schedule
+        // TODO: AAUJ-Tulkarm ---> here we must change it to what user bus line choose it from app
+        Query myMostViewedPostsQuery = mTicketDatabaseReference.child("AAUJ-Tulkarm")
+                .orderByChild("leavingTime");
+
+        myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
+                /*
+                *
+                * TODO: ok we get the data from database, but now how we can to know which each data
+                *
+                * */
+
+                String name = dataSnapshot.child("busLine").getValue().toString();
+                Toast.makeText(Bus_Schedule.this, name, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         Bus bus1 = new Bus();

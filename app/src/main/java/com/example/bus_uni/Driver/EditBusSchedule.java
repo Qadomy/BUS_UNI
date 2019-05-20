@@ -28,7 +28,10 @@ import java.util.Calendar;
 
 public class EditBusSchedule extends AppCompatActivity {
 
-    String busLine;
+    //
+    String busLine, driverName, seatNumber;
+
+    ////
     private Calendar calendar;
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference;
@@ -55,6 +58,8 @@ public class EditBusSchedule extends AppCompatActivity {
 
 
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
+                driverName = dataSnapshot.child("name").getValue().toString();
+                seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
 
             }
 
@@ -99,8 +104,9 @@ public class EditBusSchedule extends AppCompatActivity {
         final String newTicketPrice = ticketPrice.getText().toString();
 
 
+
         // class Ticket to send data to save it in database reference
-        final Ticket ticket = new Ticket(busLine, newTicketPrice, time);
+        final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time, seatNumber);
 
 
         // set dialog message
@@ -117,7 +123,9 @@ public class EditBusSchedule extends AppCompatActivity {
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")
                                         .child(busLine);
 
-                                mTicketDatabaseReference.setValue(ticket)
+                                // here we using push() to added without updated the previous,
+                                // give to every data an ID
+                                mTicketDatabaseReference.push().setValue(ticket)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {

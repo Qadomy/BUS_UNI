@@ -45,9 +45,10 @@ public class  BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull BusViewHolder busViewHolder, int position) {
         Bus bus = buses.get(position);
-        busViewHolder.busName.setText(bus.getName());
+        busViewHolder.busName.setText(bus.getBusLine());
         busViewHolder.seats_num.setText(String.valueOf(bus.getSeats_num()));
         busViewHolder.leaving_time.setText(bus.getLeavingTime());
+        busViewHolder.ticketPrice.setText(bus.getTicketPrice());
 
     }
 
@@ -59,13 +60,15 @@ public class  BusAdapter extends RecyclerView.Adapter<BusAdapter.BusViewHolder> 
     }
 
     public class BusViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView busName,seats_num,leaving_time;
+        final TextView busName,seats_num,leaving_time, ticketPrice;
 
         BusViewHolder(@NonNull View itemView) {
             super(itemView);
             busName = itemView.findViewById(R.id.busLineName);
             seats_num=itemView.findViewById(R.id.seatsNumber);
             leaving_time=itemView.findViewById(R.id.busLeavingTime);
+            ticketPrice=itemView.findViewById(R.id.busTicktPrice);
+
             itemView.setOnClickListener(this);
         }
 

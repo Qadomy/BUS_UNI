@@ -284,7 +284,7 @@ public class EditDriverProfile extends AppCompatActivity {
 
 
         // this String null just for User parameters in constructor in User class
-        User user = new User(name, email, phone, busNum, busSeat, lineName, 2, busCompany, downloadUri);
+        User user = new User(name, email, phone, busSeat, busNum, lineName, 2, busCompany, downloadUri);
 
 
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
@@ -294,7 +294,9 @@ public class EditDriverProfile extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
 
-                    showMessageDialog(getString(R.string.accountSaved), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+                    //showMessageDialog(getString(R.string.accountSaved), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+
+                    Toast.makeText(EditDriverProfile.this, R.string.accountSaved, Toast.LENGTH_SHORT).show();
 
                     // after saving successfully return to Driver Profile
                     Intent saveProfile = new Intent(EditDriverProfile.this, DriverProfile_for_driver.class);

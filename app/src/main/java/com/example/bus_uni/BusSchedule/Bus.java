@@ -1,18 +1,30 @@
 package com.example.bus_uni.BusSchedule;
 
 public class Bus {
-    private int seats_num = 50;
-    private String name = "bus bus bus";
-    private String leavingTime = "12:12";
-    private String station_num = "123456";
+
+    private String busLine = "";
+    private String leavingTime = "";
+    private int seats_num = 1;
+    private String station_num = "";
+    private String ticketPrice = "";
 
 
-    public String getName() {
-        return name;
+    public Bus() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Bus(String busLine, String leavingTime, int seats_num, String ticketPrice) {
+        this.busLine = busLine;
+        this.leavingTime = leavingTime;
+        this.seats_num = seats_num;
+        this.ticketPrice = ticketPrice;
+    }
+
+    public String getBusLine() {
+        return busLine;
+    }
+
+    public void setBusLine(String busLine) {
+        this.busLine = busLine;
     }
 
     public int getSeats_num() {
@@ -38,4 +50,13 @@ public class Bus {
     public void setStation_num(String station_num) {
         this.station_num = station_num;
     }
+
+    public String getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(String ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
 }

@@ -48,7 +48,7 @@ public class ResycleViewAdpter extends RecyclerView.Adapter<ResycleViewAdpter.Vi
         Log.d(Tag, "onBindViewHolder: caleld.");
 
         final Bus bus = buses.get(i);
-        viewHolder.busLineName.setText(bus.getName());
+        viewHolder.busLineName.setText(bus.getBusLine());
         viewHolder.seatsNumbers.setText(String.valueOf(bus.getSeats_num()));
         viewHolder.leavingTime.setText(bus.getLeavingTime());
 
@@ -56,8 +56,8 @@ public class ResycleViewAdpter extends RecyclerView.Adapter<ResycleViewAdpter.Vi
             @Override
             public void onClick(View v) {
                 // here I guss we make Intent to BusInformationCard
-                Log.d(Tag, "onClicked: cliked on: "+ bus.getName());
-                Toast.makeText(mContext, bus.getName() , Toast.LENGTH_SHORT).show();
+                Log.d(Tag, "onClicked: cliked on: "+ bus.getBusLine());
+                Toast.makeText(mContext, bus.getBusLine() , Toast.LENGTH_SHORT).show();
             }
         });
     }
