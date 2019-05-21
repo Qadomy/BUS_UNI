@@ -8,18 +8,22 @@ public class Ticket {
     private String Price;
     private String leavingTime;
     private String seatNum;
+    private String company;
+    private String driverPhone;
 
     public Ticket() {
 
     }
 
-    public Ticket(String name, String busLine, String price, String leavingTime, String seatNum) {
+    public Ticket(String name, String busLine, String price, String leavingTime, String seatNum, String company, String driverPhone) {
 
         this.name = name;
         this.busLine = busLine;
         Price = price;
         this.leavingTime = leavingTime;
         this.seatNum = seatNum;
+        this.company = company;
+        this.driverPhone = driverPhone;
     }
 
 
@@ -61,5 +65,21 @@ public class Ticket {
 
     public void setLeavingTime(String leavingTime) {
         this.leavingTime = leavingTime;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getDriverPhone() {
+        return driverPhone;
+    }
+
+    public void setDriverPhone(String driverPhone) {
+        this.driverPhone = driverPhone;
     }
 }

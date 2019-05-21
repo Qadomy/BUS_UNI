@@ -223,7 +223,6 @@ public class EditDriverProfile extends AppCompatActivity {
                                     public void onFailure(@NonNull Exception exception) {
                                         // Handle any errors
 
-                                        //TODO: make sure here what to do
                                         Toast.makeText(EditDriverProfile.this, "Can't update your profile", Toast.LENGTH_SHORT).show();
 
                                     }

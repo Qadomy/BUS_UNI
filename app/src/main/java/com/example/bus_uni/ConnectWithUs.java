@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class ConnectWithUs extends AppCompatActivity {
 
-//    public static String FACEBOOK_URL = "https://www.facebook.com/QadomyAli"; //TODO: here change the facebook URL
+//    public static String FACEBOOK_URL = "https://www.facebook.com/QadomyAli";
 //    TextView signup;
 //    ImageView backToMain;
 

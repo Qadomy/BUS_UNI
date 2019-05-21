@@ -39,7 +39,7 @@ public class BookingSeat extends AppCompatActivity {
         String busCompanyNameData = getData.getStringExtra("busCompanyNameData");
         String driverNameData = getData.getStringExtra("driverNameData");
         String driverPhoneData = getData.getStringExtra("driverPhoneData");
-        String busTimeData = getData.getStringExtra("busTimeData");
+        String busTimeData = getData.getStringExtra("busLeavingTime");
 
 
         orignLocation.setText(busRuteLineData);

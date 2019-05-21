@@ -209,7 +209,6 @@ public class EditCompanyProfile extends AppCompatActivity {
                                     public void onFailure(@NonNull Exception exception) {
                                         // Handle any errors
 
-                                        //TODO: make sure here what to do
                                         Toast.makeText(EditCompanyProfile.this, "Can't update your profile", Toast.LENGTH_SHORT).show();
 
                                     }

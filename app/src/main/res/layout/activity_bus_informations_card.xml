@@ -18,57 +18,27 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_line_bus" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_location_city" />
-
-                    <TextView
-                        android:id="@+id/busCity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/redColor"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:text="Tulkarm" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/busRuteLine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/redColor"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="Anabta-Tulkarm" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_line_bus" />
-
-                    <TextView
-                        android:id="@+id/busRuteLine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:textColor="@color/redColor"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:text="Anabta-Tulkarm" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -124,8 +94,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -171,9 +144,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
+                        android:textColor="@color/redColor"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/redColor"
                         tools:text="55" />
 
                     <TextView
@@ -182,15 +155,18 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="1dp"
+                        android:text="@string/seats"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:text="@string/seats" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -200,14 +176,14 @@
                         android:src="@drawable/ic_clock_time" />
 
                     <TextView
-                        android:id="@+id/busLeavingTime"
+                        android:id="@+id/busLeavingTime_BusInfoCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
+                        android:textColor="@color/redColor"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/redColor"
                         tools:text="12:30 pm" />
                 </LinearLayout>
 
@@ -215,14 +191,14 @@
 
 
             <Button
-                android:id="@+id/bookingSeatButton"
+                android:id="@+id/bookingTicketButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/angle"
-                android:text="@string/booking_seat"
+                android:text="@string/booking_ticket"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
 

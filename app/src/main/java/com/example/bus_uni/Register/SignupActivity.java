@@ -139,7 +139,6 @@ public class SignupActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
 
                                         Intent mainIntent = new Intent(SignupActivity.this, Home.class);
-                                        // TODO make sure:  from stack over flow
                                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(mainIntent);
                                         //finish();

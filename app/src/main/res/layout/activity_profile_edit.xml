@@ -213,7 +213,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDataLinearLayout">
 
-        <!--TODO: buttons design must changed -->
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"

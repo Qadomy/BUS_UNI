@@ -29,7 +29,7 @@ import java.util.Calendar;
 public class EditBusSchedule extends AppCompatActivity {
 
     //
-    String busLine, driverName, seatNumber;
+    String busLine, driverName, seatNumber, busCompany, driverPhone;
 
     ////
     private Calendar calendar;
@@ -60,6 +60,8 @@ public class EditBusSchedule extends AppCompatActivity {
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
                 driverName = dataSnapshot.child("name").getValue().toString();
                 seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
+                busCompany = dataSnapshot.child("bus_company").getValue().toString();
+                driverPhone = dataSnapshot.child("mobile").getValue().toString();
 
             }
 
@@ -106,7 +108,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
 
         // class Ticket to send data to save it in database reference
-        final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time, seatNumber);
+        final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone);
 
 
         // set dialog message

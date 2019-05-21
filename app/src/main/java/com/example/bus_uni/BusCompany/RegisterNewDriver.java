@@ -34,6 +34,9 @@ import javax.crypto.SecretKey;
 public class RegisterNewDriver extends AppCompatActivity {
 
 
+    // using for get the compant name from firebase
+    private String busCompany;
+
     private Button addNewDriver;
 
     private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusSeat_Num;
@@ -118,6 +121,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
     private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line) {
 
+
         // here we create driver account with email and password
         mFirebaseAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -142,9 +146,10 @@ public class RegisterNewDriver extends AppCompatActivity {
                             mDatabaseReference.child(uid).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    String busCompany = dataSnapshot.child("name").getValue().toString();
 
-                                    // here must send it to user below
+                                    // here we get the name of company of current user (company)
+                                    busCompany = dataSnapshot.child("name").getValue().toString();
+
                                 }
 
                                 @Override
@@ -155,7 +160,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
 
                             // TODO: here we get the name of current company and put it in bus company
-                            String busCompany = "";
+                            //String busCompany = "";
                             User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompany);
 
                             addNewDriver.setVisibility(View.INVISIBLE);
