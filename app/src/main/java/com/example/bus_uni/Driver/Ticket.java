@@ -10,12 +10,14 @@ public class Ticket {
     private String seatNum;
     private String company;
     private String driverPhone;
+    private String longitude;
+    private String latitude;
 
     public Ticket() {
 
     }
 
-    public Ticket(String name, String busLine, String price, String leavingTime, String seatNum, String company, String driverPhone) {
+    public Ticket(String name, String busLine, String price, String leavingTime, String seatNum, String company, String driverPhone, String latitude, String longitude) {
 
         this.name = name;
         this.busLine = busLine;
@@ -24,6 +26,8 @@ public class Ticket {
         this.seatNum = seatNum;
         this.company = company;
         this.driverPhone = driverPhone;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
@@ -81,5 +85,21 @@ public class Ticket {
 
     public void setDriverPhone(String driverPhone) {
         this.driverPhone = driverPhone;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

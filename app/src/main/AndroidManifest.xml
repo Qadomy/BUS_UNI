@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BusSchedule.EditSingleScheduleItem"></activity>
         <activity android:name=".Driver.EditDriverProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -31,45 +32,44 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusSchedule.Choose_Locations" />
         </activity>
-        <activity android:name=".Driver.EditBusSchedule" >
+        <activity android:name=".Driver.EditBusSchedule">
 
-            <!-- Edit Bus Schedule-->
-
+            <!-- Edit Bus Schedule -->
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
         </activity>
-        <activity android:name=".Driver.CheckBookings" >
+        <activity android:name=".Driver.CheckBookings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
         </activity>
         <activity android:name=".Driver.DriverHome" />
-        <activity android:name=".BusCompany.CompanyDrivers" >
+        <activity android:name=".BusCompany.CompanyDrivers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusCompany.EditCompanyProfile" >
+        <activity android:name=".BusCompany.EditCompanyProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
         <activity android:name=".BusCompany.AboutCompany_for_users" />
-        <activity android:name=".BusCompany.AboutCompany_for_company" >
+        <activity android:name=".BusCompany.AboutCompany_for_company">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusCompany.CompanyHome"></activity>
-        <activity android:name=".BusCompany.RegisterNewDriver" >
+        <activity android:name=".BusCompany.CompanyHome" />
+        <activity android:name=".BusCompany.RegisterNewDriver">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusSchedule.CurrentLocation"></activity>
-        <activity android:name=".BusSchedule.Choose_Locations" >
+        <activity android:name=".BusSchedule.CurrentLocation" />
+        <activity android:name=".BusSchedule.Choose_Locations">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -99,7 +99,11 @@
 
             <!-- splasssh -->
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".HelpActivity">
             <meta-data
@@ -113,13 +117,7 @@
         </activity>
         <activity android:name=".BusSchedule.Bus_Schedule">
 
-            <!-- Bus Schedule-->
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- Bus Schedule -->
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -160,12 +158,11 @@
                 android:name="asignuport.PARENT_ACTIVITY"
                 android:value=".SignupForFree" />
         </activity>
-
         <!--
         **
         ********
         -->
-        <!--here for map-->
+        <!-- here for map -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -43,7 +43,7 @@ public class BusInformationsCard extends AppCompatActivity {
         busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
 
 
-        //TODO: here the data dosn`t passing from TicketAdapter
+        //TODO: here the data dosen`t passing from TicketAdapter
 
         // we receive the data from the ticket from choose locations
         Intent getTicketInfo = getIntent();
@@ -54,6 +54,8 @@ public class BusInformationsCard extends AppCompatActivity {
         final String driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
         final String busSeatNumbersData = getTicketInfo.getExtras().getString("seatNum");
         final String busTimeData = getTicketInfo.getExtras().getString("leavingTime");
+        final String latitude = getTicketInfo.getExtras().getString("latitued");
+        final String longitude = getTicketInfo.getExtras().getString("longitude");
 
 
         busRuteLine.setText(busRuteLineData);
@@ -100,6 +102,8 @@ public class BusInformationsCard extends AppCompatActivity {
                                 sendData.putExtra("driverNameData", driverNameData);
                                 sendData.putExtra("driverPhoneData", driverPhoneData);
                                 sendData.putExtra("busLeavingTime", busTimeData);
+                                sendData.putExtra("latitude", latitude);
+                                sendData.putExtra("longitude", longitude);
 
 
                                 startActivity(sendData);

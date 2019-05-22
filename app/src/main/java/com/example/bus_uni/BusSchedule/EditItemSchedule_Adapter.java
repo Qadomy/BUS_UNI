@@ -9,23 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
 
 import java.util.ArrayList;
 
-
-public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> {
+public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSchedule_Adapter.ViewHolder> {
 
 
     private ArrayList<Ticket> tickets = new ArrayList<>();
     private Context mContext;
 
 
-    // constructor for TicketAdapter
-    public TicketAdpter(ArrayList<Ticket> tickets, Context mContext) {
+    // constructor for EditItemSchedule_Adapter
+    public EditItemSchedule_Adapter(ArrayList<Ticket> tickets, Context mContext) {
         this.tickets = tickets;
         this.mContext = mContext;
     }
@@ -33,16 +31,14 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         View view = LayoutInflater.from(viewGroup.getContext()).
                 inflate(R.layout.schedule_bus_list_item, viewGroup, false);
 
-        return new ViewHolder(view);
+        return new EditItemSchedule_Adapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-
 
         viewHolder.busLineName.setText(tickets.get(position).getBusLine());
         viewHolder.seatsNumbers.setText(String.valueOf(tickets.get(position).getSeatNum()));
@@ -53,22 +49,19 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
+                // passing data to EditSingleScheduleItem activity to make edit on them
+                Intent editTicket = new Intent(mContext, EditSingleScheduleItem.class);
 
-                // TODO: here when we know how we can passing the data to multiple activates we delete the other intent
-                // here passing data to BusInformationCard
-                Intent ticketInfo = new Intent(mContext, BusInformationsCard.class);
+                editTicket.putExtra("busLine", tickets.get(position).getBusLine());
+                editTicket.putExtra("companyName", tickets.get(position).getCompany());
+                editTicket.putExtra("driverName", tickets.get(position).getName());
+                editTicket.putExtra("driverPhone", tickets.get(position).getDriverPhone());
+                editTicket.putExtra("seatNum", tickets.get(position).getSeatNum());
+                editTicket.putExtra("leavingTime", tickets.get(position).getLeavingTime());
+                editTicket.putExtra("latitude", tickets.get(position).getLatitude());
+                editTicket.putExtra("longitude", tickets.get(position).getLongitude());
 
-                ticketInfo.putExtra("busLine", tickets.get(position).getBusLine());
-                ticketInfo.putExtra("companyName", tickets.get(position).getCompany());
-                ticketInfo.putExtra("driverName", tickets.get(position).getName());
-                ticketInfo.putExtra("driverPhone", tickets.get(position).getDriverPhone());
-                ticketInfo.putExtra("seatNum", tickets.get(position).getSeatNum());
-                ticketInfo.putExtra("leavingTime", tickets.get(position).getLeavingTime());
-                ticketInfo.putExtra("latitude", tickets.get(position).getLatitude());
-                ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
-
-                mContext.startActivity(ticketInfo);
-
+                mContext.startActivity(editTicket);
             }
         });
     }
@@ -80,7 +73,6 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
             return 0;
         return tickets.size();
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

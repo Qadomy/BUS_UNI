@@ -29,8 +29,6 @@ import java.util.ArrayList;
 public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAdapterOnClickHandler {
 
 
-    private static final String Tag = "BusSchedule";
-
     private RecyclerView mRecyclerView;
     //private BusAdapter mBusAdapter;
     private TicketAdpter mTicketAdpter;
@@ -202,9 +200,6 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 
 
 
-    //
-    //
-    //
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -216,16 +211,6 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 //    }
 
 
-//    public void chooseSource(View view) {
-//        Intent intent = new Intent(this, Choose_Locations.class);
-//        startActivityForResult(intent, 1);
-//
-//    }
-//
-//    public void chooseDestination(View view) {
-//        Intent intent = new Intent(this, Choose_Locations.class);
-//        startActivityForResult(intent, 2);
-//    }
 
 }
 
