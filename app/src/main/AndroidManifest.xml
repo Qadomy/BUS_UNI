@@ -15,7 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BusSchedule.EditSingleScheduleItem"></activity>
+        <activity android:name=".BusSchedule.EditSingleScheduleItem">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Driver.EditBusSchedule" />
+        </activity>
         <activity android:name=".Driver.EditDriverProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -69,11 +73,6 @@
                 android:value=".BusCompany.CompanyHome" />
         </activity>
         <activity android:name=".BusSchedule.CurrentLocation" />
-        <activity android:name=".BusSchedule.Choose_Locations">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home" />
-        </activity>
         <activity android:name=".Home">
 
             <!-- Home -->
@@ -104,6 +103,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".HelpActivity">
             <meta-data

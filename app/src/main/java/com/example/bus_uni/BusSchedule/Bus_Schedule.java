@@ -97,7 +97,7 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 
                         String name = dataSnapshot.child("busLine").getValue().toString();
                         //Toast.makeText(Bus_Schedule.this, name, Toast.LENGTH_SHORT).show();
-
+                        dataSnapshot.getKey();
 
 
                         Ticket ticket = new Ticket();
@@ -198,17 +198,6 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
         return super.onOptionsItemSelected(item);
     }
 
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1 && resultCode == RESULT_OK)
-//            origin.setText(data.getStringExtra(Choose_Locations.CITY_EXTRA));
-//        else if (requestCode == 2 && resultCode == RESULT_OK)
-//            destination.setText(data.getStringExtra(Choose_Locations.CITY_EXTRA));
-//
-//    }
 
 
 

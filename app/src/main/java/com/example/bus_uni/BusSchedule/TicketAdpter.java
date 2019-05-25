@@ -67,7 +67,9 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 ticketInfo.putExtra("latitude", tickets.get(position).getLatitude());
                 ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
 
+
                 mContext.startActivity(ticketInfo);
+
 
             }
         });

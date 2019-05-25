@@ -94,6 +94,9 @@ public class EditBusSchedule extends AppCompatActivity {
                         Ticket ticket = new Ticket();
                         tickets.add(ticket);
                         showRecyclerView();
+
+//                        String data = dataSnapshot.getKey();
+//                        Toast.makeText(EditBusSchedule.this, data, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
