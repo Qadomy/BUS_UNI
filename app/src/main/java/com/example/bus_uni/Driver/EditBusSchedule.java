@@ -29,17 +29,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class EditBusSchedule extends AppCompatActivity {
 
     //
-    String busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude;
+    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude;
+
+
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    ////
-    private Calendar calendar;
-    private String keyId;
+
+    //
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
 
@@ -56,11 +56,38 @@ public class EditBusSchedule extends AppCompatActivity {
         setContentView(R.layout.activity_edit_bus_schedule);
 
 
-        calendar = Calendar.getInstance();
+
+
+        // init firebase database
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        mUserDatabaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                busLine = dataSnapshot.child("bus_line").getValue().toString();
+//                driverName = dataSnapshot.child("name").getValue().toString();
+//                seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
+//                busCompany = dataSnapshot.child("bus_company").getValue().toString();
+//                driverPhone = dataSnapshot.child("mobile").getValue().toString();
+//                latitude = dataSnapshot.child("latitude").getValue().toString();
+//                longitude = dataSnapshot.child("longitude").getValue().toString();
 
 
 
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        //TODO: busLine ??????
+        Toast.makeText(EditBusSchedule.this, busLine, Toast.LENGTH_SHORT).show();
 
         /*
          *
@@ -78,11 +105,9 @@ public class EditBusSchedule extends AppCompatActivity {
     // method for display the list of tickets >>>>>>> uuuuuuh yaaaa man -,-
     private void showTicketsInRecycleView() {
 
-        getDataFromDataBasaFireBase();
         mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
 
 
-        Toast.makeText(this, busLine + "ll", Toast.LENGTH_SHORT).show();
         mEditTicketDatabaseReference.child("AAUJ-Tulkarm").
                 addValueEventListener(new ValueEventListener() {
                     @Override
@@ -94,7 +119,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
                             String driverName = childSnapshot.child("name").getValue().toString();
 
-                            // decler this function out of this scope
+                            // declare this function out of this scope
                             String line = childSnapshot.child("busLine").getValue().toString();
                             String price = childSnapshot.child("price").getValue().toString();
                             String time = childSnapshot.child("leavingTime").getValue().toString();
@@ -118,34 +143,6 @@ public class EditBusSchedule extends AppCompatActivity {
 
     }
 
-    private void getDataFromDataBasaFireBase() {
-
-        // init firebase database
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-
-        mUserDatabaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                busLine = dataSnapshot.child("bus_line").getValue().toString();
-                driverName = dataSnapshot.child("name").getValue().toString();
-                seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
-                busCompany = dataSnapshot.child("bus_company").getValue().toString();
-                driverPhone = dataSnapshot.child("mobile").getValue().toString();
-                latitude = dataSnapshot.child("latitude").getValue().toString();
-                longitude = dataSnapshot.child("longitude").getValue().toString();
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     private void showRecyclerView() {
 
@@ -163,7 +160,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
     //
     //
-    // here when driver click on add new date
+    // here when driver click on add new date and pop and form to input the new data
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void addNewDate(View view) {
 
@@ -177,29 +174,10 @@ public class EditBusSchedule extends AppCompatActivity {
         // set activity_add_new_bus_date.xml to alert dialog builder
         alertDialogBuilder.setView(promptsView);
 
-        TimePicker timeInput = (TimePicker) promptsView
+        final TimePicker timeInput = (TimePicker) promptsView
                 .findViewById(R.id.timePicker_addNewDate);
 
         final EditText ticketPrice = (EditText) promptsView.findViewById(R.id.addTicketPrice);
-
-        final Calendar c = Calendar.getInstance();
-        final int hour = c.get(Calendar.HOUR_OF_DAY);
-        final int min = c.get(Calendar.MINUTE);
-
-
-        int h = timeInput.getHour();
-        int m = timeInput.getMinute();
-
-
-        //TODO: the time here is the current time, and I want to get the time of time picker(spinner)
-
-        // save the hour and minute in one string
-        final String time = hour + ":" + min;
-
-        final String time2 = h + ":" + m;
-
-
-        //TODO: move the time under the onClick listener
 
 
         // set dialog message
@@ -209,12 +187,48 @@ public class EditBusSchedule extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int id) {
-                                // get time input and set it to result
-                                // edit text
+
+
+
+                                /*
+                                 *
+                                 *
+                                 * ooooooh finally I get it ha ha ha ha
+                                 *
+                                 *
+                                 * here we get the current time from the spinner (time picker)*/
+
+                                int hour, minute;
+                                String am_pm;
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    hour = timeInput.getHour();
+                                    minute = timeInput.getMinute();
+                                } else {
+
+                                    hour = timeInput.getCurrentHour();
+                                    minute = timeInput.getCurrentMinute();
+                                }
+
+                                if (hour > 12) {
+                                    am_pm = "PM";
+                                    hour = hour - 12;
+                                } else {
+                                    am_pm = "AM";
+                                }
+
+
+                                String time = hour + ":" + minute + " " + am_pm;
+
+
+                                /*
+                                 *
+                                 *        hoblaaaaaaaaa
+                                 * */
+
                                 String newTicketPrice = ticketPrice.getText().toString();
 
                                 // To send data to save it in database reference
-                                final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time2, seatNumber, busCompany, driverPhone, latitude, longitude, "");
+                                final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "");
 
 
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")

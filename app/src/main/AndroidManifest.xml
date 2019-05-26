@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".BusSchedule.EditSingleScheduleItem">
+            <!--EditSingleScheduleItem-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.EditBusSchedule" />
@@ -25,13 +27,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverProfile_for_driver" />
         </activity>
-        <activity android:name=".Driver.DriverProfile_for_user" />
+        <activity android:name=".Driver.DriverProfile_for_user" >
+            <!--todo-->
+        </activity>
         <activity android:name=".Driver.DriverProfile_for_driver">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
+            <!--todo-->
 
         </activity>
         <activity android:name=".Driver.EditBusSchedule">

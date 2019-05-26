@@ -2,6 +2,7 @@ package com.example.bus_uni.BusSchedule;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +20,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class EditSingleScheduleItem extends AppCompatActivity {
 
@@ -72,21 +68,6 @@ public class EditSingleScheduleItem extends AppCompatActivity {
         textView_seatNumbers.setText(seat);
 
 
-        //TODO: get the corrcet time from time picker
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:ss");
-        Date date = null;
-        try {
-            date = sdf.parse("07:00");
-        } catch (ParseException e) {
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-
-        //TimePicker picker = new TimePicker(getApplicationContext());
-        changeTime_TimePicker.setCurrentHour(c.get(Calendar.HOUR_OF_DAY));
-        changeTime_TimePicker.setCurrentMinute(c.get(Calendar.MINUTE));
-
-
         // when click on add button "+"
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,14 +113,47 @@ public class EditSingleScheduleItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                /*
+                 *
+                 *
+                 * ooooooh finally I get it ha ha ha ha
+                 *
+                 *
+                 * here we get the current time from the spinner (time picker)*/
 
-                // here we call the firebase to update the new data in database reference
-                // if updated successfully we make an intent to return to previous activity
-                //
+                int hour, minute;
+                String am_pm;
+                if (Build.VERSION.SDK_INT >= 23) {
+                    hour = changeTime_TimePicker.getHour();
+                    minute = changeTime_TimePicker.getMinute();
+                } else {
+
+                    hour = changeTime_TimePicker.getCurrentHour();
+                    minute = changeTime_TimePicker.getCurrentMinute();
+                }
+
+                if (hour > 12) {
+                    am_pm = "PM";
+                    hour = hour - 12;
+                } else {
+                    am_pm = "AM";
+                }
 
 
-                // we updated the new seat in the Ticket class
+                time = hour + ":" + minute + " " + am_pm;
+
+
+                /*
+                 *
+                 *        hoblaaaaaaaaa
+                 * */
+
+//                Log.d("KEY", "time picker now is :" + time);
+
+
+                // we updated the new seat and time in the Ticket class
                 ticket.setSeatNum(seat);
+                ticket.setLeavingTime(time);
 
                 mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
                 mEditTicketDatabaseReference.child(line).child(keyId)

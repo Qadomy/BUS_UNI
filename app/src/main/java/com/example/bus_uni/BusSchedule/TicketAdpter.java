@@ -54,8 +54,6 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
-
-                // TODO: here when we know how we can passing the data to multiple activates we delete the other intent
                 // here passing data to BusInformationCard
                 Intent ticketInfo = new Intent(mContext, BusInformationsCard.class);
 

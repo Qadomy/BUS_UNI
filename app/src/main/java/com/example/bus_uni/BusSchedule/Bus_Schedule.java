@@ -3,7 +3,6 @@ package com.example.bus_uni.BusSchedule;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,23 +16,24 @@ import android.widget.TextView;
 
 import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Bus_Schedule extends AppCompatActivity  {
+public class Bus_Schedule extends AppCompatActivity {
 
 
     private RecyclerView mRecyclerView;
-    //private BusAdapter mBusAdapter;
     private TicketAdpter mTicketAdpter;
     private TextView mErrorMessageDisplay;
-    //private ArrayList<Bus> buses = new ArrayList<>();
+
+
+    //
+    //
     private ArrayList<Ticket> tickets = new ArrayList<>();
 
 
@@ -69,6 +69,8 @@ public class Bus_Schedule extends AppCompatActivity  {
 
         // here we click on the search image to find the buses ....
         searchBuses.setOnClickListener(new View.OnClickListener() {
+
+            //TODO: here we have an proplem when we click twice on the search we get the same tickets twice
             @Override
             public void onClick(View v) {
 
@@ -78,63 +80,87 @@ public class Bus_Schedule extends AppCompatActivity  {
 
                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
 
-                // so here we get the data ordered by leaving time to show it in bus schedule
-                Query myMostViewedPostsQuery = mTicketDatabaseReference.child(bus_line)
-                        .orderByChild("leavingTime");
-
-                myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-
-                        /*
-                         *
-                         *
-                         *
-                         * */
-
-                        // Todo: here we create  a loop for return the all data in the database in firebase
-
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String line = dataSnapshot.child("busLine").getValue().toString();
-                        String price = dataSnapshot.child("price").getValue().toString();
-                        String time = dataSnapshot.child("leavingTime").getValue().toString();
-                        String seat = dataSnapshot.child("seatNum").getValue().toString();
-                        String company = dataSnapshot.child("company").getValue().toString();
-                        String phone = dataSnapshot.child("driverPhone").getValue().toString();
-                        String latitude = dataSnapshot.child("latitude").getValue().toString();
-                        String longitude = dataSnapshot.child("longitude").getValue().toString();
-
-
-
-                        Ticket ticket = new Ticket(name,line,price,time,seat,company,phone,latitude,longitude,dataSnapshot.getKey());
-                        tickets.add(ticket);
-                        showRecyclerView();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+//                // so here we get the data ordered by leaving time to show it in bus schedule
+//                Query myMostViewedPostsQuery = mTicketDatabaseReference.child(bus_line)
+//                        .orderByChild("leavingTime");
+//
+//                myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
+//                    @Override
+//                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                        for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+//
+//
+//                            // declare this function out of this scope
+//                            String name = dataSnapshot.child("name").getValue().toString();
+//                            String line = dataSnapshot.child("busLine").getValue().toString();
+//                            String price = dataSnapshot.child("price").getValue().toString();
+//                            String time = dataSnapshot.child("leavingTime").getValue().toString();
+//                            String seat = dataSnapshot.child("seatNum").getValue().toString();
+//                            String company = dataSnapshot.child("company").getValue().toString();
+//                            String phone = dataSnapshot.child("driverPhone").getValue().toString();
+//                            String latitude = dataSnapshot.child("latitude").getValue().toString();
+//                            String longitude = dataSnapshot.child("longitude").getValue().toString();
+//
+//
+//                            Ticket ticket = new Ticket(name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey());
+//                            tickets.add(ticket);
+//                            showRecyclerView();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//
 
 
+                mTicketDatabaseReference.child(bus_line).
+                        addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+
+
+                                    // declare this function out of this scope
+                                    String name = childSnapshot.child("name").getValue().toString();
+                                    String line = childSnapshot.child("busLine").getValue().toString();
+                                    String price = childSnapshot.child("price").getValue().toString();
+                                    String time = childSnapshot.child("leavingTime").getValue().toString();
+                                    String seat = childSnapshot.child("seatNum").getValue().toString();
+                                    String company = childSnapshot.child("company").getValue().toString();
+                                    String phone = childSnapshot.child("driverPhone").getValue().toString();
+                                    String latitude = childSnapshot.child("latitude").getValue().toString();
+                                    String longitude = childSnapshot.child("longitude").getValue().toString();
+
+                                    tickets.add(new Ticket(name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey()));
+                                    showRecyclerView();
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
             }
         });
 
@@ -152,7 +178,6 @@ public class Bus_Schedule extends AppCompatActivity  {
 
         mTicketAdpter = new TicketAdpter(tickets, Bus_Schedule.this);
         mRecyclerView.setAdapter(mTicketAdpter);
-        //mTicketAdpter.setBusesData(buses);
         showTickets();
     }
 
@@ -168,7 +193,6 @@ public class Bus_Schedule extends AppCompatActivity  {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
-
 
 
     // for back

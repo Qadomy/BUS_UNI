@@ -78,6 +78,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:textSize="22sp"
+                        android:textColor="@color/redColor"
                         android:textStyle="bold"
                         tools:text="04:30" />
 
