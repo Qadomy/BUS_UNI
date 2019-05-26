@@ -21,6 +21,9 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
     private ArrayList<Ticket> tickets = new ArrayList<>();
     private Context mContext;
 
+    public interface EditTicketAdapterOnClickHandler {
+        void onClick(Ticket ticket);
+    }
 
     // constructor for EditItemSchedule_Adapter
     public EditItemSchedule_Adapter(ArrayList<Ticket> tickets, Context mContext) {
@@ -43,7 +46,9 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
         viewHolder.busLineName.setText(tickets.get(position).getBusLine());
         viewHolder.seatsNumbers.setText(String.valueOf(tickets.get(position).getSeatNum()));
         viewHolder.leavingTime.setText(tickets.get(position).getLeavingTime());
-        viewHolder.companyName.setText(tickets.get(position).getLeavingTime());
+        viewHolder.companyName.setText(tickets.get(position).getCompany());
+        viewHolder.ticketPrice.setText(tickets.get(position).getPrice());
+
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,8 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
                 editTicket.putExtra("leavingTime", tickets.get(position).getLeavingTime());
                 editTicket.putExtra("latitude", tickets.get(position).getLatitude());
                 editTicket.putExtra("longitude", tickets.get(position).getLongitude());
+                editTicket.putExtra("ticketPrice", tickets.get(position).getPrice());
+                editTicket.putExtra("keyId", tickets.get(position).getId());
 
                 mContext.startActivity(editTicket);
             }
@@ -77,7 +84,7 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView busLineName, seatsNumbers, leavingTime, companyName;
+        TextView busLineName, seatsNumbers, leavingTime, companyName, ticketPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,6 +93,7 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
             seatsNumbers = (TextView) itemView.findViewById(R.id.seatsNumber);
             leavingTime = (TextView) itemView.findViewById(R.id.busLeavingTime);
             companyName = (TextView) itemView.findViewById(R.id.companyBusTicket);
+            ticketPrice = (TextView)itemView.findViewById(R.id.busTicktPrice);
             cardView = (CardView) itemView.findViewById(R.id.cardViewParent);
         }
     }

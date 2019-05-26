@@ -32,9 +32,7 @@
                 android:value=".Driver.DriverHome" />
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".BusSchedule.Choose_Locations" />
+
         </activity>
         <activity android:name=".Driver.EditBusSchedule">
 

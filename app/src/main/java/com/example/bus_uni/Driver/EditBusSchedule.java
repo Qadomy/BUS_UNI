@@ -35,15 +35,11 @@ public class EditBusSchedule extends AppCompatActivity {
 
     //
     String busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude;
-
-    ////
-    private Calendar calendar;
-
-
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
+    ////
+    private Calendar calendar;
+    private String keyId;
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
 
@@ -85,18 +81,33 @@ public class EditBusSchedule extends AppCompatActivity {
         getDataFromDataBasaFireBase();
         mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
 
-        Toast.makeText(this, busLine+"ll", Toast.LENGTH_SHORT).show();
-        mEditTicketDatabaseReference.child("AAUJ-Tulkarm").child("Roney").
+
+        Toast.makeText(this, busLine + "ll", Toast.LENGTH_SHORT).show();
+        mEditTicketDatabaseReference.child("AAUJ-Tulkarm").
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
 
-                        Ticket ticket = new Ticket();
-                        tickets.add(ticket);
-                        showRecyclerView();
+                            keyId = childSnapshot.getKey();
 
-//                        String data = dataSnapshot.getKey();
-//                        Toast.makeText(EditBusSchedule.this, data, Toast.LENGTH_SHORT).show();
+
+                            String driverName = childSnapshot.child("name").getValue().toString();
+
+                            // decler this function out of this scope
+                            String line = childSnapshot.child("busLine").getValue().toString();
+                            String price = childSnapshot.child("price").getValue().toString();
+                            String time = childSnapshot.child("leavingTime").getValue().toString();
+                            String seat = childSnapshot.child("seatNum").getValue().toString();
+                            String company = childSnapshot.child("company").getValue().toString();
+                            String phone = childSnapshot.child("driverPhone").getValue().toString();
+                            String latitude = childSnapshot.child("latitude").getValue().toString();
+                            String longitude = childSnapshot.child("longitude").getValue().toString();
+
+                            tickets.add(new Ticket(driverName, line, price, time, seat, company, phone, latitude, longitude, keyId));
+                            showRecyclerView();
+
+                        }
                     }
 
                     @Override
@@ -126,7 +137,6 @@ public class EditBusSchedule extends AppCompatActivity {
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
 
-                //Toast.makeText(EditBusSchedule.this, busLine, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -145,11 +155,8 @@ public class EditBusSchedule extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-
         mEditItemAdapter = new EditItemSchedule_Adapter(tickets, EditBusSchedule.this);
         mRecyclerView.setAdapter(mEditItemAdapter);
-        //mTicketAdpter.setBusesData(buses);
-        //showTickets();
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
@@ -170,11 +177,10 @@ public class EditBusSchedule extends AppCompatActivity {
         // set activity_add_new_bus_date.xml to alert dialog builder
         alertDialogBuilder.setView(promptsView);
 
-        final TimePicker timeInput = (TimePicker) promptsView
+        TimePicker timeInput = (TimePicker) promptsView
                 .findViewById(R.id.timePicker_addNewDate);
 
-        final EditText ticketPrice = (EditText) promptsView
-                .findViewById(R.id.addTicketPrice);
+        final EditText ticketPrice = (EditText) promptsView.findViewById(R.id.addTicketPrice);
 
         final Calendar c = Calendar.getInstance();
         final int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -192,12 +198,8 @@ public class EditBusSchedule extends AppCompatActivity {
 
         final String time2 = h + ":" + m;
 
-        //TODO: here why text not saved in new String >>> ??
-        final String newTicketPrice = ticketPrice.getText().toString();
 
-
-        // class Ticket to send data to save it in database reference
-        final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time2, seatNumber, busCompany, driverPhone, latitude, longitude);
+        //TODO: move the time under the onClick listener
 
 
         // set dialog message
@@ -205,11 +207,15 @@ public class EditBusSchedule extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
+
                             public void onClick(DialogInterface dialog, int id) {
                                 // get time input and set it to result
                                 // edit text
+                                String newTicketPrice = ticketPrice.getText().toString();
 
-                                //Toast.makeText(EditBusSchedule.this, time, Toast.LENGTH_SHORT).show();
+                                // To send data to save it in database reference
+                                final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time2, seatNumber, busCompany, driverPhone, latitude, longitude, "");
+
 
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")
                                         .child(busLine);

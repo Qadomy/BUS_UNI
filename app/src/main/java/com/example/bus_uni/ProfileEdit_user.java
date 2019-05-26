@@ -157,7 +157,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                 // oldImage[0] this we save the string of link of existing image
                 oldImage[0] = imageUrl;
 
-                // here we get the data from database and shown in applicationsa
+                // here we get the data from database and shown in applications
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
                 String mobile = dataSnapshot.child("mobile").getValue().toString();

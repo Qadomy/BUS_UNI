@@ -26,7 +26,7 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
-public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAdapterOnClickHandler {
+public class Bus_Schedule extends AppCompatActivity  {
 
 
     private RecyclerView mRecyclerView;
@@ -51,16 +51,15 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
         setContentView(R.layout.activity_bus__schedule);
 
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.buses_rv);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicatorSchedule);
         mErrorMessageDisplay = findViewById(R.id.tv_error_message_displaySchedule);
 
 
-        searchBuses = (ImageView)findViewById(R.id.searchBuses);
+        searchBuses = (ImageView) findViewById(R.id.searchBuses);
 
         // init here a spinner
-        busLineSpinner = (Spinner)findViewById(R.id.busLineNameSearch_spinner);
+        busLineSpinner = (Spinner) findViewById(R.id.busLineNameSearch_spinner);
 
         // here for init the spinner and get her the data from string array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bus_line_names, android.R.layout.simple_spinner_item);
@@ -90,17 +89,25 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
 
                         /*
                          *
-                         * TODO: ok we get the data from database, but now how we can to know which each data,
-                         *  // and create a Ticket class for put data in list item in bus schedule
+                         *
                          *
                          * */
 
-                        String name = dataSnapshot.child("busLine").getValue().toString();
-                        //Toast.makeText(Bus_Schedule.this, name, Toast.LENGTH_SHORT).show();
-                        dataSnapshot.getKey();
+                        // Todo: here we create  a loop for return the all data in the database in firebase
+
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String line = dataSnapshot.child("busLine").getValue().toString();
+                        String price = dataSnapshot.child("price").getValue().toString();
+                        String time = dataSnapshot.child("leavingTime").getValue().toString();
+                        String seat = dataSnapshot.child("seatNum").getValue().toString();
+                        String company = dataSnapshot.child("company").getValue().toString();
+                        String phone = dataSnapshot.child("driverPhone").getValue().toString();
+                        String latitude = dataSnapshot.child("latitude").getValue().toString();
+                        String longitude = dataSnapshot.child("longitude").getValue().toString();
 
 
-                        Ticket ticket = new Ticket();
+
+                        Ticket ticket = new Ticket(name,line,price,time,seat,company,phone,latitude,longitude,dataSnapshot.getKey());
                         tickets.add(ticket);
                         showRecyclerView();
 
@@ -128,25 +135,8 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
                 });
 
 
-
             }
         });
-
-
-
-//        Bus bus1 = new Bus();
-//        Bus bus2 = new Bus();
-//        Bus bus3 = new Bus();
-//        Bus bus4 = new Bus();
-//        Bus bus5 = new Bus();
-//
-//        buses.add(bus1);
-//        buses.add(bus2);
-//        buses.add(bus3);
-//        buses.add(bus4);
-//        buses.add(bus5);
-
-        //showRecyclerView();
 
     }// end onCreate
 
@@ -179,13 +169,6 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onClick(Bus bus) {
-        // Intent intent = new Intent(this, DetailsActivity.class);
-        //intent.putExtra("Recipe", recipe);
-        // startActivity(intent);
-    }
-
 
 
     // for back
@@ -197,8 +180,6 @@ public class Bus_Schedule extends AppCompatActivity implements BusAdapter.BusAda
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
 }

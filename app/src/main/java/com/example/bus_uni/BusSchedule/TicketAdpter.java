@@ -48,6 +48,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
         viewHolder.seatsNumbers.setText(String.valueOf(tickets.get(position).getSeatNum()));
         viewHolder.leavingTime.setText(tickets.get(position).getLeavingTime());
         viewHolder.companyName.setText(tickets.get(position).getLeavingTime());
+        viewHolder.ticketPrice.setText(tickets.get(position).getPrice());
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +88,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView busLineName, seatsNumbers, leavingTime, companyName;
+        TextView busLineName, seatsNumbers, leavingTime, companyName, ticketPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +97,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
             seatsNumbers = (TextView) itemView.findViewById(R.id.seatsNumber);
             leavingTime = (TextView) itemView.findViewById(R.id.busLeavingTime);
             companyName = (TextView) itemView.findViewById(R.id.companyBusTicket);
+            ticketPrice = (TextView)itemView.findViewById(R.id.busTicktPrice);
             cardView = (CardView) itemView.findViewById(R.id.cardViewParent);
         }
     }

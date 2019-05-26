@@ -3,6 +3,7 @@ package com.example.bus_uni.BusSchedule;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.bus_uni.Driver.EditBusSchedule;
+import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +31,14 @@ public class EditSingleScheduleItem extends AppCompatActivity {
     TextView textView_seatNumbers;
     Button addButton, minusButton, saveButton;
     TimePicker changeTime_TimePicker;
-    String busSeatNumbersData = "";
+
+
+    String seat = "";
+    String line, time;
+
+
+    // firebase database
+    private DatabaseReference mEditTicketDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +56,23 @@ public class EditSingleScheduleItem extends AppCompatActivity {
         // we receive the data from the ticket from choose locations
         Intent getTicketInfo = getIntent();
 
-        final String busRuteLineData = getTicketInfo.getExtras().getString("busLine");
-        final String busCompanyNameData = getTicketInfo.getExtras().getString("companyName");
-        final String driverNameData = getTicketInfo.getExtras().getString("driverName");
-        final String driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
-        busSeatNumbersData = getTicketInfo.getExtras().getString("seatNum");
-        final String busTimeData = getTicketInfo.getExtras().getString("leavingTime");
+        line = getTicketInfo.getExtras().getString("busLine");
+        final String company = getTicketInfo.getExtras().getString("companyName");
+        final String name = getTicketInfo.getExtras().getString("driverName");
+        final String phone = getTicketInfo.getExtras().getString("driverPhone");
+        seat = getTicketInfo.getExtras().getString("seatNum");
+        time = getTicketInfo.getExtras().getString("leavingTime");
         final String latitude = getTicketInfo.getExtras().getString("latitude");
         final String longitude = getTicketInfo.getExtras().getString("longitude");
+        final String price = getTicketInfo.getExtras().getString("ticketPrice");
+        final String keyId = getTicketInfo.getExtras().getString("keyId");
 
 
         // here assign the number of seat in textView
-        textView_seatNumbers.setText(busSeatNumbersData);
+        textView_seatNumbers.setText(seat);
 
-        Toast.makeText(this, busSeatNumbersData, Toast.LENGTH_SHORT).show();
 
-        //TODO: make sure if this work or no
+        //TODO: get the corrcet time from time picker
         SimpleDateFormat sdf = new SimpleDateFormat("hh:ss");
         Date date = null;
         try {
@@ -78,12 +93,12 @@ public class EditSingleScheduleItem extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                int addNum = Integer.parseInt(busSeatNumbersData);
+                int addNum = Integer.parseInt(seat);
                 addNum = addNum + 1;
-                busSeatNumbersData = addNum + "";
+                seat = addNum + "";
 
                 //addSeat[0] = Integer.toString(newNumber);
-                textView_seatNumbers.setText(busSeatNumbersData);
+                textView_seatNumbers.setText(seat);
 
 
             }
@@ -96,16 +111,17 @@ public class EditSingleScheduleItem extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                int minNum = Integer.parseInt(busSeatNumbersData);
+                int minNum = Integer.parseInt(seat);
                 minNum = minNum - 1;
 
                 //TODO: here to make stop if arrive to zero
-                busSeatNumbersData = minNum + "";
-                textView_seatNumbers.setText(busSeatNumbersData);
+                seat = minNum + "";
+                textView_seatNumbers.setText(seat);
             }
         });
 
 
+        final Ticket ticket = new Ticket(name, line, price, time, seat, company, phone, longitude, latitude, keyId);
 
         /*
          *
@@ -118,12 +134,30 @@ public class EditSingleScheduleItem extends AppCompatActivity {
 
 
                 // here we call the firebase to update the new data in database reference
-                // if updated successfully we make an intent to return to previuos activity
+                // if updated successfully we make an intent to return to previous activity
                 //
 
-                
+
+                // we updated the new seat in the Ticket class
+                ticket.setSeatNum(seat);
+
+                mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+                mEditTicketDatabaseReference.child(line).child(keyId)
+                        .setValue(ticket).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(EditSingleScheduleItem.this, "Your data saved successfully", Toast.LENGTH_SHORT).show();
+
+                            Intent editTicket = new Intent(EditSingleScheduleItem.this, EditBusSchedule.class);
+                            startActivity(editTicket);
+                        }
+                    }
+                });
 
 
+//                Log.d("KEY", "seat number now is :" + seat);
 
             }
         });

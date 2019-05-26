@@ -3,31 +3,33 @@ package com.example.bus_uni.Driver;
 public class Ticket {
 
 
-    private String name;
     private String busLine;
-    private String Price;
-    private String leavingTime;
-    private String seatNum;
     private String company;
     private String driverPhone;
-    private String longitude;
     private String latitude;
+    private String leavingTime;
+    private String longitude;
+    private String name;
+    private String price;
+    private String seatNum;
+    private String id;
+
 
     public Ticket() {
 
     }
 
-    public Ticket(String name, String busLine, String price, String leavingTime, String seatNum, String company, String driverPhone, String latitude, String longitude) {
-
-        this.name = name;
-        this.busLine = busLine;
-        Price = price;
-        this.leavingTime = leavingTime;
-        this.seatNum = seatNum;
+    public Ticket(String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id) {
+        this.busLine = line;
         this.company = company;
-        this.driverPhone = driverPhone;
+        this.driverPhone = phone;
         this.latitude = latitude;
+        this.leavingTime = time;
         this.longitude = longitude;
+        this.name = name;
+        this.price = price;
+        this.seatNum = seat;
+        this.id = id;
     }
 
 
@@ -40,11 +42,11 @@ public class Ticket {
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        price = price;
     }
 
     public String getSeatNum() {
@@ -101,5 +103,13 @@ public class Ticket {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
