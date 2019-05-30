@@ -67,12 +67,12 @@ public class EditBusSchedule extends AppCompatActivity {
 
 
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
-//                driverName = dataSnapshot.child("name").getValue().toString();
-//                seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
-//                busCompany = dataSnapshot.child("bus_company").getValue().toString();
-//                driverPhone = dataSnapshot.child("mobile").getValue().toString();
-//                latitude = dataSnapshot.child("latitude").getValue().toString();
-//                longitude = dataSnapshot.child("longitude").getValue().toString();
+                driverName = dataSnapshot.child("name").getValue().toString();
+                seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
+                busCompany = dataSnapshot.child("bus_company").getValue().toString();
+                driverPhone = dataSnapshot.child("mobile").getValue().toString();
+                latitude = dataSnapshot.child("latitude").getValue().toString();
+                longitude = dataSnapshot.child("longitude").getValue().toString();
 
 
 
@@ -120,6 +120,7 @@ public class EditBusSchedule extends AppCompatActivity {
                             String driverName = childSnapshot.child("name").getValue().toString();
 
                             // declare this function out of this scope
+                            String driverId = childSnapshot.child("driverId").getValue().toString();
                             String line = childSnapshot.child("busLine").getValue().toString();
                             String price = childSnapshot.child("price").getValue().toString();
                             String time = childSnapshot.child("leavingTime").getValue().toString();
@@ -129,7 +130,7 @@ public class EditBusSchedule extends AppCompatActivity {
                             String latitude = childSnapshot.child("latitude").getValue().toString();
                             String longitude = childSnapshot.child("longitude").getValue().toString();
 
-                            tickets.add(new Ticket(driverName, line, price, time, seat, company, phone, latitude, longitude, keyId));
+                            tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId));
                             showRecyclerView();
 
                         }
@@ -228,7 +229,7 @@ public class EditBusSchedule extends AppCompatActivity {
                                 String newTicketPrice = ticketPrice.getText().toString();
 
                                 // To send data to save it in database reference
-                                final Ticket ticket = new Ticket(driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "");
+                                final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "");
 
 
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")

@@ -3,6 +3,7 @@ package com.example.bus_uni.Driver;
 public class Ticket {
 
 
+    private String driverId;
     private String busLine;
     private String company;
     private String driverPhone;
@@ -19,7 +20,9 @@ public class Ticket {
 
     }
 
-    public Ticket(String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id) {
+    public Ticket(String driverId, String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id) {
+
+        this.driverId= driverId;
         this.busLine = line;
         this.company = company;
         this.driverPhone = phone;
@@ -32,6 +35,14 @@ public class Ticket {
         this.id = id;
     }
 
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
 
     public String getBusLine() {
         return busLine;

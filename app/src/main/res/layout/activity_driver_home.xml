@@ -8,15 +8,13 @@
     tools:context=".Driver.DriverHome">
 
 
-
-
     <fragment
-        android:layout_margin="10dp"
         android:id="@+id/driverMap_currentLocations"
-        android:layout_weight="1"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/checkBookingsButton"
@@ -27,6 +25,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/angle"
+        android:onClick="checkBooking"
         android:text="@string/check_bookings"
         android:textAllCaps="false"
         android:textSize="25sp" />
@@ -40,6 +39,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/angle"
+        android:onClick="EditSchedule"
         android:text="@string/edit_bus_schedule"
         android:textAllCaps="false"
         android:textSize="25sp" />
@@ -53,6 +53,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/angle"
+        android:onClick="DriverAddPost"
         android:text="@string/add_post"
         android:textAllCaps="false"
         android:textSize="25sp" />
@@ -66,10 +67,15 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/angle"
+        android:onClick="DriverProfile"
         android:text="@string/profile"
         android:textAllCaps="false"
         android:textSize="25sp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="logoutFromDriver"/>
 
 
 </LinearLayout>

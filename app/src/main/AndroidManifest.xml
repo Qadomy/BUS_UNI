@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".BusSchedule.EditSingleScheduleItem">
-            <!--EditSingleScheduleItem-->
+
+            <!-- EditSingleScheduleItem -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.EditBusSchedule" />
@@ -27,8 +28,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverProfile_for_driver" />
         </activity>
-        <activity android:name=".Driver.DriverProfile_for_user" >
-            <!--todo-->
+        <activity android:name=".Driver.DriverProfile_for_user">
+
+            <!-- todo -->
         </activity>
         <activity android:name=".Driver.DriverProfile_for_driver">
             <meta-data
@@ -36,7 +38,8 @@
                 android:value=".Driver.DriverHome" />
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
-            <!--todo-->
+
+            <!-- todo -->
 
         </activity>
         <activity android:name=".Driver.EditBusSchedule">
@@ -106,7 +109,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".HelpActivity">
             <meta-data

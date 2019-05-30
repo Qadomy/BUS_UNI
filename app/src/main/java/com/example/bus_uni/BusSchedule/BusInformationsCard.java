@@ -54,8 +54,12 @@ public class BusInformationsCard extends AppCompatActivity {
         final String driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
         final String busSeatNumbersData = getTicketInfo.getExtras().getString("seatNum");
         final String busTimeData = getTicketInfo.getExtras().getString("leavingTime");
-        final String latitude = getTicketInfo.getExtras().getString("latitued");
+        final String latitude = getTicketInfo.getExtras().getString("latitude");
         final String longitude = getTicketInfo.getExtras().getString("longitude");
+        final String driverID = getTicketInfo.getExtras().getString("driverId");
+
+
+        Toast.makeText(this, "driver id"+driverID, Toast.LENGTH_SHORT).show();
 
 
         busRuteLine.setText(busRuteLineData);
@@ -136,8 +140,14 @@ public class BusInformationsCard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // TODO: here we send the current data to check where is the bus
+                /*
+                *
+                * here we send the latitude and longitude to currentLocations to tracking the bus
+                * */
                 Intent currentLocation = new Intent(BusInformationsCard.this, CurrentLocation.class);
+                currentLocation.putExtra("latitude", latitude);
+                currentLocation.putExtra("longitude", longitude);
+                currentLocation.putExtra("driverId", driverID);
                 startActivity(currentLocation);
             }
         });

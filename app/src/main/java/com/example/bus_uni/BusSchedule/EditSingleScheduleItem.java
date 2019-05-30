@@ -62,6 +62,7 @@ public class EditSingleScheduleItem extends AppCompatActivity {
         final String longitude = getTicketInfo.getExtras().getString("longitude");
         final String price = getTicketInfo.getExtras().getString("ticketPrice");
         final String keyId = getTicketInfo.getExtras().getString("keyId");
+        final String driverId = getTicketInfo.getExtras().getString("driverId");
 
 
         // here assign the number of seat in textView
@@ -102,7 +103,7 @@ public class EditSingleScheduleItem extends AppCompatActivity {
         });
 
 
-        final Ticket ticket = new Ticket(name, line, price, time, seat, company, phone, longitude, latitude, keyId);
+        final Ticket ticket = new Ticket(driverId, name, line, price, time, seat, company, phone, longitude, latitude, keyId);
 
         /*
          *

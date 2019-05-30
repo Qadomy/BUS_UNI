@@ -65,6 +65,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 ticketInfo.putExtra("leavingTime", tickets.get(position).getLeavingTime());
                 ticketInfo.putExtra("latitude", tickets.get(position).getLatitude());
                 ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
+                ticketInfo.putExtra("driverId", tickets.get(position).getDriverId());
 
 
                 mContext.startActivity(ticketInfo);

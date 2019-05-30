@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,9 @@ public class Bus_Schedule extends AppCompatActivity {
 
     // database realtime
     private DatabaseReference mTicketDatabaseReference;
+
+    // here for get the id of current user and save in the string
+    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +154,7 @@ public class Bus_Schedule extends AppCompatActivity {
                                     String latitude = childSnapshot.child("latitude").getValue().toString();
                                     String longitude = childSnapshot.child("longitude").getValue().toString();
 
-                                    tickets.add(new Ticket(name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey()));
+                                    tickets.add(new Ticket(currentuser, name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey()));
                                     showRecyclerView();
 
                                 }

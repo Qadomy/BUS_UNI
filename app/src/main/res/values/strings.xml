@@ -153,15 +153,5 @@
         <item>AAUJ-Zababdeh</item>
     </string-array>
 
-    <string-array name="cities_names">
-        <item>Tulkarm</item>
-        <item>Jenin</item>
-        <item>Ya`bad</item>
-        <item>Tubas</item>
-        <item>Selfet</item>
-        <item>Arrabeh</item>
-        <item>Borqen</item>
-        <item>Zababdeh</item>
-    </string-array>
 
 </resources>

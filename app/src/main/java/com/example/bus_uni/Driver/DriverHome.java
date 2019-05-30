@@ -1,5 +1,6 @@
 package com.example.bus_uni.Driver;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -7,18 +8,28 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.bus_uni.LoginUserActivity;
 import com.example.bus_uni.R;
 import com.example.bus_uni.Street_Information;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -27,20 +38,27 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class DriverHome extends AppCompatActivity implements LocationListener, OnMapReadyCallback {
+public class DriverHome extends FragmentActivity implements LocationListener, OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener {
 
 
-    GoogleMap map;
+    private GoogleMap map;
+    GoogleApiClient googleApiClient;
+    Location lastLocation;
+    LocationRequest locationRequest;
 
-    Button checkBookings, editBusSchedule, addPost, profile;
+
     //
     //
     //...///////......
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     MapFragment mapFragment;
 
     //
@@ -54,28 +72,25 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
     //
     //......//
     // firebase database
-    private DatabaseReference mUserDatabaseReference;
+    private DatabaseReference mUserDatabaseReference, mDriverAvailabilityRef;
 
 
-//    double longitude[] = new double[1];
-//    double latitude[] = new double[1];
-    //
-    ////
     //
     // for locations
     private LocationManager locationManager;
+
+
+
+    // GeoFire, for store the locations of drivers in firebase database realtime
+    GeoFire geoFire;
+
+
 
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_home);
-
-
-        checkBookings = (Button) findViewById(R.id.checkBookingsButton);
-        editBusSchedule = (Button) findViewById(R.id.editBusSchedule);
-        addPost = (Button) findViewById(R.id.driverAddPostButton);
-        profile = (Button) findViewById(R.id.driverProfileButton);
 
 
         // init the fragment of map
@@ -91,10 +106,16 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
 
+        // Check GPS is enabled
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show();
+            //finish();
+        }
 
         /*
          *
-         * here for getting the current locations
+         * here for getting the location permissions
          *
          * */
 
@@ -132,47 +153,25 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
          * */
 
 
-        checkBookings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent checkBookings = new Intent(DriverHome.this, CheckBookings.class);
-                startActivity(checkBookings);
-            }
-        });
-
-        editBusSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent editBusSchedule = new Intent(DriverHome.this, EditBusSchedule.class);
-                startActivity(editBusSchedule);
-            }
-        });
-
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addPost = new Intent(DriverHome.this, Street_Information.class);
-                startActivity(addPost);
-            }
-        });
-
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent driverProfile = new Intent(DriverHome.this, DriverProfile_for_driver.class);
-                startActivity(driverProfile);
-            }
-        });
-
     }// end of onCreate
+
 
     // method for OnMapReadyCallback abstract
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-//        Location location = null;
-//        onLocationChanged(location);
         map = googleMap;
+        //map.setMaxZoomPreference(16);
+
+        buildGoogleAPIClient();
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        map.setMyLocationEnabled(true); // for my current location button above the screen
 
 
     }
@@ -182,26 +181,61 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
     public void onLocationChanged(Location location) {
 
 
+        lastLocation = location;   //------->        //********??
+
         // here for get the longitude and latitude
         getLatitude = location.getLatitude();
         getLongitude = location.getLongitude();
 
-
-        //
         // after we get the longitude and latitude we uploaded to firebase
         mUserDatabaseReference.child(currentuser).child("latitude").setValue(getLatitude);
         mUserDatabaseReference.child(currentuser).child("longitude").setValue(getLongitude);
+
+        /*
+        *
+        *
+        * */
+
 
 
         LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
         map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
 
-        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(15).build();
+        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(16).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+        //map.animateCamera(CameraUpdateFactory.zoomTo(12));
 
 
-//        longitude[0] = getLongitude;
-//        latitude[0] = getLatitude;
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
+        geoFire = new GeoFire(mDriverAvailabilityRef);
+        geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()),
+                new GeoFire.CompletionListener() {
+                    @Override
+                    public void onComplete(String key, DatabaseError error) {
+                        if (error != null) {
+                            //System.err.println("There was an error saving the location to GeoFire: " + error);
+                            Toast.makeText(DriverHome.this, "There was an error saving the location to GeoFire: " + error, Toast.LENGTH_SHORT).show();
+                        } else {
+                            //System.out.println("Location saved on server successfully!");
+                            Toast.makeText(DriverHome.this, "Location saved on server successfully!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+    }
+
+    protected void onStop() {
+
+        super.onStop();
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
+        geoFire = new GeoFire(mDriverAvailabilityRef);
+//        geoFire.removeLocation(userId);
 
     }
 
@@ -220,6 +254,52 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
 
     }
 
+
+    // 3 methods for GoogleApiClient ,........
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+        //********??
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(1000); // the time to change the locations
+        locationRequest.setFastestInterval(1000); // get the time very rapidly if exist
+
+        locationRequest.setPriority(locationRequest.PRIORITY_HIGH_ACCURACY);
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                          Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+
+
+    //// method
+    protected synchronized void buildGoogleAPIClient(){
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        googleApiClient.connect();
+
+    }
 
     //
     //
@@ -257,4 +337,43 @@ public class DriverHome extends AppCompatActivity implements LocationListener, O
         }
     }
 
+
+
+    //////////////////////////////////
+    //////////////////////////////////
+
+    public void checkBooking(View view) {
+        Intent checkBookings = new Intent(DriverHome.this, CheckBookings.class);
+        startActivity(checkBookings);
+    }
+
+    public void EditSchedule(View view) {
+        Intent editBusSchedule = new Intent(DriverHome.this, EditBusSchedule.class);
+        startActivity(editBusSchedule);
+
+    }
+
+    public void DriverAddPost(View view) {
+        Intent addPost = new Intent(DriverHome.this, Street_Information.class);
+        startActivity(addPost);
+    }
+
+    public void DriverProfile(View view) {
+        Intent driverProfile = new Intent(DriverHome.this, DriverProfile_for_driver.class);
+        startActivity(driverProfile);
+    }
+
+
+    public void logoutFromDriver(View view) {
+        firebaseAuth.signOut();
+
+        Intent signOut = new Intent(DriverHome.this, LoginUserActivity.class);
+
+        // here for when sign out of the account and when we make a back we can`t retrieve information
+        // again of the user until we Login again
+
+        signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(signOut);
+    }
 }

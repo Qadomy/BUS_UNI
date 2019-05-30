@@ -67,6 +67,7 @@ public class EditItemSchedule_Adapter extends RecyclerView.Adapter<EditItemSched
                 editTicket.putExtra("longitude", tickets.get(position).getLongitude());
                 editTicket.putExtra("ticketPrice", tickets.get(position).getPrice());
                 editTicket.putExtra("keyId", tickets.get(position).getId());
+                editTicket.putExtra("driverId", tickets.get(position).getDriverId());
 
                 mContext.startActivity(editTicket);
             }
