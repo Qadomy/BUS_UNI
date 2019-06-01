@@ -9,8 +9,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.bus_uni.R;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -39,10 +43,11 @@ public class CurrentLocation extends AppCompatActivity implements OnMapReadyCall
     Location lastLocation;
     LocationRequest locationRequest;
 
-    String getLatitude, getLongitude, getDriverId, geoLat, geoLong;
+    String getLatitude, getLongitude, getDriverId, busLine, geoLat, geoLong;
 
 
-    DatabaseReference mDatabaseReference;
+    DatabaseReference mDatabaseReference, ticketLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,22 +62,45 @@ public class CurrentLocation extends AppCompatActivity implements OnMapReadyCall
         getLatitude = getLatLong.getExtras().getString("latitude");
         getLongitude = getLatLong.getExtras().getString("longitude");
         getDriverId = getLatLong.getExtras().getString("driverId");
+        busLine = getLatLong.getExtras().getString("busLine");
 
 
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
-        mDatabaseReference.child(getDriverId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
+//        mDatabaseReference.child(getDriverId).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                //geoLat = dataSnapshot.child("l").getValue().toString();
+//
+//                Toast.makeText(CurrentLocation.this, geoLat, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
-//                geoLat = dataSnapshot.child("")
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+
+
+        getBusLocation();
+
+    }
+
+    private void getBusLocation() {
+
+        // method for get the current location of the ticket
+
+        ticketLocation = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
+
+        GeoFire geoFire = new GeoFire(ticketLocation);
+
+        // here we create an GeoQuery to get the lat and lng of the bus location
+        //GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(ticketLocation.));
+
 
     }
 
@@ -136,7 +164,7 @@ public class CurrentLocation extends AppCompatActivity implements OnMapReadyCall
         LatLng currentBus = new LatLng(longitude , latitude);
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setTrafficEnabled(true);
-        map.addMarker(new MarkerOptions().position(currentBus).title("My Home"));
+        map.addMarker(new MarkerOptions().position(currentBus).title(busLine));
 
         CameraPosition target = CameraPosition.builder().target(currentBus).zoom(17).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(target));

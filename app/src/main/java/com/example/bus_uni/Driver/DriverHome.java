@@ -13,14 +13,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.bus_uni.BusSchedule.CurrentLocation;
 import com.example.bus_uni.LoginUserActivity;
 import com.example.bus_uni.R;
 import com.example.bus_uni.Street_Information;
@@ -38,33 +37,33 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DriverHome extends FragmentActivity implements LocationListener, OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener {
 
 
-    private GoogleMap map;
     GoogleApiClient googleApiClient;
     Location lastLocation;
     LocationRequest locationRequest;
-
-
     //
     //
     //...///////......
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
     MapFragment mapFragment;
-
     //
     //
     double getLatitude;
     double getLongitude;
+    // GeoFire, for store the locations of drivers in firebase database realtime
+    GeoFire geoFire;
+    private GoogleMap map;
     //
     //
     // firebase auth
@@ -72,19 +71,10 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     //
     //......//
     // firebase database
-    private DatabaseReference mUserDatabaseReference, mDriverAvailabilityRef;
-
-
+    private DatabaseReference mUserDatabaseReference, mDriverAvailabilityRef, nameBusssLine;
     //
     // for locations
     private LocationManager locationManager;
-
-
-
-    // GeoFire, for store the locations of drivers in firebase database realtime
-    GeoFire geoFire;
-
-
 
     //
     @Override
@@ -176,6 +166,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
 
     }
 
+
     // 4 methods for LocationListener Listener
     @Override
     public void onLocationChanged(Location location) {
@@ -192,50 +183,62 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         mUserDatabaseReference.child(currentuser).child("longitude").setValue(getLongitude);
 
         /*
-        *
-        *
-        * */
+         *
+         *
+         * */
 
 
+//        nameBusssLine = FirebaseDatabase.getInstance().getReference("Users");
+//        nameBusssLine.child(currentuser).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                String busLine = dataSnapshot.child("bus_line").getValue().toString();
+//                Intent intent = new Intent(DriverHome.this, CurrentLocation.class);
+//                intent.putExtra("busLine", busLine);
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
-        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-        map.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+
+        LatLng currentLocation = new LatLng(getLatitude, getLongitude);
+        map.addMarker(new MarkerOptions().position(currentLocation).title("My Current Location"));
 
         CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(16).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-        //map.animateCamera(CameraUpdateFactory.zoomTo(12));
 
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        // using GeoFire to save the location
         mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
         geoFire = new GeoFire(mDriverAvailabilityRef);
-        geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()),
+        geoFire.setLocation(currentuser, new GeoLocation(location.getLatitude(), location.getLongitude()),
                 new GeoFire.CompletionListener() {
                     @Override
                     public void onComplete(String key, DatabaseError error) {
                         if (error != null) {
-                            //System.err.println("There was an error saving the location to GeoFire: " + error);
                             Toast.makeText(DriverHome.this, "There was an error saving the location to GeoFire: " + error, Toast.LENGTH_SHORT).show();
                         } else {
-                            //System.out.println("Location saved on server successfully!");
-                            Toast.makeText(DriverHome.this, "Location saved on server successfully!", Toast.LENGTH_SHORT).show();
+                            // Location saved on server successfully!
                         }
                     }
                 });
-
-
     }
+
 
     protected void onStop() {
 
         super.onStop();
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
-        geoFire = new GeoFire(mDriverAvailabilityRef);
-//        geoFire.removeLocation(userId);
+//        // here when the driver logout or close the app the location of his bus gone from the map
+//        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
+//        geoFire = new GeoFire(mDriverAvailabilityRef);
+//        geoFire.removeLocation(currentuser);
 
     }
 
@@ -269,7 +272,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
-                          Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
@@ -287,9 +290,8 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     }
 
 
-
     //// method
-    protected synchronized void buildGoogleAPIClient(){
+    protected synchronized void buildGoogleAPIClient() {
 
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -336,7 +338,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     //////////////////////////////////

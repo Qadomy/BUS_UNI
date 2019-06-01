@@ -49,6 +49,7 @@ public class Bus_Schedule extends AppCompatActivity {
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    String keyId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +143,8 @@ public class Bus_Schedule extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
 
+                                    keyId = childSnapshot.getKey();
+
 
                                     // declare this function out of this scope
                                     String name = childSnapshot.child("name").getValue().toString();
@@ -154,7 +157,7 @@ public class Bus_Schedule extends AppCompatActivity {
                                     String latitude = childSnapshot.child("latitude").getValue().toString();
                                     String longitude = childSnapshot.child("longitude").getValue().toString();
 
-                                    tickets.add(new Ticket(currentuser, name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey()));
+                                    tickets.add(new Ticket(currentuser, name, line, price, time, seat, company, phone, latitude, longitude, keyId));
                                     showRecyclerView();
 
                                 }

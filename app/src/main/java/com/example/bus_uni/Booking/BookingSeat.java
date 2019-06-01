@@ -1,4 +1,4 @@
-package com.example.bus_uni;
+package com.example.bus_uni.Booking;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.bus_uni.R;
 
 public class BookingSeat extends AppCompatActivity {
 

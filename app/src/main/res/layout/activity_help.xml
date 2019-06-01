@@ -1,10 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HelpActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="1"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="Click on bus schedule and choose your destination and click on search logo"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="2"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="You will see many available tickets of your destination, choose your ticket"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="3"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="When you choose the ticket it will open for you a new page with informations of ticket and driver name and phone"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="4"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="Now if you want to booking the ticket you click on Booking Ticket button and click yes or no"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="5"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="If you want to check the current location of the bus click on Current Location button"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="6"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="When you click on Booking Ticket you will move to new page with your online ticket, and your ticket will be appear in driver page"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="7"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="When return to home page you can see the page of current location and here you can tracking your location when you during the trip"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="8"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="In home page you can see a page add post, and here you can write a post with description and image"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/ten_dp"
+                android:layout_marginLeft="@dimen/ten_dp"
+                android:text="9"
+                android:textColor="@color/redColor"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twenty_dp"
+                android:layout_marginLeft="@dimen/twenty_dp"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="In the corner of the home page an list, you can see your profile and signout from your account"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

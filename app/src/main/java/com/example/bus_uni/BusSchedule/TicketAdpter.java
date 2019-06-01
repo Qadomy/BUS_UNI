@@ -47,7 +47,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
         viewHolder.busLineName.setText(tickets.get(position).getBusLine());
         viewHolder.seatsNumbers.setText(String.valueOf(tickets.get(position).getSeatNum()));
         viewHolder.leavingTime.setText(tickets.get(position).getLeavingTime());
-        viewHolder.companyName.setText(tickets.get(position).getLeavingTime());
+        viewHolder.companyName.setText(tickets.get(position).getCompany());
         viewHolder.ticketPrice.setText(tickets.get(position).getPrice());
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +66,8 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 ticketInfo.putExtra("latitude", tickets.get(position).getLatitude());
                 ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
                 ticketInfo.putExtra("driverId", tickets.get(position).getDriverId());
+                ticketInfo.putExtra("keyId", tickets.get(position).getId());
+
 
 
                 mContext.startActivity(ticketInfo);
