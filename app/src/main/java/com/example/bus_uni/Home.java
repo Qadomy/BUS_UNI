@@ -56,8 +56,9 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, About.class));
                 return true;
 
-//            case R.id.help_menu:
-//                startActivity(new Intent(Home.this, HelpActivity.class));
+            case R.id.help_menu:
+                startActivity(new Intent(Home.this, HelpActivity.class));
+                return true;
 
             case R.id.logout_menu:
                 // here when we press on Sign Out button in menu

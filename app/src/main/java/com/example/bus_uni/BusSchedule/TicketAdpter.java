@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
@@ -67,7 +66,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
                 ticketInfo.putExtra("driverId", tickets.get(position).getDriverId());
                 ticketInfo.putExtra("keyId", tickets.get(position).getId());
-
+                ticketInfo.putExtra("busNum", tickets.get(position).getBusNum());
 
 
                 mContext.startActivity(ticketInfo);
@@ -98,7 +97,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
             seatsNumbers = (TextView) itemView.findViewById(R.id.seatsNumber);
             leavingTime = (TextView) itemView.findViewById(R.id.busLeavingTime);
             companyName = (TextView) itemView.findViewById(R.id.companyBusTicket);
-            ticketPrice = (TextView)itemView.findViewById(R.id.busTicktPrice);
+            ticketPrice = (TextView) itemView.findViewById(R.id.busTicktPrice);
             cardView = (CardView) itemView.findViewById(R.id.cardViewParent);
         }
     }

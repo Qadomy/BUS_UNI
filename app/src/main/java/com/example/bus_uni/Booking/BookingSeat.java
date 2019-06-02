@@ -1,18 +1,28 @@
 package com.example.bus_uni.Booking;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.bus_uni.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class BookingSeat extends AppCompatActivity {
 
 
     TextView passengerName, orignLocation, destinationLocation, leavingTime, arrivalTime, busNumber, gateNumber, seatNumber, driverName, driverPhone, companyName, rfidNumber;
+
+    DatabaseReference mDatabaseReference;
+
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
     @Override
@@ -35,23 +45,46 @@ public class BookingSeat extends AppCompatActivity {
         rfidNumber = (TextView) findViewById(R.id.rfidNumber_bookingSeat);
 
 
-        Intent getData = getIntent();
-        //String busCityData = getData.getStringExtra("busCityData");
-        String busRuteLineData = getData.getStringExtra("busRuteLineData");
-        String busCompanyNameData = getData.getStringExtra("busCompanyNameData");
-        String driverNameData = getData.getStringExtra("driverNameData");
-        String driverPhoneData = getData.getStringExtra("driverPhoneData");
-        String busTimeData = getData.getStringExtra("busLeavingTime");
+        // init databaseReference
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Booking");
+        mDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-        orignLocation.setText(busRuteLineData);
-        leavingTime.setText(busTimeData);
-        companyName.setText(busCompanyNameData);
-        driverName.setText(driverNameData);
-        driverPhone.setText(driverPhoneData);
+                String name = dataSnapshot.child("userName").getValue().toString();
+                String driver_Name = dataSnapshot.child("driverName").getValue().toString();
+                String driver_Phone = dataSnapshot.child("driverPhone").getValue().toString();
+                String busLine = dataSnapshot.child("busLine").getValue().toString();
+                String time = dataSnapshot.child("leavingTime").getValue().toString();
+                String seatNum = dataSnapshot.child("seatNumber").getValue().toString();
+                String rfid_Number = dataSnapshot.child("rfidNumber").getValue().toString();
+                String company = dataSnapshot.child("company").getValue().toString();
+                String city = dataSnapshot.child("city").getValue().toString();
+                String busNum = dataSnapshot.child("busNum").getValue().toString();
+
+
+                passengerName.setText(name);
+                orignLocation.setText(busLine);
+                destinationLocation.setText(city);
+                leavingTime.setText(time);
+                busNumber.setText(busNum);
+                seatNumber.setText(seatNum);
+                driverName.setText(driver_Name);
+                driverPhone.setText(driver_Phone);
+                companyName.setText(company);
+                rfidNumber.setText(rfid_Number);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
-
 
 
     //

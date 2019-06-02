@@ -34,12 +34,9 @@ public class BusInformationsCard extends AppCompatActivity {
 
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+    String busSeatNumbersData = "";
     // firebase database
     private DatabaseReference mUserDatabaseReference, mBookingAnTicket, mUpdateTicketDataBase;
-
-
-    String busSeatNumbersData = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +68,7 @@ public class BusInformationsCard extends AppCompatActivity {
         final String longitude = getTicketInfo.getExtras().getString("longitude");
         final String driverID = getTicketInfo.getExtras().getString("driverId");
         final String keyId = getTicketInfo.getExtras().getString("keyId");
+        final String busNum = getTicketInfo.getExtras().getString("busNum");
 
 
         //Toast.makeText(this, "driver id"+driverID, Toast.LENGTH_SHORT).show();
@@ -100,10 +98,6 @@ public class BusInformationsCard extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
-                                //TODO: here we send all the data
-                                Toast.makeText(getApplicationContext(),
-                                        "You clicked on YES", Toast.LENGTH_SHORT)
-                                        .show();
 
 
                                 /*
@@ -113,18 +107,18 @@ public class BusInformationsCard extends AppCompatActivity {
                                  *
                                  * */
 
-                                Intent sendData = new Intent(BusInformationsCard.this, BookingSeat.class);
-                                //sendData.putExtra("busCityData", busCityData);
-                                sendData.putExtra("busRuteLineData", busRuteLineData);
-                                sendData.putExtra("busCompanyNameData", busCompanyNameData);
-                                sendData.putExtra("driverNameData", driverNameData);
-                                sendData.putExtra("driverPhoneData", driverPhoneData);
-                                sendData.putExtra("busLeavingTime", busTimeData);
-                                sendData.putExtra("latitude", latitude);
-                                sendData.putExtra("longitude", longitude);
-
-
-                                startActivity(sendData);
+//                                Intent sendData = new Intent(BusInformationsCard.this, BookingSeat.class);
+//                                //sendData.putExtra("busCityData", busCityData);
+//                                sendData.putExtra("busRuteLineData", busRuteLineData);
+//                                sendData.putExtra("busCompanyNameData", busCompanyNameData);
+//                                sendData.putExtra("driverNameData", driverNameData);
+//                                sendData.putExtra("driverPhoneData", driverPhoneData);
+//                                sendData.putExtra("busLeavingTime", busTimeData);
+//                                sendData.putExtra("latitude", latitude);
+//                                sendData.putExtra("longitude", longitude);
+//
+//
+//                                startActivity(sendData);
 
 
                                 // and we send the driver id to BusLocation activity until
@@ -139,11 +133,11 @@ public class BusInformationsCard extends AppCompatActivity {
                                  * */
 
                                 /*
-                                * here I decrease the seat number by one
-                                * every time user click on yes to booking an ticket
-                                *
-                                * send the new number to user ticket to know his seat number
-                                * and I will update the seat number on the Ticket class */
+                                 * here I decrease the seat number by one
+                                 * every time user click on yes to booking an ticket
+                                 *
+                                 * send the new number to user ticket to know his seat number
+                                 * and I will update the seat number on the Ticket class */
 
                                 int minNum = Integer.parseInt(busSeatNumbersData);
                                 minNum = minNum - 1;
@@ -154,15 +148,13 @@ public class BusInformationsCard extends AppCompatActivity {
                                 mUpdateTicketDataBase = FirebaseDatabase.getInstance().getReference().child("Ticket");
                                 mUpdateTicketDataBase.child(busRuteLineData).child(keyId).child("seatNum").setValue(busSeatNumbersData);
 
-                                //Toast.makeText(BusInformationsCard.this, "new seat number"+busSeatNumbersData, Toast.LENGTH_SHORT).show();
 
                                 /*
                                  *
                                  *
                                  * */
 
-                                // todo: make sure if this connect with firebase
-                                mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+                                mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
                                 mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -174,17 +166,25 @@ public class BusInformationsCard extends AppCompatActivity {
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                rfidNumber, rfidNumber, city);
+                                                rfidNumber, busCompanyNameData, city, busNum);
 
 
                                         // here we create an a new class name a Book and uploaded it in firebase
                                         // * it contain all information of the ticket and the current user*/
                                         mBookingAnTicket = FirebaseDatabase.getInstance().getReference().child("Booking");
-                                        mBookingAnTicket.push().setValue(book).addOnCompleteListener(
+                                        mBookingAnTicket.child(currentUser).setValue(book).addOnCompleteListener(
                                                 new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
 
+                                                        if (task.isSuccessful()) {
+
+                                                            //showMessageDialog(getString(R.string.successfully), getString(R.string.Your_ticket_booked) + busSeatNumbersData, R.drawable.ic_check_circle_30dp);
+                                                            Toast.makeText(BusInformationsCard.this, "Your ticket booked, your number: " + busSeatNumbersData, Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(BusInformationsCard.this, BookingSeat.class);
+                                                            startActivity(intent);
+
+                                                        }
                                                     }
                                                 });
 
@@ -235,6 +235,26 @@ public class BusInformationsCard extends AppCompatActivity {
                 startActivity(currentLocation);
             }
         });
+
+    }// end onCreate
+
+
+    // here method for make a message dialog on android
+    private void showMessageDialog(String title, String message, int messageIcon) {
+        // here method for messages dialogs:
+        AlertDialog alertDialog = new AlertDialog.Builder(BusInformationsCard.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(messageIcon);
+
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do stuff
+                    }
+                });
+        alertDialog.show();
     }
 
 

@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class EditBusSchedule extends AppCompatActivity {
 
     //
-    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude;
+    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
 
 
     // here for get the id of current user and save in the string
@@ -73,6 +73,7 @@ public class EditBusSchedule extends AppCompatActivity {
                 driverPhone = dataSnapshot.child("mobile").getValue().toString();
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
+                busNum = dataSnapshot.child("bus_num").getValue().toString();
 
 
 
@@ -129,8 +130,9 @@ public class EditBusSchedule extends AppCompatActivity {
                             String phone = childSnapshot.child("driverPhone").getValue().toString();
                             String latitude = childSnapshot.child("latitude").getValue().toString();
                             String longitude = childSnapshot.child("longitude").getValue().toString();
+                            String busNum= childSnapshot.child("busNum").getValue().toString();
 
-                            tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId));
+                            tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
                             showRecyclerView();
 
                         }
@@ -229,7 +231,7 @@ public class EditBusSchedule extends AppCompatActivity {
                                 String newTicketPrice = ticketPrice.getText().toString();
 
                                 // To send data to save it in database reference
-                                final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "");
+                                final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "", busNum);
 
 
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")

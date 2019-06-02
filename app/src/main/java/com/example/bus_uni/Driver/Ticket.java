@@ -14,13 +14,14 @@ public class Ticket {
     private String price;
     private String seatNum;
     private String id;
+    private String busNum;
 
 
     public Ticket() {
 
     }
 
-    public Ticket(String driverId, String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id) {
+    public Ticket(String driverId, String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id, String busNum) {
 
         this.driverId= driverId;
         this.busLine = line;
@@ -33,6 +34,7 @@ public class Ticket {
         this.price = price;
         this.seatNum = seat;
         this.id = id;
+        this.busNum = busNum;
     }
 
 
@@ -122,5 +124,13 @@ public class Ticket {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getBusNum() {
+        return busNum;
+    }
+
+    public void setBusNum(String busNum) {
+        this.busNum = busNum;
     }
 }
