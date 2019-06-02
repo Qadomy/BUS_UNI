@@ -28,28 +28,22 @@ import java.util.ArrayList;
 public class Bus_Schedule extends AppCompatActivity {
 
 
+    // here for get the id of current user and save in the string
+    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String keyId;
     private RecyclerView mRecyclerView;
     private TicketAdpter mTicketAdpter;
     private TextView mErrorMessageDisplay;
-
-
     //
     //
     private ArrayList<Ticket> tickets = new ArrayList<>();
-
-
     /////
     private ImageView searchBuses;
     private Spinner busLineSpinner;
     private ProgressBar mLoadingIndicator;
-
     // database realtime
     private DatabaseReference mTicketDatabaseReference;
 
-    // here for get the id of current user and save in the string
-    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-    String keyId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,12 +17,18 @@ public class Book {
     private String company = "";
     private String city = "";
     private String busNum = "";
+    private String userPhone = "";
+    private String userEmail = "";
 
 
     public Book() {
     }
 
-    public Book(String userID, String userName, String driverID, String driverName, String driverPhone, String busLine, String leavingTime, String latitude, String longitude, String seatNumber, String rfidNumber, String company, String city, String busNum) {
+    public Book(String userID, String userName, String driverID, String driverName, String driverPhone,
+                String busLine, String leavingTime, String latitude, String longitude, String seatNumber,
+                String rfidNumber, String company, String city, String busNum, String userPhone,
+                String userEmail) {
+
         this.userID = userID;
         this.userName = userName;
         this.driverID = driverID;
@@ -37,6 +43,13 @@ public class Book {
         this.company = company;
         this.city = city;
         this.busNum = busNum;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+    }
+
+    public Book(String userName, String seatNumber) {
+        this.userName = userName;
+        this.seatNumber = seatNumber;
     }
 
     public String getUserID() {
@@ -149,6 +162,22 @@ public class Book {
 
     public void setBusNum(String busNum) {
         this.busNum = busNum;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
 

@@ -162,11 +162,14 @@ public class BusInformationsCard extends AppCompatActivity {
                                         String userName = dataSnapshot.child("name").getValue().toString();
                                         String rfidNumber = dataSnapshot.child("refid").getValue().toString();
                                         String city = dataSnapshot.child("city").getValue().toString();
+                                        String userPhone = dataSnapshot.child("mobile").getValue().toString();
+                                        String userEmail = dataSnapshot.child("email").getValue().toString();
+
 
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                rfidNumber, busCompanyNameData, city, busNum);
+                                                rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail);
 
 
                                         // here we create an a new class name a Book and uploaded it in firebase

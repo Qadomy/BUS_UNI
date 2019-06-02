@@ -23,7 +23,7 @@ public class Ticket {
 
     public Ticket(String driverId, String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id, String busNum) {
 
-        this.driverId= driverId;
+        this.driverId = driverId;
         this.busLine = line;
         this.company = company;
         this.driverPhone = phone;

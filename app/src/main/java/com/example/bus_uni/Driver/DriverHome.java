@@ -188,23 +188,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
          * */
 
 
-//        nameBusssLine = FirebaseDatabase.getInstance().getReference("Users");
-//        nameBusssLine.child(currentuser).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String busLine = dataSnapshot.child("bus_line").getValue().toString();
-//                Intent intent = new Intent(DriverHome.this, CurrentLocation.class);
-//                intent.putExtra("busLine", busLine);
-//                startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
 
         LatLng currentLocation = new LatLng(getLatitude, getLongitude);
         map.addMarker(new MarkerOptions().position(currentLocation).title("My Current Location"));

@@ -87,9 +87,6 @@ public class EditBusSchedule extends AppCompatActivity {
         });
 
 
-        //TODO: busLine ??????
-        Toast.makeText(EditBusSchedule.this, busLine, Toast.LENGTH_SHORT).show();
-
         /*
          *
          *   init recycle view
@@ -163,7 +160,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
     //
     //
-    // here when driver click on add new date and pop and form to input the new data
+    // here when driver click on add new date button to pop form for input a new date (ticket)
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void addNewDate(View view) {
 
