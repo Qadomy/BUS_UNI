@@ -78,59 +78,6 @@ public class Bus_Schedule extends AppCompatActivity {
 
 
                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
-
-//                // so here we get the data ordered by leaving time to show it in bus schedule
-//                Query myMostViewedPostsQuery = mTicketDatabaseReference.child(bus_line)
-//                        .orderByChild("leavingTime");
-//
-//                myMostViewedPostsQuery.addChildEventListener(new ChildEventListener() {
-//                    @Override
-//                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                        for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
-//
-//
-//                            // declare this function out of this scope
-//                            String name = dataSnapshot.child("name").getValue().toString();
-//                            String line = dataSnapshot.child("busLine").getValue().toString();
-//                            String price = dataSnapshot.child("price").getValue().toString();
-//                            String time = dataSnapshot.child("leavingTime").getValue().toString();
-//                            String seat = dataSnapshot.child("seatNum").getValue().toString();
-//                            String company = dataSnapshot.child("company").getValue().toString();
-//                            String phone = dataSnapshot.child("driverPhone").getValue().toString();
-//                            String latitude = dataSnapshot.child("latitude").getValue().toString();
-//                            String longitude = dataSnapshot.child("longitude").getValue().toString();
-//
-//
-//                            Ticket ticket = new Ticket(name, line, price, time, seat, company, phone, latitude, longitude, dataSnapshot.getKey());
-//                            tickets.add(ticket);
-//                            showRecyclerView();
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-//
-
-
                 mTicketDatabaseReference.child(bus_line).
                         addValueEventListener(new ValueEventListener() {
                             @Override
@@ -151,8 +98,10 @@ public class Bus_Schedule extends AppCompatActivity {
                                     String latitude = childSnapshot.child("latitude").getValue().toString();
                                     String longitude = childSnapshot.child("longitude").getValue().toString();
                                     String busNum = childSnapshot.child("busNum").getValue().toString();
+                                    String driverId = childSnapshot.child("driverId").getValue().toString();
 
-                                    tickets.add(new Ticket(currentuser, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
+
+                                    tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
                                     showRecyclerView();
 
                                 }

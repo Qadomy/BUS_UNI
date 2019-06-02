@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -55,7 +56,7 @@ public class BusInformationsCard extends AppCompatActivity {
         busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
 
 
-        // we receive the data from the ticket from choose locations
+        // we receive the data from the ticket from TicketAdapter
         Intent getTicketInfo = getIntent();
 
         final String busRuteLineData = getTicketInfo.getExtras().getString("busLine");
@@ -70,8 +71,6 @@ public class BusInformationsCard extends AppCompatActivity {
         final String keyId = getTicketInfo.getExtras().getString("keyId");
         final String busNum = getTicketInfo.getExtras().getString("busNum");
 
-
-        //Toast.makeText(this, "driver id"+driverID, Toast.LENGTH_SHORT).show();
 
 
         busRuteLine.setText(busRuteLineData);

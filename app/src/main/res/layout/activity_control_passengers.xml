@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".Booking.ControlPassengers">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/passenger_controlling"
+        android:textAlignment="center"
+        android:textColor="@color/blueStart"
+        android:textSize="30sp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="Ali Qadomy" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="000976123538230233" />
+
+        <TextView
+            android:id="@+id/callingPassenger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calling"
+            android:textColor="@color/blueStart"
+            android:textSize="@dimen/twintySP"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="user@user.com" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seat_label"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerSeatLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="12" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="Tulkarem" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rfid"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerRFID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="2011861287" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_method"
+            android:textSize="@dimen/twintySP" />
+
+        <TextView
+            android:id="@+id/passengerPaymentMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twenty_dp"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_weight="2"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/twintySP"
+            tools:text="Cash" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/addBlackListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/twenty_dp"
+        android:layout_marginLeft="@dimen/twenty_dp"
+        android:layout_marginTop="@dimen/forty_dp"
+        android:layout_marginEnd="@dimen/twenty_dp"
+        android:background="@drawable/angle2"
+        android:text="@string/add_to_blacklist"
+        android:textAllCaps="false"
+        android:textSize="@dimen/twintySP"
+        android:textStyle="bold" />
+
+</LinearLayout>

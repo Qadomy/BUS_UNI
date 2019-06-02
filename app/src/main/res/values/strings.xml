@@ -58,8 +58,8 @@
     <string name="send">Send</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
-    <string name="rfid">RFID NO.</string>
-    <string name="mobile">Mobile NO.</string>
+    <string name="rfid">RFID No</string>
+    <string name="mobile">Mobile No</string>
     <string name="city">City</string>
     <string name="bus_locations">Bus Locations</string>
     <string name="bus_schedule">Bus Schedule</string>
@@ -141,6 +141,10 @@
     <string name="yourNewDateAded">Your new date added</string>
     <string name="ils">ILS</string>
     <string name="booking_ticket">Booking Ticket</string>
+    <string name="passenger_controlling">Passenger Controlling</string>
+    <string name="payment_method">Payment method</string>
+    <string name="add_to_blacklist">Add to blacklist</string>
+    <string name="calling">Calling..</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>
