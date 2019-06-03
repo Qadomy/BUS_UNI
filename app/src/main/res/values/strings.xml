@@ -147,6 +147,11 @@
     <string name="calling">Call now</string>
     <string name="Warning">Warning</string>
     <string name="User_added_to_blacklist">User added to blacklist</string>
+    <string name="delete">Delete</string>
+    <string name="change_time">Change time</string>
+    <string name="passengers_numbers">Passengers numbers</string>
+    <string name="available_seats">Available Seats</string>
+    <string name="ticketDelete">Ticket deleted</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

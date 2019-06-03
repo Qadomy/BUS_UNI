@@ -18,7 +18,7 @@
             android:layout_marginStart="@dimen/ten_dp"
             android:layout_marginLeft="@dimen/ten_dp"
             android:gravity="center_vertical"
-            android:text="Available Seats:"
+            android:text="@string/available_seats"
             android:textSize="30sp"
             android:textStyle="italic" />
 
@@ -65,8 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Change time"
-
+            android:text="@string/change_time"
             android:textSize="15sp" />
 
         <TimePicker
@@ -90,8 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="Edit passenger"
-            android:textSize="15sp" />
+            android:text="@string/passengers_numbers"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,9 +124,24 @@
         android:id="@+id/saveEditScheduleItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/forty_dp"
-        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginStart="@dimen/forty_dp"
+        android:layout_marginTop="@dimen/forty_dp"
+        android:layout_marginEnd="@dimen/forty_dp"
         android:background="@drawable/angle"
         android:text="@string/save"
-        android:textSize="@dimen/twenty_dp" />
+        android:textAllCaps="false"
+        android:textSize="@dimen/twintySP" />
+
+
+    <Button
+        android:id="@+id/deleteTicketButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/forty_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginEnd="@dimen/forty_dp"
+        android:background="@drawable/angle"
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        android:textSize="@dimen/twintySP" />
 </LinearLayout>

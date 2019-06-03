@@ -1,5 +1,6 @@
 package com.example.bus_uni.Booking;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -121,7 +123,7 @@ public class ControlPassengers extends AppCompatActivity {
                                 * here we delete user from Booking database from firebase*/
 
                                 mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
-                                Query query = mDeleteFromDatabase.equalTo(userId);
+                                Query query = mDeleteFromDatabase.child(userId);
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -193,4 +195,15 @@ public class ControlPassengers extends AppCompatActivity {
                 });
         alertDialog.show();
     }
+
+    // for back
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home) {
+            ActionBar actionBar = getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
