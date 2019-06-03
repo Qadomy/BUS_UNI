@@ -144,7 +144,9 @@
     <string name="passenger_controlling">Passenger Controlling</string>
     <string name="payment_method">Payment method</string>
     <string name="add_to_blacklist">Add to blacklist</string>
-    <string name="calling">Calling..</string>
+    <string name="calling">Call now</string>
+    <string name="Warning">Warning</string>
+    <string name="User_added_to_blacklist">User added to blacklist</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

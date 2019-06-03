@@ -92,7 +92,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
                 alertDialog.setTitle("Confirm Delete...");
                 alertDialog.setMessage("Are you sure you want booking this ticket?");
-                alertDialog.setIcon(R.drawable.call_icon);
+                alertDialog.setIcon(R.drawable.ic_bookmark_border_black_24dp);
                 alertDialog.setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

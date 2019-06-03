@@ -1,14 +1,28 @@
 package com.example.bus_uni.Booking;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bus_uni.Driver.CheckBookings;
+import com.example.bus_uni.Driver.EditBusSchedule;
 import com.example.bus_uni.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ControlPassengers extends AppCompatActivity {
 
@@ -17,28 +31,35 @@ public class ControlPassengers extends AppCompatActivity {
     TextView name, phone, email, seatLabel, city, rfid, paymentMethod, calling;
 
 
-    String seatNum, userPhone;
+    String seatNum, userPhone, userName;
+
+    // get the id for current user
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    // firebase database
+    DatabaseReference mBlacklistDataBase, mDeleteFromDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_passengers);
 
-        addBlackList = (Button)findViewById(R.id.addBlackListButton);
+        addBlackList = (Button) findViewById(R.id.addBlackListButton);
 
-        name = (TextView)findViewById(R.id.passengerName);
-        phone = (TextView)findViewById(R.id.passengerPhone);
-        email = (TextView)findViewById(R.id.passengerEmail);
-        seatLabel = (TextView)findViewById(R.id.passengerSeatLabel);
-        city = (TextView)findViewById(R.id.passengerCity);
-        rfid = (TextView)findViewById(R.id.passengerRFID);
-        paymentMethod = (TextView)findViewById(R.id.passengerPaymentMethod);
-        calling = (TextView)findViewById(R.id.callingPassenger);
+        name = (TextView) findViewById(R.id.passengerName);
+        phone = (TextView) findViewById(R.id.passengerPhone);
+        email = (TextView) findViewById(R.id.passengerEmail);
+        seatLabel = (TextView) findViewById(R.id.passengerSeatLabel);
+        city = (TextView) findViewById(R.id.passengerCity);
+        rfid = (TextView) findViewById(R.id.passengerRFID);
+        paymentMethod = (TextView) findViewById(R.id.passengerPaymentMethod);
+        calling = (TextView) findViewById(R.id.callingPassenger);
 
 
         // now receive data from BookedTicketAdapter
         Intent getBookedInfo = getIntent();
 
-        final String userName = getBookedInfo.getExtras().getString("userName");
+        userName = getBookedInfo.getExtras().getString("userName");
         userPhone = getBookedInfo.getExtras().getString("userPhone");
         final String userEmail = getBookedInfo.getExtras().getString("userEmail");
         seatNum = getBookedInfo.getExtras().getString("seatNum");
@@ -55,9 +76,6 @@ public class ControlPassengers extends AppCompatActivity {
         seatLabel.setText(seatNum);
         city.setText(userCity);
         rfid.setText(userRfid);
-
-
-
 
 
         // here when click on calling we open the phone and calling passenger number
@@ -78,12 +96,101 @@ public class ControlPassengers extends AppCompatActivity {
             public void onClick(View v) {
 
                 /*
-                *
-                * here must remove this user from booking class from database in firebase
-                *
-                * */
+                 *
+                 * here must remove this user from booking class from database in firebase
+                 *
+                 * */
+
+
+                // message dialog confirmation to add user to blacklist or no
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                        ControlPassengers.this);
+
+                alertDialog.setTitle("Confirmations...");
+                alertDialog.setMessage("Are you sure want to add (" + userName + ") to blacklist?");
+                alertDialog.setIcon(R.drawable.ic_warning_yellow_30dp);
+
+                // here when we clicked Yes in message dialog
+                alertDialog.setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                /*
+                                *
+                                * here we delete user from Booking database from firebase*/
+
+                                mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
+                                Query query = mDeleteFromDatabase.equalTo(userId);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        dataSnapshot.getRef().removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                /*
+                                *
+                                * first thing create an new table name Blacklist in firebase to save the
+                                * list of users who added to blacklist
+                                * */
+
+                                BlackList blackList = new BlackList(userId, userName, userEmail, userPhone, userRfid, userCity, driverId);
+                                mBlacklistDataBase = FirebaseDatabase.getInstance().getReference().child("BlackList");
+                                mBlacklistDataBase.push().setValue(blackList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+
+                                            showMessageDialog(getString(R.string.User_added_to_blacklist),
+                                                    getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+
+                                            Intent intent = new Intent(ControlPassengers.this, CheckBookings.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+                                });
+
+                            }
+                        });
+
+                // here when we clicked No in message dialog
+                alertDialog.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+
 
             }
         });
+
+    }// end onCreate
+
+    // here method for make a message dialog on android
+    private void showMessageDialog(String title, String message, int messageIcon) {
+        // here method for messages dialogs:
+        AlertDialog alertDialog = new AlertDialog.Builder(ControlPassengers.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setIcon(messageIcon);
+
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do stuff
+                    }
+                });
+        alertDialog.show();
     }
 }
