@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bus_uni.LoginUserActivity;
+import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.R;
-import com.example.bus_uni.Street_Information;
+import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -101,7 +101,7 @@ public class CompanyHome extends AppCompatActivity {
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addPost = new Intent(CompanyHome.this, Street_Information.class);
+                Intent addPost = new Intent(CompanyHome.this, StreetInformation.class);
                 startActivity(addPost);
             }
         });

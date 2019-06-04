@@ -10,6 +10,9 @@ import android.view.View;
 
 import com.example.bus_uni.Booking.BookingSeat;
 import com.example.bus_uni.BusSchedule.Bus_Schedule;
+import com.example.bus_uni.Register.Profile_user;
+import com.example.bus_uni.Register.SignupForFree;
+import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
@@ -94,7 +97,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void streetNewsClick(View view) {
-        Intent street = new Intent(Home.this, Street_Information.class);
+        Intent street = new Intent(Home.this, StreetInformation.class);
         startActivity(street);
     }
 

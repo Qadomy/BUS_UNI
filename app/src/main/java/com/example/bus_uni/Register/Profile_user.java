@@ -1,4 +1,4 @@
-package com.example.bus_uni;
+package com.example.bus_uni.Register;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bus_uni.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

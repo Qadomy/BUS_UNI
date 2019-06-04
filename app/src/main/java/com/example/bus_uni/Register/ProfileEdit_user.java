@@ -1,4 +1,4 @@
-package com.example.bus_uni;
+package com.example.bus_uni.Register;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.bus_uni.Register.User;
+import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -202,7 +202,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                     imageProgressBar.setVisibility(View.VISIBLE);
 
 
-                    // smart thing to save the image in link contain the id for photo and id for the
+                    // Save the image in link contain the id for photo and id for the
                     // current user who upload this photo
                     //
 

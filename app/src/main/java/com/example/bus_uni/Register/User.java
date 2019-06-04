@@ -1,5 +1,7 @@
 package com.example.bus_uni.Register;
 
+import com.example.bus_uni.StreetsInformation.Post;
+
 public class User {
 
     private double longitude;
@@ -18,7 +20,6 @@ public class User {
     private String profile_pic = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
     private int type; // 0: Student , 1: Company , 2: Driver
 
-    //private ArrayList<Post> posts = new ArrayList<>();
 
     //Default Const. for retrieving User Obj from firebase
     public User() {
@@ -160,15 +161,6 @@ public class User {
         this.mobile = mobile;
     }
 
-    /*public ArrayList<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
-    }
-    */
-
     public int getType() {
         return type;
     }
@@ -218,9 +210,6 @@ public class User {
         this.bus_company = bus_company;
     }
 
-    ////////
-    ////
-
     public double getLongitude() {
         return longitude;
     }
@@ -237,9 +226,4 @@ public class User {
         this.latitude = latitude;
     }
 
-
-    //No need for this, we initialize type once when register "constructor"
-   /* public void setType(int type) {
-        this.type = type;
-    }*/
 }

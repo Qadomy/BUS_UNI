@@ -1,22 +1,16 @@
-package com.example.bus_uni;
+package com.example.bus_uni.Register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.BusSchedule.Bus_Schedule;
-import com.example.bus_uni.Register.SignupActivity;
+import com.example.bus_uni.Home;
+import com.example.bus_uni.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SignupForFree extends AppCompatActivity {
 

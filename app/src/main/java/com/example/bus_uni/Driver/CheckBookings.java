@@ -1,10 +1,12 @@
 package com.example.bus_uni.Driver;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.bus_uni.Booking.Book;
@@ -93,5 +95,16 @@ public class CheckBookings extends AppCompatActivity {
         mRecyclerView.setAdapter(bookedTicket_adapter);
         mRecyclerView.setVisibility(View.VISIBLE);
 
+    }
+
+
+    // for back
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home) {
+            ActionBar actionBar = getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

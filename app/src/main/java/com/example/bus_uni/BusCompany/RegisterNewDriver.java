@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.bus_uni.Encrypt;
+import com.example.bus_uni.Register.Encrypt;
 import com.example.bus_uni.R;
 import com.example.bus_uni.Register.User;
 import com.google.android.gms.tasks.OnCompleteListener;

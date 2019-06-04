@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.bus_uni.Booking.BookedTicket_Adapter;
 import com.example.bus_uni.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         viewHolder.userName.setText(posted.get(position).getUserName());
         viewHolder.postText.setText(posted.get(position).getPostText());
         viewHolder.postDateTime.setText(posted.get(position).getPostDate());
+
+        Picasso.with(mContext).load(posted.get(position).getUserImage()).into(viewHolder.userImage);
+        Picasso.with(mContext).load(posted.get(position).getPostImage()).into(viewHolder.postImage);
 
     }
 

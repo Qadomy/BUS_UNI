@@ -123,7 +123,8 @@ public class ControlPassengers extends AppCompatActivity {
                                 * here we delete user from Booking database from firebase*/
 
                                 mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
-                                Query query = mDeleteFromDatabase.child(userId);
+                                Query query = mDeleteFromDatabase.child(
+                                        userId);
                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

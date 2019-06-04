@@ -1,4 +1,4 @@
-package com.example.bus_uni;
+package com.example.bus_uni.Register;
 
 import android.app.ActionBar;
 import android.content.DialogInterface;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

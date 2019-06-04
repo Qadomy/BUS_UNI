@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.example.bus_uni.Encrypt;
 import com.example.bus_uni.Home;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;

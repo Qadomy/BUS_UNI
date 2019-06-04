@@ -5,11 +5,12 @@
     android:layout_margin="@dimen/twenty_dp"
     android:orientation="vertical">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/addPostImage"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_margin="@dimen/twenty_dp"
+        android:background="@drawable/timg"
         android:src="@drawable/ic_add_post_black_100dp" />
 
 

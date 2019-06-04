@@ -91,18 +91,18 @@
             <!-- Home -->
 
         </activity>
-        <activity android:name=".ResetPassword">
+        <activity android:name=".Register.ResetPassword">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginUserActivity" />
+                android:value=".Register.LoginUserActivity" />
         </activity>
-        <activity android:name=".ProfileEdit_user">
+        <activity android:name=".Register.ProfileEdit_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Profile_user" />
+                android:value=".Register.Profile_user" />
         </activity>
-        <activity android:name=".SignupForFree" />
-        <activity android:name=".Profile_user">
+        <activity android:name=".Register.SignupForFree" />
+        <activity android:name=".Register.Profile_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -135,22 +135,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".AddPost_Activity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Street_Information" />
-        </activity>
         <activity android:name=".BusLocation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
         <activity android:name=".Booking.BookingSeat">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home" />
-        </activity>
-        <activity android:name=".Street_Information">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -163,9 +153,9 @@
         <activity android:name=".Register.SignupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SignupForFree" />
+                android:value=".Register.SignupForFree" />
         </activity>
-        <activity android:name=".LoginUserActivity">
+        <activity android:name=".Register.LoginUserActivity">
             <meta-data
                 android:name="asignuport.PARENT_ACTIVITY"
                 android:value=".SignupForFree" />
