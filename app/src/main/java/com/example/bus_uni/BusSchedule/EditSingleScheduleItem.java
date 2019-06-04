@@ -192,6 +192,8 @@ public class EditSingleScheduleItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                // delete the user from database of ticket
                 mDeleteTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
                 Query query = mDeleteTicketDatabaseReference.child(line).child(keyId);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {

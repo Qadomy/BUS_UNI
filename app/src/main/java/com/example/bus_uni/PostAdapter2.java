@@ -15,12 +15,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+public class PostAdapter2 extends RecyclerView.Adapter<PostAdapter2.PostViewHolder> {
     private final PostAdapterOnClickHandler mClickHandler;
     private final Context context;
     private ArrayList<Post> posts = new ArrayList<>();
 
-    public PostAdapter(Context context, PostAdapterOnClickHandler clickHandler) {
+    public PostAdapter2(Context context, PostAdapterOnClickHandler clickHandler) {
         mClickHandler = clickHandler;
         this.context = context;
     }

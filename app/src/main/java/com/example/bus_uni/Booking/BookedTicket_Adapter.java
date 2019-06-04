@@ -1,4 +1,4 @@
-package com.example.bus_uni.Driver;
+package com.example.bus_uni.Booking;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.bus_uni.Booking.Book;
-import com.example.bus_uni.Booking.ControlPassengers;
-import com.example.bus_uni.BusSchedule.BusInformationsCard;
 import com.example.bus_uni.R;
 
 import java.util.ArrayList;

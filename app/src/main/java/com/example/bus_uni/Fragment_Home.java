@@ -23,9 +23,9 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_Home extends Fragment implements PostAdapter.PostAdapterOnClickHandler {
+public class Fragment_Home extends Fragment implements PostAdapter2.PostAdapterOnClickHandler {
     private RecyclerView mRecyclerView;
-    private PostAdapter mPostAdapter;
+    private PostAdapter2 mPostAdapter2;
     private TextView mErrorMessageDisplay;
     private ArrayList<Post> posts = new ArrayList<>();
     private ProgressBar mLoadingIndicator;
@@ -78,12 +78,12 @@ public class Fragment_Home extends Fragment implements PostAdapter.PostAdapterOn
         mRecyclerView = rootView.findViewById(R.id.posts_rv);
         // mLoadingIndicator = rootView.findViewById(R.id.pb_loading_indicator);
         mErrorMessageDisplay = rootView.findViewById(R.id.tv_error_message_display);
-        mPostAdapter = new PostAdapter(context, this);
+        mPostAdapter2 = new PostAdapter2(context, this);
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mPostAdapter);
-        mPostAdapter.setPostsData(posts);
+        mRecyclerView.setAdapter(mPostAdapter2);
+        mPostAdapter2.setPostsData(posts);
         showPosts();
         return rootView;
     }

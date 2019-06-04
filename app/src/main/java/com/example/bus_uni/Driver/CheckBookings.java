@@ -5,12 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
-import com.example.bus_uni.BusSchedule.EditItemSchedule_Adapter;
+import com.example.bus_uni.Booking.BookedTicket_Adapter;
 import com.example.bus_uni.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

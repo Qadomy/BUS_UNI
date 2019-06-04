@@ -23,6 +23,7 @@ import com.example.bus_uni.BusSchedule.CurrentLocation;
 import com.example.bus_uni.LoginUserActivity;
 import com.example.bus_uni.R;
 import com.example.bus_uni.Street_Information;
+import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
@@ -199,6 +200,8 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         // using GeoFire to save the location
         mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
         geoFire = new GeoFire(mDriverAvailabilityRef);
+
+        // To check if a write was successfully saved on the server
         geoFire.setLocation(currentuser, new GeoLocation(location.getLatitude(), location.getLongitude()),
                 new GeoFire.CompletionListener() {
                     @Override
@@ -338,7 +341,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     }
 
     public void DriverAddPost(View view) {
-        Intent addPost = new Intent(DriverHome.this, Street_Information.class);
+        Intent addPost = new Intent(DriverHome.this, StreetInformation.class);
         startActivity(addPost);
     }
 

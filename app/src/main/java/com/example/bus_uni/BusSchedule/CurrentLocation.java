@@ -66,25 +66,6 @@ public class CurrentLocation extends AppCompatActivity implements OnMapReadyCall
 
 
 
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
-//        mDatabaseReference.child(getDriverId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                //geoLat = dataSnapshot.child("l").getValue().toString();
-//
-//                Toast.makeText(CurrentLocation.this, geoLat, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-
-
 
         getBusLocation();
 
