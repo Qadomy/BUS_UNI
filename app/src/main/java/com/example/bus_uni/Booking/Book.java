@@ -19,6 +19,7 @@ public class Book {
     private String busNum = "";
     private String userPhone = "";
     private String userEmail = "";
+    private String costPaid="";
 
 
     public Book() {
@@ -27,7 +28,7 @@ public class Book {
     public Book(String userID, String userName, String driverID, String driverName, String driverPhone,
                 String busLine, String leavingTime, String latitude, String longitude, String seatNumber,
                 String rfidNumber, String company, String city, String busNum, String userPhone,
-                String userEmail) {
+                String userEmail, String costPaid) {
 
         this.userID = userID;
         this.userName = userName;
@@ -45,6 +46,7 @@ public class Book {
         this.busNum = busNum;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
+        this.costPaid = costPaid;
     }
 
     public Book(String userName, String seatNumber) {
@@ -178,6 +180,14 @@ public class Book {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getCostPaid() {
+        return costPaid;
+    }
+
+    public void setCostPaid(String costPaid) {
+        this.costPaid = costPaid;
     }
 }
 

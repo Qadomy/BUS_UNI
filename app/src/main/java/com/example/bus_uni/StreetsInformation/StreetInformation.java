@@ -25,8 +25,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bus_uni.Booking.BookedTicket_Adapter;
-import com.example.bus_uni.Driver.CheckBookings;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -294,7 +292,7 @@ public class StreetInformation extends AppCompatActivity {
         mShowPostDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
 
                     Post post = childSnapshot.getValue(Post.class);
                     posts.add(post);

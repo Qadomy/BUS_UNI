@@ -1,22 +1,31 @@
 package com.example.bus_uni.BusSchedule;
 
 import android.app.ActionBar;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookingSeat;
 import com.example.bus_uni.BusLocation;
+import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,15 +36,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class BusInformationsCard extends AppCompatActivity {
 
     Button bookingTicket, currentLocation;
     TextView busRuteLine, busCompanyName, driverName, driverPhone, busSeatNumbers, busTime;
+    TextView pickerDate;
+
+
+    private int mYear, mMonth, mDay, mHour, mMinute;
+
+
+    EditText cvv, costValue, cardNumber;
 
 
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String busSeatNumbersData = "";
+    String driverPhoneData, busSeatNumbersData = "", cvvNum, priceValue, cardNum;
     // firebase database
     private DatabaseReference mUserDatabaseReference, mBookingAnTicket, mUpdateTicketDataBase;
 
@@ -56,13 +74,26 @@ public class BusInformationsCard extends AppCompatActivity {
         busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
 
 
+        pickerDate = (TextView)findViewById(R.id.pickerDate);
+
+        // init cvv, costValue the fields for visa payment
+        cvv = (EditText)findViewById(R.id.cvvNumber);
+        costValue = (EditText)findViewById(R.id.addCostValue);
+        cardNumber = (EditText)findViewById(R.id.cardNumber);
+
+
+        cvvNum = cvv.getText().toString();
+        priceValue = costValue.getText().toString();
+        cardNum = cardNumber.getText().toString();
+
+        //
         // we receive the data from the ticket from TicketAdapter
         Intent getTicketInfo = getIntent();
 
         final String busRuteLineData = getTicketInfo.getExtras().getString("busLine");
         final String busCompanyNameData = getTicketInfo.getExtras().getString("companyName");
         final String driverNameData = getTicketInfo.getExtras().getString("driverName");
-        final String driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
+        driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
         busSeatNumbersData = getTicketInfo.getExtras().getString("seatNum");
         final String busTimeData = getTicketInfo.getExtras().getString("leavingTime");
         final String latitude = getTicketInfo.getExtras().getString("latitude");
@@ -90,7 +121,7 @@ public class BusInformationsCard extends AppCompatActivity {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                         BusInformationsCard.this);
 
-                alertDialog.setTitle("Confirm Delete...");
+                alertDialog.setTitle("Confirm Booking...");
                 alertDialog.setMessage("Are you sure you want booking this ticket?");
                 alertDialog.setIcon(R.drawable.ic_bookmark_border_black_24dp);
                 alertDialog.setPositiveButton("YES",
@@ -102,22 +133,7 @@ public class BusInformationsCard extends AppCompatActivity {
                                 /*
                                  * if we click yes
                                  *
-                                 * here to send the data in info card to booking seat(tickets)
-                                 *
                                  * */
-
-//                                Intent sendData = new Intent(BusInformationsCard.this, BookingSeat.class);
-//                                //sendData.putExtra("busCityData", busCityData);
-//                                sendData.putExtra("busRuteLineData", busRuteLineData);
-//                                sendData.putExtra("busCompanyNameData", busCompanyNameData);
-//                                sendData.putExtra("driverNameData", driverNameData);
-//                                sendData.putExtra("driverPhoneData", driverPhoneData);
-//                                sendData.putExtra("busLeavingTime", busTimeData);
-//                                sendData.putExtra("latitude", latitude);
-//                                sendData.putExtra("longitude", longitude);
-//
-//
-//                                startActivity(sendData);
 
 
                                 // and we send the driver id to BusLocation activity until
@@ -126,10 +142,6 @@ public class BusInformationsCard extends AppCompatActivity {
                                 //startActivity(sendDriverId);
 
 
-                                /*
-                                 *
-                                 *
-                                 * */
 
                                 /*
                                  * here I decrease the seat number by one
@@ -168,7 +180,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail);
+                                                rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail, priceValue);
 
 
                                         // here we create an a new class name a Book and uploaded it in firebase
@@ -241,6 +253,42 @@ public class BusInformationsCard extends AppCompatActivity {
     }// end onCreate
 
 
+    // method when click on phone number for driver and make a call
+    public void callDriver(View view) {
+
+        Intent intent = new Intent(Intent.ACTION_DIAL,
+                Uri.fromParts("tel", driverPhoneData, null));
+        startActivity(intent);
+    }
+
+    // method when click on date to choose date expiration date of visa card
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void pickerDate(View view) {
+
+
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        pickerDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        Toast.makeText(BusInformationsCard.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_SHORT).show();
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
+    }
+
     // here method for make a message dialog on android
     private void showMessageDialog(String title, String message, int messageIcon) {
         // here method for messages dialogs:
@@ -269,4 +317,5 @@ public class BusInformationsCard extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

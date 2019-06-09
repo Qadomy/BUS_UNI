@@ -26,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="26dp"
-        android:text="@string/nothingToShow"
+        android:layout_marginBottom="@dimen/twenty_dp"
         android:textColor="@android:color/white"
-        android:textSize="45sp" />
+        android:textSize="45sp"
+        tools:text="Ilar Bus Company" />
 
     <Button
         android:id="@+id/rejisterNewDriverButton"
@@ -81,7 +82,6 @@
         android:text="Company profile"
         android:textAllCaps="false"
         android:textSize="25sp" />
-
 
 
 </LinearLayout>

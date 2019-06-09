@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.example.bus_uni.BusSchedule.EditItemSchedule_Adapter;
 import com.example.bus_uni.R;
@@ -32,13 +31,10 @@ import java.util.ArrayList;
 
 public class EditBusSchedule extends AppCompatActivity {
 
-    //
-    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
-
-
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+    //
+    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
     //
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
@@ -54,8 +50,6 @@ public class EditBusSchedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_bus_schedule);
-
-
 
 
         // init firebase database
@@ -74,8 +68,6 @@ public class EditBusSchedule extends AppCompatActivity {
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
                 busNum = dataSnapshot.child("bus_num").getValue().toString();
-
-
 
 
             }
@@ -106,6 +98,7 @@ public class EditBusSchedule extends AppCompatActivity {
         mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
 
 
+        // todo: get the busline from databaserefernce
         mEditTicketDatabaseReference.child("AAUJ-Tulkarm").
                 addValueEventListener(new ValueEventListener() {
                     @Override
@@ -125,9 +118,11 @@ public class EditBusSchedule extends AppCompatActivity {
                             String seat = childSnapshot.child("seatNum").getValue().toString();
                             String company = childSnapshot.child("company").getValue().toString();
                             String phone = childSnapshot.child("driverPhone").getValue().toString();
-                            String latitude = childSnapshot.child("latitude").getValue().toString();
-                            String longitude = childSnapshot.child("longitude").getValue().toString();
-                            String busNum= childSnapshot.child("busNum").getValue().toString();
+                            String busNum = childSnapshot.child("busNum").getValue().toString();
+
+                            // here the latitude and longitude of the aaup (origin location)
+                            String latitude = 32.406654 + "";
+                            String longitude = 32.406654 + "";
 
                             tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
                             showRecyclerView();

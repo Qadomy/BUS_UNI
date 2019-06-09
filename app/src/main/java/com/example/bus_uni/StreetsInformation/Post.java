@@ -1,7 +1,5 @@
 package com.example.bus_uni.StreetsInformation;
 
-import java.util.Calendar;
-
 public class Post {
 
     private String userName = "";

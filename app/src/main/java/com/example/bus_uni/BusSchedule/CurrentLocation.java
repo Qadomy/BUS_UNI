@@ -142,6 +142,7 @@ public class CurrentLocation extends AppCompatActivity implements OnMapReadyCall
         double latitude = Double.parseDouble(getLatitude);
         double longitude = Double.parseDouble(getLongitude);
 
+
         LatLng currentBus = new LatLng(longitude , latitude);
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setTrafficEnabled(true);

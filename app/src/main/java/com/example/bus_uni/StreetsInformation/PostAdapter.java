@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bus_uni.Booking.BookedTicket_Adapter;
 import com.example.bus_uni.R;
 import com.squareup.picasso.Picasso;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private ArrayList<Post> posted = new ArrayList<>();
     private Context mContext;
@@ -48,6 +47,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         Picasso.with(mContext).load(posted.get(position).getUserImage()).into(viewHolder.userImage);
         Picasso.with(mContext).load(posted.get(position).getPostImage()).into(viewHolder.postImage);
 
+
     }
 
     @Override
@@ -70,11 +70,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
 
             cardView = (CardView) itemView.findViewById(R.id.postCardView);
-            userImage = (CircleImageView)itemView.findViewById(R.id.circular_user_image);
-            userName = (TextView)itemView.findViewById(R.id.User_name);
-            postDateTime = (TextView)itemView.findViewById(R.id.post_date);
-            postText = (TextView)itemView.findViewById(R.id.post_content);
-            postImage=(ImageView)itemView.findViewById(R.id.post_pic);
+            userImage = (CircleImageView) itemView.findViewById(R.id.circular_user_image);
+            userName = (TextView) itemView.findViewById(R.id.User_name);
+            postDateTime = (TextView) itemView.findViewById(R.id.post_date);
+            postText = (TextView) itemView.findViewById(R.id.post_content);
+            postImage = (ImageView) itemView.findViewById(R.id.post_pic);
         }
     }
 }
