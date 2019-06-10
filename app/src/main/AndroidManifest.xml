@@ -72,7 +72,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusCompany.AboutCompany_for_company">
+        <activity android:name=".BusCompany.CompanyProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />

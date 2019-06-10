@@ -155,6 +155,7 @@
     <string name="card_number">Card number</string>
     <string name="expiration_date">Expiration Date</string>
     <string name="add_cost_value">Add cost value</string>
+    <string name="company_buses">Company buses</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

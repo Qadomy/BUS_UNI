@@ -241,7 +241,7 @@ public class EditCompanyProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent cancel = new Intent(EditCompanyProfile.this, AboutCompany_for_company.class);
+                Intent cancel = new Intent(EditCompanyProfile.this, CompanyProfile.class);
                 startActivity(cancel);
             }
         });
@@ -277,7 +277,7 @@ public class EditCompanyProfile extends AppCompatActivity {
 
                     showMessageDialog(getString(R.string.accountSaved), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
 
-                    Intent saveProfile = new Intent(EditCompanyProfile.this, AboutCompany_for_company.class);
+                    Intent saveProfile = new Intent(EditCompanyProfile.this, CompanyProfile.class);
                     saveProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(saveProfile);
                     finish();

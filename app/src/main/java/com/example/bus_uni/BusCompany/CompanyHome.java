@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ import com.squareup.picasso.Picasso;
 public class CompanyHome extends AppCompatActivity {
 
 
-    Button registerNewDriver, trckingBuses, addPost, aboutCompany;
     ImageView companyPic;
     TextView companyName;
 
@@ -44,15 +42,8 @@ public class CompanyHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_home);
 
-        registerNewDriver = (Button) findViewById(R.id.rejisterNewDriverButton);
-        trckingBuses = (Button) findViewById(R.id.trackingBusesButton);
-        addPost = (Button) findViewById(R.id.companyAddPostButton);
-        aboutCompany = (Button) findViewById(R.id.companyInfoButton);
 
         companyName = (TextView) findViewById(R.id.company_name);
-
-
-        ///////
         companyPic = (ImageView) findViewById(R.id.companyProfilePhoto);
 
 
@@ -65,8 +56,6 @@ public class CompanyHome extends AppCompatActivity {
 
         // init firebase database
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-
         mUserDatabaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,31 +79,29 @@ public class CompanyHome extends AppCompatActivity {
         });
 
 
-        registerNewDriver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerNewDriver = new Intent(CompanyHome.this, RegisterNewDriver.class);
-                startActivity(registerNewDriver);
-            }
-        });
+    }// onCreate
 
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addPost = new Intent(CompanyHome.this, StreetInformation.class);
-                startActivity(addPost);
-            }
-        });
 
-        aboutCompany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent aboutCompany = new Intent(CompanyHome.this, AboutCompany_for_company.class);
-                startActivity(aboutCompany);
-            }
-        });
-
+    public void addNewDriver(View view) {
+        Intent registerNewDriver = new Intent(CompanyHome.this, RegisterNewDriver.class);
+        startActivity(registerNewDriver);
     }
+
+    public void trackingAllBuses(View view) {
+        Intent companyDrivers = new Intent(CompanyHome.this, CompanyDrivers.class);
+        startActivity(companyDrivers);
+    }
+
+    public void addPost(View view) {
+        Intent addPost = new Intent(CompanyHome.this, StreetInformation.class);
+        startActivity(addPost);
+    }
+
+    public void openProfile(View view) {
+        Intent aboutCompany = new Intent(CompanyHome.this, CompanyProfile.class);
+        startActivity(aboutCompany);
+    }
+
 
 
     // Here for shown the menu on the XML activity
