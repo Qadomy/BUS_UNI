@@ -15,9 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StreetsInformation.StreetInformation">
-
+        <activity android:name=".Setting">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home" />
         </activity>
+        <activity android:name=".StreetsInformation.StreetInformation"></activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,10 +37,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverProfile_for_driver" />
-        </activity>
-        <activity android:name=".Driver.DriverProfile_for_user">
-
-            <!-- todo -->
         </activity>
         <activity android:name=".Driver.DriverProfile_for_driver">
             <meta-data
@@ -73,7 +72,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusCompany.AboutCompany_for_users" />
         <activity android:name=".BusCompany.AboutCompany_for_company">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -117,12 +115,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HelpActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home" />
-        </activity>
-        <activity android:name=".About">
+        <activity android:name=".HelpActivity"
+            android:configChanges="locale|orientation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />

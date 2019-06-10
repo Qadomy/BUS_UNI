@@ -1,35 +1,35 @@
 <resources>
-    <string name="app_name">BUS-UNI</string>
-    <string name="user_homescreen">User</string>
-    <string name="driver_homescreen">Bus Driver</string>
-    <string name="login">Log In</string>
-    <string name="signup">Sign Up</string>
-    <string name="signin">Sign In</string>
-    <string name="driver_id">Enter Driver ID</string>
-    <string name="driver_password">Enter Driver Password</string>
-    <string name="user_rfid">Enter Your RFID Number</string>
-    <string name="user_password">Enter Your Password</string>
+    <string name="app_name" translatable="false">BUS-UNI</string>
+    <string name="user_homescreen" translatable="true">User</string>
+    <string name="driver_homescreen" translatable="true">Bus Driver</string>
+    <string name="login" translatable="true">Log In</string>
+    <string name="signup" translatable="true">Sign Up</string>
+    <string name="signin" translatable="true">Sign In</string>
+    <string name="driver_id" translatable="true">Enter Driver ID</string>
+    <string name="driver_password" translatable="true">Enter Driver Password</string>
+    <string name="user_rfid" translatable="true">Enter Your RFID Number</string>
+    <string name="user_password" translatable="true">Enter Your Password</string>
     <string name="enterRFID">Enter Your RFID Number</string>
-    <string name="enterPassword">Enter Your Password</string>
-    <string name="enterName">Enter Your Name</string>
-    <string name="enterEmail">Email</string>
-    <string name="enterMobileNumber">Enter Your Mobile Number</string>
-    <string name="connectDevaloper">Connect With Us</string>
-    <string name="not_registered_yet">Not registered yet ?</string>
-    <string name="are_you_user">Are You User</string>
-    <string name="are_you_driver">Are You Driver</string>
-    <string name="settings">Settings</string>
-    <string name="logout">Log Out</string>
-    <string name="about">About</string>
-    <string name="are_you_Bus_Driver">Are You Bus Driver ?</string>
-    <string name="press_here">Press Here</string>
-    <string name="exit">Exit</string>
-    <string name="help">Help</string>
-    <string name="Password">Password</string>
-    <string name="Username">Username</string>
-    <string name="signUpFree">Sign Up For Free</string>
-    <string name="alreadyHaveAccount">Already have an account?</string>
-    <string name="create">Create</string>
+    <string name="enterPassword" translatable="true">Enter Your Password</string>
+    <string name="enterName" translatable="true">Enter Your Name</string>
+    <string name="enterEmail" translatable="true">Email</string>
+    <string name="enterMobileNumber" translatable="true">Enter Your Mobile Number</string>
+    <string name="connectDevaloper" translatable="true">Connect With Us</string>
+    <string name="not_registered_yet" translatable="true">Not registered yet ?</string>
+    <string name="are_you_user" translatable="true">Are You User?</string>
+    <string name="are_you_driver" translatable="true">Are You Driver?</string>
+    <string name="settings" translatable="true">Settings</string>
+    <string name="logout" translatable="true">Log Out</string>
+    <string name="about" translatable="true">About</string>
+    <string name="are_you_Bus_Driver" translatable="true">Are You Bus Driver ?</string>
+    <string name="press_here" translatable="true">Press Here</string>
+    <string name="exit" translatable="true">Exit</string>
+    <string name="help" translatable="true">Help</string>
+    <string name="Password" translatable="true">Password</string>
+    <string name="Username" translatable="true">Username</string>
+    <string name="signUpFree" translatable="true">Sign Up For Free</string>
+    <string name="alreadyHaveAccount" translatable="true">Already have an account?</string>
+    <string name="create" translatable="true">Create</string>
     <string name="profile">Profile</string>
     <string name="my_name">Ali Qadomy</string>
     <string name="homeTown">Home Town</string>

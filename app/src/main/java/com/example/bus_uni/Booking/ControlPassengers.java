@@ -30,7 +30,7 @@ public class ControlPassengers extends AppCompatActivity {
 
 
     Button addBlackList;
-    TextView name, phone, email, seatLabel, city, rfid, paymentMethod, calling;
+    TextView name, phone, email, seatLabel, city, paymentMethod, calling;
 
 
     String seatNum, userPhone, userName;
@@ -53,7 +53,6 @@ public class ControlPassengers extends AppCompatActivity {
         email = (TextView) findViewById(R.id.passengerEmail);
         seatLabel = (TextView) findViewById(R.id.passengerSeatLabel);
         city = (TextView) findViewById(R.id.passengerCity);
-        rfid = (TextView) findViewById(R.id.passengerRFID);
         paymentMethod = (TextView) findViewById(R.id.passengerPaymentMethod);
         calling = (TextView) findViewById(R.id.callingPassenger);
 
@@ -77,7 +76,6 @@ public class ControlPassengers extends AppCompatActivity {
         email.setText(userEmail);
         seatLabel.setText(seatNum);
         city.setText(userCity);
-        rfid.setText(userRfid);
 
 
         // here when click on calling we open the phone and calling passenger number

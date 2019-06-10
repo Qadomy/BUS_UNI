@@ -41,7 +41,6 @@ public class Profile_user extends AppCompatActivity {
 
         mProfileName = (TextView) findViewById(R.id.profile_displayName);
         mProfileEmail = (TextView) findViewById(R.id.emailValue_profile);
-        mProfileRfid_number = (TextView) findViewById(R.id.rfidValue_profile);
         mProfileMobile_number = (TextView) findViewById(R.id.mobileValue_profile);
         mProfileCity = (TextView) findViewById(R.id.cityValue_profile);
 
@@ -73,7 +72,6 @@ public class Profile_user extends AppCompatActivity {
                 mProfileName.setText(name);
                 mProfileEmail.setText(email);
                 mProfileMobile_number.setText(mobile);
-                mProfileRfid_number.setText(rfid);
                 mProfileCity.setText(city);
             }
 

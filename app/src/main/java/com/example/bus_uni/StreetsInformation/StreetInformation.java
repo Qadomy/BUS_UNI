@@ -293,12 +293,14 @@ public class StreetInformation extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-
+                    //TODO: sorting post by date, duplicated posts
                     Post post = childSnapshot.getValue(Post.class);
                     posts.add(post);
-                    showRecycleView();
+
 
                 }
+                showRecycleView();
+
             }
 
             @Override

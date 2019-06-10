@@ -76,31 +76,31 @@
             android:layout_height="1dp"
             android:background="#dad8d8" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/rfidNumber_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/rfid"
-                android:textColor="#a2a1b8"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/rfidNumber_profile"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="16dp"-->
+                <!--android:text="@string/rfid"-->
+                <!--android:textColor="#a2a1b8"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/rfidValue_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="16dp"
-                android:text="@string/rfid_number"
-                android:textColor="#a2a1b8"
-                android:textColorHint="#a2a1b8"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/rfidValue_profile"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="right"-->
+                <!--android:padding="16dp"-->
+                <!--android:text="@string/rfid_number"-->
+                <!--android:textColor="#a2a1b8"-->
+                <!--android:textColorHint="#a2a1b8"-->
+                <!--android:textSize="16sp" />-->
+        <!--</LinearLayout>-->
 
         <View
             android:layout_width="match_parent"

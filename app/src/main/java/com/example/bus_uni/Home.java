@@ -51,13 +51,10 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, Profile_user.class));
                 return true;
 
-//            case R.id.settings_menu:
-//                startActivity(new Intent(this,. class));
-//                return true;
-
-            case R.id.about_menu:
-                startActivity(new Intent(Home.this, About.class));
+            case R.id.settings_menu:
+                startActivity(new Intent(Home.this, Setting.class));
                 return true;
+
 
             case R.id.help_menu:
                 startActivity(new Intent(Home.this, HelpActivity.class));

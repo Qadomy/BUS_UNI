@@ -1,13 +1,22 @@
 package com.example.bus_uni.Booking;
 
 import android.app.ActionBar;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.bus_uni.BusLocation;
+import com.example.bus_uni.BusSchedule.BusInformationsCard;
 import com.example.bus_uni.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +34,8 @@ public class BookingSeat extends AppCompatActivity {
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +50,10 @@ public class BookingSeat extends AppCompatActivity {
         busNumber = (TextView) findViewById(R.id.textViewBusNumber);
         gateNumber = (TextView) findViewById(R.id.textViewGate);
         seatNumber = (TextView) findViewById(R.id.textViewSeat);
-        driverName = (TextView) findViewById(R.id.driverName_bookingSeat);
-        driverPhone = (TextView) findViewById(R.id.driverPhone_bookingSeat);
-        companyName = (TextView) findViewById(R.id.companyName_bookingSeat);
-        rfidNumber = (TextView) findViewById(R.id.rfidNumber_bookingSeat);
+//        driverName = (TextView) findViewById(R.id.driverName_bookingSeat);
+//        driverPhone = (TextView) findViewById(R.id.driverPhone_bookingSeat);
+//        companyName = (TextView) findViewById(R.id.companyName_bookingSeat);
+//        rfidNumber = (TextView) findViewById(R.id.rfidNumber_bookingSeat);
 
 
         // init databaseReference
@@ -70,10 +81,10 @@ public class BookingSeat extends AppCompatActivity {
                 leavingTime.setText(time);
                 busNumber.setText(busNum);
                 seatNumber.setText(seatNum);
-                driverName.setText(driver_Name);
-                driverPhone.setText(driver_Phone);
-                companyName.setText(company);
-                rfidNumber.setText(rfid_Number);
+//                driverName.setText(driver_Name);
+//                driverPhone.setText(driver_Phone);
+//                companyName.setText(company);
+//                rfidNumber.setText(rfid_Number);
 
             }
 
@@ -96,5 +107,38 @@ public class BookingSeat extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cancelBooking(View view) {
+
+
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                BookingSeat.this);
+
+        alertDialog.setTitle("Confirm cancelling...");
+        alertDialog.setMessage("Are you sure you want to cancel this ticket?");
+        alertDialog.setIcon(R.drawable.ic_warning_yellow_30dp);
+        alertDialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+
+        // here when we clicked No in message dialog
+        alertDialog.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
+
+
+
     }
 }

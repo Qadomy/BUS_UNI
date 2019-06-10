@@ -80,7 +80,7 @@
             android:id="@+id/textViewOriginLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="10"
+            android:maxLength="4"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/divider"
@@ -275,105 +275,116 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/twenty_dp"
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="@dimen/twenty_dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:letterSpacing="0.3"-->
+            <!--android:text="@string/driver_name"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/barcode" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/driverName_bookingSeat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="@dimen/twenty_dp"-->
+            <!--android:layout_marginLeft="@dimen/twenty_dp"-->
+            <!--android:maxLength="7"-->
+            <!--tools:text="Roney" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:letterSpacing="0.3"-->
+            <!--android:text="@string/driver_phone"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/barcode" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/driverPhone_bookingSeat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="@dimen/twenty_dp"-->
+            <!--android:layout_marginLeft="@dimen/twenty_dp"-->
+            <!--tools:text="0599999999" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:letterSpacing="0.3"-->
+            <!--android:text="@string/company_name"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/barcode" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/companyName_bookingSeat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="@dimen/twenty_dp"-->
+            <!--android:layout_marginLeft="@dimen/twenty_dp"-->
+            <!--android:maxLength="10"-->
+            <!--tools:text="Ilar" />-->
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginLeft="32dp"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:letterSpacing="0.6"-->
+            <!--android:text="@string/rfid_number"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/barcode" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/rfidNumber_bookingSeat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="@dimen/twenty_dp"-->
+            <!--android:layout_marginLeft="@dimen/twenty_dp"-->
+            <!--android:maxLength="10"-->
+            <!--tools:text="1232131231" />-->
+    <!--</LinearLayout>-->
+
+    <Button
+        android:id="@+id/cancelBookingButton"
         android:layout_width="match_parent"
+        android:onClick="cancelBooking"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.3"
-            android:text="@string/driver_name"
-            app:layout_constraintTop_toBottomOf="@id/barcode" />
-
-        <TextView
-            android:id="@+id/driverName_bookingSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twenty_dp"
-            android:layout_marginLeft="@dimen/twenty_dp"
-            android:maxLength="7"
-            tools:text="Roney" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.3"
-            android:text="@string/driver_phone"
-            app:layout_constraintTop_toBottomOf="@id/barcode" />
-
-        <TextView
-            android:id="@+id/driverPhone_bookingSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twenty_dp"
-            android:layout_marginLeft="@dimen/twenty_dp"
-            tools:text="0599999999" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.3"
-            android:text="@string/company_name"
-            app:layout_constraintTop_toBottomOf="@id/barcode" />
-
-        <TextView
-            android:id="@+id/companyName_bookingSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twenty_dp"
-            android:layout_marginLeft="@dimen/twenty_dp"
-            android:maxLength="10"
-            tools:text="Ilar" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.6"
-            android:text="@string/rfid_number"
-            app:layout_constraintTop_toBottomOf="@id/barcode" />
-
-        <TextView
-            android:id="@+id/rfidNumber_bookingSeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twenty_dp"
-            android:layout_marginLeft="@dimen/twenty_dp"
-            android:maxLength="10"
-            tools:text="1232131231" />
-    </LinearLayout>
+        android:background="@drawable/angle"
+        android:text="Cancel Booking"
+        android:textAllCaps="false"
+        android:textSize="@dimen/twintySP"
+        android:layout_margin="40dp"/>
 
 </LinearLayout>

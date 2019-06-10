@@ -11,21 +11,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookingSeat;
 import com.example.bus_uni.BusLocation;
-import com.example.bus_uni.Driver.Ticket;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,17 +41,16 @@ public class BusInformationsCard extends AppCompatActivity {
     TextView pickerDate;
 
 
-    private int mYear, mMonth, mDay, mHour, mMinute;
-
-
     EditText cvv, costValue, cardNumber;
 
 
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String driverPhoneData, busSeatNumbersData = "", cvvNum, priceValue, cardNum;
+    String driverPhoneData, busSeatNumbersData = "", cvvNum, priceValue, cardNum, expireDate;
+
+
     // firebase database
-    private DatabaseReference mUserDatabaseReference, mBookingAnTicket, mUpdateTicketDataBase;
+    private DatabaseReference mUserDatabaseReference, mBookingAnTicket, mUpdateTicketDataBase, mVisaDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +69,13 @@ public class BusInformationsCard extends AppCompatActivity {
         busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
 
 
-        pickerDate = (TextView)findViewById(R.id.pickerDate);
+        Toast.makeText(this, expireDate, Toast.LENGTH_SHORT).show();
+        pickerDate = (TextView) findViewById(R.id.pickerDate);
 
         // init cvv, costValue the fields for visa payment
-        cvv = (EditText)findViewById(R.id.cvvNumber);
-        costValue = (EditText)findViewById(R.id.addCostValue);
-        cardNumber = (EditText)findViewById(R.id.cardNumber);
+        cvv = (EditText) findViewById(R.id.cvvNumber);
+        costValue = (EditText) findViewById(R.id.addCostValue);
+        cardNumber = (EditText) findViewById(R.id.cardNumber);
 
 
         cvvNum = cvv.getText().toString();
@@ -101,7 +97,6 @@ public class BusInformationsCard extends AppCompatActivity {
         final String driverID = getTicketInfo.getExtras().getString("driverId");
         final String keyId = getTicketInfo.getExtras().getString("keyId");
         final String busNum = getTicketInfo.getExtras().getString("busNum");
-
 
 
         busRuteLine.setText(busRuteLineData);
@@ -177,13 +172,12 @@ public class BusInformationsCard extends AppCompatActivity {
                                         String userEmail = dataSnapshot.child("email").getValue().toString();
 
 
-
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
                                                 rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail, priceValue);
 
 
-                                        // here we create an a new class name a Book and uploaded it in firebase
+                                        // here we create an a new class name a Book and uploaded it to firebase
                                         // * it contain all information of the ticket and the current user*/
                                         mBookingAnTicket = FirebaseDatabase.getInstance().getReference().child("Booking");
                                         mBookingAnTicket.child(currentUser).setValue(book).addOnCompleteListener(
@@ -201,6 +195,11 @@ public class BusInformationsCard extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
+
+
+                                        // here we create an a new class name a Visa and uploaded it to firebase
+                                        // * it contain all information of the Visa and the current user*/
+
 
                                     }
 
@@ -265,6 +264,7 @@ public class BusInformationsCard extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void pickerDate(View view) {
 
+        int mYear, mMonth, mDay;
 
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -281,7 +281,10 @@ public class BusInformationsCard extends AppCompatActivity {
 
                         pickerDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                        Toast.makeText(BusInformationsCard.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_SHORT).show();
+                        String date = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                        expireDate = date;
+
+                        //Toast.makeText(BusInformationsCard.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_SHORT).show();
 
                     }
                 }, mYear, mMonth, mDay);

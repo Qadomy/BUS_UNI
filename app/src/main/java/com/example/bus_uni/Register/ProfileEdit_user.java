@@ -93,7 +93,6 @@ public class ProfileEdit_user extends AppCompatActivity {
         newEmail = (EditText) findViewById(R.id.email_editProfile);
         newPass = (EditText) findViewById(R.id.pass_editProfile);
 
-        newRfid = (EditText) findViewById(R.id.rfid_editProfile);
         newMobile = (EditText) findViewById(R.id.mobile_editProfile);
         newCity = (EditText) findViewById(R.id.city_editProfile);
 
@@ -167,7 +166,6 @@ public class ProfileEdit_user extends AppCompatActivity {
                 newName.setText(name);
                 newEmail.setText(email);
                 newMobile.setText(mobile);
-                newRfid.setText(rfid);
                 newCity.setText(city);
 
             }
@@ -191,7 +189,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                 final String name = newName.getText().toString();
                 final String email = newEmail.getText().toString();
                 final String mobile = newMobile.getText().toString();
-                final String rfid = newRfid.getText().toString();
+                final String rfid = "";
                 final String city = newCity.getText().toString();
                 final String pass = newPass.getText().toString();
 
@@ -299,7 +297,6 @@ public class ProfileEdit_user extends AppCompatActivity {
 
     private void saveNewUserData(String name, String email, String pass, String mobile,
                                  String rfid, String city, String url) {
-        //TODO: Problem here when create new object the other info like posts will be removed!
         //We must use (User.class) to retrieve the current user and then update necessary fields
         User user;
 
