@@ -372,6 +372,7 @@ public class EditCompanyProfile extends AppCompatActivity {
     }
 
 
+    // for back
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.home) {
             ActionBar actionBar = getActionBar();

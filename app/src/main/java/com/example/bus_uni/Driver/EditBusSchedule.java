@@ -34,7 +34,7 @@ public class EditBusSchedule extends AppCompatActivity {
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
-    private String keyId, busLine, driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
+    private String keyId, busLine="", driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
     //
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
@@ -63,7 +63,7 @@ public class EditBusSchedule extends AppCompatActivity {
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
                 driverName = dataSnapshot.child("name").getValue().toString();
                 seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
-                busCompany = dataSnapshot.child("bus_company").getValue().toString();
+//                busCompany = dataSnapshot.child("bus_company").getValue().toString();
                 driverPhone = dataSnapshot.child("mobile").getValue().toString();
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
@@ -99,7 +99,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
 
         // todo: get the busline from databaserefernce
-        mEditTicketDatabaseReference.child("AAUJ-Tulkarm").
+        mEditTicketDatabaseReference.child(busLine).
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -13,17 +13,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.R;
+import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -36,13 +36,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class DriverHome extends FragmentActivity implements LocationListener, OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        com.google.android.gms.location.LocationListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
 
 
     GoogleApiClient googleApiClient;
@@ -61,6 +60,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     // GeoFire, for store the locations of drivers in firebase database realtime
     GeoFire geoFire;
     private GoogleMap map;
+
     //
     //
     // firebase auth
@@ -73,6 +73,8 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     // for locations
     private LocationManager locationManager;
 
+
+    LatLng currentLocation = new LatLng(0,0);
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,18 +109,14 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
          * */
 
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getApplicationContext(),
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
+        int permission = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
 
-            ActivityCompat.requestPermissions(this, new String[]{
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-            }, 101);
 
+        if (permission == PackageManager.PERMISSION_GRANTED) {
+            startTrackerService();
         }
+
 
 
         try {
@@ -131,8 +129,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         }
 
 
-
-
         /*
          *
          * // end of getting the current locations
@@ -142,6 +138,14 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
 
     }// end of onCreate
 
+
+    private void startTrackerService() {
+
+        startService(new Intent(this, TrackingService.class));
+
+        Toast.makeText(this, "GPS tracking enabled", Toast.LENGTH_SHORT).show();
+
+    }
 
     // method for OnMapReadyCallback abstract
     @Override
@@ -157,16 +161,19 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
+
         }
         map.setMyLocationEnabled(true); // for my current location button above the screen
 
 
     }
 
-        //TODO:
-    // 4 methods for LocationListener Listener
+    //TODO:
+//    // 4 methods for LocationListener Listener
     @Override
     public void onLocationChanged(Location location) {
+
+        //Log.d("msg111", "onLocationChanged");
 
 
         lastLocation = location;   //------->        //********??
@@ -193,49 +200,40 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
 
 
-        // using GeoFire to save the location
-        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
-        geoFire = new GeoFire(mDriverAvailabilityRef);
-
-        // To check if a write was successfully saved on the server
-        geoFire.setLocation(currentuser, new GeoLocation(location.getLatitude(), location.getLongitude()),
-                new GeoFire.CompletionListener() {
-                    @Override
-                    public void onComplete(String key, DatabaseError error) {
-                        if (error != null) {
-                            Toast.makeText(DriverHome.this, "There was an error saving the location to GeoFire: " + error, Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Location saved on server successfully!
-                        }
-                    }
-                });
-    }
-
-
-    protected void onStop() {
-
-        super.onStop();
-
-
-//        // here when the driver logout or close the app the location of his bus gone from the map
+//        // using GeoFire to save the location
 //        mDriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Driver_Availability");
 //        geoFire = new GeoFire(mDriverAvailabilityRef);
-//        geoFire.removeLocation(currentuser);
+//
+//        // To check if a write was successfully saved on the server
+//        geoFire.setLocation(currentuser, new GeoLocation(location.getLatitude(), location.getLongitude()),
+//                new GeoFire.CompletionListener() {
+//                    @Override
+//                    public void onComplete(String key, DatabaseError error) {
+//                        if (error != null) {
+//                            Toast.makeText(DriverHome.this, "There was an error saving the location to GeoFire: " + error, Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            // Location saved on server successfully!
+//                        }
+//                    }
+//                });
 
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
+        Log.d("msg111", "onStatusVhanged");
     }
 
     @Override
     public void onProviderEnabled(String provider) {
+        Log.d("msg111", "onProviderEnabled");
 
     }
 
     @Override
     public void onProviderDisabled(String provider) {
+        Log.d("msg111", "onProviderDisabled");
 
     }
 
@@ -258,7 +256,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
 
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        //LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
     }
 
     @Override

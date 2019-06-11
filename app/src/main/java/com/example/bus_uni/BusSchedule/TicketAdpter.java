@@ -25,7 +25,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
 
     // constructor for TicketAdapter
     public TicketAdpter(ArrayList<Ticket> tickets, Context mContext) {
-        this.tickets = tickets;
+        this.setTickets(tickets);
         this.mContext = mContext;
     }
 
@@ -43,11 +43,11 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
 
 
-        viewHolder.busLineName.setText(tickets.get(position).getBusLine());
-        viewHolder.seatsNumbers.setText(String.valueOf(tickets.get(position).getSeatNum()));
-        viewHolder.leavingTime.setText(tickets.get(position).getLeavingTime());
-        viewHolder.companyName.setText(tickets.get(position).getCompany());
-        viewHolder.ticketPrice.setText(tickets.get(position).getPrice());
+        viewHolder.busLineName.setText(getTickets().get(position).getBusLine());
+        viewHolder.seatsNumbers.setText(String.valueOf(getTickets().get(position).getSeatNum()));
+        viewHolder.leavingTime.setText(getTickets().get(position).getLeavingTime());
+        viewHolder.companyName.setText(getTickets().get(position).getCompany());
+        viewHolder.ticketPrice.setText(getTickets().get(position).getPrice());
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,17 +56,17 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 // here passing data to BusInformationCard
                 Intent ticketInfo = new Intent(mContext, BusInformationsCard.class);
 
-                ticketInfo.putExtra("busLine", tickets.get(position).getBusLine());
-                ticketInfo.putExtra("companyName", tickets.get(position).getCompany());
-                ticketInfo.putExtra("driverName", tickets.get(position).getName());
-                ticketInfo.putExtra("driverPhone", tickets.get(position).getDriverPhone());
-                ticketInfo.putExtra("seatNum", tickets.get(position).getSeatNum());
-                ticketInfo.putExtra("leavingTime", tickets.get(position).getLeavingTime());
-                ticketInfo.putExtra("latitude", tickets.get(position).getLatitude());
-                ticketInfo.putExtra("longitude", tickets.get(position).getLongitude());
-                ticketInfo.putExtra("driverId", tickets.get(position).getDriverId());
-                ticketInfo.putExtra("keyId", tickets.get(position).getId());
-                ticketInfo.putExtra("busNum", tickets.get(position).getBusNum());
+                ticketInfo.putExtra("busLine", getTickets().get(position).getBusLine());
+                ticketInfo.putExtra("companyName", getTickets().get(position).getCompany());
+                ticketInfo.putExtra("driverName", getTickets().get(position).getName());
+                ticketInfo.putExtra("driverPhone", getTickets().get(position).getDriverPhone());
+                ticketInfo.putExtra("seatNum", getTickets().get(position).getSeatNum());
+                ticketInfo.putExtra("leavingTime", getTickets().get(position).getLeavingTime());
+                ticketInfo.putExtra("latitude", getTickets().get(position).getLatitude());
+                ticketInfo.putExtra("longitude", getTickets().get(position).getLongitude());
+                ticketInfo.putExtra("driverId", getTickets().get(position).getDriverId());
+                ticketInfo.putExtra("keyId", getTickets().get(position).getId());
+                ticketInfo.putExtra("busNum", getTickets().get(position).getBusNum());
 
 
                 mContext.startActivity(ticketInfo);
@@ -79,9 +79,17 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
     @Override
     public int getItemCount() {
         // here return how many items in the list
-        if (tickets == null)
+        if (getTickets() == null)
             return 0;
-        return tickets.size();
+        return getTickets().size();
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
 

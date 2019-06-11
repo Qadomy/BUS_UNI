@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 
 public class Bus_Schedule extends AppCompatActivity {
 
+    private boolean searchFlag=false,changeFlag=false;
+    //private int prevPos=0,lastPos=0;
     String keyId;
     private RecyclerView mRecyclerView;
     private TicketAdpter mTicketAdpter;
@@ -44,7 +47,6 @@ public class Bus_Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus__schedule);
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.buses_rv);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicatorSchedule);
         mErrorMessageDisplay = findViewById(R.id.tv_error_message_displaySchedule);
@@ -60,72 +62,82 @@ public class Bus_Schedule extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         busLineSpinner.setAdapter(adapter);
 
-        //TODO: every time we click on search icon it repeat the tickets again
-        //here we click on the search image to find the buses ....
-        searchBuses.setOnClickListener(new View.OnClickListener() {
-
-            //TODO: here we have an proplem when we click twice on the search we get the same tickets twice
+       /* busLineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-
-                // here get what chosen in spinner and found all dates same in database realtime
-                final String bus_line = busLineSpinner.getSelectedItem().toString();
-
-
-                mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
-                mTicketDatabaseReference.child(bus_line).
-                        addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-
-                                    keyId = childSnapshot.getKey();
-
-
-                                    // declare this function out of this scope
-                                    String name = childSnapshot.child("name").getValue().toString();
-                                    String line = childSnapshot.child("busLine").getValue().toString();
-                                    String price = childSnapshot.child("price").getValue().toString();
-                                    String time = childSnapshot.child("leavingTime").getValue().toString();
-                                    String seat = childSnapshot.child("seatNum").getValue().toString();
-                                    String company = childSnapshot.child("company").getValue().toString();
-                                    String phone = childSnapshot.child("driverPhone").getValue().toString();
-                                    String latitude = childSnapshot.child("latitude").getValue().toString();
-                                    String longitude = childSnapshot.child("longitude").getValue().toString();
-                                    String busNum = childSnapshot.child("busNum").getValue().toString();
-                                    String driverId = childSnapshot.child("driverId").getValue().toString();
-
-
-                                    tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
-                                    showRecyclerView();
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               // if(position!=0)
+                 //   changeFlag=true;
             }
-        });
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });*/
+      //    prevPos=busLineSpinner.getSelectedItemPosition();
     }// end onCreate
 
-
-    private void showRecyclerView() {
-
-        // here how we want to display the list of tickets
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
+    private void showRecyclerView(String bus_line) {
 
 
-        mTicketAdpter = new TicketAdpter(tickets, Bus_Schedule.this);
-        mRecyclerView.setAdapter(mTicketAdpter);
-        showTickets();
-    }
+        mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+        mTicketDatabaseReference.child(bus_line).
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+
+                            keyId = childSnapshot.getKey();
+
+
+                            // declare this function out of this scope
+                            String name = childSnapshot.child("name").getValue().toString();
+                            String line = childSnapshot.child("busLine").getValue().toString();
+                            String price = childSnapshot.child("price").getValue().toString();
+                            String time = childSnapshot.child("leavingTime").getValue().toString();
+                            String seat = childSnapshot.child("seatNum").getValue().toString();
+                            String company = childSnapshot.child("company").getValue().toString();
+                            String phone = childSnapshot.child("driverPhone").getValue().toString();
+                            String latitude = childSnapshot.child("latitude").getValue().toString();
+                            String longitude = childSnapshot.child("longitude").getValue().toString();
+                            String busNum = childSnapshot.child("busNum").getValue().toString();
+                            String driverId = childSnapshot.child("driverId").getValue().toString();
+
+
+                            tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
+
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Bus_Schedule.this, LinearLayoutManager.VERTICAL, false);
+
+                            mRecyclerView.setLayoutManager(linearLayoutManager);
+                            mRecyclerView.setHasFixedSize(true);
+
+
+                            mTicketAdpter = new TicketAdpter(tickets, Bus_Schedule.this);
+
+                            // mTicketAdpter.setTickets(tickets);
+                            mRecyclerView.setAdapter(mTicketAdpter);
+
+                            // here how we want to display the list of tickets
+                          // if(!searchFlag)
+                            showTickets();
+
+//                                    Ticket ticket = childSnapshot.getValue(Ticket.class);
+//                                    tickets.add(ticket);
+
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+      }
 
 
     private void showTickets() {
@@ -151,6 +163,19 @@ public class Bus_Schedule extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //here we click on the search image to find the buses ....
+    public void searchOnCLick(View view) {
+
+        // here get what chosen in spinner and found all dates same in database realtime
+         String bus_line = busLineSpinner.getSelectedItem().toString();
+
+ //TODO: && item selected not changed (inside if)
+        if(!searchFlag && !changeFlag)
+            showRecyclerView(bus_line);
+
+        searchFlag=true;
+
+    }
 
 }
 

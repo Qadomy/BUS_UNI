@@ -55,7 +55,9 @@
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
 
-            <!-- todo -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BusSchedule.Bus_Schedule" />
 
         </activity>
         <activity android:name=".Driver.EditBusSchedule">
@@ -80,7 +82,7 @@
         <activity android:name=".BusCompany.EditCompanyProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".BusCompany.CompanyHome" />
+                android:value=".BusCompany.CompanyProfile" />
         </activity>
         <activity android:name=".BusCompany.CompanyProfile">
             <meta-data

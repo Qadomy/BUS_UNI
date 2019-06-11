@@ -1,139 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blackColor"
     tools:context=".Home">
 
-
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:padding="15dp"
+        android:rowCount="3">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
 
-            android:layout_height="200dp"
-            android:layout_marginBottom="11dp">
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
-            <ImageView
-                android:id="@+id/busShcedule_ImageView"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="passengerProfile"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:src="@drawable/ic_user_login" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/profile"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="busScheduleClick"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bus_location" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/busSchedule_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="busScheduleClick"
-                android:text="@string/bus_schedule"
-                android:textColor="@color/whitecolor"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/busShcedule_ImageView"
-                app:layout_constraintRight_toRightOf="@id/busShcedule_ImageView"
-                app:layout_constraintTop_toTopOf="@id/busShcedule_ImageView" />
-        </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:src="@drawable/ic_bus_schedule" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="11dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timg" />
 
-            <ImageView
-                android:id="@+id/busLocation_ImagView"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/bus_schedule"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="busLocationClick"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bus_location"
-                tools:layout_editor_absoluteX="-16dp"
-                tools:layout_editor_absoluteY="167dp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/busLocation_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="busLocationClick"
-                android:text="@string/bus_locations"
-                android:textColor="@color/whitecolor"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/busLocation_ImagView"
-                app:layout_constraintRight_toRightOf="@id/busLocation_ImagView"
-                app:layout_constraintTop_toTopOf="@id/busLocation_ImagView" />
-        </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:src="@drawable/ic_bus_locations" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="My  location"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-
-            android:layout_height="200dp"
-            android:layout_marginBottom="11dp">
-
-            <ImageView
-                android:id="@+id/streetView_ImageView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="streetNewsClick"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bus_location" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/streetNews_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="streetNewsClick"
-                android:text="@string/street_news"
-                android:textColor="@color/whitecolor"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/streetView_ImageView"
-                app:layout_constraintRight_toRightOf="@id/streetView_ImageView"
-                app:layout_constraintTop_toTopOf="@id/streetView_ImageView" />
-        </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:src="@drawable/ic_news" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timg" />
 
-            android:layout_height="200dp"
-            android:layout_marginBottom="11dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/street_news"
+                    android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/BookingSeat_ImageView"
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="bookinSeatClick"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bus_location" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bookingSeat_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:onClick="bookinSeatClick"
-                android:text="@string/booking_seat"
-                android:textColor="@color/whitecolor"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/BookingSeat_ImageView"
-                app:layout_constraintRight_toRightOf="@id/BookingSeat_ImageView"
-                app:layout_constraintTop_toTopOf="@id/BookingSeat_ImageView" />
-        </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:src="@drawable/ic_bus_ticket" />
 
-    </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/timg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/my_ticket"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
 
-</ScrollView>
+    </GridLayout>
+
+
+
+</LinearLayout>

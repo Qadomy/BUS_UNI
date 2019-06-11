@@ -33,7 +33,7 @@ public class Home extends AppCompatActivity {
 
 
 
-    // Here for shown the menu on the MainAvtivity
+    // Here for shown the menu on the MainActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_after_login, menu);
@@ -46,10 +46,6 @@ public class Home extends AppCompatActivity {
     // here for menu
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-            case R.id.profile_menu:
-                startActivity(new Intent(Home.this, Profile_user.class));
-                return true;
 
             case R.id.settings_menu:
                 startActivity(new Intent(Home.this, Setting.class));
@@ -86,7 +82,6 @@ public class Home extends AppCompatActivity {
     }
 
 
-    // here methods when we click on the images and text in After Login Activity after we log in in applications
 
     public void bookinSeatClick(View view) {
         Intent booking = new Intent(Home.this, BookingSeat.class);
@@ -109,6 +104,8 @@ public class Home extends AppCompatActivity {
     }
 
 
-
-
+    public void passengerProfile(View view) {
+        Intent profile = new Intent(Home.this, Profile_user.class);
+        startActivity(profile);
+    }
 }

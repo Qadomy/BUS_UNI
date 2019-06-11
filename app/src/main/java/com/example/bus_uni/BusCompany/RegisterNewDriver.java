@@ -43,18 +43,32 @@ public class RegisterNewDriver extends AppCompatActivity {
     private Spinner bus_line_spinner;
     private ProgressBar loadingProgress;
 
+
+    private String current_user=FirebaseAuth.getInstance().getCurrentUser().getUid();
     // Firebase Auth
     private FirebaseAuth mFirebaseAuth;
 
     // Firebase Database
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
-
+    private DatabaseReference mDatabaseReference,mUserDataBaseReference;
+    private String company_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_driver);
 
+        mUserDataBaseReference=FirebaseDatabase.getInstance().getReference("Users");
+        mUserDataBaseReference.child(current_user).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                company_name=dataSnapshot.child("name").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         dName = (EditText) findViewById(R.id.driverNameEditText);
         dEmail = (EditText) findViewById(R.id.driverEmailEditText);
@@ -109,8 +123,8 @@ public class RegisterNewDriver extends AppCompatActivity {
                     addNewDriver.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
 
-                } else {
-                    createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line);
+                } else { //TODO: Add
+                    createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line, company_name);
                 }
 
 
@@ -119,7 +133,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
     }
 
-    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line) {
+    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line, final String company_name) {
 
 
         // here we create driver account with email and password

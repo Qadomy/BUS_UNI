@@ -20,11 +20,15 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class TrackingService extends Service {
     private static final String TAG = TrackingService.class.getSimpleName();
+
+
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     public TrackingService() {
     }
@@ -110,7 +114,7 @@ public class TrackingService extends Service {
 
 //Save the location data to the database//
 
-                        ref.setValue(location);
+                        ref.child(currentUser).setValue(location);
                     }
                 }
             }, null);

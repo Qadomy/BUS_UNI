@@ -157,6 +157,9 @@
     <string name="expiration_date">Expiration Date</string>
     <string name="add_cost_value">Add cost value</string>
     <string name="company_buses">Company buses</string>
+    <string name="enter_buses_numbers">Enter buses numbers</string>
+    <string name="edit_bus_line">Edit bus line</string>
+    <string name="my_ticket">My ticket</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

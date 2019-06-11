@@ -62,7 +62,6 @@ public class Profile_user extends AppCompatActivity {
                 Picasso.with(Profile_user.this).load(imageUrl).into(mProfileImage);
 
 
-
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
                 String mobile = dataSnapshot.child("mobile").getValue().toString();

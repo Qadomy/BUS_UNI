@@ -12,6 +12,7 @@ import android.view.View;
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookedTicket_Adapter;
 import com.example.bus_uni.R;
+import com.example.bus_uni.StreetsInformation.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,35 +46,16 @@ public class CheckBookings extends AppCompatActivity {
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren())  {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
 
-//
-//                    String name = childSnapshot.child("userName").getValue().toString();
-//                    String userID = childSnapshot.child("userID").getValue().toString();
-//                    String driverID = childSnapshot.child("driverID").getValue().toString();
-//                    String driverName = childSnapshot.child("driverName").getValue().toString();
-//                    String driverPhone = childSnapshot.child("driverPhone").getValue().toString();
-//                    String busLine = childSnapshot.child("busLine").getValue().toString();
-//                    String leavingTime = childSnapshot.child("leavingTime").getValue().toString();
-//                    String latitude = childSnapshot.child("latitude").getValue().toString();
-//                    String longitude = childSnapshot.child("longitude").getValue().toString();
-//                    String seatNumber = childSnapshot.child("seatNumber").getValue().toString();
-//                    String rfidNumber = childSnapshot.child("rfidNumber").getValue().toString();
-//                    String company = childSnapshot.child("company").getValue().toString();
-//                    String city = childSnapshot.child("city").getValue().toString();
-//                    String busNum = childSnapshot.child("busNum").getValue().toString();
-//
-//                    booked.add(new Book(userID, name, driverID, driverName, driverPhone, busLine,
-//                            leavingTime, latitude, longitude, seatNumber, rfidNumber, company,
-//                            city, busNum));
-
-                    //todo: here why not all data display on the recycle view
-                    Book book =  childSnapshot.getValue(Book.class);
-                    booked.add(book);
-
+                    Book books = childSnapshot.getValue(Book.class);
+                    booked.add(books);
                     showRecycleView();
 
+
+
                 }
+
             }
 
             @Override
