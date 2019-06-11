@@ -27,17 +27,12 @@ import java.util.ArrayList;
 
 public class Bus_Schedule extends AppCompatActivity {
 
-
-    // here for get the id of current user and save in the string
-    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String keyId;
     private RecyclerView mRecyclerView;
     private TicketAdpter mTicketAdpter;
     private TextView mErrorMessageDisplay;
-    //
-    //
+
     private ArrayList<Ticket> tickets = new ArrayList<>();
-    /////
     private ImageView searchBuses;
     private Spinner busLineSpinner;
     private ProgressBar mLoadingIndicator;
@@ -65,8 +60,8 @@ public class Bus_Schedule extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         busLineSpinner.setAdapter(adapter);
 
-
-        // here we click on the search image to find the buses ....
+        //TODO: every time we click on search icon it repeat the tickets again
+        //here we click on the search image to find the buses ....
         searchBuses.setOnClickListener(new View.OnClickListener() {
 
             //TODO: here we have an proplem when we click twice on the search we get the same tickets twice

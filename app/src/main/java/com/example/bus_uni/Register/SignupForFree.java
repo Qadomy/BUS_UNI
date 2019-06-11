@@ -43,7 +43,7 @@ public class SignupForFree extends AppCompatActivity {
                 startActivity(signIn);
             }
         });
-
+        //TODO: Exception in Guest button
         tryAsGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

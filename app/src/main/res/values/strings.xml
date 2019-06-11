@@ -6,6 +6,7 @@
     <string name="signup" translatable="true">Sign Up</string>
     <string name="signin" translatable="true">Sign In</string>
     <string name="driver_id" translatable="true">Enter Driver ID</string>
+    <string name="tracking_enabled" translatable="true">Tracking notification</string>
     <string name="driver_password" translatable="true">Enter Driver Password</string>
     <string name="user_rfid" translatable="true">Enter Your RFID Number</string>
     <string name="user_password" translatable="true">Enter Your Password</string>

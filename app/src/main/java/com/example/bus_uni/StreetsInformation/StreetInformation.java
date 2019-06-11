@@ -114,6 +114,7 @@ public class StreetInformation extends AppCompatActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.postsListRecycleView);
+       //TODO: Where should we put this to prevent duplication?
         showPostsInRecycleView();
     }
 
@@ -178,7 +179,7 @@ public class StreetInformation extends AppCompatActivity {
 
         // show it
         alertDialog.show();
-
+    //finish();
     }
 
     private void uploadImage() {
@@ -294,6 +295,7 @@ public class StreetInformation extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     //TODO: sorting post by date, duplicated posts
+                    //We maybe put a list of posts inside Post class
                     Post post = childSnapshot.getValue(Post.class);
                     posts.add(post);
 
