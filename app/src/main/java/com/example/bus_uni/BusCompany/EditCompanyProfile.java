@@ -46,7 +46,7 @@ public class EditCompanyProfile extends AppCompatActivity {
     static int PReqCode = 1;
     static int REQUESCODE = 1;
     //
-    String currentUser;
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
     //
     //
@@ -65,8 +65,7 @@ public class EditCompanyProfile extends AppCompatActivity {
     //
     //
     // firebase database
-    private DatabaseReference mUserDatabaseReference;
-    private DatabaseReference mPhotoDatabaseReference;
+    private DatabaseReference mUserDatabaseReference, mEditUserDatabaseFirebase;
     // Firebase Storage Reference
     private StorageReference mStorageReference;
 
@@ -93,7 +92,7 @@ public class EditCompanyProfile extends AppCompatActivity {
         progressBarSave.setVisibility(View.INVISIBLE);
 
         // here for get the id of current user and save in the string
-        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         // mean there is no photo
@@ -105,7 +104,7 @@ public class EditCompanyProfile extends AppCompatActivity {
 
 
         // init database for images
-        mPhotoDatabaseReference = FirebaseDatabase.getInstance().getReference("Upload");
+//        mPhotoDatabaseReference = FirebaseDatabase.getInstance().getReference("Upload");
 
         //
 
@@ -268,9 +267,8 @@ public class EditCompanyProfile extends AppCompatActivity {
         user = new User(name, email, phone, busesNum, lineName, downloadUri, 1);
 
 
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
-
-        mUserDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mEditUserDatabaseFirebase = FirebaseDatabase.getInstance().getReference("Users");
+        mEditUserDatabaseFirebase.child(currentUser).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
