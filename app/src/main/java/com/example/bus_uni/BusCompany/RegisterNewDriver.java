@@ -2,6 +2,7 @@ package com.example.bus_uni.BusCompany;
 
 import android.app.ActionBar;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -34,9 +35,6 @@ import javax.crypto.SecretKey;
 public class RegisterNewDriver extends AppCompatActivity {
 
 
-    // using for get the compant name from firebase
-    private String busCompany;
-
     private Button addNewDriver;
 
     private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusSeat_Num;
@@ -50,18 +48,21 @@ public class RegisterNewDriver extends AppCompatActivity {
 
     // Firebase Database
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference,mUserDataBaseReference;
-    private String company_name;
+    private DatabaseReference mCreataUseDriverDatabaseReference, mUserDatabaseReference;
+
+
+    String busCompanyName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_driver);
 
-        mUserDataBaseReference=FirebaseDatabase.getInstance().getReference("Users");
-        mUserDataBaseReference.child(current_user).addValueEventListener(new ValueEventListener() {
+        mUserDatabaseReference  = FirebaseDatabase.getInstance().getReference("Users");
+        mUserDatabaseReference.child(current_user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                company_name=dataSnapshot.child("name").getValue().toString();
+
+                busCompanyName = dataSnapshot.child("name").getValue().toString();
             }
 
             @Override
@@ -69,6 +70,11 @@ public class RegisterNewDriver extends AppCompatActivity {
 
             }
         });
+
+
+        // init firebaseAuth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
 
         dName = (EditText) findViewById(R.id.driverNameEditText);
         dEmail = (EditText) findViewById(R.id.driverEmailEditText);
@@ -82,13 +88,6 @@ public class RegisterNewDriver extends AppCompatActivity {
         addNewDriver = (Button) findViewById(R.id.addNewDriverButton);
         loadingProgress = (ProgressBar) findViewById(R.id.driverProgressBar);
 
-
-        // here we add info to firebase
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
-        // init Firebase database real time
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        mDatabaseReference = mFirebaseDatabase.getReference("EDMIT_FIREBASE");
 
 
         // here for init the spinner and get her the data from string array
@@ -124,7 +123,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                     loadingProgress.setVisibility(View.INVISIBLE);
 
                 } else { //TODO: Add
-                    createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line, company_name);
+                    createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line);
                 }
 
 
@@ -133,7 +132,9 @@ public class RegisterNewDriver extends AppCompatActivity {
 
     }
 
-    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line, final String company_name) {
+    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line) {
+
+
 
 
         // here we create driver account with email and password
@@ -147,35 +148,30 @@ public class RegisterNewDriver extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            // for get the current driver id
-                            FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                            String uid = current_user.getUid();
+
                             SecretKey sec = Encrypt.generateKey();
-                            String encPass = Encrypt.encryptPass(pass, sec);
+                            final String encPass = Encrypt.encryptPass(pass, sec);
 
-                            mDatabaseReference = FirebaseDatabase.getInstance()
-                                    .getReference("Users").child(uid);
+                            User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompanyName);
 
-
-                            mDatabaseReference.child(uid).addValueEventListener(new ValueEventListener() {
+                            mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                            mCreataUseDriverDatabaseReference.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                    // here we get the name of company of current user (company)
-                                    busCompany = dataSnapshot.child("name").getValue().toString();
+                                    if (task.isSuccessful()){
 
-                                }
+                                        Toast.makeText(RegisterNewDriver.this, "Driver" + name + "added successfully", Toast.LENGTH_SHORT).show();
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                    }else{
+
+                                        Toast.makeText(RegisterNewDriver.this, "Faild add new driver", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
 
 
-                            // TODO: here we get the name of current company and put it in bus company
-                            //String busCompany = "";
-                            User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompany);
 
                             addNewDriver.setVisibility(View.INVISIBLE);
                             loadingProgress.setVisibility(View.VISIBLE);
@@ -184,23 +180,12 @@ public class RegisterNewDriver extends AppCompatActivity {
                             showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
                                     R.drawable.ic_check_circle_30dp);
 
-                            mDatabaseReference.setValue(user)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
+                            Intent intent = new Intent(RegisterNewDriver.this, CompanyHome.class);
+                            startActivity(intent);
 
-//                                        Intent mainIntent = new Intent(RegisterNewDriver.this, CompanyHome.class);
-//                                        // TODO make sure:  from stack over flow
-//                                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                        startActivity(mainIntent);
 
-                                                Toast.makeText(RegisterNewDriver.this, "Driver " + name + "  added successfully", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-
-                        } else {
+                        }
+                        else {
 
                             showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
                                     R.drawable.ic_error_red_color_30dp);
@@ -211,9 +196,26 @@ public class RegisterNewDriver extends AppCompatActivity {
                     }
                 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }// end of onCreate
 
 
+    // for message dialog
     private void showMessageDialog(String title, String message, int messageIcon) {
         // here method for messages dialogs:
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -240,6 +242,5 @@ public class RegisterNewDriver extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
