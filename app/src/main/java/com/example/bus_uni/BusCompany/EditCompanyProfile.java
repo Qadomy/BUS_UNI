@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -170,6 +171,8 @@ public class EditCompanyProfile extends AppCompatActivity {
                 final String busesNum = newCompanyBusesNumbers.getText().toString();
                 final String lineName = newCompanyLineName.getText().toString();
 
+                Log.d("msg", "busesNum"+busesNum);
+
                 if (pickedImageUri != null) {
 
                     //
@@ -279,6 +282,7 @@ public class EditCompanyProfile extends AppCompatActivity {
                     saveProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(saveProfile);
                     finish();
+
                 } else {
 
                     save.setVisibility(View.VISIBLE);

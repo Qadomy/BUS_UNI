@@ -21,9 +21,11 @@ import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookingSeat;
+import com.example.bus_uni.Booking.Visa;
 import com.example.bus_uni.BusLocation;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -176,7 +178,23 @@ public class BusInformationsCard extends AppCompatActivity {
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
                                                 rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail, priceValue);
 
+                                        //todo: make sure if the expirDate not null
+                                        Visa visa = new Visa(cardNum, cvvNum, expireDate, priceValue, currentUser, userName);
 
+                                        mVisaDatabaseReference = FirebaseDatabase.getInstance().getReference("Visa");
+                                        mVisaDatabaseReference.child(currentUser).setValue(visa).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+                                                    Toast.makeText(BusInformationsCard.this, "Your visa data saved successfully", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(BusInformationsCard.this, "Your data faild saved", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                         // here we create an a new class name a Book and uploaded it to firebase
                                         // * it contain all information of the ticket and the current user*/
                                         mBookingAnTicket = FirebaseDatabase.getInstance().getReference().child("Booking");
