@@ -171,7 +171,6 @@ public class Bus_Schedule extends AppCompatActivity {
                     }
                 });
 
-        //TODO: && item selected not changed (inside if)
         if(!searchFlag)
             showRecyclerView(bus_line);
 
