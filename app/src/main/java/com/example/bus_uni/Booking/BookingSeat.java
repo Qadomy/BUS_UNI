@@ -69,7 +69,6 @@ public class BookingSeat extends AppCompatActivity {
                 String busLine = dataSnapshot.child("busLine").getValue().toString();
                 String time = dataSnapshot.child("leavingTime").getValue().toString();
                 String seatNum = dataSnapshot.child("seatNumber").getValue().toString();
-                String rfid_Number = dataSnapshot.child("rfidNumber").getValue().toString();
                 String company = dataSnapshot.child("company").getValue().toString();
                 String city = dataSnapshot.child("city").getValue().toString();
                 String busNum = dataSnapshot.child("busNum").getValue().toString();

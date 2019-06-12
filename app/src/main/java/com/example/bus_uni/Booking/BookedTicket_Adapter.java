@@ -54,7 +54,6 @@ public class BookedTicket_Adapter extends RecyclerView.Adapter<BookedTicket_Adap
                 bookInfo.putExtra("userEmail", booked.get(position).getUserEmail());
                 bookInfo.putExtra("userPhone", booked.get(position).getUserPhone());
                 bookInfo.putExtra("city", booked.get(position).getCity());
-                bookInfo.putExtra("rfid", booked.get(position).getRfidNumber());
 
 
                 mContext.startActivity(bookInfo);

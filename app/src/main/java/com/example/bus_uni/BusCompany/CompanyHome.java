@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.R;
+import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,18 +26,16 @@ public class CompanyHome extends AppCompatActivity {
 
 
     ImageView companyPic;
+
     TextView companyName;
 
+    String name;
 
     // firebase auth
     private FirebaseAuth firebaseAuth;
 
-
     // firebase database reference
     private DatabaseReference mUserDatabaseReference;
-
-
-    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +70,6 @@ public class CompanyHome extends AppCompatActivity {
                 companyName.setText(name);
 
 
-
-
             }
 
             @Override
@@ -84,7 +80,6 @@ public class CompanyHome extends AppCompatActivity {
 
 
     }// onCreate
-
 
 
     public void addNewDriver(View view) {
@@ -107,7 +102,6 @@ public class CompanyHome extends AppCompatActivity {
         Intent aboutCompany = new Intent(CompanyHome.this, CompanyProfile.class);
         startActivity(aboutCompany);
     }
-
 
 
     // Here for shown the menu on the XML activity

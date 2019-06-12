@@ -161,6 +161,10 @@
     <string name="edit_bus_line">Edit bus line</string>
     <string name="my_ticket">My ticket</string>
     <string name="company_city">Company city</string>
+    <string name="payment_status">Payment status:</string>
+    <string name="in_cash">In Cash</string>
+    <string name="your_seat_label">Your seat label</string>
+    <string name="minute">Minute</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

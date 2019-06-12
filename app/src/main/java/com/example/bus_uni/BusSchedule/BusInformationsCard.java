@@ -15,13 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookingSeat;
-import com.example.bus_uni.Booking.Visa;
 import com.example.bus_uni.BusLocation;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,15 +38,13 @@ public class BusInformationsCard extends AppCompatActivity {
 
     Button bookingTicket, currentLocation;
     TextView busRuteLine, busCompanyName, driverName, driverPhone, busSeatNumbers, busTime;
-    TextView pickerDate;
 
 
-    EditText cvv, costValue, cardNumber;
 
 
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String driverPhoneData, busSeatNumbersData = "", cvvNum, priceValue, cardNum, expireDate;
+    String driverPhoneData, busSeatNumbersData = "", busTimeData, paymentStatus="Cash money";
 
 
     // firebase database
@@ -71,19 +67,6 @@ public class BusInformationsCard extends AppCompatActivity {
         busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
 
 
-        Toast.makeText(this, expireDate, Toast.LENGTH_SHORT).show();
-        pickerDate = (TextView) findViewById(R.id.pickerDate);
-
-        // init cvv, costValue the fields for visa payment
-        cvv = (EditText) findViewById(R.id.cvvNumber);
-        costValue = (EditText) findViewById(R.id.addCostValue);
-        cardNumber = (EditText) findViewById(R.id.cardNumber);
-
-
-        cvvNum = cvv.getText().toString();
-        priceValue = costValue.getText().toString();
-        cardNum = cardNumber.getText().toString();
-
         //
         // we receive the data from the ticket from TicketAdapter
         Intent getTicketInfo = getIntent();
@@ -93,12 +76,13 @@ public class BusInformationsCard extends AppCompatActivity {
         final String driverNameData = getTicketInfo.getExtras().getString("driverName");
         driverPhoneData = getTicketInfo.getExtras().getString("driverPhone");
         busSeatNumbersData = getTicketInfo.getExtras().getString("seatNum");
-        final String busTimeData = getTicketInfo.getExtras().getString("leavingTime");
+        busTimeData = getTicketInfo.getExtras().getString("leavingTime");
         final String latitude = getTicketInfo.getExtras().getString("latitude");
         final String longitude = getTicketInfo.getExtras().getString("longitude");
         final String driverID = getTicketInfo.getExtras().getString("driverId");
         final String keyId = getTicketInfo.getExtras().getString("keyId");
         final String busNum = getTicketInfo.getExtras().getString("busNum");
+
 
 
         busRuteLine.setText(busRuteLineData);
@@ -168,7 +152,6 @@ public class BusInformationsCard extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                         String userName = dataSnapshot.child("name").getValue().toString();
-                                        String rfidNumber = dataSnapshot.child("refid").getValue().toString();
                                         String city = dataSnapshot.child("city").getValue().toString();
                                         String userPhone = dataSnapshot.child("mobile").getValue().toString();
                                         String userEmail = dataSnapshot.child("email").getValue().toString();
@@ -176,25 +159,10 @@ public class BusInformationsCard extends AppCompatActivity {
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                rfidNumber, busCompanyNameData, city, busNum, userPhone, userEmail, priceValue);
+                                                busCompanyNameData, city, busNum, userPhone, userEmail, paymentStatus);
 
-                                        //todo: make sure if the expirDate not null
-                                        Visa visa = new Visa(cardNum, cvvNum, expireDate, priceValue, currentUser, userName);
 
-                                        mVisaDatabaseReference = FirebaseDatabase.getInstance().getReference("Visa");
-                                        mVisaDatabaseReference.child(currentUser).setValue(visa).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Toast.makeText(BusInformationsCard.this, "Your visa data saved successfully", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(BusInformationsCard.this, "Your data faild saved", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+
                                         // here we create an a new class name a Book and uploaded it to firebase
                                         // * it contain all information of the ticket and the current user*/
                                         mBookingAnTicket = FirebaseDatabase.getInstance().getReference().child("Booking");
@@ -269,6 +237,27 @@ public class BusInformationsCard extends AppCompatActivity {
 
     }// end onCreate
 
+//    private void getRemaingTime() {
+//
+//        String [] tokens=busTimeData.split(" ");
+//        String timeNums=tokens[0];
+//        String [] nums=timeNums.split(":");
+//        String h=nums[0],m=nums[1];
+//        int h2=Integer.parseInt(h);
+//        int m2=Integer.parseInt(m);
+//
+//
+//
+//        int mHour, mMinute;
+//
+//        final Calendar c = Calendar.getInstance();
+//        mHour = c.get(Calendar.HOUR);
+//        mMinute = c.get(Calendar.MINUTE);
+//
+//
+//        Toast.makeText(this, mHour, Toast.LENGTH_SHORT).show();
+//    }
+
 
     // method when click on phone number for driver and make a call
     public void callDriver(View view) {
@@ -278,37 +267,6 @@ public class BusInformationsCard extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // method when click on date to choose date expiration date of visa card
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void pickerDate(View view) {
-
-        int mYear, mMonth, mDay;
-
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-                        pickerDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                        String date = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                        expireDate = date;
-
-                        //Toast.makeText(BusInformationsCard.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_SHORT).show();
-
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-
-    }
 
     // here method for make a message dialog on android
     private void showMessageDialog(String title, String message, int messageIcon) {

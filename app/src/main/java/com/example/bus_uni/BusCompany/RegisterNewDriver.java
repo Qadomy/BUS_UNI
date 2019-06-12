@@ -16,33 +16,32 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.bus_uni.Register.Encrypt;
 import com.example.bus_uni.R;
+import com.example.bus_uni.Register.Encrypt;
 import com.example.bus_uni.Register.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import javax.crypto.SecretKey;
 
 public class RegisterNewDriver extends AppCompatActivity {
 
 
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    String companyName;
+
     private Button addNewDriver;
 
     private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusSeat_Num;
+
     private Spinner bus_line_spinner;
+
     private ProgressBar loadingProgress;
-
-
-    String companyName;
 
     // Firebase Auth
     private FirebaseAuth mFirebaseAuth;
@@ -50,6 +49,15 @@ public class RegisterNewDriver extends AppCompatActivity {
     // Firebase Database
     private DatabaseReference mCreataUseDriverDatabaseReference, mUserDatabaseReference;
 
+    // method for gearate new random strings
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +66,6 @@ public class RegisterNewDriver extends AppCompatActivity {
 
         Intent getCompanyName = getIntent();
         companyName = getCompanyName.getExtras().getString("companyName");
-
 
 
         // init firebaseAuth
@@ -76,7 +83,6 @@ public class RegisterNewDriver extends AppCompatActivity {
 
         addNewDriver = (Button) findViewById(R.id.addNewDriverButton);
         loadingProgress = (ProgressBar) findViewById(R.id.driverProgressBar);
-
 
 
         // here for init the spinner and get her the data from string array
@@ -121,7 +127,6 @@ public class RegisterNewDriver extends AppCompatActivity {
     private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line) {
 
 
-
         // here we create driver account with email and password
         mFirebaseAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -136,8 +141,6 @@ public class RegisterNewDriver extends AppCompatActivity {
 
                             addNewDriver.setVisibility(View.INVISIBLE);
                             loadingProgress.setVisibility(View.VISIBLE);
-
-
 
 
                             SecretKey sec = Encrypt.generateKey();
@@ -163,7 +166,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
 
                                         Toast.makeText(RegisterNewDriver.this, "Driver" + name + "added successfully", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegisterNewDriver.this, CompanyHome.class);
@@ -172,13 +175,12 @@ public class RegisterNewDriver extends AppCompatActivity {
                                         startActivity(intent);
 
 
-                                    }else{
+                                    } else {
 
                                         Toast.makeText(RegisterNewDriver.this, "Faild add new driver", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-
 
 
                         } else {
@@ -194,16 +196,6 @@ public class RegisterNewDriver extends AppCompatActivity {
 
 
     }// end of onCreate
-
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    public static String randomAlphaNumeric(int count) {
-        StringBuilder builder = new StringBuilder();
-        while (count-- != 0) {
-            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-        }
-        return builder.toString();
-    }
 
     // for message dialog
     private void showMessageDialog(String title, String message, int messageIcon) {

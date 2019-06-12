@@ -72,10 +72,11 @@ public class StreetInformation extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
     private ArrayList<Post> posts = new ArrayList<>();
-
+    private Posts mPosts=new Posts();
 
     // firebase storageReference
     private StorageReference mStorageReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,7 @@ public class StreetInformation extends AppCompatActivity {
 
                 userName = dataSnapshot.child("name").getValue().toString();
                 userImage = dataSnapshot.child("profile_pic").getValue().toString();
+
             }
 
             @Override
@@ -269,10 +271,15 @@ public class StreetInformation extends AppCompatActivity {
 
         String postTime = getYear + "/" + getMonth + "/" + getDay + " - " + getClock;
 
+
+
+
         Post post = new Post(userName, userImage, postTime, postText, downloadUri);
 
-        mPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Post");
-        mPostDatabaseReference.child(currentUser).setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+        posts.add(post);
+        mPosts.setPosts(posts);
+        mPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+        mPostDatabaseReference.child(currentUser).setValue(mPosts).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -289,15 +296,17 @@ public class StreetInformation extends AppCompatActivity {
     // method for display the posts in the list of recycle view
     private void showPostsInRecycleView() {
 
-        mShowPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Post");
+        mShowPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         mShowPostDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     //TODO: sorting post by date, duplicated posts
                     //We maybe put a list of posts inside Post class
-                    Post post = childSnapshot.getValue(Post.class);
-                    posts.add(post);
+
+                 //   Post post = childSnapshot.getValue(Post.class);
+                   // posts.add(post);
+
 
 
                 }

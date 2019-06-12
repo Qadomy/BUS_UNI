@@ -8,6 +8,7 @@ public class Post {
     private String postText = "";
     private String postImage = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fpost_photo%2FScreen%20Shot%202019-06-04%20at%208.51.14%20PM.png?alt=media&token=7ff577aa-6f3a-437c-8096-9fe90e732f47";
 
+
     public Post() {
     }
 

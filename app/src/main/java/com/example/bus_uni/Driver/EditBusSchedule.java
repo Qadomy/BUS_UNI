@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.bus_uni.BusSchedule.EditItemSchedule_Adapter;
 import com.example.bus_uni.R;
@@ -63,12 +64,15 @@ public class EditBusSchedule extends AppCompatActivity {
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
                 driverName = dataSnapshot.child("name").getValue().toString();
                 seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
-//                busCompany = dataSnapshot.child("bus_company").getValue().toString();
+                busCompany = dataSnapshot.child("bus_company").getValue().toString();
                 driverPhone = dataSnapshot.child("mobile").getValue().toString();
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
                 busNum = dataSnapshot.child("bus_num").getValue().toString();
 
+
+                mRecyclerView = (RecyclerView) findViewById(R.id.editSchudeleDate_RecycleView);
+                showTicketsInRecycleView();
 
             }
 
@@ -85,8 +89,7 @@ public class EditBusSchedule extends AppCompatActivity {
          *
          *   */
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.editSchudeleDate_RecycleView);
-        showTicketsInRecycleView();
+
 
 
     }// end of onCreate
@@ -96,6 +99,7 @@ public class EditBusSchedule extends AppCompatActivity {
     private void showTicketsInRecycleView() {
 
         mEditTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+
 
 
         // todo: get the busline from databaserefernce
@@ -226,6 +230,7 @@ public class EditBusSchedule extends AppCompatActivity {
                                 final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "", busNum);
 
 
+
                                 mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket")
                                         .child(busLine);
 
@@ -236,8 +241,7 @@ public class EditBusSchedule extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
-                                                showMessageDialog(getString(R.string.yourNewDateAded),
-                                                        getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+                                                Toast.makeText(EditBusSchedule.this, "New ticket added successfully", Toast.LENGTH_SHORT).show();
 
 
                                             }

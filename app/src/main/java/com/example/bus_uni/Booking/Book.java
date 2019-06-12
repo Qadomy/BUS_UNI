@@ -13,13 +13,12 @@ public class Book {
     private String latitude = "";
     private String longitude = "";
     private String seatNumber = "";
-    private String rfidNumber = "";
     private String company = "";
     private String city = "";
     private String busNum = "";
     private String userPhone = "";
     private String userEmail = "";
-    private String costPaid="";
+    private String paymentStatus="";
 
 
     public Book() {
@@ -27,8 +26,8 @@ public class Book {
 
     public Book(String userID, String userName, String driverID, String driverName, String driverPhone,
                 String busLine, String leavingTime, String latitude, String longitude, String seatNumber,
-                String rfidNumber, String company, String city, String busNum, String userPhone,
-                String userEmail, String costPaid) {
+                String company, String city, String busNum, String userPhone,
+                String userEmail, String paymentStatus) {
 
         this.userID = userID;
         this.userName = userName;
@@ -40,13 +39,12 @@ public class Book {
         this.latitude = latitude;
         this.longitude = longitude;
         this.seatNumber = seatNumber;
-        this.rfidNumber = rfidNumber;
         this.company = company;
         this.city = city;
         this.busNum = busNum;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
-        this.costPaid = costPaid;
+        this.paymentStatus = paymentStatus;
     }
 
     public Book(String userName, String seatNumber) {
@@ -134,13 +132,6 @@ public class Book {
         this.seatNumber = seatNumber;
     }
 
-    public String getRfidNumber() {
-        return rfidNumber;
-    }
-
-    public void setRfidNumber(String rfidNumber) {
-        this.rfidNumber = rfidNumber;
-    }
 
     public String getCompany() {
         return company;
@@ -183,11 +174,11 @@ public class Book {
     }
 
     public String getCostPaid() {
-        return costPaid;
+        return paymentStatus;
     }
 
     public void setCostPaid(String costPaid) {
-        this.costPaid = costPaid;
+        this.paymentStatus = costPaid;
     }
 }
 

@@ -192,31 +192,58 @@ public class EditSingleScheduleItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                        EditSingleScheduleItem.this);
 
-                // delete the user from database of ticket
-                mDeleteTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
-                Query query = mDeleteTicketDatabaseReference.child(line).child(keyId);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        dataSnapshot.getRef().removeValue();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                alertDialog.setTitle("Confirm Booking...");
+                alertDialog.setMessage("Are you sure you want delete this ticket?");
+                alertDialog.setIcon(R.drawable.ic_warning_yellow_30dp);
+                alertDialog.setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
 
-                showMessageDialog(getString(R.string.ticketDelete),
-                        getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+                                // delete the user from database of ticket
+                                mDeleteTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+                                Query query = mDeleteTicketDatabaseReference.child(line).child(keyId);
+                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        dataSnapshot.getRef().removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
 
 
-                Intent intent = new Intent(EditSingleScheduleItem.this, EditBusSchedule.class);
-                startActivity(intent);
+                                showMessageDialog(getString(R.string.ticketDelete),
+                                        getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+
+
+                                Intent intent = new Intent(EditSingleScheduleItem.this, EditBusSchedule.class);
+                                startActivity(intent);
+
+
+                            }
+                        });
+
+                // here when we clicked No in message dialog
+                alertDialog.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+
             }
         });
+
     }// end of onCreate
 
 

@@ -3,18 +3,18 @@ package com.example.bus_uni.Driver;
 public class Ticket {
 
 
-    private String driverId;
-    private String busLine;
-    private String company;
-    private String driverPhone;
-    private String latitude;
-    private String leavingTime;
-    private String longitude;
-    private String name;
-    private String price;
-    private String seatNum;
-    private String id;
-    private String busNum;
+    private String driverId="";
+    private String busLine="";
+    private String company="";
+    private String driverPhone="";
+    private String latitude="";
+    private String leavingTime="";
+    private String longitude="";
+    private String name="";
+    private String price="";
+    private String seatNum="";
+    private String id="";
+    private String busNum="";
 
 
     public Ticket() {

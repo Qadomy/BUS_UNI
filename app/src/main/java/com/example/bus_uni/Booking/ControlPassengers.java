@@ -65,7 +65,6 @@ public class ControlPassengers extends AppCompatActivity {
         final String userEmail = getBookedInfo.getExtras().getString("userEmail");
         seatNum = getBookedInfo.getExtras().getString("seatNum");
         final String userCity = getBookedInfo.getExtras().getString("city");
-        final String userRfid = getBookedInfo.getExtras().getString("rfid");
 
         final String userId = getBookedInfo.getExtras().getString("userId");
         final String driverId = getBookedInfo.getExtras().getString("driverId");
@@ -141,7 +140,7 @@ public class ControlPassengers extends AppCompatActivity {
                                 * list of users who added to blacklist
                                 * */
 
-                                BlackList blackList = new BlackList(userId, userName, userEmail, userPhone, userRfid, userCity, driverId);
+                                BlackList blackList = new BlackList(userId, userName, userEmail, userPhone, userCity, driverId);
                                 mBlacklistDataBase = FirebaseDatabase.getInstance().getReference().child("BlackList");
                                 mBlacklistDataBase.push().setValue(blackList).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

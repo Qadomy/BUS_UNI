@@ -159,6 +159,7 @@ public class Bus_Schedule extends AppCompatActivity {
 //                                    Ticket ticket = childSnapshot.getValue(Ticket.class);
 //                                    tickets.add(ticket);
 
+                            showRecyclerView(line);
 
                         }
 
