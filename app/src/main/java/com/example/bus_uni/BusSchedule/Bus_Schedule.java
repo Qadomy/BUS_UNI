@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class Bus_Schedule extends AppCompatActivity {
 
     private boolean searchFlag=false,changeFlag=false;
-    //private int prevPos=0,lastPos=0;
+    private int prevPos=0;//lastPos=0;
     String keyId;
     private RecyclerView mRecyclerView;
     private TicketAdpter mTicketAdpter;
@@ -62,11 +62,13 @@ public class Bus_Schedule extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         busLineSpinner.setAdapter(adapter);
 
-       /* busLineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        busLineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               // if(position!=0)
-                 //   changeFlag=true;
+               // if(prevPos==position) {
+                 //   changeFlag = true;
+                    searchFlag = false;
+               // }
             }
 
             @Override
@@ -74,38 +76,10 @@ public class Bus_Schedule extends AppCompatActivity {
 
             }
 
-        });*/
-      //    prevPos=busLineSpinner.getSelectedItemPosition();
+        });
     }// end onCreate
 
     private void showRecyclerView(String bus_line) {
-
-
-        mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
-        mTicketDatabaseReference.child(bus_line).
-                addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-
-                            keyId = childSnapshot.getKey();
-
-
-                            // declare this function out of this scope
-                            String name = childSnapshot.child("name").getValue().toString();
-                            String line = childSnapshot.child("busLine").getValue().toString();
-                            String price = childSnapshot.child("price").getValue().toString();
-                            String time = childSnapshot.child("leavingTime").getValue().toString();
-                            String seat = childSnapshot.child("seatNum").getValue().toString();
-                            String company = childSnapshot.child("company").getValue().toString();
-                            String phone = childSnapshot.child("driverPhone").getValue().toString();
-                            String latitude = childSnapshot.child("latitude").getValue().toString();
-                            String longitude = childSnapshot.child("longitude").getValue().toString();
-                            String busNum = childSnapshot.child("busNum").getValue().toString();
-                            String driverId = childSnapshot.child("driverId").getValue().toString();
-
-
-                            tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
 
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Bus_Schedule.this, LinearLayoutManager.VERTICAL, false);
 
@@ -119,23 +93,10 @@ public class Bus_Schedule extends AppCompatActivity {
                             mRecyclerView.setAdapter(mTicketAdpter);
 
                             // here how we want to display the list of tickets
-                          // if(!searchFlag)
+                            // if(!searchFlag)
                             showTickets();
 
-//                                    Ticket ticket = childSnapshot.getValue(Ticket.class);
-//                                    tickets.add(ticket);
-
-
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+//
 
       }
 
@@ -169,11 +130,54 @@ public class Bus_Schedule extends AppCompatActivity {
         // here get what chosen in spinner and found all dates same in database realtime
          String bus_line = busLineSpinner.getSelectedItem().toString();
 
- //TODO: && item selected not changed (inside if)
-        if(!searchFlag && !changeFlag)
+
+        mTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+        mTicketDatabaseReference.child(bus_line).
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+
+                            keyId = childSnapshot.getKey();
+
+
+                            // declare this function out of this scope
+                            String name = childSnapshot.child("name").getValue().toString();
+                            String line = childSnapshot.child("busLine").getValue().toString();
+                            String price = childSnapshot.child("price").getValue().toString();
+                            String time = childSnapshot.child("leavingTime").getValue().toString();
+                            String seat = childSnapshot.child("seatNum").getValue().toString();
+                            String company = childSnapshot.child("company").getValue().toString();
+                            String phone = childSnapshot.child("driverPhone").getValue().toString();
+                            String latitude = childSnapshot.child("latitude").getValue().toString();
+                            String longitude = childSnapshot.child("longitude").getValue().toString();
+                            String busNum = childSnapshot.child("busNum").getValue().toString();
+                            String driverId = childSnapshot.child("driverId").getValue().toString();
+
+
+                            tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
+//                                    Ticket ticket = childSnapshot.getValue(Ticket.class);
+//                                    tickets.add(ticket);
+
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+        //TODO: && item selected not changed (inside if)
+        if(!searchFlag)
             showRecyclerView(bus_line);
 
         searchFlag=true;
+   //     prevPos=busLineSpinner.getSelectedItemPosition();
+//
 
     }
 
