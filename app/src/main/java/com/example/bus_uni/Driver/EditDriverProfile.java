@@ -16,9 +16,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,32 +48,37 @@ public class EditDriverProfile extends AppCompatActivity {
 
     static int PReqCode = 1;
     static int REQUESCODE = 1;
+
     //
-    String currentUser;
+    // here for get the id of current user and save in the string
+    String email, currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();;
+
     //
     //
     //
 
     private CircleImageView newDriverProfilePhoto;
-    private TextView clickHereChangePhoto, driver_longitude, driver_latitude;
+    private TextView clickHereChangePhoto;
     private Button save, cancel;
-    private EditText newDriverName, newDriverPhone, newDriverBusCompany,
-            newDriverBusNum, newDriverLineName, newDriverSeatNum;
+    private EditText newDriverName, newDriverPhone, newDriverBusNum, newDriverSeatNum;
+    private Spinner spinnerNewBusLine;
     private ProgressBar progressBarSave;
-    ////
-    ////
-    ////
+
+    //
     private Uri pickedImageUri;
-    //////
-    //
-    //
+
+
     // firebase database
     private DatabaseReference mUserDatabaseReference;
-    private DatabaseReference mPhotoDatabaseReference;
 
     // Firebase Storage Reference
     private StorageReference mStorageReference;
 
+
+    /*
+     *
+     *
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,54 +87,43 @@ public class EditDriverProfile extends AppCompatActivity {
 
         newDriverProfilePhoto = (CircleImageView) findViewById(R.id.newDriverProfile_photo);
         clickHereChangePhoto = (TextView) findViewById(R.id.newDriverProfile_clickHereText);
-        ////
-        //
         save = (Button) findViewById(R.id.saveDriverProfileButton);
         cancel = (Button) findViewById(R.id.cancelSaveDriverProfileButton);
-        ///
         newDriverName = (EditText) findViewById(R.id.newDriverProfile_name);
         newDriverPhone = (EditText) findViewById(R.id.newDriverProfile_Phone);
-        newDriverBusCompany = (EditText) findViewById(R.id.newDriverProfile_busCompany);
         newDriverBusNum = (EditText) findViewById(R.id.newDriverProfile__BusNumber);
-        newDriverLineName = (EditText) findViewById(R.id.newDriverProfile__LineName);
         newDriverSeatNum = (EditText)findViewById(R.id.newDriverProfile_SeatNum);
-        //
-        //
+        spinnerNewBusLine = (Spinner) findViewById(R.id.newDriverProfile__LineName);
         progressBarSave = (ProgressBar) findViewById(R.id.driverProgressBarSave);
+
         progressBarSave.setVisibility(View.INVISIBLE);
 
 
-        // here for get the id of current user and save in the string
-        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // here for init the spinner and get her the data from string array
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bus_line_names, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerNewBusLine.setAdapter(adapter);
 
 
         // mean there is no photo
         pickedImageUri = null;
 
-        //
-        // init database for driver
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-
-        // init database for images
-        mPhotoDatabaseReference = FirebaseDatabase.getInstance().getReference("Upload");
-
-        //
-
-
-        //
 
         // init Storage Reference
         mStorageReference = FirebaseStorage.getInstance().getReference("upload");
-        //
-        //
-        //
 
 
         final String[] oldImage = {""};
+
+        // init database for driver
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
         mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                email = dataSnapshot.child("email").getValue().toString();
 
                 // here using Picasso for get the image url and set in ImageView
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
@@ -138,24 +134,13 @@ public class EditDriverProfile extends AppCompatActivity {
                 oldImage[0] = imageUrl;
 
 
-//                // here we get the data from database and shown in applicationsa
-//                String name = dataSnapshot.child("name").getValue().toString();
-//                String email = dataSnapshot.child("email").getValue().toString();
-//                String phone = dataSnapshot.child("mobile").getValue().toString();
-//                String busCompany = dataSnapshot.child("bus_company").getValue().toString();
-//                String busNum = dataSnapshot.child("bus_num").getValue().toString();
-//                String lineName = dataSnapshot.child("bus_line").getValue().toString();
-//                String busSeat = dataSnapshot.child("bus_seat").getValue().toString();
-
                 User user = dataSnapshot.getValue(User.class);
 
 
                 // here we get the data from
                 newDriverName.setText(user.getName());
                 newDriverPhone.setText(user.getMobile());
-                newDriverBusCompany.setText(user.getBus_company());
                 newDriverBusNum.setText(user.getBus_num());
-                newDriverLineName.setText(user.getBus_line());
                 newDriverSeatNum.setText(user.getBus_seat());
 
             }
@@ -178,21 +163,11 @@ public class EditDriverProfile extends AppCompatActivity {
 
                 final String name = newDriverName.getText().toString();
                 final String phone = newDriverPhone.getText().toString();
-                final String busCompany = newDriverBusCompany.getText().toString();
                 final String busNum = newDriverBusNum.getText().toString();
-                final String lineName = newDriverLineName.getText().toString();
                 final String busSeat = newDriverSeatNum.getText().toString();
+                final String lineName = spinnerNewBusLine.getSelectedItem().toString();
 
                 if (pickedImageUri != null) {
-
-//                    newDriverProfilePhoto.setVisibility(View.INVISIBLE);
-//                    //
-//                    progressBarSave.setVisibility(View.VISIBLE);
-
-
-                    // smart thing to save the image in link contain the id for photo and id for the
-                    // current user who upload this photo
-                    //
 
                     // Folder name: profile_images, and current user id and extinctions of image (jpg)
                     final StorageReference image_path = mStorageReference.child("profile_pic")
@@ -214,13 +189,12 @@ public class EditDriverProfile extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         String downloadUri = uri.toString();
-                                        saveNewDriverData(name, phone, busCompany, busNum, busSeat, lineName, downloadUri);
+                                        saveNewDriverData(name, phone, busNum, busSeat, lineName, downloadUri);
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception exception) {
-                                        // Handle any errors
 
                                         Toast.makeText(EditDriverProfile.this, "Can't update your profile", Toast.LENGTH_SHORT).show();
 
@@ -228,13 +202,10 @@ public class EditDriverProfile extends AppCompatActivity {
 
                                 });
 
-
-                                Toast.makeText(EditDriverProfile.this,
-                                        "The Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditDriverProfile.this, "The Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                showMessageDialog(getString(R.string.photoSavedFaild), task.getException()
-                                        .getMessage(), R.drawable.ic_error_red_color_30dp);
+                                Toast.makeText(EditDriverProfile.this, "Photo faild saved in database", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -244,7 +215,7 @@ public class EditDriverProfile extends AppCompatActivity {
                 } else {
 
                     // if we don`t change the image in edit profile we send the real image again to firebase when we save
-                    saveNewDriverData(name, phone, busCompany, busNum, busSeat, lineName, oldImage[0]);
+                    saveNewDriverData(name, phone, busNum, busSeat, lineName, oldImage[0]);
 
                 }
             }
@@ -260,57 +231,42 @@ public class EditDriverProfile extends AppCompatActivity {
         });
 
 
-        //
-        // when click on photo button for open the gallery and choose a photo
-        newDriverProfilePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= 22) {
 
-                    checkAndRequestForPermission();
-                } else {
-
-                    openGallery();
-                }
-            }
-        });
 
     }// end of onCreate
 
-    private void saveNewDriverData(String name, String phone, String busCompany,
+    private void saveNewDriverData(String name, String phone,
                                    String busNum, String busSeat, String lineName, String downloadUri) {
 
 
         User user = new User();
+
         user.setName(name);
         user.setMobile(phone);
         user.setBus_seat(busSeat);
         user.setBus_num(busNum);
         user.setBus_line(lineName);
         user.setType(2);
-        user.setBus_company(busCompany);
         user.setProfile_pic(downloadUri);
-
-
-
+        user.setEmail(email);
 
 
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
-
         mUserDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
 
-                    //showMessageDialog(getString(R.string.accountSaved), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
 
-                    Toast.makeText(EditDriverProfile.this, R.string.accountSaved, Toast.LENGTH_SHORT).show();
+                    //todo: here when successfully saved data it back to DriverHome not DriverProfile like in Intent
 
                     // after saving successfully return to Driver Profile
                     Intent saveProfile = new Intent(EditDriverProfile.this, DriverProfile.class);
-                    saveProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    saveProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(saveProfile);
-                    finish();
+
+                    Toast.makeText(EditDriverProfile.this, R.string.accountSaved, Toast.LENGTH_SHORT).show();
+
 
 
                 } else {
@@ -319,15 +275,25 @@ public class EditDriverProfile extends AppCompatActivity {
                     cancel.setVisibility(View.VISIBLE);
                     progressBarSave.setVisibility(View.GONE);
 
-                    showMessageDialog(getString(R.string.accountSavedFaild), task.getException()
-                            .getMessage(), R.drawable.ic_error_red_color_30dp);
+
+                    Toast.makeText(EditDriverProfile.this, "Your data failed saved", Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
 
-    }
+    }// end saveDriverData
 
+
+    public void chooseImageToEdit(View view) {
+        if (Build.VERSION.SDK_INT >= 22) {
+
+            checkAndRequestForPermission();
+        } else {
+
+            openGallery();
+        }
+    }
 
     // here method for make a message dialog on android
     private void showMessageDialog(String title, String message, int messageIcon) {
@@ -409,4 +375,6 @@ public class EditDriverProfile extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

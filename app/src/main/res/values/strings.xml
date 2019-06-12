@@ -125,7 +125,6 @@
     <string name="check_bookings">Check bookings</string>
     <string name="driver_email">Driver email</string>
     <string name="bus_company">Bus company</string>
-    <string name="click_at_photo_to_change_it">Click at photo to change it:</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="seat_numbers">Seat numbers</string>
@@ -165,6 +164,8 @@
     <string name="in_cash">In Cash</string>
     <string name="your_seat_label">Your seat label</string>
     <string name="minute">Minute</string>
+    <string name="company">Company</string>
+    <string name="click_here_to_edit_image">Click here to edit image</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

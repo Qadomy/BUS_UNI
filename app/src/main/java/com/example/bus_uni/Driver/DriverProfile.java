@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bus_uni.R;
+import com.example.bus_uni.Register.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ public class DriverProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_profile_for_driver);
+        setContentView(R.layout.activity_driver_profile);
 
 
         driverImage = (ImageView) findViewById(R.id.driverProfile_ProfilePhoto);
@@ -51,8 +52,6 @@ public class DriverProfile extends AppCompatActivity {
         driverLineName = (TextView) findViewById(R.id.driverProfile_LineName);
         driverSeatNum = (TextView) findViewById(R.id.driverProfile_seatNum);
 
-        driverLongitude = (TextView) findViewById(R.id.driverProfile_longitude);
-        driverLatitude = (TextView) findViewById(R.id.driverProfile_latitude);
 
 
         // init firebase database
@@ -76,8 +75,8 @@ public class DriverProfile extends AppCompatActivity {
                 String lineName = dataSnapshot.child("bus_line").getValue().toString();
                 String seatNum = dataSnapshot.child("bus_seat").getValue().toString();
 
-                String longitude = dataSnapshot.child("longitude").getValue().toString();
-                String latitude = dataSnapshot.child("latitude").getValue().toString();
+                User user = dataSnapshot.getValue(User.class);
+
 
 
                 //
@@ -89,8 +88,6 @@ public class DriverProfile extends AppCompatActivity {
                 driverLineName.setText(lineName);
                 driverSeatNum.setText(seatNum);
 
-                driverLongitude.setText(longitude);
-                driverLatitude.setText(latitude);
             }
 
             @Override
