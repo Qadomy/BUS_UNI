@@ -24,7 +24,7 @@ public class CompanyProfile extends AppCompatActivity {
 
 
     ImageView companyPhoto, editCompanyProfile;
-    TextView companyName, companyEmail, companyPhone, companyBusesNumbers, companyLineName;
+    TextView companyName, companyEmail, companyPhone, companyCity;
 
 
     // here for get the id of current user and save in the string
@@ -48,8 +48,7 @@ public class CompanyProfile extends AppCompatActivity {
         companyName = (TextView) findViewById(R.id.companyName);
         companyEmail = (TextView) findViewById(R.id.companyEmail);
         companyPhone = (TextView) findViewById(R.id.companyPhone);
-        companyBusesNumbers = (TextView) findViewById(R.id.companyBusesNumbers);
-        companyLineName = (TextView) findViewById(R.id.companyLineName);
+        companyCity = (TextView) findViewById(R.id.companyCity);
 
 
 
@@ -67,12 +66,6 @@ public class CompanyProfile extends AppCompatActivity {
                 Picasso.with(CompanyProfile.this).load(imageUrl).into(companyPhoto);
 
 
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                String phone = dataSnapshot.child("mobile").getValue().toString();
-                String busesNumbers = dataSnapshot.child("buses_numbers").getValue().toString();
-                String lineName = dataSnapshot.child("bus_line").getValue().toString();
-
                 User user = dataSnapshot.getValue(User.class);
 
 
@@ -80,8 +73,7 @@ public class CompanyProfile extends AppCompatActivity {
                 companyName.setText(user.getName());
                 companyEmail.setText(user.getEmail());
                 companyPhone.setText(user.getMobile());
-                companyBusesNumbers.setText(user.getBuses_numbers());
-                companyLineName.setText(user.getBus_line());
+                companyCity.setText(user.getCity());
 
             }
 

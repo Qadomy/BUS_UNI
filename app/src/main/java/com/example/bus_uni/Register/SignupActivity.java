@@ -32,6 +32,9 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressBar loadingProgress;
 
 
+    // get the currentuser
+    //private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
     // Firebase Auth
     private FirebaseAuth mFirebaseAuth;
 
@@ -63,7 +66,6 @@ public class SignupActivity extends AppCompatActivity {
 
         // init Firebase database real time
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference("EDMIT_FIREBASE");
 
 
         // here when press on create account in signup activity
@@ -90,6 +92,7 @@ public class SignupActivity extends AppCompatActivity {
                     loadingProgress.setVisibility(View.INVISIBLE);
 
                 } else if (!pass.equals(confirmPass)) {
+
                     showMessageDialog(getString(R.string.errorMessage), getString(R.string.passwordNOTmatch),
                             R.drawable.ic_error_red_color_30dp);
                     loadingProgress.setVisibility(View.INVISIBLE);
@@ -119,14 +122,20 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             // for get the current user id
+                            // for get the current user id
                             FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                             String uid = current_user.getUid();
+
                             SecretKey sec = Encrypt.generateKey();
                             String encPass = Encrypt.encryptPass(pass, sec);
-                            mDatabaseReference = FirebaseDatabase.getInstance()
-                                    .getReference("Users").child(uid);
 
-                            User user = new User(name, email, encPass, 0);
+                            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+
+                            User user = new User();
+                            user.setName(name);
+                            user.setEmail(email);
+                            user.setPassword(encPass);
+                            user.setType(0);
 
                             // user account created successfully
                             showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),

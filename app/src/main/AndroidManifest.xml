@@ -46,9 +46,9 @@
         <activity android:name=".Driver.EditDriverProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Driver.DriverProfile_for_driver" />
+                android:value=".Driver.DriverProfile" />
         </activity>
-        <activity android:name=".Driver.DriverProfile_for_driver">
+        <activity android:name=".Driver.DriverProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
@@ -120,6 +120,7 @@
         <activity android:name=".Splash_Screen">
 
             <!-- splasssh -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -158,11 +159,22 @@
                 android:value=".Home" />
         </activity>
         <activity android:name=".Register.SignupActivity">
+
+
+
+
+
+
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register.SignupForFree" />
         </activity>
         <activity android:name=".Register.LoginUserActivity">
+
+
+
+
             <meta-data
                 android:name="asignuport.PARENT_ACTIVITY"
                 android:value=".SignupForFree" />

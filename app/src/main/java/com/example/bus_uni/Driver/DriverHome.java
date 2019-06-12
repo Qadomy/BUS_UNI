@@ -340,7 +340,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     }
 
     public void DriverProfile(View view) {
-        Intent driverProfile = new Intent(DriverHome.this, DriverProfile_for_driver.class);
+        Intent driverProfile = new Intent(DriverHome.this, DriverProfile.class);
         startActivity(driverProfile);
     }
 

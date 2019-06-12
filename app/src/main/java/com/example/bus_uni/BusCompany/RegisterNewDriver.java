@@ -42,34 +42,23 @@ public class RegisterNewDriver extends AppCompatActivity {
     private ProgressBar loadingProgress;
 
 
-    private String current_user=FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String companyName;
+
     // Firebase Auth
     private FirebaseAuth mFirebaseAuth;
 
     // Firebase Database
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCreataUseDriverDatabaseReference, mUserDatabaseReference;
 
 
-    String busCompanyName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_driver);
 
-        mUserDatabaseReference  = FirebaseDatabase.getInstance().getReference("Users");
-        mUserDatabaseReference.child(current_user).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        Intent getCompanyName = getIntent();
+        companyName = getCompanyName.getExtras().getString("companyName");
 
-                busCompanyName = dataSnapshot.child("name").getValue().toString();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
         // init firebaseAuth
@@ -108,9 +97,6 @@ public class RegisterNewDriver extends AppCompatActivity {
                 final String busSeat = dBusSeat_Num.getText().toString();
                 final String bus_line = bus_line_spinner.getSelectedItem().toString();
 
-//                TODO: here fo editing the code, here anything company entered can saved in
-//                 Firebase, just email and password not optional
-
 
                 if (name.isEmpty() || pass.isEmpty() || email.isEmpty() ||
                         bus_line.isEmpty() || busSeat.isEmpty()) {
@@ -122,7 +108,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                     addNewDriver.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
 
-                } else { //TODO: Add
+                } else {
                     createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line);
                 }
 
@@ -133,7 +119,6 @@ public class RegisterNewDriver extends AppCompatActivity {
     }
 
     private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line) {
-
 
 
 
@@ -149,19 +134,42 @@ public class RegisterNewDriver extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
 
+                            addNewDriver.setVisibility(View.INVISIBLE);
+                            loadingProgress.setVisibility(View.VISIBLE);
+
+
+
+
                             SecretKey sec = Encrypt.generateKey();
                             final String encPass = Encrypt.encryptPass(pass, sec);
 
-                            User user = new User(name, email, encPass, phone, bus_num, bus_seat, bus_line, 2, busCompanyName);
 
-                            mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            mCreataUseDriverDatabaseReference.push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            User user = new User();
+                            user.setName(name);
+                            user.setEmail(email);
+                            user.setPassword(encPass);
+                            user.setMobile(phone);
+                            user.setBus_num(bus_num);
+                            user.setBus_seat(bus_seat);
+                            user.setBus_line(bus_line);
+                            user.setType(2);
+                            user.setBus_company(companyName);
+
+                            String gena = randomAlphaNumeric(28);
+
+
+                            mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(gena);
+                            mCreataUseDriverDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
                                     if (task.isSuccessful()){
 
                                         Toast.makeText(RegisterNewDriver.this, "Driver" + name + "added successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(RegisterNewDriver.this, CompanyHome.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                        startActivity(intent);
 
 
                                     }else{
@@ -173,19 +181,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
 
 
-                            addNewDriver.setVisibility(View.INVISIBLE);
-                            loadingProgress.setVisibility(View.VISIBLE);
-
-                            // Driver account created successfully
-                            showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
-                                    R.drawable.ic_check_circle_30dp);
-
-                            Intent intent = new Intent(RegisterNewDriver.this, CompanyHome.class);
-                            startActivity(intent);
-
-
-                        }
-                        else {
+                        } else {
 
                             showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
                                     R.drawable.ic_error_red_color_30dp);
@@ -197,23 +193,17 @@ public class RegisterNewDriver extends AppCompatActivity {
                 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }// end of onCreate
 
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
+    }
 
     // for message dialog
     private void showMessageDialog(String title, String message, int messageIcon) {

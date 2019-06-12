@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.Driver.DriverHome;
@@ -30,6 +31,7 @@ public class Splash_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash__screen);
 
+        //Toast.makeText(this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -49,6 +51,7 @@ public class Splash_Screen extends AppCompatActivity {
                 } else {
 
                     String currentuser = mFirebaseAuth.getCurrentUser().getUid();
+                    Toast.makeText(Splash_Screen.this, currentuser, Toast.LENGTH_SHORT).show();
 
                     // init database reference
                     databaseReference = FirebaseDatabase.getInstance().getReference("Users");

@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class DriverProfile_for_driver extends AppCompatActivity {
+public class DriverProfile extends AppCompatActivity {
 
 
     ImageView driverImage, editProfile;
@@ -65,7 +65,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
 
                 // here using Picasso for get the image url and set in ImageView
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
-                Picasso.with(DriverProfile_for_driver.this).load(imageUrl).into(driverImage);
+                Picasso.with(DriverProfile.this).load(imageUrl).into(driverImage);
 
 
                 String name = dataSnapshot.child("name").getValue().toString();
@@ -103,7 +103,7 @@ public class DriverProfile_for_driver extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent editProfile = new Intent(DriverProfile_for_driver.this, EditDriverProfile.class);
+                Intent editProfile = new Intent(DriverProfile.this, EditDriverProfile.class);
                 startActivity(editProfile);
             }
         });

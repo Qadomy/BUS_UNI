@@ -47,15 +47,12 @@ public class ProfileEdit_user extends AppCompatActivity {
     static int REQUESCODE = 1;
 
 
-    String currentUid;
-
-
     //TODO:same key or unique key attribute for each user (in Info or Encrypt class)?
     private SecretKey sec = Encrypt.generateKey();
 
 
     private Button save, cancel;
-    private EditText newName, newEmail, newRfid, newMobile, newCity, newPass;
+    private EditText newName, newMobile, newCity, newPass;
 
     private Uri pickedImageUri;
     private ProgressBar progressBarSave, imageProgressBar;
@@ -67,11 +64,12 @@ public class ProfileEdit_user extends AppCompatActivity {
 
     // firebase database
     private DatabaseReference mUserDatabaseReference;
-    private DatabaseReference mPhotoDatabaseReference;
 
     // for current user
-    private FirebaseUser current_user;
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
+    String userEmail;
 
     // Firebase Storage Reference
     private StorageReference mStorageReference;
@@ -90,9 +88,7 @@ public class ProfileEdit_user extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.cancel_button);
 
         newName = (EditText) findViewById(R.id.name_editProfile);
-        newEmail = (EditText) findViewById(R.id.email_editProfile);
         newPass = (EditText) findViewById(R.id.pass_editProfile);
-
         newMobile = (EditText) findViewById(R.id.mobile_editProfile);
         newCity = (EditText) findViewById(R.id.city_editProfile);
 
@@ -109,17 +105,6 @@ public class ProfileEdit_user extends AppCompatActivity {
         pickedImageUri = null;
 
 
-        // init database for users
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-
-        // init database for images
-        mPhotoDatabaseReference = FirebaseDatabase.getInstance().getReference("Upload");
-
-        //
-
-
-        //
 
         // init Storage Reference
         mStorageReference = FirebaseStorage.getInstance().getReference("upload");
@@ -128,24 +113,11 @@ public class ProfileEdit_user extends AppCompatActivity {
         //
 
 
-        // here for get the id of current user and save in the string
-        current_user = FirebaseAuth.getInstance().getCurrentUser();
-        currentUid = current_user.getUid();
-
-
-        //////////
-        //
-        ///
-        //////////
-        //
-        //
-        //////////
-        //
-
-
         final String[] oldImage = new String[1];
+
         // database realtime
-        mUserDatabaseReference.child(currentUid).addValueEventListener(new ValueEventListener() {
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -156,17 +128,14 @@ public class ProfileEdit_user extends AppCompatActivity {
                 // oldImage[0] this we save the string of link of existing image
                 oldImage[0] = imageUrl;
 
-                // here we get the data from database and shown in applications
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                String mobile = dataSnapshot.child("mobile").getValue().toString();
-                String rfid = dataSnapshot.child("refid").getValue().toString();
-                String city = dataSnapshot.child("city").getValue().toString();
+                // get the data from database in class
+                User user = dataSnapshot.getValue(User.class);
 
-                newName.setText(name);
-                newEmail.setText(email);
-                newMobile.setText(mobile);
-                newCity.setText(city);
+                newName.setText(user.getName());
+                newMobile.setText(user.getMobile());
+                newCity.setText(user.getCity());
+
+                userEmail = user.getEmail();
 
             }
 
@@ -187,9 +156,7 @@ public class ProfileEdit_user extends AppCompatActivity {
 
 
                 final String name = newName.getText().toString();
-                final String email = newEmail.getText().toString();
                 final String mobile = newMobile.getText().toString();
-                final String rfid = "";
                 final String city = newCity.getText().toString();
                 final String pass = newPass.getText().toString();
 
@@ -206,7 +173,7 @@ public class ProfileEdit_user extends AppCompatActivity {
 
                     // Folder name: profile_images, and current user id and extinctions of image (jpg)
                     final StorageReference image_path = mStorageReference.child("profile_images")
-                            .child(currentUid + ".jpg");
+                            .child(currentUser + ".jpg");
 
                     // here for upload the image to storage firebase
                     image_path.putFile(pickedImageUri).addOnCompleteListener(new OnCompleteListener
@@ -223,7 +190,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         String downloadUri = uri.toString();
-                                        saveNewUserData(name, email, pass, mobile, rfid, city, downloadUri);
+                                        saveNewUserData(name, pass, mobile, city, downloadUri);
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -254,7 +221,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                 } else {
 
                     // if we don`t change the image in edit profile we send the real image again to firebase when we save
-                    saveNewUserData(name, email, pass, mobile, rfid, city, oldImage[0]);
+                    saveNewUserData(name, pass, mobile, city, oldImage[0]);
                 }
 
 
@@ -295,26 +262,37 @@ public class ProfileEdit_user extends AppCompatActivity {
 
     }
 
-    private void saveNewUserData(String name, String email, String pass, String mobile,
-                                 String rfid, String city, String url) {
-        //We must use (User.class) to retrieve the current user and then update necessary fields
-        User user;
+    private void saveNewUserData(String name, String pass, String mobile, String city, String url) {
+
+        User user = new User();
+        FirebaseUser upDatePassword = FirebaseAuth.getInstance().getCurrentUser();
 
         // here for update the password with the new password
         if (pass != null && !pass.isEmpty()) {
-            current_user.updatePassword(pass);
+            upDatePassword.updatePassword(pass);
+
 
             String encPass = Encrypt.encryptPass(pass, sec);
-            user = new User(name, email, encPass, mobile, rfid, city, url);
+
+            user.setName(name);
+            user.setPassword(encPass);
+            user.setMobile(mobile);
+            user.setCity(city);
+            user.setProfile_pic(url);
+            user.setEmail(userEmail);
 
         } else {
-            user = new User(name, email, mobile, rfid, city, url);
+
+            user.setName(name);
+            user.setMobile(mobile);
+            user.setCity(city);
+            user.setProfile_pic(url);
+            user.setEmail(userEmail);
+
         }
 
-        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUid);
-
-
-        mUserDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        mUserDatabaseReference.child(currentUser).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

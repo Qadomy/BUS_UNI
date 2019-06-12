@@ -160,6 +160,7 @@
     <string name="enter_buses_numbers">Enter buses numbers</string>
     <string name="edit_bus_line">Edit bus line</string>
     <string name="my_ticket">My ticket</string>
+    <string name="company_city">Company city</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

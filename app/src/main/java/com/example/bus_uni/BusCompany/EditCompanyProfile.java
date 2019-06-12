@@ -47,7 +47,7 @@ public class EditCompanyProfile extends AppCompatActivity {
     static int PReqCode = 1;
     static int REQUESCODE = 1;
     //
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
     //
     //
@@ -55,8 +55,7 @@ public class EditCompanyProfile extends AppCompatActivity {
 
     private CircleImageView companyProfilePhoto;
     private Button save, cancel;
-    private EditText newCompanyName, newCompanyEmail, newCompanyPhone, newCompanyBusesNumbers,
-            newCompanyLineName;
+    private EditText newCompanyName, newCompanyPhone, newCompanyCity;
     private ProgressBar progressBarSave;
     ////
     ////
@@ -70,6 +69,8 @@ public class EditCompanyProfile extends AppCompatActivity {
     // Firebase Storage Reference
     private StorageReference mStorageReference;
 
+
+    String companyEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,17 +84,13 @@ public class EditCompanyProfile extends AppCompatActivity {
         //
 
         newCompanyName = (EditText) findViewById(R.id.newCompany_name);
-        newCompanyEmail = (EditText) findViewById(R.id.newCompany_Email);
         newCompanyPhone = (EditText) findViewById(R.id.newCompany_Phone);
-        newCompanyBusesNumbers = (EditText) findViewById(R.id.newCompany_BusesNumbers);
-        newCompanyLineName = (EditText) findViewById(R.id.newCompany_LineName);
+        newCompanyCity = (EditText) findViewById(R.id.newCompany_city);
 
         //
         progressBarSave = (ProgressBar) findViewById(R.id.companyProgressBarSave);
         progressBarSave.setVisibility(View.INVISIBLE);
 
-        // here for get the id of current user and save in the string
-//        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         // mean there is no photo
@@ -103,9 +100,6 @@ public class EditCompanyProfile extends AppCompatActivity {
         // init database for company
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
-
-        // init database for images
-//        mPhotoDatabaseReference = FirebaseDatabase.getInstance().getReference("Upload");
 
         //
 
@@ -132,20 +126,16 @@ public class EditCompanyProfile extends AppCompatActivity {
                 // oldImage[0] this we save the string of link of existing image
                 oldImage[0] = imageUrl;
 
-                // here we get the data from database and shown in applicationsa
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                String phone = dataSnapshot.child("mobile").getValue().toString();
-                String busesNumbers = dataSnapshot.child("buses_numbers").getValue().toString();
-                String lineName = dataSnapshot.child("bus_line").getValue().toString();
+
+                User user = dataSnapshot.getValue(User.class);
 
 
                 // here we get the data from
-                newCompanyName.setText(name);
-                newCompanyEmail.setText(email);
-                newCompanyPhone.setText(phone);
-                newCompanyBusesNumbers.setText(busesNumbers);
-                newCompanyLineName.setText(lineName);
+                newCompanyName.setText(user.getName());
+                newCompanyPhone.setText(user.getMobile());
+                newCompanyCity.setText(user.getCity());
+
+                companyEmail = user.getEmail();
 
             }
 
@@ -166,12 +156,9 @@ public class EditCompanyProfile extends AppCompatActivity {
 
 
                 final String name = newCompanyName.getText().toString();
-                final String email = newCompanyEmail.getText().toString();
                 final String phone = newCompanyPhone.getText().toString();
-                final String busesNum = newCompanyBusesNumbers.getText().toString();
-                final String lineName = newCompanyLineName.getText().toString();
+                final String city = newCompanyCity.getText().toString();
 
-                Log.d("msg", "busesNum"+busesNum);
 
                 if (pickedImageUri != null) {
 
@@ -202,8 +189,7 @@ public class EditCompanyProfile extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         String downloadUri = uri.toString();
-                                        saveNewCompanyData(name, email, phone, busesNum, lineName, downloadUri);
-                                        Toast.makeText(EditCompanyProfile.this, "here nowwww", Toast.LENGTH_SHORT).show();
+                                        saveNewCompanyData(name, phone, city, downloadUri);
 
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -233,7 +219,7 @@ public class EditCompanyProfile extends AppCompatActivity {
                 }else{
 
                     // if we don`t change the image in edit profile we send the real image again to firebase when we save
-                    saveNewCompanyData(name, email, phone, busesNum, lineName, oldImage[0]);
+                    saveNewCompanyData(name, phone, city, oldImage[0]);
 
                 }
             }
@@ -262,12 +248,19 @@ public class EditCompanyProfile extends AppCompatActivity {
                 }
             }
         });
-    }
+    }// end onCreate
 
-    private void saveNewCompanyData(String name, String email, String phone, String busesNum, String lineName, String downloadUri) {
+    private void saveNewCompanyData(String name, String phone, String city, String downloadUri) {
 
-        User user;
-        user = new User(name, email, phone, busesNum, lineName, downloadUri, 1);
+        User user = new User();
+        user.setName(name);
+        user.setMobile(phone);
+        user.setCity(city);
+        user.setProfile_pic(downloadUri);
+        user.setType(1);
+        user.setEmail(companyEmail);
+
+
 
 
         mEditUserDatabaseFirebase = FirebaseDatabase.getInstance().getReference("Users");
@@ -276,10 +269,9 @@ public class EditCompanyProfile extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
 
-                    showMessageDialog(getString(R.string.accountSaved), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
+                    Toast.makeText(EditCompanyProfile.this, "Your data saved successfully", Toast.LENGTH_SHORT).show();
 
                     Intent saveProfile = new Intent(EditCompanyProfile.this, CompanyProfile.class);
-                    saveProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(saveProfile);
                     finish();
 
@@ -289,8 +281,7 @@ public class EditCompanyProfile extends AppCompatActivity {
                     cancel.setVisibility(View.VISIBLE);
                     progressBarSave.setVisibility(View.GONE);
 
-                    showMessageDialog(getString(R.string.accountSavedFaild), task.getException()
-                            .getMessage(), R.drawable.ic_error_red_color_30dp);
+                    Toast.makeText(EditCompanyProfile.this, "Unsuccessfully saved", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -299,6 +290,8 @@ public class EditCompanyProfile extends AppCompatActivity {
 
 
     }
+
+
 
 
     // here method for make a message dialog on android

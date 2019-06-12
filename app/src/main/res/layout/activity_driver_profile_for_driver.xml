@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/timg"
     android:orientation="vertical"
-    tools:context=".Driver.DriverProfile_for_driver">
+    tools:context=".Driver.DriverProfile">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/driverProfile_ProfilePhoto"

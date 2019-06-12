@@ -62,16 +62,12 @@ public class Profile_user extends AppCompatActivity {
                 Picasso.with(Profile_user.this).load(imageUrl).into(mProfileImage);
 
 
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                String mobile = dataSnapshot.child("mobile").getValue().toString();
-                String rfid = dataSnapshot.child("refid").getValue().toString();
-                String city = dataSnapshot.child("city").getValue().toString();
+                User user = dataSnapshot.getValue(User.class);
 
-                mProfileName.setText(name);
-                mProfileEmail.setText(email);
-                mProfileMobile_number.setText(mobile);
-                mProfileCity.setText(city);
+                mProfileName.setText(user.getName());
+                mProfileEmail.setText(user.getEmail());
+                mProfileMobile_number.setText(user.getMobile());
+                mProfileCity.setText(user.getCity());
             }
 
             @Override

@@ -37,6 +37,8 @@ public class CompanyHome extends AppCompatActivity {
     private DatabaseReference mUserDatabaseReference;
 
 
+    String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +66,12 @@ public class CompanyHome extends AppCompatActivity {
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
                 Picasso.with(CompanyHome.this).load(imageUrl).into(companyPic);
 
-                String name = dataSnapshot.child("name").getValue().toString();
+                name = dataSnapshot.child("name").getValue().toString();
 
                 // here we get the name from name in data base and set in textView
                 companyName.setText(name);
+
+
 
 
             }
@@ -82,9 +86,11 @@ public class CompanyHome extends AppCompatActivity {
     }// onCreate
 
 
+
     public void addNewDriver(View view) {
-        Intent registerNewDriver = new Intent(CompanyHome.this, RegisterNewDriver.class);
-        startActivity(registerNewDriver);
+        Intent sendCompanyName = new Intent(CompanyHome.this, RegisterNewDriver.class);
+        sendCompanyName.putExtra("companyName", name);
+        startActivity(sendCompanyName);
     }
 
     public void trackingAllBuses(View view) {

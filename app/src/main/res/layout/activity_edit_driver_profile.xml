@@ -63,33 +63,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_email_blue_24dp" />
-
-        <EditText
-            android:id="@+id/newDriverProfile_email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:hint="@string/driver_email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/whitecolor"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="horizontal">
 
