@@ -144,7 +144,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
                 } else if (type == 2) {
 
-                    Intent signInSuccessfully = new Intent(LoginUserActivity.this, DriverLocation.class);
+                    Intent signInSuccessfully = new Intent(LoginUserActivity.this, DriverHome.class);
                     startActivity(signInSuccessfully);
 
                 }
