@@ -166,6 +166,12 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         map.setMyLocationEnabled(true); // for my current location button above the screen
 
 
+        LatLng currentLocation = new LatLng(getLatitude, getLongitude);
+        map.addMarker(new MarkerOptions().position(currentLocation).title("My Current Location"));
+
+        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(16).build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+
     }
 
     //TODO:
@@ -192,12 +198,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
          * */
 
 
-
-        LatLng currentLocation = new LatLng(getLatitude, getLongitude);
-        map.addMarker(new MarkerOptions().position(currentLocation).title("My Current Location"));
-
-        CameraPosition target = CameraPosition.builder().target(currentLocation).zoom(16).build();
-        map.moveCamera(CameraUpdateFactory.newCameraPosition(target));
 
 
 //        // using GeoFire to save the location
