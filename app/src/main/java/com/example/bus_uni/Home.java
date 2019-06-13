@@ -28,8 +28,6 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        Toast.makeText(this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
-
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
@@ -53,7 +51,6 @@ public class Home extends AppCompatActivity {
             case R.id.settings_menu:
                 startActivity(new Intent(Home.this, Setting.class));
                 return true;
-
 
             case R.id.help_menu:
                 startActivity(new Intent(Home.this, HelpActivity.class));

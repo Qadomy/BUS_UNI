@@ -12,16 +12,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bus_uni.BusLocation;
-import com.example.bus_uni.BusSchedule.BusInformationsCard;
+import com.example.bus_uni.Home;
 import com.example.bus_uni.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class BookingSeat extends AppCompatActivity {
@@ -29,17 +27,19 @@ public class BookingSeat extends AppCompatActivity {
 
     TextView passengerName, orignLocation, destinationLocation, leavingTime, arrivalTime, busNumber, gateNumber, seatNumber, driverName, driverPhone, companyName, rfidNumber;
 
-    DatabaseReference mDatabaseReference;
+    DatabaseReference mDatabaseReference, mDeleteFromDatabase;
 
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_seat);
+
+        if (currentUser == null) {
+            Toast.makeText(this, "You have no booking ticket yet", Toast.LENGTH_SHORT).show();
+        }
 
 
         passengerName = (TextView) findViewById(R.id.textViewPassengerName);
@@ -62,28 +62,37 @@ public class BookingSeat extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                // here we check if there ticket booking for current user in database or no
+                if (dataSnapshot.exists()) {
 
-                String name = dataSnapshot.child("userName").getValue().toString();
-                String driver_Name = dataSnapshot.child("driverName").getValue().toString();
-                String driver_Phone = dataSnapshot.child("driverPhone").getValue().toString();
-                String busLine = dataSnapshot.child("busLine").getValue().toString();
-                String time = dataSnapshot.child("leavingTime").getValue().toString();
-                String seatNum = dataSnapshot.child("seatNumber").getValue().toString();
-                String company = dataSnapshot.child("company").getValue().toString();
-                String city = dataSnapshot.child("city").getValue().toString();
-                String busNum = dataSnapshot.child("busNum").getValue().toString();
+                    String name = dataSnapshot.child("userName").getValue().toString();
+                    String driver_Name = dataSnapshot.child("driverName").getValue().toString();
+                    String driver_Phone = dataSnapshot.child("driverPhone").getValue().toString();
+                    String busLine = dataSnapshot.child("busLine").getValue().toString();
+                    String time = dataSnapshot.child("leavingTime").getValue().toString();
+                    String seatNum = dataSnapshot.child("seatNumber").getValue().toString();
+                    String company = dataSnapshot.child("company").getValue().toString();
+                    String city = dataSnapshot.child("city").getValue().toString();
+                    String busNum = dataSnapshot.child("busNum").getValue().toString();
 
 
-                passengerName.setText(name);
-                orignLocation.setText(busLine);
-                destinationLocation.setText(city);
-                leavingTime.setText(time);
-                busNumber.setText(busNum);
-                seatNumber.setText(seatNum);
+                    passengerName.setText(name);
+                    orignLocation.setText(busLine);
+                    destinationLocation.setText(city);
+                    leavingTime.setText(time);
+                    busNumber.setText(busNum);
+                    seatNumber.setText(seatNum);
 //                driverName.setText(driver_Name);
 //                driverPhone.setText(driver_Phone);
 //                companyName.setText(company);
 //                rfidNumber.setText(rfid_Number);
+
+                } else {
+
+                    Toast.makeText(BookingSeat.this, "You have no booking tickets yet", Toast.LENGTH_SHORT).show();
+                    Intent backHome = new Intent(BookingSeat.this, Home.class);
+                    startActivity(backHome);
+                }
 
             }
 
@@ -94,7 +103,7 @@ public class BookingSeat extends AppCompatActivity {
         });
 
 
-    }
+    }// end onCreate
 
 
     //
@@ -111,7 +120,6 @@ public class BookingSeat extends AppCompatActivity {
     public void cancelBooking(View view) {
 
 
-
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 BookingSeat.this);
 
@@ -122,6 +130,30 @@ public class BookingSeat extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
+                        // if we click yes to cancel ticket
+
+                        /*
+                         *
+                         * here we delete user from Booking database from firebase*/
+
+                        mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
+                        Query query = mDeleteFromDatabase.child(currentUser);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                dataSnapshot.getRef().removeValue();
+
+                                Intent intent = new Intent(BookingSeat.this, Home.class);
+                                startActivity(intent);
+                                Toast.makeText(BookingSeat.this, "Your ticket canceled", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }
                 });
@@ -136,8 +168,6 @@ public class BookingSeat extends AppCompatActivity {
                 });
 
         alertDialog.show();
-
-
 
     }
 }

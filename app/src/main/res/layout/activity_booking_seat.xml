@@ -377,7 +377,6 @@
     <!--</LinearLayout>-->
 
     <Button
-        android:id="@+id/cancelBookingButton"
         android:layout_width="match_parent"
         android:onClick="cancelBooking"
         android:layout_height="wrap_content"
