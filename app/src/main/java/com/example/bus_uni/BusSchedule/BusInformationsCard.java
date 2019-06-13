@@ -1,29 +1,24 @@
 package com.example.bus_uni.BusSchedule;
 
 import android.app.ActionBar;
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookingSeat;
-import com.example.bus_uni.BusLocation;
+import com.example.bus_uni.MyLocation;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,19 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Calendar;
-
 public class BusInformationsCard extends AppCompatActivity {
 
     Button bookingTicket, currentLocation;
     TextView busRuteLine, busCompanyName, driverName, driverPhone, busSeatNumbers, busTime;
 
 
-
-
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String driverPhoneData, busSeatNumbersData = "", busTimeData, paymentStatus="Cash money";
+    String driverPhoneData, busSeatNumbersData = "", busTimeData, paymentStatus = "Cash money";
 
 
     // firebase database
@@ -84,7 +75,6 @@ public class BusInformationsCard extends AppCompatActivity {
         final String busNum = getTicketInfo.getExtras().getString("busNum");
 
 
-
         busRuteLine.setText(busRuteLineData);
         busCompanyName.setText(busCompanyNameData);
         driverName.setText(driverNameData);
@@ -117,8 +107,8 @@ public class BusInformationsCard extends AppCompatActivity {
                                  * */
 
 
-                                // and we send the driver id to BusLocation activity until
-                                Intent sendDriverId = new Intent(BusInformationsCard.this, BusLocation.class);
+                                // and we send the driver id to MyLocation activity until
+                                Intent sendDriverId = new Intent(BusInformationsCard.this, MyLocation.class);
                                 sendDriverId.putExtra("driverId", driverID);
                                 //startActivity(sendDriverId);
 
@@ -160,7 +150,6 @@ public class BusInformationsCard extends AppCompatActivity {
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
                                                 busCompanyNameData, city, busNum, userPhone, userEmail, paymentStatus);
-
 
 
                                         // here we create an a new class name a Book and uploaded it to firebase
@@ -226,7 +215,7 @@ public class BusInformationsCard extends AppCompatActivity {
                  *
                  * here we send the latitude and longitude to currentLocations to tracking the bus
                  * */
-                Intent currentLocation = new Intent(BusInformationsCard.this, CurrentLocation.class);
+                Intent currentLocation = new Intent(BusInformationsCard.this, CurrentBusLocation.class);
                 currentLocation.putExtra("latitude", latitude);
                 currentLocation.putExtra("longitude", longitude);
                 currentLocation.putExtra("driverId", driverID);

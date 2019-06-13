@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.bus_uni.Booking.BookingSeat;
 import com.example.bus_uni.BusSchedule.Bus_Schedule;
@@ -33,15 +32,12 @@ public class Home extends AppCompatActivity {
     }
 
 
-
     // Here for shown the menu on the MainActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_after_login, menu);
         return true;
     }
-
-
 
 
     // here for menu
@@ -82,7 +78,6 @@ public class Home extends AppCompatActivity {
     }
 
 
-
     public void bookinSeatClick(View view) {
         Intent booking = new Intent(Home.this, BookingSeat.class);
         startActivity(booking);
@@ -98,9 +93,9 @@ public class Home extends AppCompatActivity {
         startActivity(busSchedule);
     }
 
-    public void busLocationClick(View view) {
-        Intent busLocation = new Intent(Home.this, BusLocation.class);
-        startActivity(busLocation);
+    public void myLocationClick(View view) {
+        Intent myLocation = new Intent(Home.this, MyLocation.class);
+        startActivity(myLocation);
     }
 
 

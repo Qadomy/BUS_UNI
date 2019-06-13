@@ -283,42 +283,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
 
     }
 
-    //
-    //
-    //
-    // Here for shown the menu on the XML activity
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.company_menu, menu);
-        return true;
-    }
-
-
-    // here for menu
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.company_logout_menu:
-
-                // here when we press on Sign Out button in menu
-                firebaseAuth.signOut();
-
-                Intent signOut = new Intent(DriverHome.this, LoginUserActivity.class);
-
-                // here for when sign out of the account and when we make a back we can`t retrieve information
-                // again of the user until we Login again
-
-                signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(signOut);
-                return true;
-
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     //////////////////////////////////
     //////////////////////////////////

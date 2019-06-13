@@ -15,15 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MyLocation"></activity>
+
         <service
             android:name=".Driver.TrackingService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-        <activity android:name=".Driver.DriverLocation">
-
-
-        </activity>
+        <activity android:name=".Driver.DriverLocation"></activity>
         <activity android:name=".Setting">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -53,11 +52,9 @@
                 android:value=".Driver.DriverHome" />
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusSchedule.Bus_Schedule" />
-
         </activity>
         <activity android:name=".Driver.EditBusSchedule">
 
@@ -94,7 +91,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
         </activity>
-        <activity android:name=".BusSchedule.CurrentLocation" />
+        <activity android:name=".BusSchedule.CurrentBusLocation" />
         <activity android:name=".Home">
 
             <!-- Home -->
@@ -124,10 +121,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".HelpActivity"
+        <activity
+            android:name=".HelpActivity"
             android:configChanges="locale|orientation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -137,13 +133,6 @@
 
             <!-- Bus Schedule -->
 
-
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Home" />
-        </activity>
-        <activity android:name=".BusLocation">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -159,17 +148,13 @@
                 android:value=".Home" />
         </activity>
         <activity android:name=".Register.SignupActivity">
-
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register.SignupForFree" />
         </activity>
         <activity android:name=".Register.LoginUserActivity">
 
-            <!--Login-->
-
-
+            <!-- Login -->
 
             <meta-data
                 android:name="asignuport.PARENT_ACTIVITY"

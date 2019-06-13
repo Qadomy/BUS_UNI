@@ -2,21 +2,15 @@ package com.example.bus_uni;
 
 import android.app.ActionBar;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class BusLocation extends AppCompatActivity {
-
+public class MyLocation extends AppCompatActivity {
 
     private GoogleMap map;
 
@@ -27,7 +21,7 @@ public class BusLocation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bus__location);
+        setContentView(R.layout.activity_my_location);
 
 
         Intent getFromBusCard = getIntent();
@@ -57,17 +51,7 @@ public class BusLocation extends AppCompatActivity {
 //            }
 //        });
 
-
-
     }
-
-
-
-
-
-
-
-
 
 
     // for back
