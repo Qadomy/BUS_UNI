@@ -167,6 +167,21 @@
     <string name="company">Company</string>
     <string name="click_here_to_edit_image">Click here to edit image</string>
 
+
+    <string name="infobussystem">UNI-SmartBus, system designed for university students in particular, the system can be used by bus companies, bus drivers and students. The application allow to check the bus station in university stations, and check the available seats in the bus.The system allows passengers to check the buses schedule, booking tickets, and tracking the bus during the trip.</string>
+    <string name="seat_availability">Seat Availability</string>
+    <string name="seatAvailability">Check seats availabel for the paricular bus for each day</string>
+    <string name="street_news_info">Show the posts about street news, and add post with image and some descriptions about roads</string>
+    <string name="version_number">Version 1.0.0</string>
+    <string name="qadomy_abushomer_technologies"><![CDATA[© Qadomy&AbuShomer Technologies]]></string>
+    <string name="booking_ticket_info">Book one ticket for each passenger for any bus</string>
+    <string name="tracking_bus">Tracking Bus</string>
+    <string name="tracking_bus_info">Tracking the bus during the trip in the map using GPS</string>
+    <string name="offers">Offers</string>
+    <string name="offers_info">Check exciting offers for each bus</string>
+    <string name="devalopers">Devalopers</string>
+    <string name="devaopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
+
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>
         <item>AAUJ-Jenin</item>

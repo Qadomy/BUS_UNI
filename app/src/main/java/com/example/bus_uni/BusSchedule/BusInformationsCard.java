@@ -102,6 +102,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
 
                                 /*
+                                 *
                                  * if we click yes
                                  *
                                  * */

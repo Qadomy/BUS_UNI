@@ -69,6 +69,10 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, ConnectWithUs.class));
                 return true;
 
+            case R.id.about_menu:
+                startActivity(new Intent(Home.this, About.class));
+                return true;
+
             case R.id.exit_menu:
                 System.exit(0);
 

@@ -15,14 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyLocation"></activity>
+        <activity android:name=".About"></activity>
+        <activity android:name=".MyLocation" />
 
         <service
             android:name=".Driver.TrackingService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Driver.DriverLocation"></activity>
+        <activity android:name=".Driver.DriverLocation" />
         <activity android:name=".Setting">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

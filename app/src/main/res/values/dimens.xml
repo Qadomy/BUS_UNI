@@ -9,4 +9,5 @@
     <dimen name="five_dp">5dp</dimen>
     <dimen name="sixty">60sp</dimen>
     <dimen name="twintySP">20sp</dimen>
+    <dimen name="fifteen_SP">15sp</dimen>
 </resources>
