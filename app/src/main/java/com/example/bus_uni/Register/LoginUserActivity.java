@@ -101,7 +101,7 @@ public class LoginUserActivity extends AppCompatActivity {
                         // and if sign in succeeds will user notified
                         if (task.isSuccessful()) {
                             showMessageDialog(getString(R.string.accountSignin), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
-                            checkType(email);
+                            checkType();
 
 
                         } else {
@@ -116,20 +116,23 @@ public class LoginUserActivity extends AppCompatActivity {
         );
     }
 
-    private void checkType(final String email) {
+    private void checkType() {
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+      DatabaseReference user= databaseReference.child(currentUser);
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int type = -1;
-                Iterable<DataSnapshot> users = dataSnapshot.getChildren();
+              /*  Iterable<DataSnapshot> users = dataSnapshot.getChildren();
                 for (DataSnapshot user : users) {
                     String current_email = user.child("email").getValue().toString();
                     if (email.equals(current_email)) {
                         type = user.child("type").getValue(Integer.class);
                         break;
                     }
-                }
+                }*/
+              type=dataSnapshot.child("type").getValue(Integer.class);
 
                 if (type == 0) {
 
@@ -150,7 +153,7 @@ public class LoginUserActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
+           @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }

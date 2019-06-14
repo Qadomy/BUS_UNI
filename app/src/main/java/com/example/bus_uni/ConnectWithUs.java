@@ -69,7 +69,7 @@ public class ConnectWithUs extends AppCompatActivity {
 
     //For open LinkedIn
     public void linkedConnetClick(View view) {
-        String linkedInPageUrl = "https://www.linkedin.com/in/ali-qadomy-a0556b110/";
+        String linkedInPageUrl = "https://www.linkedin.com/in/ala-%E2%80%8B-abu-shomer/ar";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkedInPageUrl));
         startActivity(intent);
     }

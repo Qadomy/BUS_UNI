@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.Driver.DriverHome;
+import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.Register.SignupForFree;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +26,7 @@ public class Splash_Screen extends AppCompatActivity {
     // Firebase
     private DatabaseReference databaseReference;
     private FirebaseAuth mFirebaseAuth;
+    String currentuser ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,8 @@ public class Splash_Screen extends AppCompatActivity {
 
                 } else {
 
-                    String currentuser = mFirebaseAuth.getCurrentUser().getUid();
-                    Toast.makeText(Splash_Screen.this, currentuser, Toast.LENGTH_SHORT).show();
+                     currentuser = mFirebaseAuth.getCurrentUser().getUid();
+                  //  Toast.makeText(Splash_Screen.this, currentuser, Toast.LENGTH_SHORT).show();
 
                     // init database reference
                     databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -59,9 +61,7 @@ public class Splash_Screen extends AppCompatActivity {
                     databaseReference.child(currentuser).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            String email = dataSnapshot.child("email").getValue().toString();
-                            checkType(email);
+                            checkType();
 
 
                         }
@@ -87,20 +87,16 @@ public class Splash_Screen extends AppCompatActivity {
 
 
     /// method for check the type of user and send for right activity
-    private void checkType(final String email) {
+    private void checkType() {
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+      //  String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference user= databaseReference.child(currentuser);
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int type = -1;
-                Iterable<DataSnapshot> users = dataSnapshot.getChildren();
-                for (DataSnapshot user : users) {
-                    String current_email = user.child("email").getValue().toString();
-                    if (email.equals(current_email)) {
-                        type = user.child("type").getValue(Integer.class);
-                        break;
-                    }
-                }
+                type=dataSnapshot.child("type").getValue(Integer.class);
 
                 if (type == 0) {
 
