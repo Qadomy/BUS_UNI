@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,7 +35,7 @@ public class RegisterNewDriver extends AppCompatActivity {
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     String companyName;
-
+    FirebaseUser companyUser;
     private Button addNewDriver;
 
     private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusSeat_Num;
@@ -49,7 +50,8 @@ public class RegisterNewDriver extends AppCompatActivity {
     // Firebase Database
     private DatabaseReference mCreataUseDriverDatabaseReference, mUserDatabaseReference;
 
-    // method for gearate new random strings
+    //TODO: This is for what?
+    //method for generate new random strings
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
         while (count-- != 0) {
@@ -64,9 +66,9 @@ public class RegisterNewDriver extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_driver);
 
-        Intent getCompanyName = getIntent();
-        companyName = getCompanyName.getExtras().getString("companyName");
-
+        Intent getCompany = getIntent();
+        companyName = getCompany.getStringExtra(CompanyHome.EXTRA_COMPANY_NAME);
+        companyUser = getCompany.getParcelableExtra(CompanyHome.EXTRA_COMPANY_OBJECT);
 
         // init firebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -114,6 +116,18 @@ public class RegisterNewDriver extends AppCompatActivity {
                     addNewDriver.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
 
+                } else if ((Integer.parseInt(busSeat)) > 50) {
+                    showMessageDialog(getString(R.string.errorMessage), getString(R.string.SeatsNumMessageError50),
+                            R.drawable.ic_error_red_color_30dp);
+                    addNewDriver.setVisibility(View.VISIBLE);
+                    loadingProgress.setVisibility(View.INVISIBLE);
+
+                } else if ((Integer.parseInt(busSeat)) < 4) {
+                    showMessageDialog(getString(R.string.errorMessage), getString(R.string.SeatsNumMessageError4),
+                            R.drawable.ic_error_red_color_30dp);
+                    addNewDriver.setVisibility(View.VISIBLE);
+                    loadingProgress.setVisibility(View.INVISIBLE);
+
                 } else {
                     createUserAccount(email, pass, name, phone, busNum, busSeat, bus_line);
                 }
@@ -140,6 +154,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
 
                             addNewDriver.setVisibility(View.INVISIBLE);
+                            //TODO: Progress bar exists on left of the screen
                             loadingProgress.setVisibility(View.VISIBLE);
 
 
@@ -167,8 +182,9 @@ public class RegisterNewDriver extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
 
                                     if (task.isSuccessful()) {
-
-                                        Toast.makeText(RegisterNewDriver.this, "Driver" + name + "added successfully", Toast.LENGTH_SHORT).show();
+                                        //TODO: Send Sign in link (Or credentials) to driver email
+                                        mFirebaseAuth.updateCurrentUser(companyUser);
+                                        Toast.makeText(RegisterNewDriver.this, "Driver " + name + " is added successfully", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegisterNewDriver.this, CompanyHome.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -177,7 +193,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
                                     } else {
 
-                                        Toast.makeText(RegisterNewDriver.this, "Faild add new driver", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterNewDriver.this, "Failed to add new driver", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

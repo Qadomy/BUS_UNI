@@ -43,12 +43,12 @@ public class LoginUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        signin = (Button) findViewById(R.id.signinUserButton);
-        resetPssword = (Button) findViewById(R.id.reset_password);
+        signin = findViewById(R.id.signinUserButton);
+        resetPssword =  findViewById(R.id.reset_password);
 
-        inputEmail = (EditText) findViewById(R.id.email_loginUser);
-        inputPassword = (EditText) findViewById(R.id.password_loginUser);
-        progressBarLogin = (ProgressBar) findViewById(R.id.progressBarLoginUser);
+        inputEmail =  findViewById(R.id.email_loginUser);
+        inputPassword =  findViewById(R.id.password_loginUser);
+        progressBarLogin =  findViewById(R.id.progressBarLoginUser);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -123,7 +123,7 @@ public class LoginUserActivity extends AppCompatActivity {
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int type = -1;
+                // int type = -1;
               /*  Iterable<DataSnapshot> users = dataSnapshot.getChildren();
                 for (DataSnapshot user : users) {
                     String current_email = user.child("email").getValue().toString();
@@ -132,7 +132,7 @@ public class LoginUserActivity extends AppCompatActivity {
                         break;
                     }
                 }*/
-              type=dataSnapshot.child("type").getValue(Integer.class);
+             int type=dataSnapshot.child("type").getValue(Integer.class);
 
                 if (type == 0) {
 

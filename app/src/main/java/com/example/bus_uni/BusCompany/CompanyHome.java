@@ -10,11 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bus_uni.R;
 import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.StreetsInformation.StreetInformation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +28,12 @@ public class CompanyHome extends AppCompatActivity {
 
 
     ImageView companyPic;
-
+    FirebaseUser companyUser;
     TextView companyName;
 
     String name;
-
+     final static  String EXTRA_COMPANY_NAME="companyName";
+     final static  String EXTRA_COMPANY_OBJECT="Company Object";
     // firebase auth
     private FirebaseAuth firebaseAuth;
 
@@ -49,10 +52,11 @@ public class CompanyHome extends AppCompatActivity {
 
         // init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
-
         // here for get the id of current user and save in the string
-        String currentuser = firebaseAuth.getCurrentUser().getUid();
+         companyUser=firebaseAuth.getCurrentUser();
+        String currentuser = companyUser.getUid();
 
+        //TODO: We can use method (finishActivityFromChild) for back arrow
 
         // init firebase database
         mUserDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -61,6 +65,7 @@ public class CompanyHome extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 // here using Picasso for get the image url and set in ImageView
+               //TODO: NULL Pointer Exception Here! maybe because the current user became the new driver not company
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
                 Picasso.with(CompanyHome.this).load(imageUrl).into(companyPic);
 
@@ -83,9 +88,12 @@ public class CompanyHome extends AppCompatActivity {
 
 
     public void addNewDriver(View view) {
-        Intent sendCompanyName = new Intent(CompanyHome.this, RegisterNewDriver.class);
-        sendCompanyName.putExtra("companyName", name);
-        startActivity(sendCompanyName);
+        Intent sendCompany= new Intent(CompanyHome.this, RegisterNewDriver.class);
+        sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
+        sendCompany.putExtra(EXTRA_COMPANY_OBJECT,companyUser);
+        //TODO: Try this on Ali's Mobile
+        Toast.makeText(this,companyUser.getEmail(),Toast.LENGTH_LONG).show();
+        startActivity(sendCompany);
     }
 
     public void trackingAllBuses(View view) {
@@ -129,8 +137,13 @@ public class CompanyHome extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
-                return true;
-
+                 return true;
+        //TODO: Remove this (I added it just for test)
+            case R.id.add_new_driver_menu:
+                Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
+                sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
+                sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
+                startActivity(sendCompany);
 
             default:
                 return super.onOptionsItemSelected(item);

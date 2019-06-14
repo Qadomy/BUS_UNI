@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ControlPassengers extends AppCompatActivity {
 
-
+    //TODO: This Activity for what!
     Button addBlackList;
     TextView name, phone, email, seatLabel, city, paymentMethod, calling;
 

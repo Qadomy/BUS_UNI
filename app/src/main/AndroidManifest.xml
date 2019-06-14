@@ -29,7 +29,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".StreetsInformation.StreetInformation" />
+        <activity android:name=".StreetsInformation.StreetInformation">
+
+        </activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -91,6 +93,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
+
         </activity>
         <activity android:name=".BusSchedule.CurrentBusLocation" />
         <activity android:name=".Home">
@@ -122,6 +125,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".HelpActivity"

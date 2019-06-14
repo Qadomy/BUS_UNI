@@ -176,6 +176,7 @@ public class EditBusSchedule extends AppCompatActivity {
         final TimePicker timeInput = (TimePicker) promptsView
                 .findViewById(R.id.timePicker_addNewDate);
 
+        //TODO: Make the price constant for the same bus line tickets
         final EditText ticketPrice = (EditText) promptsView.findViewById(R.id.addTicketPrice);
 
 

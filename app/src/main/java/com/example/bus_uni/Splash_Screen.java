@@ -95,8 +95,7 @@ public class Splash_Screen extends AppCompatActivity {
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int type = -1;
-                type=dataSnapshot.child("type").getValue(Integer.class);
+               int type=dataSnapshot.child("type").getValue(Integer.class);
 
                 if (type == 0) {
 

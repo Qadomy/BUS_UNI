@@ -1,7 +1,9 @@
 package com.example.bus_uni;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +43,7 @@ public class Home extends AppCompatActivity {
 
 
     // here for menu
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -73,7 +76,15 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, About.class));
                 return true;
 
+            //TODO:
             case R.id.exit_menu:
+                finish();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAndRemoveTask();
+                }
+                else
+                    moveTaskToBack(true);
+                //TODO: This may be not necessary
                 System.exit(0);
 
             default:

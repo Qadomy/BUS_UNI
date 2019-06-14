@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -140,13 +142,13 @@ public class SignupActivity extends AppCompatActivity {
                             // user account created successfully
                             showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
                                     R.drawable.ic_check_circle_30dp);
-
                             mDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
 
                                         Intent mainIntent = new Intent(SignupActivity.this, Home.class);
+                                        //TODO: this flags for what? here and in other places (StackOverflow also)
                                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(mainIntent);
                                         //finish();
@@ -155,10 +157,25 @@ public class SignupActivity extends AppCompatActivity {
                             });
 
                         } else {
+                            try {
+                                throw task.getException();
+                            }
+                            // if user enters wrong password.
+                            catch (FirebaseAuthWeakPasswordException weakPassword) {
+                                showMessageDialog(getString(R.string.weak_password), task.getException().getMessage(),
+                                        R.drawable.ic_error_red_color_30dp);
 
-                            showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
-                                    R.drawable.ic_error_red_color_30dp);
+                            }
+                            // if user enters wrong email.
+                            catch (FirebaseAuthInvalidCredentialsException malformedEmail) {
 
+                                showMessageDialog(getString(R.string.malformed_email), task.getException().getMessage(),
+                                        R.drawable.ic_error_red_color_30dp);
+
+                            } catch (Exception ex) {
+                                showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
+                                        R.drawable.ic_error_red_color_30dp);
+                            }
                             createAccount.setVisibility(View.VISIBLE);
                             loadingProgress.setVisibility(View.INVISIBLE);
                         }

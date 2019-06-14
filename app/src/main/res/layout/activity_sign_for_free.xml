@@ -7,6 +7,7 @@
     android:background="@color/redColor"
     tools:context=".Register.SignupForFree">
 
+    <!--TODO: Make the background Black-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

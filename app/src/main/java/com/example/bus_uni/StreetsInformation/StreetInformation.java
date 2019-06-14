@@ -35,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class StreetInformation extends AppCompatActivity {
 
@@ -72,7 +74,7 @@ public class StreetInformation extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
     private ArrayList<Post> posts = new ArrayList<>();
-    private Posts mPosts=new Posts();
+    //  private Posts mPosts=new Posts();
 
     // firebase storageReference
     private StorageReference mStorageReference;
@@ -116,7 +118,6 @@ public class StreetInformation extends AppCompatActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.postsListRecycleView);
-       //TODO: Where should we put this to prevent duplication?
         showPostsInRecycleView();
     }
 
@@ -165,6 +166,7 @@ public class StreetInformation extends AppCompatActivity {
 
 
                                 uploadImage();
+                                posts.clear();
 
 
                             }
@@ -181,7 +183,7 @@ public class StreetInformation extends AppCompatActivity {
 
         // show it
         alertDialog.show();
-    //finish();
+        //  finish();
     }
 
     private void uploadImage() {
@@ -272,14 +274,12 @@ public class StreetInformation extends AppCompatActivity {
         String postTime = getYear + "/" + getMonth + "/" + getDay + " - " + getClock;
 
 
-
-
         Post post = new Post(userName, userImage, postTime, postText, downloadUri);
 
-        posts.add(post);
-        mPosts.setPosts(posts);
+        //posts.add(post);
+        //mPosts.setPost(post);
         mPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Posts");
-        mPostDatabaseReference.child(currentUser).setValue(mPosts).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mPostDatabaseReference.push().setValue(post).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -297,16 +297,14 @@ public class StreetInformation extends AppCompatActivity {
     private void showPostsInRecycleView() {
 
         mShowPostDatabaseReference = FirebaseDatabase.getInstance().getReference("Posts");
-        mShowPostDatabaseReference.addValueEventListener(new ValueEventListener() {
+        Query query = mShowPostDatabaseReference.orderByChild("postDate");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    //TODO: sorting post by date, duplicated posts
-                    //We maybe put a list of posts inside Post class
-
-                 //   Post post = childSnapshot.getValue(Post.class);
-                   // posts.add(post);
-
+                    //TODO: sorting post by date (Descending)
+                    Post post = childSnapshot.getValue(Post.class);
+                    posts.add(post);
 
 
                 }
@@ -328,7 +326,7 @@ public class StreetInformation extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-
+        //To show them in descending order
         mPostAdapter = new PostAdapter(posts, StreetInformation.this);
         mRecyclerView.setAdapter(mPostAdapter);
         mRecyclerView.setVisibility(View.VISIBLE);
