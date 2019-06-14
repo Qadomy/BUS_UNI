@@ -1,191 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="app_name" translatable="false">BUS-UNI</string>
-    <string name="user_homescreen" translatable="true">User</string>
-    <string name="driver_homescreen" translatable="true">Bus Driver</string>
-    <string name="login" translatable="true">Log In</string>
-    <string name="signup" translatable="true">Sign Up</string>
-    <string name="signin" translatable="true">Sign In</string>
-    <string name="driver_id" translatable="true">Enter Driver ID</string>
-    <string name="tracking_enabled" translatable="true">Tracking notification</string>
-    <string name="driver_password" translatable="true">Enter Driver Password</string>
-    <string name="user_rfid" translatable="true">Enter Your RFID Number</string>
-    <string name="user_password" translatable="true">Enter Your Password</string>
-    <string name="enterRFID">Enter Your RFID Number</string>
-    <string name="enterPassword" translatable="true">Enter Your Password</string>
-    <string name="enterName" translatable="true">Enter Your Name</string>
-    <string name="enterEmail" translatable="true">Email</string>
-    <string name="enterMobileNumber" translatable="true">Enter Your Mobile Number</string>
-    <string name="connectDevaloper" translatable="true">Connect With Us</string>
-    <string name="not_registered_yet" translatable="true">Not registered yet ?</string>
-    <string name="are_you_user" translatable="true">Are You User?</string>
-    <string name="are_you_driver" translatable="true">Are You Driver?</string>
-    <string name="settings" translatable="true">Settings</string>
-    <string name="logout" translatable="true">Log Out</string>
     <string name="about" translatable="true">About</string>
-    <string name="are_you_Bus_Driver" translatable="true">Are You Bus Driver ?</string>
-    <string name="press_here" translatable="true">Press Here</string>
-    <string name="exit" translatable="true">Exit</string>
-    <string name="help" translatable="true">Help</string>
-    <string name="Password" translatable="true">Password</string>
-    <string name="Username" translatable="true">Username</string>
-    <string name="signUpFree" translatable="true">Sign Up For Free</string>
-    <string name="alreadyHaveAccount" translatable="true">Already have an account?</string>
-    <string name="create" translatable="true">Create</string>
-    <string name="profile">Profile</string>
-    <string name="my_name">Ali Qadomy</string>
-    <string name="homeTown">Home Town</string>
-    <string name="university">University</string>
-    <string name="re_password">Confirm Password</string>
-    <string name="please_accept_permissions">Please accept for required permission</string>
-    <string name="signupANDlogin">Sign up/Sign In</string>
-    <string name="fieldsMessageError">Please fill out all fields</string>
-    <string name="SeatsNumMessageError50">Seats Number mustn\'t be more than 50!</string>
-    <string name="SeatsNumMessageError4">Seats Number mustn\'t be less than 4!</string>
-    <string name="accountCreated">Account Created</string>
-    <string name="accountCreationFaild">Account Creation Failed</string>
-    <string name="registerCompleate">Register Complete</string>
-    <string name="errorMessage">Error</string>
-    <string name="passwordNOTmatch">Your password not match</string>
-    <string name="successfully">Successfully</string>
-    <string name="forget_your_password">Forget your password ?</string>
-    <string name="need_regester">We just need your registered Email Id to sent you password reset instructions</string>
-    <string name="back"><![CDATA[<< Back]]></string>
-    <string name="resetPassword">Reset Password</string>
-    <string name="enterYourEmail">Enter your registered email</string>
-    <string name="sendEmailForReset">We have sent you instructions to reset your password!</string>
-    <string name="faildSendEmailReset">Failed to send reset email!</string>
-    <string name="accountSignin">Account Sign In</string>
-    <string name="accountSignInFaild">Account Sign In Faild</string>
-    <string name="messgesWillbeHere">Messages will be here</string>
-    <string name="typeMessageHere">Type message here</string>
-    <string name="send">Send</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
-    <string name="rfid">RFID No</string>
-    <string name="mobile">Mobile No</string>
-    <string name="city">City</string>
-    <string name="bus_locations">Bus Locations</string>
-    <string name="bus_schedule">Bus Schedule</string>
-    <string name="street_news">Street News</string>
-    <string name="booking_seat">Booking Seat</string>
-    <string name="enter_your_new_name">Enter your new name</string>
-    <string name="enter_your_new_rfid_number">Enter your new RFID number</string>
-    <string name="enter_you_new_mobile_number">Enter you new mobile number</string>
-    <string name="enter_your_city">Enter your city</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
-    <string name="enter_your_new_password">Enter your new password</string>
-    <string name="nothingToShow">------------------------</string>
-    <string name="enter_your_new_email">Enter your new email</string>
+    <string name="about_company">About Company</string>
+
     <string name="accountSaved">Your data saved</string>
+
     <string name="accountSavedFaild">Your data failed save</string>
-    <string name="photoSavedFaild">Photo failed saved</string>
-    <string name="add_your_post">Add your post</string>
-    <string name="add_post">Add post</string>
+
+    <string name="accountSignInFaild">Account Sign In Faild</string>
+
+    <string name="accountSignin">Account Sign In</string>
+
+    <string name="account_created">Account Created</string>
+    <string name="account_creation_faild">Account Created Failed</string>
+
     <string name="addPhoto_or_text">Please add photo or text to post</string>
+
+    <string name="add_new_date">Add new date</string>
+    <string name="add_new_driver">Add New Driver</string>
+    <string name="add_post">Add post</string>
+    <string name="add_ticket_price">Example: 12 ILS</string>
+    <string name="add_to_blacklist">Add to blacklist</string>
+    <string name="add_your_post">Add your post</string>
+
+    <string name="alreadyHaveAccount" translatable="true">Already have an account?</string>
+
+    <string name="arrival_time">Arrival Time</string>
+
+    <string name="available">Available</string>
+    <string name="available_seats">Available Seats</string>
+
+    <string name="back" translatable="false"><![CDATA[<< Back]]></string>
+
+    <string name="booking_seat">Booking Seat</string>
+    <string name="booking_ticket">Booking Ticket</string>
+    <string name="booking_ticket_info">Book one ticket for each passenger for any bus</string>
+
+    <string name="bottom_ac_text">Account</string>
     <string name="bottom_home_text">Home</string>
     <string name="bottom_notification_text">Notification</string>
-    <string name="bottom_ac_text">Account</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="postAddSuccessfully">Your post added successfully</string>
-    <string name="imageUploadSuccessfully">The Image Uploaded Successfully</string>
-    <string name="postError">Your post failed</string>
-    <string name="try_as_guest">Try as guest</string>
-    <string name="YourPostFaildAdded">Your Post Faild Added</string>
-    <string name="enter_origin">Choose origin</string>
-    <string name="enter_destination">Choose destination</string>
-
-    <string name="top_locations">Top Locations</string>
-    <string name="recent_searches">Recent Searches</string>
-    <string name="error_message">Data can\'t be loaded</string>
-    <string name="seats">Seats</string>
-    <string name="station_no">Station No.</string>
-    <string name="current_location">Current location</string>
-    <string name="driver_name">Driver name</string>
-    <string name="driver_phone">Driver Phone</string>
-    <string name="bus_number">Bus Number</string>
-    <string name="add_new_driver">Add New Driver</string>
-    <string name="register_new_driver">Register new driver</string>
-    <string name="available">Available</string>
-    <string name="saet_numbers">Saet numbers</string>
-    <string name="tracking_all_buses">Tracking all buses</string>
-    <string name="about_company">About Company</string>
-    <string name="company_email">Company Email</string>
-    <string name="bus_numbers">Bus Numbers</string>
-    <string name="drivers_information_s">Drivers Information\'s</string>
-    <string name="company_name">Company Name</string>
-    <string name="company_phone">Company Phone</string>
-    <string name="rfid_number">RFID number</string>
-    <string name="mobile_number">Mobile Number</string>
-    <string name="city_name">City Name</string>
-    <string name="line_name">Line Name</string>
-    <string name="company_drivers">Company drivers</string>
-    <string name="phone">Phone</string>
-    <string name="enter_your_phone_number">Enter your phone number</string>
-    <string name="edit_bus_schedule">Edit Bus schedule</string>
-    <string name="check_bookings">Check bookings</string>
-    <string name="driver_email">Driver email</string>
     <string name="bus_company">Bus company</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
-    <string name="seat_numbers">Seat numbers</string>
-    <string name="spinner_title">Filter</string>
-    <string name="passenger_name">Passenger Name</string>
-    <string name="leaving_time">Leaving Time</string>
-    <string name="arrival_time">Arrival Time</string>
-    <string name="gate_number">Gate number</string>
-    <string name="seat_label">Seat label</string>
-    <string name="choose_new_time">Choose new time:</string>
-    <string name="add_new_date">Add new date</string>
-    <string name="add_ticket_price">Example: 12 ILS</string>
-    <string name="ticket_price">Ticket Price</string>
-    <string name="yourNewDateAded">Your new date added</string>
-    <string name="ils">ILS</string>
-    <string name="booking_ticket">Booking Ticket</string>
-    <string name="passenger_controlling">Passenger Controlling</string>
-    <string name="payment_method">Payment method</string>
-    <string name="add_to_blacklist">Add to blacklist</string>
-    <string name="calling">Call now</string>
-    <string name="Warning">Warning</string>
-    <string name="User_added_to_blacklist">User added to blacklist</string>
-    <string name="delete">Delete</string>
-    <string name="change_time">Change time</string>
-    <string name="passengers_numbers">Passengers numbers</string>
-    <string name="available_seats">Available Seats</string>
-    <string name="ticketDelete">Ticket deleted</string>
-    <string name="card_number">Card number</string>
-    <string name="expiration_date">Expiration Date</string>
-    <string name="add_cost_value">Add cost value</string>
-    <string name="company_buses">Company buses</string>
-    <string name="enter_buses_numbers">Enter buses numbers</string>
-    <string name="edit_bus_line">Edit bus line</string>
-    <string name="my_ticket">My ticket</string>
-    <string name="company_city">Company city</string>
-    <string name="payment_status">Payment status:</string>
-    <string name="in_cash">In Cash</string>
-    <string name="your_seat_label">Your seat label</string>
-    <string name="minute">Minute</string>
-    <string name="company">Company</string>
-    <string name="click_here_to_edit_image">Click here to edit image</string>
-
-
-    <string name="infobussystem">UNI-SmartBus, system designed for university students in particular, the system can be used by bus companies, bus drivers and students. The application allow to check the bus station in university stations, and check the available seats in the bus.The system allows passengers to check the buses schedule, booking tickets, and tracking the bus during the trip.</string>
-    <string name="seat_availability">Seat Availability</string>
-    <string name="seatAvailability">Check seats availabel for the paricular bus for each day</string>
-    <string name="street_news_info">Show the posts about street news, and add post with image and some descriptions about roads</string>
-    <string name="version_number">Version 1.0.0</string>
-    <string name="qadomy_abushomer_technologies"><![CDATA[© Qadomy&AbuShomer Technologies]]></string>
-    <string name="booking_ticket_info">Book one ticket for each passenger for any bus</string>
-    <string name="tracking_bus">Tracking Bus</string>
-    <string name="tracking_bus_info">Tracking the bus during the trip in the map using GPS</string>
-    <string name="offers">Offers</string>
-    <string name="offers_info">Check exciting offers for each bus</string>
-    <string name="devalopers">Devalopers</string>
-    <string name="devaopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
-    <string name="weak_password">Enter a strong password please!</string>
-    <string name="malformed_email">Enter a correct email please!</string>
-
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>
         <item>AAUJ-Jenin</item>
@@ -196,6 +51,242 @@
         <item>AAUJ-Borqen</item>
         <item>AAUJ-Zababdeh</item>
     </string-array>
+    <string name="bus_locations">Bus Locations</string>
+    <string name="bus_number">Bus Number</string>
+    <string name="bus_numbers">Bus Numbers</string>
+    <string name="bus_schedule">Bus Schedule</string>
+
+    <string name="calling">Call now</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="change_time">Change time</string>
+
+    <string name="check_bookings">Check bookings</string>
+
+    <string name="choose_new_time">Choose new time:</string>
+
+    <string name="city">City</string>
+    <string name="city_name">City Name</string>
+
+    <string name="click_here_to_edit_image">Click here to edit image</string>
+
+    <string name="company">Company</string>
+    <string name="company_buses">Company buses</string>
+    <string name="company_city">Company city</string>
+    <string name="company_drivers">Company drivers</string>
+    <string name="company_email">Company Email</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_phone">Company Phone</string>
+
+    <string name="connectDevaloper" translatable="true">Connect With Us</string>
+
+    <string name="create" translatable="true">Create</string>
+
+    <string name="current_location">Current location</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="devalopers">Devalopers</string>
+
+    <string name="devaopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
+
+    <string name="driver_email">Driver email</string>
+    <string name="driver_homescreen" translatable="true">Bus Driver</string>
+    <string name="driver_id" translatable="true">Enter Driver ID</string>
+    <string name="driver_name">Driver name</string>
+    <string name="driver_password" translatable="true">Enter Driver Password</string>
+    <string name="driver_phone">Driver Phone</string>
+
+    <string name="drivers_information_s">Drivers Information\'s</string>
+
+    <string name="edit_bus_line">Edit bus line</string>
+    <string name="edit_bus_schedule">Edit Bus schedule</string>
+
+    <string name="email">Email</string>
+
+    <string name="enterEmail" translatable="true">Email</string>
+
+    <string name="enterMobileNumber" translatable="true">Enter Your Mobile Number</string>
+
+    <string name="enterName" translatable="true">Enter Your Name</string>
+
+    <string name="enterPassword" translatable="true">Enter Your Password</string>
+
+    <string name="enterYourEmail">Enter your registered email</string>
+
+    <string name="enter_buses_numbers">Enter buses numbers</string>
+    <string name="enter_you_new_mobile_number">Enter you new mobile number</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="enter_your_new_email">Enter your new email</string>
+    <string name="enter_your_new_name">Enter your new name</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+
+    <string name="errorMessage">Error</string>
+
+    <string name="error_message">Data can\'t be loaded</string>
+
+    <string name="exit" translatable="true">Exit</string>
+
+    <string name="faildSendEmailReset">Failed to send reset email!</string>
+
+    <string name="fieldsMessageError">Please fill out all fields</string>
+
+    <string name="forget_your_password">Forget your password ?</string>
+
+    <string name="gate_number">Gate number</string>
+
+    <string name="help" translatable="true">Help</string>
+
+    <string name="homeTown">Home Town</string>
+
+    <string name="ils">ILS</string>
+
+    <string name="imageUploadSuccessfully">The Image Uploaded Successfully</string>
+
+    <string name="in_cash">In Cash</string>
+
+    <string name="infobussystem">UNI-SmartBus, system designed for university students in particular, the system can be used by bus companies, bus drivers and students. The application allow to check the bus station in university stations, and check the available seats in the bus.The system allows passengers to check the buses schedule, booking tickets, and tracking the bus during the trip.</string>
+
+    <string name="latitude">Latitude</string>
+
+    <string name="leaving_time">Leaving Time</string>
+
+    <string name="line_name">Line Name</string>
+
+    <string name="login" translatable="true">Log In</string>
+
+    <string name="logout" translatable="true">Log Out</string>
+
+    <string name="longitude">Longitude</string>
+
+    <string name="messgesWillbeHere">Messages will be here</string>
+
+    <string name="minute">Minute</string>
+
+    <string name="mobile">Mobile No</string>
+    <string name="mobile_number">Mobile Number</string>
+
+    <string name="my_name" translatable="false">Ali Qadomy</string>
+    <string name="my_ticket">My ticket</string>
+    <string name="malformed_email" translatable="false">Confirm your email</string>
+
+    <string name="name">Name</string>
+
+    <string name="need_regester">We just need your registered Email Id to sent you password reset instructions</string>
+
+    <string name="not_registered_yet" translatable="true">Not registered yet ?</string>
+
+    <string name="offers">Offers</string>
+    <string name="offers_info">Check exciting offers for each bus</string>
+
+    <string name="passenger_controlling">Passenger Controlling</string>
+    <string name="passenger_name">Passenger Name</string>
+
+    <string name="passengers_numbers">Passengers numbers</string>
+
+    <string name="password" translatable="true">Password</string>
+
+    <string name="passwordNOTmatch">Your password not match</string>
+
+    <string name="payment_method">Payment method</string>
+    <string name="payment_status">Payment status:</string>
+
+    <string name="phone">Phone</string>
+
+    <string name="photoSavedFaild">Photo failed saved</string>
+
+    <string name="please_accept_permissions">Please accept for required permission</string>
+
+    <string name="postAddSuccessfully">Your post added successfully</string>
+
+    <string name="postError">Your post failed</string>
+
+    <string name="press_here" translatable="true">Press Here</string>
+
+    <string name="profile">Profile</string>
+
+    <string name="qadomy_abushomer_technologies" translatable="false"><![CDATA[© Qadomy&AbuShomer Technologies]]></string>
+
+    <string name="re_password">Confirm Password</string>
+
+    <string name="registerCompleate">Register Complete</string>
+
+    <string name="register_new_driver">Register new driver</string>
+
+    <string name="resetPassword">Reset Password</string>
 
 
+    <string name="saet_numbers">Saet numbers</string>
+
+    <string name="save">Save</string>
+
+    <string name="seatAvailability">Check seats availabel for the paricular bus for each day</string>
+
+    <string name="seat_availability">Seat Availability</string>
+    <string name="seat_label">Seat label</string>
+    <string name="seat_numbers">Seat numbers</string>
+
+    <string name="seats">Seats</string>
+
+    <string name="send">Send</string>
+
+    <string name="sendEmailForReset">We have sent you instructions to reset your password!</string>
+
+    <string name="settings" translatable="true">Settings</string>
+
+    <string name="signUpFree" translatable="true">Sign Up For Free</string>
+
+    <string name="signin" translatable="true">Sign In</string>
+
+    <string name="signup" translatable="true">Sign Up</string>
+
+
+    <string name="spinner_title" translatable="false">Filter</string>
+
+    <string name="station_no">Station No.</string>
+
+    <string name="street_news">Street News</string>
+    <string name="street_news_info">Show the posts about street news, and add post with image and some descriptions about roads</string>
+
+    <string name="successfully">Successfully</string>
+
+    <string name="ticketDelete">Ticket deleted</string>
+
+    <string name="ticket_price">Ticket Price</string>
+
+    <string name="tracking_all_buses">Tracking all buses</string>
+    <string name="tracking_bus">Tracking Bus</string>
+    <string name="tracking_bus_info">Tracking the bus during the trip in the map using GPS</string>
+    <string name="tracking_enabled" translatable="true">Tracking notification</string>
+
+    <string name="try_as_guest">Try as guest</string>
+
+    <string name="typeMessageHere">Type message here</string>
+
+    <string name="university">University</string>
+
+    <string name="user_added_to_blacklist" translatable="true">User has been added to the blacklist</string>
+    <string name="user_homescreen" translatable="true">User</string>
+    <string name="user_password" translatable="true">Enter Your Password</string>
+
+    <string name="username" translatable="true">Username</string>
+
+    <string name="version_number">Version 1.0.0</string>
+
+    <string name="warning" translatable="true">Warning</string>
+
+    <string name="weak_password" translatable="false">Enter a strong password please!</string>
+
+    <string name="yourNewDateAded">Your new date added</string>
+
+    <string name="your_post_faild_added">Your Post Failed Post</string>
+    <string name="your_seat_label">Your seat label</string>
+
+    <string name="SeatsNumMessageError4" translatable="false">Seats Number mustn\'t be less than 4!</string>
+
+    <string name="SeatsNumMessageError50" translatable="false">Seats Number mustn\'t be more than 50!</string>
+
+    <string name="app_name" translatable="false">BUS-UNI</string>
 </resources>

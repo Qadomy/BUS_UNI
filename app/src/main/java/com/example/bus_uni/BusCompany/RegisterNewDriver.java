@@ -201,7 +201,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
                         } else {
 
-                            showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
+                            showMessageDialog(getString(R.string.account_creation_faild), task.getException().getMessage(),
                                     R.drawable.ic_error_red_color_30dp);
 
                             addNewDriver.setVisibility(View.VISIBLE);

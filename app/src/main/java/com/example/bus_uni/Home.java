@@ -33,6 +33,11 @@ public class Home extends AppCompatActivity {
 
     }
 
+//
+//    protected void onDestroy() {
+//
+//        super.onDestroy();
+//    }
 
     // Here for shown the menu on the MainActivity
     public boolean onCreateOptionsMenu(Menu menu) {

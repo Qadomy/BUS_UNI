@@ -117,15 +117,6 @@ public class Bus_Schedule extends AppCompatActivity {
     }
 
 
-    // for back
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.home) {
-            ActionBar actionBar = getActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     //here we click on the search image to find the buses ....
     public void searchOnCLick(View view) {
@@ -183,5 +174,15 @@ public class Bus_Schedule extends AppCompatActivity {
 
     }
 
+
+    // for back
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home) {
+            ActionBar actionBar = getActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
