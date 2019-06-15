@@ -137,6 +137,7 @@ public class CompanyHome extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
+                finish();
                  return true;
 //        //TODO: Remove this (I added it just for test)
 

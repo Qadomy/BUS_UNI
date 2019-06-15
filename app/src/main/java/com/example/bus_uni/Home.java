@@ -71,6 +71,7 @@ public class Home extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
+                finish();
                 return true;
 
             case R.id.connect_menu:
