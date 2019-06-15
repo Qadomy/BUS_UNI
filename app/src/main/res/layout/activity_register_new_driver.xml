@@ -75,7 +75,7 @@
                 android:id="@+id/driverPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textSize="15sp" />
@@ -195,7 +195,7 @@
             android:id="@+id/bus_line_price"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/busline_price"
+            android:hint="@string/ticket_price"
             android:inputType="number"
             android:padding="10dp"
             android:textSize="15sp" />

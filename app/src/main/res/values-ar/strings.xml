@@ -172,4 +172,10 @@
     <string name="user_password">أدخل كلمة مرورك</string>
     <string name="Username">اسم المستخدم</string>
     <string name="YourPostFaildAdded">فشل نشر البوست الخاص بك</string>
+    <string name="qadomy_abushomer_technologies"><![CDATA[© تقنيات قدومي & أبوشومر]]></string>
+    <string name="recent_searches">عمليات البحث الأخيرة</string>
+    <string name="signupANDlogin">التسجيل/تسجيل الدخول</string>
+    <string name="top_locations">أهم المواقع</string>
+    <string name="enter_origin">اختر مكان وجودك</string>
+    <string name="enter_buses_numbers">أدخل أرقام الحافلات</string>
 </resources>
