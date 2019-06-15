@@ -33,6 +33,11 @@ public class Home extends AppCompatActivity {
 
     }
 
+//
+//    protected void onDestroy() {
+//
+//        super.onDestroy();
+//    }
 
     // Here for shown the menu on the MainActivity
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,6 +71,7 @@ public class Home extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
+                finish();
                 return true;
 
             case R.id.connect_menu:

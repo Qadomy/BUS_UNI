@@ -321,5 +321,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(signOut);
+        finish();
     }
 }

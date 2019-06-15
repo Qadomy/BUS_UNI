@@ -63,7 +63,7 @@
                 android:background="#0000"
                 android:drawableEnd="@drawable/ic_password_white_24dp"
                 android:drawableRight="@drawable/ic_password_white_24dp"
-                android:hint="@string/Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLength="12"
                 android:padding="16dp"

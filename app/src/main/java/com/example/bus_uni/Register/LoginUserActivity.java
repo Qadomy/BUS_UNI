@@ -141,17 +141,20 @@ public class LoginUserActivity extends AppCompatActivity {
 
                     Intent signInSuccessfully = new Intent(LoginUserActivity.this, Home.class);
                     startActivity(signInSuccessfully);
+                    finish();
 
                 } else if (type == 1) {
 
 
                     Intent signInSuccessfully = new Intent(LoginUserActivity.this, CompanyHome.class);
                     startActivity(signInSuccessfully);
+                    finish();
 
                 } else if (type == 2) {
 
                     Intent signInSuccessfully = new Intent(LoginUserActivity.this, DriverHome.class);
                     startActivity(signInSuccessfully);
+                    finish();
 
                 }
             }

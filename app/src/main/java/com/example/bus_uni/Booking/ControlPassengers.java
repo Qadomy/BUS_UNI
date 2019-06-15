@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bus_uni.Driver.CheckBookings;
-import com.example.bus_uni.Driver.EditBusSchedule;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -146,7 +145,7 @@ public class ControlPassengers extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
 
-                                            showMessageDialog(getString(R.string.User_added_to_blacklist),
+                                            showMessageDialog(getString(R.string.user_added_to_blacklist),
                                                     getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
 
                                             Intent intent = new Intent(ControlPassengers.this, CheckBookings.class);

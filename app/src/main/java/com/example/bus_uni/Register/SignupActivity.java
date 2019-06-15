@@ -140,8 +140,9 @@ public class SignupActivity extends AppCompatActivity {
                             user.setType(0);
 
                             // user account created successfully
-                            showMessageDialog(getString(R.string.accountCreated), getString(R.string.successfully),
+                            showMessageDialog(getString(R.string.account_created), getString(R.string.successfully),
                                     R.drawable.ic_check_circle_30dp);
+
                             mDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -173,7 +174,7 @@ public class SignupActivity extends AppCompatActivity {
                                         R.drawable.ic_error_red_color_30dp);
 
                             } catch (Exception ex) {
-                                showMessageDialog(getString(R.string.accountCreationFaild), task.getException().getMessage(),
+                                showMessageDialog(getString(R.string.account_creation_faild), task.getException().getMessage(),
                                         R.drawable.ic_error_red_color_30dp);
                             }
                             createAccount.setVisibility(View.VISIBLE);
@@ -203,6 +204,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
+    // for back
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.home) {
             ActionBar actionBar = getActionBar();

@@ -137,13 +137,15 @@ public class CompanyHome extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
+                finish();
                  return true;
-        //TODO: Remove this (I added it just for test)
-            case R.id.add_new_driver_menu:
-                Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
-                sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
-                sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
-                startActivity(sendCompany);
+//        //TODO: Remove this (I added it just for test)
+
+//            case R.id.add_new_driver_menu:
+//                Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
+//                sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
+//                sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
+//                startActivity(sendCompany);
 
             default:
                 return super.onOptionsItemSelected(item);
