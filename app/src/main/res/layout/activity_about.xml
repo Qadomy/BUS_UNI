@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/twenty_dp"
-            android:text="@string/devalopers"
+            android:text="@string/developers"
             android:textSize="@dimen/twintySP"
             android:textStyle="bold" />
 

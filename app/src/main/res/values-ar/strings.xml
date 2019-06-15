@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">UNI Smart Bus</string>
-    <string name="password">الباسوورد</string>
-    <string name="user_added_to_blacklist">تمت اضافة المستخدم للقائمة السوداء</string>
+    <string name="user_added_to_blacklist">تمت إضافة المستخدم للقائمة السوداء</string>
     <string name="username">اسم المستخدم</string>
     <string name="warning">تحذير</string>
     <string name="your_post_faild_added">فشل نشر البوست الخاص بك</string>
     <string name="about">حول التطبيق</string>
     <string name="account_created">تم إنشاء الحساب</string>
-    <string name="account_creation_faild">تم إنشاء الحساب</string>
     <string name="accountSaved">تم حفظ البيانات الخاصة بك</string>
     <string name="accountSavedFaild">فشل حفظ البيانات الخاصة بك</string>
     <string name="accountSignInFaild">فشل تسجيل الدخول إلى الحساب</string>
@@ -49,7 +46,7 @@
     <string name="create">انشاء</string>
     <string name="current_location">الموقع الحالي</string>
     <string name="delete">حذف</string>
-    <string name="devalopers">المطورون</string>
+    <string name="developers">المطورون</string>
     <string name="devalopers_info">هذا التطبيق هو مشروع تخرج في كلية تكنولوجيا المعلومات من الجامعة العربية الأمريكية في فلسطين, للمطورين علي القدومي آلاء أبو شومر</string>
     <string name="driver_email">البريد الإلكتروني للسائق</string>
     <string name="driver_homescreen">سائق الحافلة</string>
@@ -146,10 +143,33 @@
     <string name="university">جامعة</string>
     <string name="your_seat_label">تسمية مقعدك</string>
     <string name="user_homescreen">مستخدم</string>
-    <string name="user_password">ادخل رقمك السري</string>
     <string name="version_number">الإصدار 1.0.0</string>
     <string name="yourNewDateAded">تمت اضافة موعدك الجديد</string>
-    <string name="malformed_email" translatable="false">تأكيد بريدك الالكتروني</string>
+    <string name="malformed_email" translatable="false">أدخل بريد إلكتروني صحيح لو سمحت!</string>
     <string name="weak_password" translatable="false">أدخل كلمة مرور قوية من فضلك!</string>
     <string name="bus_number">رقم الحافلة</string>
+    <string name="password">كلمة المرور</string>
+    <string name="Warning">تحذير</string>
+    <string name="about_company">حول الشركة</string>
+    <string name="accountCreated">تم إنشاء الحساب</string>
+    <string name="account_creation_faild">فشل إنشاء الحساب</string>
+    <string name="accountCreationFaild">فشل إنشاء الحساب</string>
+    <string name="add_cost_value">إضافة الثمن</string>
+    <string name="are_you_Bus_Driver">هل أنت سائق حافلة؟</string>
+    <string name="are_you_driver">هل أنت سائق؟</string>
+    <string name="are_you_user">هل أنت مستخدم (راكب)؟</string>
+    <string name="back">رجوع</string>
+    <string name="card_number">رقم البطاقة</string>
+    <string name="bottom_ac_text">الحساب</string>
+    <string name="bottom_home_text">الرئيسية</string>
+    <string name="bottom_notification_text">إشعار</string>
+    <string name="devaopers_info">هذا التطبيق هو مشروع تخرج في كلية تكنولوجيا المعلومات من الجامعة العربية الأمريكية في فلسطين, للمطورين علي القدومي آلاء أبو شومر</string>
+    <string name="enter_destination">اختر وجهتك</string>
+    <string name="expiration_date">تاريخ الانتهاء</string>
+    <string name="SeatsNumMessageError4">عدد المقاعد لا يمكن أن يكون أقل من 4!</string>
+    <string name="SeatsNumMessageError50">عدد المقاعد لا يمكن أن يكون أكثرمن 50!</string>
+    <string name="User_added_to_blacklist">تمت إضافة المستخدم للقائمة السوداء</string>
+    <string name="user_password">أدخل كلمة مرورك</string>
+    <string name="Username">اسم المستخدم</string>
+    <string name="YourPostFaildAdded">فشل نشر البوست الخاص بك</string>
 </resources>

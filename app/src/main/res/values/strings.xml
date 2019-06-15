@@ -8,9 +8,7 @@
     <string name="driver_id" translatable="true">Enter Driver ID</string>
     <string name="tracking_enabled" translatable="true">Tracking notification</string>
     <string name="driver_password" translatable="true">Enter Driver Password</string>
-    <string name="user_rfid" translatable="true">Enter Your RFID Number</string>
-    <string name="user_password" translatable="true">Enter Your Password</string>
-    <string name="enterRFID">Enter Your RFID Number</string>
+    <string name="user_password">Enter Your Password</string>
     <string name="enterPassword" translatable="true">Enter Your Password</string>
     <string name="enterName" translatable="true">Enter Your Name</string>
     <string name="enterEmail" translatable="true">Email</string>
@@ -26,8 +24,7 @@
     <string name="press_here" translatable="true">Press Here</string>
     <string name="exit" translatable="true">Exit</string>
     <string name="help" translatable="true">Help</string>
-    <string name="Password" translatable="true">Password</string>
-    <string name="Username" translatable="true">Username</string>
+    <string name="Username" translatable="true">User name</string>
     <string name="signUpFree" translatable="true">Sign Up For Free</string>
     <string name="alreadyHaveAccount" translatable="true">Already have an account?</string>
     <string name="create" translatable="true">Create</string>
@@ -61,7 +58,6 @@
     <string name="send">Send</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
-    <string name="rfid">RFID No</string>
     <string name="mobile">Mobile No</string>
     <string name="city">City</string>
     <string name="bus_locations">Bus Locations</string>
@@ -69,13 +65,12 @@
     <string name="street_news">Street News</string>
     <string name="booking_seat">Booking Seat</string>
     <string name="enter_your_new_name">Enter your new name</string>
-    <string name="enter_your_new_rfid_number">Enter your new RFID number</string>
     <string name="enter_you_new_mobile_number">Enter you new mobile number</string>
     <string name="enter_your_city">Enter your city</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="enter_your_new_password">Enter your new password</string>
-    <string name="nothingToShow">------------------------</string>
+    <string name="nothingToShow" translatable="false">------------------------</string>
     <string name="enter_your_new_email">Enter your new email</string>
     <string name="accountSaved">Your data saved</string>
     <string name="accountSavedFaild">Your data failed save</string>
@@ -92,7 +87,7 @@
     <string name="imageUploadSuccessfully">The Image Uploaded Successfully</string>
     <string name="postError">Your post failed</string>
     <string name="try_as_guest">Try as guest</string>
-    <string name="YourPostFaildAdded">Your Post Faild Added</string>
+    <string name="YourPostFaildAdded">Your Post Failed to be added</string>
     <string name="enter_origin">Choose origin</string>
     <string name="enter_destination">Choose destination</string>
 
@@ -116,7 +111,6 @@
     <string name="drivers_information_s">Drivers Information\'s</string>
     <string name="company_name">Company Name</string>
     <string name="company_phone">Company Phone</string>
-    <string name="rfid_number">RFID number</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="city_name">City Name</string>
     <string name="line_name">Line Name</string>
@@ -148,7 +142,7 @@
     <string name="add_to_blacklist">Add to blacklist</string>
     <string name="calling">Call now</string>
     <string name="Warning">Warning</string>
-    <string name="User_added_to_blacklist">User added to blacklist</string>
+    <string name="User_added_to_blacklist">User is added to blacklist</string>
     <string name="delete">Delete</string>
     <string name="change_time">Change time</string>
     <string name="passengers_numbers">Passengers numbers</string>
@@ -181,7 +175,7 @@
     <string name="tracking_bus_info">Tracking the bus during the trip in the map using GPS</string>
     <string name="offers">Offers</string>
     <string name="offers_info">Check exciting offers for each bus</string>
-    <string name="devalopers">Devalopers</string>
+    <string name="developers">Devalopers</string>
     <string name="devaopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
     <string name="weak_password">Enter a strong password please!</string>
     <string name="malformed_email">Enter a correct email please!</string>
@@ -196,6 +190,14 @@
         <item>AAUJ-Borqen</item>
         <item>AAUJ-Zababdeh</item>
     </string-array>
+    <string name="password">Password</string>
+    <string name="warning">Warning</string>
+    <string name="account_created">Account is created</string>
+    <string name="account_creation_faild">Account Creation Failed</string>
+    <string name="devalopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
+    <string name="user_added_to_blacklist">User is added to blacklist</string>
+    <string name="username">User name</string>
+    <string name="your_post_faild_added">Your Post Failed to be added</string>
 
 
 </resources>
