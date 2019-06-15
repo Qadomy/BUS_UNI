@@ -185,7 +185,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="@string/bus_numbers"
+                        android:text="@string/bus_number"
                         android:textColor="@color/redColor"
                         android:textSize="@dimen/twintySP" />
 

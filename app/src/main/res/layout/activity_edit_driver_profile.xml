@@ -110,7 +110,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:hint="@string/bus_numbers"
+                android:hint="@string/bus_number"
                 android:inputType="number"
                 android:textSize="15sp" />
 

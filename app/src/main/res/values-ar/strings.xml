@@ -7,7 +7,6 @@
     <string name="warning">تحذير</string>
     <string name="your_post_faild_added">فشل نشر البوست الخاص بك</string>
     <string name="about">حول التطبيق</string>
-    <string name="about_company">حول الشركة</string>
     <string name="account_created">تم إنشاء الحساب</string>
     <string name="account_creation_faild">تم إنشاء الحساب</string>
     <string name="accountSaved">تم حفظ البيانات الخاصة بك</string>
@@ -28,13 +27,8 @@
     <string name="booking_seat">حجز مقعد</string>
     <string name="booking_ticket">حجز تذكرة</string>
     <string name="booking_ticket_info">حجز تذكرة واحدة لكل راكب لأي حافلة</string>
-    <string name="bottom_ac_text">الحساب</string>
-    <string name="bottom_home_text">الصفحة الرئيسية</string>
-    <string name="bottom_notification_text">إشعار</string>
     <string name="bus_company">شركة الحافلات</string>
     <string name="bus_locations">مواقع الحافلات</string>
-    <string name="bus_number">رقم الباص</string>
-    <string name="bus_numbers">أرقام الحافلات</string>
     <string name="bus_schedule">جدول الحافلات</string>
     <string name="calling">اتصل الان</string>
     <string name="cancel">إلغاء</string>
@@ -56,7 +50,7 @@
     <string name="current_location">الموقع الحالي</string>
     <string name="delete">حذف</string>
     <string name="devalopers">المطورون</string>
-    <string name="devaopers_info">هذا التطبيق هو مشروع تخرج في كلية تكنولوجيا المعلومات من الجامعة العربية الأمريكية في فلسطين, للمطورين علي القدومي آلاء أبو شومر</string>
+    <string name="devalopers_info">هذا التطبيق هو مشروع تخرج في كلية تكنولوجيا المعلومات من الجامعة العربية الأمريكية في فلسطين, للمطورين علي القدومي آلاء أبو شومر</string>
     <string name="driver_email">البريد الإلكتروني للسائق</string>
     <string name="driver_homescreen">سائق الحافلة</string>
     <string name="driver_id">ادخل المعرف الشخصي للسائق</string>
@@ -72,7 +66,6 @@
     <string name="enterName">أدخل أسمك</string>
     <string name="enterPassword">ادخل رقمك السري</string>
     <string name="enterYourEmail">أدخل بريدك الإلكتروني المسجل</string>
-    <string name="enter_buses_numbers">أدخل أرقام الحافلات</string>
     <string name="enter_you_new_mobile_number">أدخل رقم هاتفك المحمول الجديد</string>
     <string name="enter_your_city">أدخل مدينتك</string>
     <string name="enter_your_new_email">أدخل بريدك الإلكتروني الجديد</string>
@@ -156,4 +149,7 @@
     <string name="user_password">ادخل رقمك السري</string>
     <string name="version_number">الإصدار 1.0.0</string>
     <string name="yourNewDateAded">تمت اضافة موعدك الجديد</string>
+    <string name="malformed_email" translatable="false">تأكيد بريدك الالكتروني</string>
+    <string name="weak_password" translatable="false">أدخل كلمة مرور قوية من فضلك!</string>
+    <string name="bus_number">رقم الحافلة</string>
 </resources>
