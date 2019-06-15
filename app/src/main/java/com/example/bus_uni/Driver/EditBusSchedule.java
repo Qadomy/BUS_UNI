@@ -35,7 +35,7 @@ public class EditBusSchedule extends AppCompatActivity {
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
-    private String keyId, busLine="", driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum;
+    private String keyId, busLine="", driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum,price;
     //
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
@@ -60,7 +60,7 @@ public class EditBusSchedule extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
+                //TODO: WHAT difference here and below?
                 busLine = dataSnapshot.child("bus_line").getValue().toString();
                 driverName = dataSnapshot.child("name").getValue().toString();
                 seatNumber = dataSnapshot.child("bus_seat").getValue().toString();
@@ -69,7 +69,7 @@ public class EditBusSchedule extends AppCompatActivity {
                 latitude = dataSnapshot.child("latitude").getValue().toString();
                 longitude = dataSnapshot.child("longitude").getValue().toString();
                 busNum = dataSnapshot.child("bus_num").getValue().toString();
-
+                price=dataSnapshot.child("line_price").getValue().toString();
 
                 mRecyclerView = (RecyclerView) findViewById(R.id.editSchudeleDate_RecycleView);
                 showTicketsInRecycleView();
@@ -89,9 +89,6 @@ public class EditBusSchedule extends AppCompatActivity {
          *
          *   */
 
-
-
-
     }// end of onCreate
 
 
@@ -102,7 +99,6 @@ public class EditBusSchedule extends AppCompatActivity {
 
 
 
-        // todo: get the busline from databaserefernce
         mEditTicketDatabaseReference.child(busLine).
                 addValueEventListener(new ValueEventListener() {
                     @Override
@@ -111,7 +107,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
                             keyId = childSnapshot.getKey();
 
-
+                            //TODO: WHAT difference here and above?
                             String driverName = childSnapshot.child("name").getValue().toString();
 
                             // declare this function out of this scope
@@ -119,6 +115,7 @@ public class EditBusSchedule extends AppCompatActivity {
                             String line = childSnapshot.child("busLine").getValue().toString();
                             String price = childSnapshot.child("price").getValue().toString();
                             String time = childSnapshot.child("leavingTime").getValue().toString();
+                           //TODO: Ensure seat number & number of seats
                             String seat = childSnapshot.child("seatNum").getValue().toString();
                             String company = childSnapshot.child("company").getValue().toString();
                             String phone = childSnapshot.child("driverPhone").getValue().toString();
@@ -176,9 +173,8 @@ public class EditBusSchedule extends AppCompatActivity {
         final TimePicker timeInput = (TimePicker) promptsView
                 .findViewById(R.id.timePicker_addNewDate);
 
-        //TODO: Make the price constant for the same bus line tickets
         final EditText ticketPrice = (EditText) promptsView.findViewById(R.id.addTicketPrice);
-
+        ticketPrice.setText(price);
 
         // set dialog message
         alertDialogBuilder
@@ -263,6 +259,7 @@ public class EditBusSchedule extends AppCompatActivity {
 
         // show it
         alertDialog.show();
+    tickets.clear();
     }
 
 

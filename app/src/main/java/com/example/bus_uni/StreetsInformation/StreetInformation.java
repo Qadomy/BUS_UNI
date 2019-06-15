@@ -302,12 +302,16 @@ public class StreetInformation extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    //TODO: sorting post by date (Descending)
                     Post post = childSnapshot.getValue(Post.class);
                     posts.add(post);
 
 
                 }
+           /*     String s="";
+                for(int i=0;i<posts.size();i++)
+                    s+=posts.get(i).getPostText()+"   ";
+                Toast.makeText(StreetInformation.this,s,Toast.LENGTH_LONG).show();
+*/
                 showRecycleView();
 
             }
@@ -327,6 +331,7 @@ public class StreetInformation extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
         //To show them in descending order
+        Collections.reverse(posts);
         mPostAdapter = new PostAdapter(posts, StreetInformation.this);
         mRecyclerView.setAdapter(mPostAdapter);
         mRecyclerView.setVisibility(View.VISIBLE);

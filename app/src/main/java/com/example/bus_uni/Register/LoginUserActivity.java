@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.Driver.DriverHome;
@@ -33,6 +34,7 @@ public class LoginUserActivity extends AppCompatActivity {
     private Button signin, resetPssword;
     private EditText inputEmail, inputPassword;
     private ProgressBar progressBarLogin;
+    String currentuser ="";
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
@@ -100,6 +102,8 @@ public class LoginUserActivity extends AppCompatActivity {
                         // if the sign in failed display a message dialog for user
                         // and if sign in succeeds will user notified
                         if (task.isSuccessful()) {
+                            currentuser = firebaseAuth.getCurrentUser().getUid();
+
                             showMessageDialog(getString(R.string.accountSignin), getString(R.string.successfully), R.drawable.ic_check_circle_30dp);
                             checkType();
 
@@ -117,9 +121,8 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
     private void checkType() {
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-      DatabaseReference user= databaseReference.child(currentUser);
+    //    Toast.makeText(this,currentuser,Toast.LENGTH_LONG).show();
+      DatabaseReference user= databaseReference.child(currentuser);
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

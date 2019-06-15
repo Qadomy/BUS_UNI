@@ -38,7 +38,7 @@
     <string name="re_password">Confirm Password</string>
     <string name="please_accept_permissions">Please accept for required permission</string>
     <string name="signupANDlogin">Sign up/Sign In</string>
-    <string name="fieldsMessageError">Please fill out all fields</string>
+    <string name="fieldsMessageError">Please fill out all required fields!</string>
     <string name="SeatsNumMessageError50">Seats Number mustn\'t be more than 50!</string>
     <string name="SeatsNumMessageError4">Seats Number mustn\'t be less than 4!</string>
     <string name="accountCreated">Account Created</string>
@@ -185,6 +185,7 @@
     <string name="devaopers_info">This system is a graduation project at the IT Faculty of the Arab American University in Palestine, from the Ali Qadomy and Ala` Abu Shomer</string>
     <string name="weak_password">Enter a strong password please!</string>
     <string name="malformed_email">Enter a correct email please!</string>
+    <string name="busline_price">Price</string>
 
     <string-array name="bus_line_names">
         <item>AAUJ-Tulkarm</item>

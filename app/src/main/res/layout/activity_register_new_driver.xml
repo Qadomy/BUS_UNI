@@ -171,16 +171,6 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_bus_line_name" />
 
-        <!--<EditText-->
-        <!--android:id="@+id/busLineName"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:padding="10dp"-->
-        <!--android:inputType="text"-->
-        <!--android:hint="Enter Line Name"-->
-        <!--android:textSize="15sp"/>-->
-
-        <!--TODO: here put a Edit text for add a new lines to spinner-->
         <Spinner
             android:id="@+id/bus_line_name_spinner"
             android:layout_width="match_parent"
@@ -190,11 +180,36 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <!--TODO: Change icon to Cash-->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_bus_line_name" />
+        <EditText
+            android:id="@+id/bus_line_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/busline_price"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="15sp" />
+
+
+
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/driverProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 
 
     <Button

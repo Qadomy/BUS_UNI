@@ -15,7 +15,7 @@ public class User {
     private String bus_company = ""; // here the name of company for each driver
     private String profile_pic = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
     private int type; // 0: Student , 1: Company , 2: Driver
-
+    private String line_price="";
 
     //Default Const. for retrieving User Obj from firebase
     public User() {
@@ -144,5 +144,13 @@ public class User {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getLine_price() {
+        return line_price;
+    }
+
+    public void setLine_price(String line_price) {
+        this.line_price = line_price;
     }
 }
