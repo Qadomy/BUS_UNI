@@ -144,17 +144,14 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-
                 android:src="@drawable/seat_normal_booked" />
 
-            <EditText
-                android:id="@+id/busSaetNumber"
+            <Spinner
+                android:id="@+id/seatsNumberSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/seat_numbers"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent">
+
+            </Spinner>
 
         </LinearLayout>
     </LinearLayout>
@@ -171,16 +168,6 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_bus_line_name" />
 
-        <!--<EditText-->
-        <!--android:id="@+id/busLineName"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:padding="10dp"-->
-        <!--android:inputType="text"-->
-        <!--android:hint="Enter Line Name"-->
-        <!--android:textSize="15sp"/>-->
-
-        <!--TODO: here put a Edit text for add a new lines to spinner-->
         <Spinner
             android:id="@+id/bus_line_name_spinner"
             android:layout_width="match_parent"

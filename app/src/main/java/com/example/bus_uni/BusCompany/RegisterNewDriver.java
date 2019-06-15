@@ -38,9 +38,9 @@ public class RegisterNewDriver extends AppCompatActivity {
     FirebaseUser companyUser;
     private Button addNewDriver;
 
-    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusSeat_Num;
+    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num;
 
-    private Spinner bus_line_spinner;
+    private Spinner bus_line_spinner, bus_seat_number_spinner;
 
     private ProgressBar loadingProgress;
 
@@ -79,18 +79,24 @@ public class RegisterNewDriver extends AppCompatActivity {
         dPass = (EditText) findViewById(R.id.driverPasswordEditText);
         dPhone = (EditText) findViewById(R.id.driverPhoneEditText);
         dBusLine_Num = (EditText) findViewById(R.id.busNumber);
-        dBusSeat_Num = (EditText) findViewById(R.id.busSaetNumber);
         bus_line_spinner = (Spinner) findViewById(R.id.bus_line_name_spinner);
+        bus_seat_number_spinner =(Spinner)findViewById(R.id.seatsNumberSpinner);
 
 
         addNewDriver = (Button) findViewById(R.id.addNewDriverButton);
         loadingProgress = (ProgressBar) findViewById(R.id.driverProgressBar);
 
 
-        // here for init the spinner and get her the data from string array
+        // here for init the bus lines spinner and get her the data from string array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bus_line_names, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bus_line_spinner.setAdapter(adapter);
+
+        // init bus seat number spinner
+        ArrayAdapter<CharSequence> seatnumber = ArrayAdapter.createFromResource(this, R.array.bus_seat_numbers, android.R.layout.simple_spinner_item);
+        seatnumber.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bus_seat_number_spinner.setAdapter(seatnumber);
+
 
 
         addNewDriver.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +108,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                 final String pass = dPass.getText().toString();
                 final String phone = dPhone.getText().toString();
                 final String busNum = dBusLine_Num.getText().toString();
-                final String busSeat = dBusSeat_Num.getText().toString();
+                final String busSeat = bus_seat_number_spinner.getSelectedItem().toString();
                 final String bus_line = bus_line_spinner.getSelectedItem().toString();
 
 
@@ -113,18 +119,6 @@ public class RegisterNewDriver extends AppCompatActivity {
                     showMessageDialog(getString(R.string.errorMessage), getString(R.string.fieldsMessageError),
                             R.drawable.ic_error_red_color_30dp);
 
-                    addNewDriver.setVisibility(View.VISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
-
-                } else if ((Integer.parseInt(busSeat)) > 50) {
-                    showMessageDialog(getString(R.string.errorMessage), getString(R.string.SeatsNumMessageError50),
-                            R.drawable.ic_error_red_color_30dp);
-                    addNewDriver.setVisibility(View.VISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
-
-                } else if ((Integer.parseInt(busSeat)) < 4) {
-                    showMessageDialog(getString(R.string.errorMessage), getString(R.string.SeatsNumMessageError4),
-                            R.drawable.ic_error_red_color_30dp);
                     addNewDriver.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
 
