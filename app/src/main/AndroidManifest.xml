@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About"></activity>
+        <activity android:name=".BusCompany.ShowDriversOnMap"></activity>
+        <activity android:name=".About" />
         <activity android:name=".MyLocation" />
 
         <service
@@ -29,9 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".StreetsInformation.StreetInformation">
-
-         </activity>
+        <activity android:name=".StreetsInformation.StreetInformation"></activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -66,19 +65,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
-
         </activity>
         <activity android:name=".Driver.CheckBookings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
         </activity>
-        <activity android:name=".Driver.DriverHome" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Driver.DriverHome">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- Driver Home -->
+
         </activity>
         <activity android:name=".BusCompany.CompanyDrivers">
             <meta-data
@@ -100,7 +96,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BusCompany.CompanyHome" />
-
         </activity>
         <activity android:name=".BusSchedule.CurrentBusLocation" />
         <activity android:name=".Home">
@@ -128,7 +123,11 @@
 
             <!-- splasssh -->
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".HelpActivity"
@@ -179,10 +178,9 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDzDhfPTZrlGJ-rgFm8dP4_wdNpy64XJOs" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB-hBKSipzV9a8mLOTbTbgt9zudAIvt2og"/>
+            android:value="AIzaSyB-hBKSipzV9a8mLOTbTbgt9zudAIvt2og" />
     </application>
 
 </manifest>

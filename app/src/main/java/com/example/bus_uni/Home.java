@@ -33,11 +33,13 @@ public class Home extends AppCompatActivity {
 
     }
 
-//
-//    protected void onDestroy() {
-//
-//        super.onDestroy();
-//    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        finish();
+    }
 
     // Here for shown the menu on the MainActivity
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,6 +103,7 @@ public class Home extends AppCompatActivity {
 
     public void bookinSeatClick(View view) {
         Intent booking = new Intent(Home.this, BookingSeat.class);
+//        booking.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(booking);
     }
 

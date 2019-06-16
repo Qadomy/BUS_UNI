@@ -10,4 +10,5 @@
     <dimen name="sixty">60sp</dimen>
     <dimen name="twintySP">20sp</dimen>
     <dimen name="fifteen_SP">15sp</dimen>
+    <dimen name="FifteenSP">15sp</dimen>
 </resources>

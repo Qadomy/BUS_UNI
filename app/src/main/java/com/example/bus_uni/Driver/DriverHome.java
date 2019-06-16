@@ -182,7 +182,7 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
         //Log.d("msg111", "onLocationChanged");
 
 
-        lastLocation = location;   //------->        //********??
+        lastLocation = location;
 
         // here for get the longitude and latitude
         getLatitude = location.getLatitude();

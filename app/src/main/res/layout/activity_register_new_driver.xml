@@ -147,14 +147,12 @@
 
                 android:src="@drawable/seat_normal_booked" />
 
-            <EditText
-                android:id="@+id/busSaetNumber"
+            <Spinner
+                android:id="@+id/busSeatNumbers_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/saet_numbers"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent">
+
+            </Spinner>
 
         </LinearLayout>
     </LinearLayout>
@@ -190,7 +188,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_bus_line_name" />
+            android:src="@drawable/ic_bank_money" />
         <EditText
             android:id="@+id/bus_line_price"
             android:layout_width="match_parent"
@@ -199,7 +197,6 @@
             android:inputType="number"
             android:padding="10dp"
             android:textSize="15sp" />
-
 
 
     </LinearLayout>

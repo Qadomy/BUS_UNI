@@ -14,42 +14,12 @@ public class MyLocation extends AppCompatActivity {
 
     private GoogleMap map;
 
-    String driverId;
-
-    DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_location);
 
-
-        Intent getFromBusCard = getIntent();
-        driverId = getFromBusCard.getExtras().getString("driverId");
-
-
-        Toast.makeText(this, driverId, Toast.LENGTH_SHORT).show();
-
-
-//        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
-//        mDatabaseReference.child(driverId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String latitude = dataSnapshot.child("latitude").getValue().toString();
-//                String longitude = dataSnapshot.child("longitude").getValue().toString();
-//
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
     }
 

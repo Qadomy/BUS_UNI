@@ -381,7 +381,7 @@
         android:onClick="cancelBooking"
         android:layout_height="wrap_content"
         android:background="@drawable/angle"
-        android:text="Cancel Booking"
+        android:text="@string/cancel_booking"
         android:textAllCaps="false"
         android:textSize="@dimen/twintySP"
         android:layout_margin="40dp"/>

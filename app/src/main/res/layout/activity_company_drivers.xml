@@ -7,9 +7,9 @@
     tools:context=".BusCompany.CompanyDrivers">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/allDrivers_RecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

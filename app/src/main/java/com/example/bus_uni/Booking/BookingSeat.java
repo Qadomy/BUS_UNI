@@ -92,6 +92,7 @@ public class BookingSeat extends AppCompatActivity {
                     Toast.makeText(BookingSeat.this, "You have no booking tickets yet", Toast.LENGTH_SHORT).show();
                     Intent backHome = new Intent(BookingSeat.this, Home.class);
                     startActivity(backHome);
+                    finish();
                 }
 
             }

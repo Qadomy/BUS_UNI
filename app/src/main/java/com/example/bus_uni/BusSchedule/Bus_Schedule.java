@@ -32,6 +32,8 @@ public class Bus_Schedule extends AppCompatActivity {
 
     private boolean searchFlag=false;
     String keyId="";
+
+
     private RecyclerView mRecyclerView;
     private TicketAdpter mTicketAdpter;
     private TextView mErrorMessageDisplay;

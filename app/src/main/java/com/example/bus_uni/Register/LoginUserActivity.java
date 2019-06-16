@@ -108,6 +108,7 @@ public class LoginUserActivity extends AppCompatActivity {
                             checkType();
 
 
+
                         } else {
 
                             showMessageDialog(getString(R.string.accountSignInFaild), task.getException().getMessage(), R.drawable.ic_error_red_color_30dp);
@@ -121,7 +122,6 @@ public class LoginUserActivity extends AppCompatActivity {
     }
 
     private void checkType() {
-    //    Toast.makeText(this,currentuser,Toast.LENGTH_LONG).show();
       DatabaseReference user= databaseReference.child(currentuser);
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -155,6 +155,8 @@ public class LoginUserActivity extends AppCompatActivity {
                     Intent signInSuccessfully = new Intent(LoginUserActivity.this, DriverHome.class);
                     startActivity(signInSuccessfully);
                     finish();
+
+                    // 🤣🤣
 
                 }
             }
