@@ -216,6 +216,7 @@ public class BusInformationsCard extends AppCompatActivity {
                  *
                  * here we send the latitude and longitude to currentLocations to tracking the bus
                  * */
+                //TODO: Change this to go to MapsActivity (with id of specific bus location "not current user")
                 Intent currentLocation = new Intent(BusInformationsCard.this, CurrentBusLocation.class);
                 currentLocation.putExtra("latitude", latitude);
                 currentLocation.putExtra("longitude", longitude);

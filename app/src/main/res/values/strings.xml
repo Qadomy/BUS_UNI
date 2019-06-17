@@ -288,4 +288,6 @@
     <string name="show_on_map">Show on map</string>
     <string name="line" translatable="true">Line</string>
     <string name="send_email">Send Email</string>
+    <string name="firebase_path" translatable="false">locations</string>
+    <string name="notification_text">Tracking is enabled</string>
 </resources>

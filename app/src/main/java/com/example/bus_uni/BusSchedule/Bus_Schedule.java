@@ -68,13 +68,10 @@ public class Bus_Schedule extends AppCompatActivity {
         busLineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              // if(position!=0)
                 Log.d("Position",busLineSpinner.getSelectedItemPosition()+"");
-                Toast.makeText(Bus_Schedule.this,busLineSpinner.getSelectedItemPosition()+"",Toast.LENGTH_LONG).show();
+//                Toast.makeText(Bus_Schedule.this,busLineSpinner.getSelectedItemPosition()+"",Toast.LENGTH_LONG).show();
 
                 searchFlag=false;
-                //TODO: Keep this statement or remove it? (Visibility)
-                   // mRecyclerView.setVisibility(View.INVISIBLE);
                     tickets.clear();
                // }
             }
@@ -122,7 +119,7 @@ public class Bus_Schedule extends AppCompatActivity {
 
     //here we click on the search image to find the buses ....
     public void searchOnCLick(View view) {
-        Toast.makeText(this,searchFlag+"",Toast.LENGTH_LONG).show();
+      //  Toast.makeText(this,searchFlag+"",Toast.LENGTH_LONG).show();
         // here get what chosen in spinner and found all dates same in database realtime
         if(!searchFlag) {
             String bus_line = busLineSpinner.getSelectedItem().toString();

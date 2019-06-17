@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.Driver.DriverHome;
 import com.example.bus_uni.Driver.DriverLocation;
+import com.example.bus_uni.Driver.MapsActivity;
 import com.example.bus_uni.Home;
 import com.example.bus_uni.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -152,7 +153,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
                 } else if (type == 2) {
 
-                    Intent signInSuccessfully = new Intent(LoginUserActivity.this, DriverHome.class);
+                    Intent signInSuccessfully = new Intent(LoginUserActivity.this, MapsActivity.class);
                     startActivity(signInSuccessfully);
                     finish();
 

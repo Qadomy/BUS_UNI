@@ -284,10 +284,6 @@ public class DriverHome extends FragmentActivity implements LocationListener, On
     }
 
 
-    //////////////////////////////////
-    //////////////////////////////////
-
-
     public void checkBooking(View view) {
         Intent checkBookings = new Intent(DriverHome.this, CheckBookings.class);
         startActivity(checkBookings);

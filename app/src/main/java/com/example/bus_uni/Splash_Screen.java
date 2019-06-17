@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
 import com.example.bus_uni.Driver.DriverHome;
+import com.example.bus_uni.Driver.MapsActivity;
 import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.Register.SignupForFree;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,7 +111,7 @@ public class Splash_Screen extends AppCompatActivity {
 
                 } else if (type == 2) {
 
-                    Intent signInSuccessfully = new Intent(Splash_Screen.this, DriverHome.class);
+                    Intent signInSuccessfully = new Intent(Splash_Screen.this, MapsActivity.class);
                     startActivity(signInSuccessfully);
 
                 }

@@ -25,35 +25,34 @@ import com.google.firebase.database.ValueEventListener;
 public class BookingSeat extends AppCompatActivity {
 
 
-    TextView passengerName, orignLocation, destinationLocation, leavingTime, arrivalTime, busNumber, gateNumber, seatNumber, driverName, driverPhone, companyName, rfidNumber;
+    TextView passengerName, orignLocation, destinationLocation, leavingTime, arrivalTime, busNumber, gateNumber, seatNumber, driverName, driverPhone, companyName;
 
     DatabaseReference mDatabaseReference, mDeleteFromDatabase;
-
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String currentUser = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_seat);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (currentUser == null) {
-            Toast.makeText(this, "You have no booking ticket yet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must be logged in!", Toast.LENGTH_SHORT).show();
         }
 
 
-        passengerName = (TextView) findViewById(R.id.textViewPassengerName);
-        orignLocation = (TextView) findViewById(R.id.textViewOriginLocation);
-        destinationLocation = (TextView) findViewById(R.id.textViewDestinationLocation);
-        leavingTime = (TextView) findViewById(R.id.textViewLeavingTime);
-        arrivalTime = (TextView) findViewById(R.id.textViewArrivalTime);
-        busNumber = (TextView) findViewById(R.id.textViewBusNumber);
-        gateNumber = (TextView) findViewById(R.id.textViewGate);
-        seatNumber = (TextView) findViewById(R.id.textViewSeat);
+        passengerName =  findViewById(R.id.textViewPassengerName);
+        orignLocation =  findViewById(R.id.textViewOriginLocation);
+        destinationLocation =  findViewById(R.id.textViewDestinationLocation);
+        leavingTime =  findViewById(R.id.textViewLeavingTime);
+        arrivalTime =  findViewById(R.id.textViewArrivalTime);
+        busNumber =  findViewById(R.id.textViewBusNumber);
+        gateNumber =  findViewById(R.id.textViewGate);
+        seatNumber =  findViewById(R.id.textViewSeat);
 //        driverName = (TextView) findViewById(R.id.driverName_bookingSeat);
 //        driverPhone = (TextView) findViewById(R.id.driverPhone_bookingSeat);
 //        companyName = (TextView) findViewById(R.id.companyName_bookingSeat);
-//        rfidNumber = (TextView) findViewById(R.id.rfidNumber_bookingSeat);
 
 
         // init databaseReference
@@ -85,11 +84,10 @@ public class BookingSeat extends AppCompatActivity {
 //                driverName.setText(driver_Name);
 //                driverPhone.setText(driver_Phone);
 //                companyName.setText(company);
-//                rfidNumber.setText(rfid_Number);
 
                 } else {
 
-                    Toast.makeText(BookingSeat.this, "You have no booking tickets yet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingSeat.this, "You have no booked tickets yet!", Toast.LENGTH_SHORT).show();
                     Intent backHome = new Intent(BookingSeat.this, Home.class);
                     startActivity(backHome);
                     finish();

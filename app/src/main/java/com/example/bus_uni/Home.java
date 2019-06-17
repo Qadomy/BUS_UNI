@@ -84,7 +84,15 @@ public class Home extends AppCompatActivity {
                 startActivity(new Intent(Home.this, About.class));
                 return true;
 
-            //TODO:
+            case R.id.book:
+                Intent booking = new Intent(Home.this, BookingSeat.class);
+                startActivity(booking);
+                return true;
+            case R.id.schedule:
+                Intent busSchedule = new Intent(Home.this, Bus_Schedule.class);
+                startActivity(busSchedule);
+                return true;
+
             case R.id.exit_menu:
                 finish();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
