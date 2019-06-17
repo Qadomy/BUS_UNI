@@ -45,7 +45,7 @@
         <activity android:name=".Driver.DriverProfile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Driver.DriverHome" />
+                android:value=".Driver.MapsActivity" />
         </activity>
         <activity android:name=".BusSchedule.BusInformationsCard">
             <meta-data
@@ -58,12 +58,12 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Driver.DriverHome" />
+                android:value=".Driver.MapsActivity" />
         </activity>
         <activity android:name=".Driver.CheckBookings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Driver.DriverHome" />
+                android:value=".Driver.MapsActivity" />
         </activity>
         <activity android:name=".BusCompany.CompanyDrivers">
             <meta-data
