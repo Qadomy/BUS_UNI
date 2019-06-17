@@ -32,8 +32,8 @@ public class CompanyHome extends AppCompatActivity {
     TextView companyName;
 
     String name;
-    final static String EXTRA_COMPANY_NAME = "companyName";
-    final static String EXTRA_COMPANY_OBJECT = "Company Object";
+     final static  String EXTRA_COMPANY_NAME="companyName";
+     final static  String EXTRA_COMPANY_OBJECT="Company Object";
     // firebase auth
     private FirebaseAuth firebaseAuth;
 
@@ -53,7 +53,7 @@ public class CompanyHome extends AppCompatActivity {
         // init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
         // here for get the id of current user and save in the string
-        companyUser = firebaseAuth.getCurrentUser();
+         companyUser=firebaseAuth.getCurrentUser();
         String currentuser = companyUser.getUid();
 
         //TODO: We can use method (finishActivityFromChild) for back arrow
@@ -65,7 +65,7 @@ public class CompanyHome extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 // here using Picasso for get the image url and set in ImageView
-                //TODO: NULL Pointer Exception Here! maybe because the current user became the new driver not company
+               //TODO: NULL Pointer Exception Here! maybe because the current user became the new driver not company
                 String imageUrl = dataSnapshot.child("profile_pic").getValue().toString();
                 Picasso.with(CompanyHome.this).load(imageUrl).into(companyPic);
 
@@ -88,11 +88,9 @@ public class CompanyHome extends AppCompatActivity {
 
 
     public void addNewDriver(View view) {
-        Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
+        Intent sendCompany= new Intent(CompanyHome.this, RegisterNewDriver.class);
         sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
-        sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
-        //TODO: Try this on Ali's Mobile
-        Toast.makeText(this, companyUser.getEmail(), Toast.LENGTH_LONG).show();
+        sendCompany.putExtra(EXTRA_COMPANY_OBJECT,companyUser);
         startActivity(sendCompany);
     }
 
@@ -138,13 +136,14 @@ public class CompanyHome extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
                 finish();
-                return true;
+                 return true;
+//        //TODO: Remove this (I added it just for test)
 
-         //   case R.id.add_new_driver_menu:
-           //     Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
-             //   sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
-                // sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
-               // startActivity(sendCompany);
+//            case R.id.add_new_driver_menu:
+//                Intent sendCompany = new Intent(CompanyHome.this, RegisterNewDriver.class);
+//                sendCompany.putExtra(EXTRA_COMPANY_NAME, name);
+//                sendCompany.putExtra(EXTRA_COMPANY_OBJECT, companyUser);
+//                startActivity(sendCompany);
 
             default:
                 return super.onOptionsItemSelected(item);

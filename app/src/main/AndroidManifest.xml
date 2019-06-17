@@ -19,16 +19,6 @@
         <activity android:name=".About" />
         <activity android:name=".MyLocation" />
 
-        <service
-            android:name=".Driver.TrackingService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".Driver.TrackerService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".Driver.DriverLocation" />
         <activity android:name=".Setting">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -75,11 +65,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.DriverHome" />
         </activity>
-        <activity android:name=".Driver.DriverHome">
-
-            <!-- Driver Home -->
-
-        </activity>
         <activity android:name=".BusCompany.CompanyDrivers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -111,6 +96,9 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register.LoginUserActivity" />
+        </activity>
+        <activity android:name=".Driver.MapsActivity">
+
         </activity>
         <activity android:name=".Register.ProfileEdit_user">
             <meta-data
@@ -171,7 +159,6 @@
                 android:name="asignuport.PARENT_ACTIVITY"
                 android:value=".SignupForFree" />
         </activity>
-        <activity android:name=".Driver.MapsActivity"></activity>
         <!--
         **
         ********
@@ -180,12 +167,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-   <!--     <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD2uDJtJAXNQueh0LT-3iMhHEuHx25Kl-U" />-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyB-hBKSipzV9a8mLOTbTbgt9zudAIvt2og" />
     </application>
 
 </manifest>

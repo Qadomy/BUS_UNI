@@ -51,6 +51,7 @@
         <item>4</item>
         <item>7</item>
         <item>20</item>
+        <item>50</item>
         <item>55</item>
     </string-array>
 
@@ -278,7 +279,7 @@
 
     <string name="back" translatable="false"><![CDATA[<< Back]]></string>
 
-    <string name="my_name" translatable="false">Ali Qadomy</string>
+    <string name="ali_qadomy_name" translatable="false">Ali Qadomy</string>
 
     <string name="qadomy_abushomer_technologies" translatable="false"><![CDATA[© Qadomy&Abushomer Technologies]]></string>
 
@@ -287,7 +288,8 @@
     <string name="busline_price" translatable="true">Bus line price</string>
     <string name="show_on_map">Show on map</string>
     <string name="line" translatable="true">Line</string>
-    <string name="send_email">Send Email</string>
-    <string name="firebase_path" translatable="false">locations</string>
+    <string name="send_email" translatable="true">Send Email</string>
+    <string name="ala_abushomer_name" translatable="false">Ala` Abushomer</string>
+    <string name="locations" translatable="false">locations</string>
     <string name="notification_text">Tracking is enabled</string>
 </resources>

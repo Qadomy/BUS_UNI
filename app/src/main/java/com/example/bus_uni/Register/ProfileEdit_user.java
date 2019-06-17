@@ -224,7 +224,7 @@ public class ProfileEdit_user extends AppCompatActivity {
                     saveNewUserData(name, pass, mobile, city, oldImage[0]);
                 }
 
-
+                
             }
         });
 

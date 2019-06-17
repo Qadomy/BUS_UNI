@@ -156,7 +156,6 @@
     <string name="busline_price">سعر الخط</string>
     <string name="show_on_map">أظهر على الخريطة</string>
     <string name="line">الخط</string>
-    <string name="send_email">أرسل بريد</string>
-    <string name="notification_text">التتبع فعال</string>
-
+    <string name="send_email">ارسل بريد الكتروني</string>
+    <string name="notification_text">تتبع الحافلة فعال</string>
 </resources>

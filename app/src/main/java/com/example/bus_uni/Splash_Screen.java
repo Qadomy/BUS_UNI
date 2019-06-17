@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
-import com.example.bus_uni.Driver.DriverHome;
 import com.example.bus_uni.Driver.MapsActivity;
-import com.example.bus_uni.Register.LoginUserActivity;
 import com.example.bus_uni.Register.SignupForFree;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

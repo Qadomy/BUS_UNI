@@ -14,6 +14,7 @@ import android.widget.Switch;
 import java.util.Locale;
 
 public class Setting extends AppCompatActivity {
+
     private Switch switchLang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

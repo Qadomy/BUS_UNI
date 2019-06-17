@@ -24,7 +24,7 @@ public class User {
 
     public User(double longitude, double latitude, String name, String email, String password,
                 String mobile, String city, String bus_num, String bus_line, String bus_seat,
-                String bus_company, String profile_pic, int type) {
+                String bus_company, String profile_pic, int type, String line_price) {
 
         this.longitude = longitude;
         this.latitude = latitude;
@@ -39,8 +39,8 @@ public class User {
         this.bus_company = bus_company;
         this.profile_pic = profile_pic;
         this.type = type;
+        this.line_price = line_price;
     }
-
 
     public double getLongitude() {
         return longitude;

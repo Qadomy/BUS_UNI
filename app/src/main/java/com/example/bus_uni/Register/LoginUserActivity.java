@@ -15,8 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.bus_uni.BusCompany.CompanyHome;
-import com.example.bus_uni.Driver.DriverHome;
-import com.example.bus_uni.Driver.DriverLocation;
 import com.example.bus_uni.Driver.MapsActivity;
 import com.example.bus_uni.Home;
 import com.example.bus_uni.R;

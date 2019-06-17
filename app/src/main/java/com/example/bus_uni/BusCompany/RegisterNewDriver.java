@@ -38,7 +38,7 @@ public class RegisterNewDriver extends AppCompatActivity {
     FirebaseUser companyUser;
     private Button addNewDriver;
 
-    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num,busLine_price;
+    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, busLine_price;
 
     private Spinner bus_line_spinner, bus_seat_number_spinner;
 
@@ -50,15 +50,6 @@ public class RegisterNewDriver extends AppCompatActivity {
     // Firebase Database
     private DatabaseReference mCreataUseDriverDatabaseReference, mUserDatabaseReference;
 
-    //method for generate new random strings
-   /* public static String randomAlphaNumeric(int count) {
-        StringBuilder builder = new StringBuilder();
-        while (count-- != 0) {
-            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-        }
-        return builder.toString();
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +64,19 @@ public class RegisterNewDriver extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
 
 
-        dName =  findViewById(R.id.driverNameEditText);
-        dEmail =  findViewById(R.id.driverEmailEditText);
-        dPass =  findViewById(R.id.driverPasswordEditText);
-        dPhone =  findViewById(R.id.driverPhoneEditText);
-        dBusLine_Num =  findViewById(R.id.busNumber);
+        dName = findViewById(R.id.driverNameEditText);
+        dEmail = findViewById(R.id.driverEmailEditText);
+        dPass = findViewById(R.id.driverPasswordEditText);
+        dPhone = findViewById(R.id.driverPhoneEditText);
+        dBusLine_Num = findViewById(R.id.busNumber);
 
 
-        bus_seat_number_spinner =(Spinner)findViewById(R.id.busSeatNumbers_spinner);
-        bus_line_spinner =  findViewById(R.id.bus_line_name_spinner);
-        busLine_price=findViewById(R.id.bus_line_price);
+        bus_seat_number_spinner = findViewById(R.id.busSeatNumbers_spinner);
+        bus_line_spinner = findViewById(R.id.bus_line_name_spinner);
+        busLine_price = findViewById(R.id.bus_line_price);
 
-        addNewDriver =  findViewById(R.id.addNewDriverButton);
-        loadingProgress =  findViewById(R.id.driverProgressBar);
+        addNewDriver = findViewById(R.id.addNewDriverButton);
+        loadingProgress = findViewById(R.id.driverProgressBar);
 
 
         // here for init the spinner and get her the data from string array
@@ -112,7 +103,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
                 final String busSeat = bus_seat_number_spinner.getSelectedItem().toString();
                 final String bus_line = bus_line_spinner.getSelectedItem().toString();
-                final String line_price=busLine_price.getText().toString();
+                final String line_price = busLine_price.getText().toString();
 
                 if (name.isEmpty() || pass.isEmpty() || email.isEmpty() ||
                         busNum.isEmpty() || line_price.isEmpty() ||
@@ -126,7 +117,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                     loadingProgress.setVisibility(View.INVISIBLE);
 
                 } else {
-                    createUserAccount(email, pass, name, phone, busSeat, busNum, bus_line,line_price);
+                    createUserAccount(email, pass, name, phone, busSeat, busNum, bus_line, line_price);
                 }
 
 
@@ -135,7 +126,7 @@ public class RegisterNewDriver extends AppCompatActivity {
 
     }
 
-    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line,final String line_price) {
+    private void createUserAccount(final String email, final String pass, final String name, final String phone, final String bus_seat, final String bus_num, final String bus_line, final String line_price) {
 
 
         // here we create driver account with email and password
@@ -170,16 +161,15 @@ public class RegisterNewDriver extends AppCompatActivity {
                             user.setBus_company(companyName);
                             user.setLine_price(line_price);
 
-                           // String gena = randomAlphaNumeric(28);
-
-                            String current=mFirebaseAuth.getCurrentUser().getUid();
-                           // mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(gena);
-                           mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(current);
+                            String current = mFirebaseAuth.getCurrentUser().getUid();
+                            // mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(gena);
+                            mCreataUseDriverDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(current);
                             mCreataUseDriverDatabaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
                                     if (task.isSuccessful()) {
+
                                         //TODO: Send Sign in link (Or credentials) to driver email
                                         mFirebaseAuth.updateCurrentUser(companyUser);
                                         Toast.makeText(RegisterNewDriver.this, "Driver " + name + " is added successfully", Toast.LENGTH_SHORT).show();
@@ -187,6 +177,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                                         startActivity(intent);
+                                        finish();
 
 
                                     } else {
