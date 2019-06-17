@@ -118,7 +118,7 @@ public class RegisterNewDriver extends AppCompatActivity {
                         busNum.isEmpty() || line_price.isEmpty() ||
                         bus_line.isEmpty() || busSeat.isEmpty()) {
 
-                    // here show message dialog if there's a field empty
+                    //here show message dialog if there's a field empty
                     showMessageDialog(getString(R.string.errorMessage), getString(R.string.fieldsMessageError),
                             R.drawable.ic_error_red_color_30dp);
 
