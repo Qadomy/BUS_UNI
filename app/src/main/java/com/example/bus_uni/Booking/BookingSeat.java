@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class BookingSeat extends AppCompatActivity {
 
@@ -43,14 +47,14 @@ public class BookingSeat extends AppCompatActivity {
         }
 
 
-        passengerName =  findViewById(R.id.textViewPassengerName);
-        orignLocation =  findViewById(R.id.textViewOriginLocation);
-        destinationLocation =  findViewById(R.id.textViewDestinationLocation);
-        leavingTime =  findViewById(R.id.textViewLeavingTime);
-        arrivalTime =  findViewById(R.id.textViewArrivalTime);
-        busNumber =  findViewById(R.id.textViewBusNumber);
-        gateNumber =  findViewById(R.id.textViewGate);
-        seatNumber =  findViewById(R.id.textViewSeat);
+        passengerName = findViewById(R.id.textViewPassengerName);
+        orignLocation = findViewById(R.id.textViewOriginLocation);
+        destinationLocation = findViewById(R.id.textViewDestinationLocation);
+        leavingTime = findViewById(R.id.textViewLeavingTime);
+        arrivalTime = findViewById(R.id.textViewArrivalTime);
+        busNumber = findViewById(R.id.textViewBusNumber);
+        gateNumber = findViewById(R.id.textViewGate);
+        seatNumber = findViewById(R.id.textViewSeat);
 //        driverName = (TextView) findViewById(R.id.driverName_bookingSeat);
 //        driverPhone = (TextView) findViewById(R.id.driverPhone_bookingSeat);
 //        companyName = (TextView) findViewById(R.id.companyName_bookingSeat);
@@ -78,15 +82,35 @@ public class BookingSeat extends AppCompatActivity {
 
 
                     /*
-                    *
-                    * here we add the duration in leaving time to display the arrival time
-                    * todo: complete
-                    * first we split the time format 12:12 AM
-                    * */
-                    String[] hour = time.split(":");
-                    for (String a:hour)
-                        Log.d("msg", "hour = "+a);
+                     *
+                     * here we add the duration in leaving time to display the arrival time
+                     *
+                     * first we split the time format to time and time type
+                     * */
+                    String[] format = time.split(" ");
+                    String splitTime = format[0];
+                    String timeType = format[1];
 
+                    // convert the duration string to int until added to leaving time
+                    int durationAmount = Integer.parseInt(duration);
+
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                    Date date = null;
+                    try {
+                        date = dateFormat.parse(splitTime);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date);
+                    cal.add(Calendar.MINUTE, durationAmount);
+                    String newTime = dateFormat.format(cal.getTime()) + " " + timeType;
+
+
+                    /*
+                     *
+                     * */
 
                     passengerName.setText(name);
                     orignLocation.setText(busLine);
@@ -94,6 +118,7 @@ public class BookingSeat extends AppCompatActivity {
                     leavingTime.setText(time);
                     busNumber.setText(busNum);
                     seatNumber.setText(seatNum);
+                    arrivalTime.setText(newTime);
 //                driverName.setText(driver_Name);
 //                driverPhone.setText(driver_Phone);
 //                companyName.setText(company);
