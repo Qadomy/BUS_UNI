@@ -111,6 +111,7 @@ public class BusInformationsCard extends AppCompatActivity {
                                  * */
 
 
+                                // todo: ???????????????????
                                 // and we send the driver id to MyLocation activity until
                                 Intent sendDriverId = new Intent(BusInformationsCard.this, MyLocation.class);
                                 sendDriverId.putExtra("driverId", driverID);
@@ -153,7 +154,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                busCompanyNameData, city, busNum, userPhone, userEmail, paymentStatus);
+                                                busCompanyNameData, city, busNum, userPhone, userEmail, paymentStatus, duration);
 
 
                                         // here we create an a new class name a Book and uploaded it to firebase

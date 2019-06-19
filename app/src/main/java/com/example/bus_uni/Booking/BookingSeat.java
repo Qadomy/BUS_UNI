@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -73,6 +74,18 @@ public class BookingSeat extends AppCompatActivity {
                     String company = dataSnapshot.child("company").getValue().toString();
                     String city = dataSnapshot.child("city").getValue().toString();
                     String busNum = dataSnapshot.child("busNum").getValue().toString();
+                    String duration = dataSnapshot.child("expectedTime").getValue().toString();
+
+
+                    /*
+                    *
+                    * here we add the duration in leaving time to display the arrival time
+                    * todo: complete
+                    * first we split the time format 12:12 AM
+                    * */
+                    String[] hour = time.split(":");
+                    for (String a:hour)
+                        Log.d("msg", "hour = "+a);
 
 
                     passengerName.setText(name);
@@ -132,7 +145,7 @@ public class BookingSeat extends AppCompatActivity {
                         // if we click yes to cancel ticket
 
                         /*
-                         *
+                         * todo: when cancelling ticket must increase number of seats available in ticket
                          * here we delete user from Booking database from firebase*/
 
                         mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
