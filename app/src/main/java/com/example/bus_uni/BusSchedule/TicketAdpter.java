@@ -67,6 +67,7 @@ public class TicketAdpter extends RecyclerView.Adapter<TicketAdpter.ViewHolder> 
                 ticketInfo.putExtra("driverId", getTickets().get(position).getDriverId());
                 ticketInfo.putExtra("keyId", getTickets().get(position).getId());
                 ticketInfo.putExtra("busNum", getTickets().get(position).getBusNum());
+                ticketInfo.putExtra("expectedTime", getTickets().get(position).getExpectedTime());
 
 
                 mContext.startActivity(ticketInfo);

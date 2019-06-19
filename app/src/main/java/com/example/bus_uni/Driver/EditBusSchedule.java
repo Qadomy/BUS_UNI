@@ -35,7 +35,8 @@ public class EditBusSchedule extends AppCompatActivity {
     // here for get the id of current user and save in the string
     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     //
-    private String keyId, busLine="", driverName, seatNumber, busCompany, driverPhone, latitude, longitude, busNum,price;
+    private String keyId, busLine="", driverName, seatNumber, busCompany, driverPhone, latitude,
+            longitude, busNum, price, duration;
     //
     // firebase database
     private DatabaseReference mUserDatabaseReference, mTicketDatabaseReference, mEditTicketDatabaseReference;
@@ -70,6 +71,7 @@ public class EditBusSchedule extends AppCompatActivity {
                 longitude = dataSnapshot.child("longitude").getValue().toString();
                 busNum = dataSnapshot.child("bus_num").getValue().toString();
                 price=dataSnapshot.child("line_price").getValue().toString();
+                duration=dataSnapshot.child("expectedTime").getValue().toString();
 
                 mRecyclerView = (RecyclerView) findViewById(R.id.editSchudeleDate_RecycleView);
                 showTicketsInRecycleView();
@@ -120,12 +122,13 @@ public class EditBusSchedule extends AppCompatActivity {
                             String company = childSnapshot.child("company").getValue().toString();
                             String phone = childSnapshot.child("driverPhone").getValue().toString();
                             String busNum = childSnapshot.child("busNum").getValue().toString();
+                            String duration = childSnapshot.child("expectedTime").getValue().toString();
 
                             // here the latitude and longitude of the aaup (origin location)
                             String latitude = 32.406654 + "";
                             String longitude = 32.406654 + "";
 
-                            tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
+                            tickets.add(new Ticket(driverId, driverName, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum, duration));
                             showRecyclerView();
 
                         }
@@ -224,7 +227,7 @@ public class EditBusSchedule extends AppCompatActivity {
                                 String newTicketPrice = ticketPrice.getText().toString();
 
                                 // To send data to save it in database reference
-                                final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "", busNum);
+                                final Ticket ticket = new Ticket(currentuser, driverName, busLine, newTicketPrice, time, seatNumber, busCompany, driverPhone, latitude, longitude, "", busNum, duration);
 
 
 

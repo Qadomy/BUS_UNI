@@ -15,13 +15,16 @@ public class Ticket {
     private String seatNum="";
     private String id="";
     private String busNum="";
+    private String expectedTime="";
 
 
     public Ticket() {
 
     }
 
-    public Ticket(String driverId, String name, String line, String price, String time, String seat, String company, String phone, String latitude, String longitude, String id, String busNum) {
+    public Ticket(String driverId, String name, String line, String price, String time, String seat,
+                  String company, String phone, String latitude, String longitude, String id,
+                  String busNum, String expectedTime) {
 
         this.driverId = driverId;
         this.busLine = line;
@@ -35,6 +38,7 @@ public class Ticket {
         this.seatNum = seat;
         this.id = id;
         this.busNum = busNum;
+        this.expectedTime = expectedTime;
     }
 
 
@@ -132,5 +136,13 @@ public class Ticket {
 
     public void setBusNum(String busNum) {
         this.busNum = busNum;
+    }
+
+    public String getExpectedTime() {
+        return expectedTime;
+    }
+
+    public void setExpectedTime(String expectedTime) {
+        this.expectedTime = expectedTime;
     }
 }

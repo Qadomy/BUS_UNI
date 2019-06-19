@@ -142,7 +142,7 @@
                     android:layout_margin="10dp"
                     android:textColor="@color/redColor"
                     android:textStyle="bold"
-                    tools:text="12:30 pm" />
+                    android:text="12" />
 
                 <TextView
                     android:layout_width="wrap_content"

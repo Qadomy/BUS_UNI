@@ -148,9 +148,10 @@ public class Bus_Schedule extends AppCompatActivity {
                                 String longitude = childSnapshot.child("longitude").getValue().toString();
                                 String busNum = childSnapshot.child("busNum").getValue().toString();
                                 String driverId = childSnapshot.child("driverId").getValue().toString();
+                                String duration = childSnapshot.child("expectedTime").getValue().toString();
 
 
-                                tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum));
+                                tickets.add(new Ticket(driverId, name, line, price, time, seat, company, phone, latitude, longitude, keyId, busNum, duration));
 //                                    Ticket ticket = childSnapshot.getValue(Ticket.class);
 //                                    tickets.add(ticket);
 
