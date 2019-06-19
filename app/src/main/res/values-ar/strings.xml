@@ -158,4 +158,5 @@
     <string name="line">الخط</string>
     <string name="send_email">ارسل بريد الكتروني</string>
     <string name="notification_text">تتبع الحافلة فعال</string>
+    <string name="expected_time_to_arrival">Expected time to arrival</string>
 </resources>

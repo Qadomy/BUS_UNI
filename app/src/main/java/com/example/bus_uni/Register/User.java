@@ -11,11 +11,12 @@ public class User {
     private String city = "";
     private String bus_num = "";// here for bus number
     private String bus_line = "";
-    private String bus_seat = "";
+    private String bus_seat = "";// the number of seats in each bus (driver)
     private String bus_company = ""; // here the name of company for each driver
     private String profile_pic = "https://firebasestorage.googleapis.com/v0/b/unibus-5f23b.appspot.com/o/upload%2Fprofile_images%2Fman.png?alt=media&token=cb3f7bb5-1104-4f81-b341-ef525aa0caa4";
     private int type; // 0: Student , 1: Company , 2: Driver
-    private String line_price="";
+    private String line_price = "";
+    private String expectedTime = "";
 
     //Default Const. for retrieving User Obj from firebase
     public User() {
@@ -24,7 +25,7 @@ public class User {
 
     public User(double longitude, double latitude, String name, String email, String password,
                 String mobile, String city, String bus_num, String bus_line, String bus_seat,
-                String bus_company, String profile_pic, int type, String line_price) {
+                String bus_company, String profile_pic, int type, String line_price, String expectedTime) {
 
         this.longitude = longitude;
         this.latitude = latitude;
@@ -40,6 +41,7 @@ public class User {
         this.profile_pic = profile_pic;
         this.type = type;
         this.line_price = line_price;
+        this.expectedTime = expectedTime;
     }
 
     public double getLongitude() {
@@ -152,5 +154,13 @@ public class User {
 
     public void setLine_price(String line_price) {
         this.line_price = line_price;
+    }
+
+    public String getExpectedTime() {
+        return expectedTime;
+    }
+
+    public void setExpectedTime(String expectedTime) {
+        this.expectedTime = expectedTime;
     }
 }

@@ -291,5 +291,7 @@
     <string name="send_email" translatable="true">Send Email</string>
     <string name="ala_abushomer_name" translatable="false">Ala` Abushomer</string>
     <string name="locations" translatable="false">locations</string>
-    <string name="notification_text">Tracking is enabled</string>
+    <string name="notification_text" translatable="false">Tracking is enabled</string>
+    <string name="city_destination" translatable="false">City destination</string>
+    <string name="expected_time_to_arrival" translatable="false">Expected time to arrival</string>
 </resources>
