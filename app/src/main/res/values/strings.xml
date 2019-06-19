@@ -44,6 +44,16 @@
         <item>AAUJ-Borqen</item>
         <item>AAUJ-Zababdeh</item>
     </string-array>
+    <string-array name="bus_city_destination">
+        <item>Tulkarm</item>
+        <item>Jenin</item>
+        <item>Ya`bad</item>
+        <item>Tubas</item>
+        <item>Selfet</item>
+        <item>Arrabeh</item>
+        <item>Borqen</item>
+        <item>Zababdeh</item>
+    </string-array>
     <string name="bus_locations" translatable="true">Bus Locations</string>
     <string name="bus_number" translatable="true">Bus Number</string>
     <string name="bus_schedule" translatable="true">Bus Schedule</string>
@@ -293,5 +303,6 @@
     <string name="locations" translatable="false">locations</string>
     <string name="notification_text" translatable="false">Tracking is enabled</string>
     <string name="city_destination" translatable="false">City destination</string>
-    <string name="expected_time_to_arrival" translatable="false">Expected time to arrival</string>
+    <string name="enter_the_expected_time_in_minutes" translatable="false">Enter the expected time in minutes</string>
+    <string name="duration">Duration</string>
 </resources>

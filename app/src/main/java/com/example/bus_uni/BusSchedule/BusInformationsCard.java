@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class BusInformationsCard extends AppCompatActivity {
 
     Button bookingTicket, currentLocation;
-    TextView busRuteLine, busCompanyName, driverName, driverPhone, busSeatNumbers, busTime;
+    TextView busRuteLine, busCompanyName, driverName, driverPhone, busSeatNumbers, busTime, durationTime;
 
 
     // for get the current user
@@ -46,16 +46,17 @@ public class BusInformationsCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_informations_card);
 
-        bookingTicket = (Button) findViewById(R.id.bookingTicketButton);
-        currentLocation = (Button) findViewById(R.id.currentLocationButton);
+        bookingTicket =  findViewById(R.id.bookingTicketButton);
+        currentLocation =  findViewById(R.id.currentLocationButton);
 
 
-        busRuteLine = (TextView) findViewById(R.id.busRuteLine);
-        busCompanyName = (TextView) findViewById(R.id.busCompany);
-        driverName = (TextView) findViewById(R.id.busDriverName);
-        driverPhone = (TextView) findViewById(R.id.busDriverPhone);
-        busSeatNumbers = (TextView) findViewById(R.id.busSeat);
-        busTime = (TextView) findViewById(R.id.busLeavingTime_BusInfoCard);
+        busRuteLine =  findViewById(R.id.busRuteLine);
+        busCompanyName =  findViewById(R.id.busCompany);
+        driverName =  findViewById(R.id.busDriverName);
+        driverPhone =  findViewById(R.id.busDriverPhone);
+        busSeatNumbers =  findViewById(R.id.busSeat);
+        busTime = findViewById(R.id.busLeavingTime_BusInfoCard);
+        durationTime=findViewById(R.id.busDurationTime);
 
 
         //
@@ -73,6 +74,7 @@ public class BusInformationsCard extends AppCompatActivity {
         final String driverID = getTicketInfo.getExtras().getString("driverId");
         final String keyId = getTicketInfo.getExtras().getString("keyId");
         final String busNum = getTicketInfo.getExtras().getString("busNum");
+        final String duration = getTicketInfo.getExtras().getString("expectedTime");
 
 
         busRuteLine.setText(busRuteLineData);
@@ -81,6 +83,7 @@ public class BusInformationsCard extends AppCompatActivity {
         driverPhone.setText(driverPhoneData);
         busSeatNumbers.setText(busSeatNumbersData);
         busTime.setText(busTimeData);
+        durationTime.setText(duration);
 
 
         // we clicked on booking ticket

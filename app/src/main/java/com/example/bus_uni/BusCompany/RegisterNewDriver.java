@@ -38,10 +38,9 @@ public class RegisterNewDriver extends AppCompatActivity {
     FirebaseUser companyUser;
     private Button addNewDriver;
 
-    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusLine_price, dBusCityDestination,
-            dBusExpextedTimeArrival;
+    private EditText dName, dEmail, dPass, dPhone, dBusLine_Num, dBusLine_price, dBusExpextedTimeArrival;
 
-    private Spinner bus_line_spinner, bus_seat_number_spinner;
+    private Spinner bus_line_spinner, bus_seat_number_spinner, dBusCityDestinations;
 
     private ProgressBar loadingProgress;
 
@@ -70,10 +69,9 @@ public class RegisterNewDriver extends AppCompatActivity {
         dPass = findViewById(R.id.driverPasswordEditText);
         dPhone = findViewById(R.id.driverPhoneEditText);
         dBusLine_Num = findViewById(R.id.busNumber);
-        dBusCityDestination = findViewById(R.id.bus_city_destination);
         dBusExpextedTimeArrival = findViewById(R.id.bus_expected_time_arrival);
 
-
+        dBusCityDestinations = findViewById(R.id.bus_city_destination_spinner);
         bus_seat_number_spinner = findViewById(R.id.busSeatNumbers_spinner);
         bus_line_spinner = findViewById(R.id.bus_line_name_spinner);
         dBusLine_price = findViewById(R.id.bus_line_price);
@@ -94,6 +92,12 @@ public class RegisterNewDriver extends AppCompatActivity {
         bus_seat_number_spinner.setAdapter(seatnumber);
 
 
+        // init bus city destination spinner
+        ArrayAdapter<CharSequence> cityDest = ArrayAdapter.createFromResource(this, R.array.bus_city_destination, android.R.layout.simple_spinner_item);
+        seatnumber.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dBusCityDestinations.setAdapter(cityDest);
+
+
         addNewDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,12 +107,12 @@ public class RegisterNewDriver extends AppCompatActivity {
                 final String pass = dPass.getText().toString();
                 final String phone = dPhone.getText().toString();
                 final String busNum = dBusLine_Num.getText().toString();
-                final String busDest = dBusCityDestination.getText().toString();
                 final String expectedTime = dBusExpextedTimeArrival.getText().toString();
+                final String line_price = dBusLine_price.getText().toString();
 
                 final String busSeat = bus_seat_number_spinner.getSelectedItem().toString();
                 final String bus_line = bus_line_spinner.getSelectedItem().toString();
-                final String line_price = dBusLine_price.getText().toString();
+                final String busDest = dBusCityDestinations.getSelectedItem().toString();
 
                 if (name.isEmpty() || pass.isEmpty() || email.isEmpty() ||
                         busNum.isEmpty() || line_price.isEmpty() ||

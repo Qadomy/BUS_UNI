@@ -164,14 +164,16 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_bus_line_name" />
+            android:src="@drawable/ic_bank_money" />
 
-        <Spinner
-            android:id="@+id/bus_line_name_spinner"
+        <EditText
+            android:id="@+id/bus_line_price"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </Spinner>
+            android:layout_height="match_parent"
+            android:hint="@string/ticket_price"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -190,16 +192,13 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_bank_money" />
+                android:src="@drawable/ic_bus_line_name" />
 
-            <EditText
-                android:id="@+id/bus_line_price"
+            <Spinner
+                android:id="@+id/bus_line_name_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/ticket_price"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent">
+            </Spinner>
 
         </LinearLayout>
 
@@ -216,13 +215,11 @@
                 android:layout_height="40dp"
                 android:src="@drawable/ic_location_city" />
 
-            <EditText
-                android:id="@+id/bus_city_destination"
+            <Spinner
+                android:id="@+id/bus_city_destination_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/city_destination"
-                android:padding="10dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent">
+            </Spinner>
 
         </LinearLayout>
 
@@ -244,7 +241,7 @@
             android:id="@+id/bus_expected_time_arrival"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/expected_time_to_arrival"
+            android:hint="@string/enter_the_expected_time_in_minutes"
             android:inputType="number"
             android:padding="10dp"
             android:textSize="15sp" />
