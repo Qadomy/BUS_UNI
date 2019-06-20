@@ -1,8 +1,18 @@
 package com.example.bus_uni.Driver;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.example.bus_uni.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -14,39 +24,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.Manifest;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-
-import java.util.Map;
-
 public class TrackerService extends Service {
 
     private static final String TAG = TrackerService.class.getSimpleName();
-    private String current_uid="";
+    private String current_uid = "";
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
-    public IBinder onBind(Intent intent) {return null;}
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-      //  this.
+        //  this.
 
         //current_uid=firebaseAuth.getCurrentUser().getUid();
-       }
+    }
 
     private void buildNotification() {
         String stop = "stop";
-       registerReceiver(stopReceiver, new IntentFilter(stop));
+        registerReceiver(stopReceiver, new IntentFilter(stop));
         PendingIntent broadcastIntent = PendingIntent.getBroadcast(
                 this, 0, new Intent(stop), PendingIntent.FLAG_UPDATE_CURRENT);
         // Create the persistent notification
@@ -68,6 +67,7 @@ public class TrackerService extends Service {
             stopSelf();
         }
     };
+
     private void requestLocationUpdates() {
 
         LocationRequest request = new LocationRequest();
@@ -97,7 +97,7 @@ public class TrackerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(firebaseAuth.getCurrentUser()==null)
+        if (firebaseAuth.getCurrentUser() == null)
             this.stopSelf();
         else {
             current_uid = intent.getStringExtra(MapsActivity.TAG);

@@ -36,18 +36,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".StreetsInformation.StreetInformation">
-            <!--todo: check here (add value to meta data)-->
-           <!-- <meta-data android:name="android.support.PARENT_ACTIVITY" />-->
-        </activity>
+        <activity android:name=".StreetsInformation.StreetInformation"></activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.CheckBookings" />
         </activity>
         <activity android:name=".BusSchedule.EditSingleScheduleItem">
-
-            <!-- EditSingleScheduleItem -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.EditBusSchedule" />
