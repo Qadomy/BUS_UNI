@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -32,16 +33,18 @@ public class BookingSeat extends AppCompatActivity {
 
     TextView passengerName, orignLocation, destinationLocation, leavingTime, arrivalTime, busNumber, gateNumber, seatNumber, driverName, driverPhone, companyName;
 
-    DatabaseReference mDatabaseReference, mDeleteFromDatabase;
-    String currentUser = "";
+    DatabaseReference mDatabaseReference, mDeleteFromDatabase, mIncreaseTicketDatabaseReference,
+            mGetNumSeatFromTicketDatabaseReference;
+    String currentUser = "", busLine, ticketID, seatNumInTicket;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_seat);
-        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        //todo: ???????????
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         if (currentUser == null) {
             Toast.makeText(this, "You must be logged in!", Toast.LENGTH_SHORT).show();
         }
@@ -72,13 +75,32 @@ public class BookingSeat extends AppCompatActivity {
                     String name = dataSnapshot.child("userName").getValue().toString();
                     String driver_Name = dataSnapshot.child("driverName").getValue().toString();
                     String driver_Phone = dataSnapshot.child("driverPhone").getValue().toString();
-                    String busLine = dataSnapshot.child("busLine").getValue().toString();
+                    busLine = dataSnapshot.child("busLine").getValue().toString();
                     String time = dataSnapshot.child("leavingTime").getValue().toString();
                     String seatNum = dataSnapshot.child("seatNumber").getValue().toString();
                     String company = dataSnapshot.child("company").getValue().toString();
                     String city = dataSnapshot.child("city").getValue().toString();
                     String busNum = dataSnapshot.child("busNum").getValue().toString();
                     String duration = dataSnapshot.child("expectedTime").getValue().toString();
+                    ticketID = dataSnapshot.child("ticketID").getValue().toString();
+
+
+                    // we get the number of seat in the ticket
+                    mGetNumSeatFromTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+                    mGetNumSeatFromTicketDatabaseReference.child(busLine).child(ticketID)
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    seatNumInTicket = dataSnapshot.child("seatNum").getValue().toString();
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
 
 
                     /*
@@ -139,7 +161,6 @@ public class BookingSeat extends AppCompatActivity {
             }
         });
 
-
     }// end onCreate
 
 
@@ -154,8 +175,9 @@ public class BookingSeat extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void cancelBooking(View view) {
 
+
+    public void cancelBooking(View view) {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 BookingSeat.this);
@@ -170,7 +192,7 @@ public class BookingSeat extends AppCompatActivity {
                         // if we click yes to cancel ticket
 
                         /*
-                         * todo: when cancelling ticket must increase number of seats available in ticket
+                         *
                          * here we delete user from Booking database from firebase*/
 
                         mDeleteFromDatabase = FirebaseDatabase.getInstance().getReference().child("Booking");
@@ -194,6 +216,17 @@ public class BookingSeat extends AppCompatActivity {
 
                     }
                 });
+
+
+
+        // here we get the number of seats and increase it by one and save it again in database of ticket
+        int newSeatNum = Integer.parseInt(seatNumInTicket);
+        newSeatNum = newSeatNum + 1;
+        seatNumInTicket = newSeatNum + "";
+
+        // after we canceled the ticket we must increase the number of available seats in ticket
+        mIncreaseTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+        mIncreaseTicketDatabaseReference.child(busLine).child(ticketID).child("seatNum").setValue(seatNumInTicket);
 
         // here when we clicked No in message dialog
         alertDialog.setNegativeButton("NO",

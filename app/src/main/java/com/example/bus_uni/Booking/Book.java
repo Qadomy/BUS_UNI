@@ -18,8 +18,8 @@ public class Book {
     private String busNum = "";
     private String userPhone = "";
     private String userEmail = "";
-    private String paymentStatus="";
     private String expectedTime="";
+    private String ticketID = "";
 
 
     public Book() {
@@ -28,7 +28,7 @@ public class Book {
     public Book(String userID, String userName, String driverID, String driverName, String driverPhone,
                 String busLine, String leavingTime, String latitude, String longitude, String seatNumber,
                 String company, String city, String busNum, String userPhone,
-                String userEmail, String paymentStatus, String expectedTime) {
+                String userEmail, String expectedTime, String ticketID) {
 
         this.userID = userID;
         this.userName = userName;
@@ -45,8 +45,8 @@ public class Book {
         this.busNum = busNum;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
-        this.paymentStatus = paymentStatus;
         this.expectedTime = expectedTime;
+        this.ticketID = ticketID;
     }
 
     public Book(String userName, String seatNumber) {
@@ -175,28 +175,20 @@ public class Book {
         this.userEmail = userEmail;
     }
 
-    public String getCostPaid() {
-        return paymentStatus;
-    }
-
-    public void setCostPaid(String costPaid) {
-        this.paymentStatus = costPaid;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
     public String getExpectedTime() {
         return expectedTime;
     }
 
     public void setExpectedTime(String expectedTime) {
         this.expectedTime = expectedTime;
+    }
+
+    public String getTicketID() {
+        return ticketID;
+    }
+
+    public void setTicketID(String ticketID) {
+        this.ticketID = ticketID;
     }
 }
 

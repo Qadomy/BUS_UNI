@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ControlPassengers extends AppCompatActivity {
 
-    //TODO: This Activity for what!
     Button addBlackList;
     TextView name, phone, email, seatLabel, city, paymentMethod, calling;
 
@@ -132,6 +131,7 @@ public class ControlPassengers extends AppCompatActivity {
 
                                     }
                                 });
+
                                 /*
                                 *
                                 * first thing create an new table name Blacklist in firebase to save the

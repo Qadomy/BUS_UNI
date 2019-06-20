@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
     // for get the current user
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String driverPhoneData, busSeatNumbersData = "", busTimeData, paymentStatus = "Cash money";
+    String driverPhoneData, busSeatNumbersData = "", busTimeData;
 
 
     // firebase database
@@ -154,7 +155,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
                                         Book book = new Book(currentUser, userName, driverID, driverNameData, driverPhoneData,
                                                 busRuteLineData, busTimeData, latitude, longitude, busSeatNumbersData,
-                                                busCompanyNameData, city, busNum, userPhone, userEmail, paymentStatus, duration);
+                                                busCompanyNameData, city, busNum, userPhone, userEmail, duration, keyId);
 
 
                                         // here we create an a new class name a Book and uploaded it to firebase
