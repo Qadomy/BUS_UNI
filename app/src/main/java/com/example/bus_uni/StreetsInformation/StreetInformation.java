@@ -45,7 +45,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 
-public class StreetInformation extends AppCompatActivity {
+public class
+StreetInformation extends AppCompatActivity {
 
     static int PReqCode = 1;
     static int REQUESCODE = 1;

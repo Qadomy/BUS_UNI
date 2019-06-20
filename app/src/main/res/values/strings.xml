@@ -303,6 +303,6 @@
     <string name="locations" translatable="false">locations</string>
     <string name="notification_text" translatable="false">Tracking is enabled</string>
     <string name="city_destination" translatable="false">City destination</string>
-    <string name="enter_the_expected_time_in_minutes" translatable="false">Enter the expected time in minutes</string>
+    <string name="enter_the_expected_time_in_minutes">Enter the expected time in minutes</string>
     <string name="duration">Duration</string>
 </resources>

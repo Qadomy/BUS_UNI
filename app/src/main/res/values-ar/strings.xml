@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UNI Smart Bus</string>
-    <string name="password">الباسوورد</string>
+    <string name="password">كلمة المرور</string>
     <string name="user_added_to_blacklist">تمت اضافة المستخدم للقائمة السوداء</string>
     <string name="username">اسم المستخدم</string>
     <string name="warning">تحذير</string>
@@ -158,6 +158,6 @@
     <string name="line">الخط</string>
     <string name="send_email">ارسل بريد الكتروني</string>
     <string name="notification_text">تتبع الحافلة فعال</string>
-    <string name="enter_the_expected_time_in_minutes">Expected time to arrival</string>
-    <string name="duration">Duration</string>
+    <string name="enter_the_expected_time_in_minutes">الوقت المتوقع للوصول</string>
+    <string name="duration">الفترة</string>
 </resources>

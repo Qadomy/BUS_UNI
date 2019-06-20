@@ -54,7 +54,7 @@ public class CurrentBusLocation extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.current_location_map);
         mapFragment.getMapAsync(this);
 
 

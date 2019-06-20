@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- What's difference between FINE & COARSE? -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- What's difference between FINE & COARSE? -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -15,16 +16,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BusCompany.ShowDriversOnMap"></activity>
-        <activity android:name=".About" />
-        <activity android:name=".MyLocation" />
-
+        <activity android:name=".BusCompany.ShowDriversOnMap">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BusCompany.CompanyDrivers" />
+        </activity>
+        <activity android:name=".About">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home" />
+        </activity>
+        <activity android:name=".MyLocation">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home" />
+        </activity>
         <activity android:name=".Setting">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".StreetsInformation.StreetInformation"></activity>
+        <activity android:name=".StreetsInformation.StreetInformation">
+            <!--todo: check here (add value to meta data)-->
+           <!-- <meta-data android:name="android.support.PARENT_ACTIVITY" />-->
+        </activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -98,7 +113,6 @@
                 android:value=".Register.LoginUserActivity" />
         </activity>
         <activity android:name=".Driver.MapsActivity">
-
         </activity>
         <activity android:name=".Register.ProfileEdit_user">
             <meta-data
@@ -164,12 +178,16 @@
         ********
         -->
         <!-- here for map -->
+        <service android:name=".Driver.TrackerService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB-hBKSipzV9a8mLOTbTbgt9zudAIvt2og" />
+            android:value="AIzaSyD2uDJtJAXNQueh0LT-3iMhHEuHx25Kl-U" />
     </application>
 
 </manifest>
