@@ -120,27 +120,7 @@ public class BusInformationsCard extends AppCompatActivity {
 
 
 
-                                /*
-                                 * here I decrease the seat number by one
-                                 * every time user click on yes to booking an ticket
-                                 *
-                                 * send the new number to user ticket to know his seat number
-                                 * and I will update the seat number on the Ticket class */
 
-                                int minNum = Integer.parseInt(busSeatNumbersData);
-                                minNum = minNum - 1;
-
-                                busSeatNumbersData = minNum + "";
-
-
-                                mUpdateTicketDataBase = FirebaseDatabase.getInstance().getReference().child("Ticket");
-                                mUpdateTicketDataBase.child(busRuteLineData).child(keyId).child("seatNum").setValue(busSeatNumbersData);
-
-
-                                /*
-                                 *
-                                 *
-                                 * */
 
                                 mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
                                 mUserDatabaseReference.child(currentUser).addValueEventListener(new ValueEventListener() {
@@ -173,6 +153,34 @@ public class BusInformationsCard extends AppCompatActivity {
                                                             Intent intent = new Intent(BusInformationsCard.this, BookingSeat.class);
                                                             startActivity(intent);
 
+                                                            /*
+                                                             *
+                                                             * here we create an a new class name a Book and uploaded it in firebase
+                                                             * it contain all information of the ticket and the user*/
+
+
+                                                            /*
+                                                             * here I decrease the seat number by one
+                                                             * every time user click on yes to booking an ticket
+                                                             *
+                                                             * send the new number to user ticket to know his seat number
+                                                             * and I will update the seat number on the Ticket class */
+
+                                                            int minNum = Integer.parseInt(busSeatNumbersData);
+                                                            minNum = minNum - 1;
+
+                                                            busSeatNumbersData = minNum + "";
+
+
+                                                            mUpdateTicketDataBase = FirebaseDatabase.getInstance().getReference().child("Ticket");
+                                                            mUpdateTicketDataBase.child(busRuteLineData).child(keyId).child("seatNum").setValue(busSeatNumbersData);
+
+
+                                                            /*
+                                                             *
+                                                             *
+                                                             * */
+
                                                         }
                                                     }
                                                 });
@@ -190,14 +198,10 @@ public class BusInformationsCard extends AppCompatActivity {
                                     }
                                 });
 
-                                /*
-                                 *
-                                 * here we create an a new class name a Book and uploaded it in firebase
-                                 * it contain all information of the ticket and the user*/
-
 
                             }
                         });
+
 
                 // here when we clicked No in message dialog
                 alertDialog.setNegativeButton("NO",

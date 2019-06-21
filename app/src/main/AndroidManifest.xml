@@ -101,6 +101,7 @@
 
             <!-- Home -->
 
+
         </activity>
         <activity android:name=".Register.ResetPassword">
             <meta-data

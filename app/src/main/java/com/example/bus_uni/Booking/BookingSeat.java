@@ -214,19 +214,17 @@ public class BookingSeat extends AppCompatActivity {
                             }
                         });
 
+                        // here we get the number of seats and increase it by one and save it again in database of ticket
+                        int newSeatNum = Integer.parseInt(seatNumInTicket);
+                        newSeatNum = newSeatNum + 1;
+                        seatNumInTicket = newSeatNum + "";
+
+                        // after we canceled the ticket we must increase the number of available seats in ticket
+                        mIncreaseTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+                        mIncreaseTicketDatabaseReference.child(busLine).child(ticketID).child("seatNum").setValue(seatNumInTicket);
+
                     }
                 });
-
-
-
-        // here we get the number of seats and increase it by one and save it again in database of ticket
-        int newSeatNum = Integer.parseInt(seatNumInTicket);
-        newSeatNum = newSeatNum + 1;
-        seatNumInTicket = newSeatNum + "";
-
-        // after we canceled the ticket we must increase the number of available seats in ticket
-        mIncreaseTicketDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
-        mIncreaseTicketDatabaseReference.child(busLine).child(ticketID).child("seatNum").setValue(seatNumInTicket);
 
         // here when we clicked No in message dialog
         alertDialog.setNegativeButton("NO",
