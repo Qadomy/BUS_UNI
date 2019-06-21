@@ -37,7 +37,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      static final String TAG = MapsActivity.class.getSimpleName();
     private HashMap<String, Marker> mMarkers = new HashMap<>();
     private GoogleMap mMap;
-  //private Button scheduleButton, logoutButton, checkButton;
     private Button logoutButton;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     Intent intent;
@@ -83,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ref.addChildEventListener(new ChildEventListener() {
            @Override
            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               setMarker(dataSnapshot);
+              // setMarker(dataSnapshot);
 
            }
 
