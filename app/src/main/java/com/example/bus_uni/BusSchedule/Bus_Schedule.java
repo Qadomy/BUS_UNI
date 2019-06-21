@@ -73,7 +73,7 @@ public class Bus_Schedule extends AppCompatActivity {
 
                 searchFlag=false;
                     tickets.clear();
-               // }
+
             }
 
             @Override
@@ -86,6 +86,7 @@ public class Bus_Schedule extends AppCompatActivity {
 
     private void showRecyclerView(String bus_line) {
 
+        //TODO: We don't use the string parameter, Why!
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Bus_Schedule.this, LinearLayoutManager.VERTICAL, false);
 
                             mRecyclerView.setLayoutManager(linearLayoutManager);

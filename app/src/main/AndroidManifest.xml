@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bus_uni">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- What's difference between FINE & COARSE? -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- What's difference between FINE & COARSE? -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Driver.DetailedBookings"></activity>
         <activity android:name=".BusCompany.ShowDriversOnMap">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,13 +37,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".StreetsInformation.StreetInformation"></activity>
+        <activity android:name=".StreetsInformation.StreetInformation">
+
+            <!-- todo: check here (add value to meta data) -->
+            <!-- <meta-data android:name="android.support.PARENT_ACTIVITY" /> -->
+        </activity>
         <activity android:name=".Booking.ControlPassengers">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.CheckBookings" />
         </activity>
         <activity android:name=".BusSchedule.EditSingleScheduleItem">
+
+            <!-- EditSingleScheduleItem -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Driver.EditBusSchedule" />
@@ -91,6 +98,7 @@
                 android:value=".BusCompany.CompanyHome" />
         </activity>
         <activity android:name=".BusCompany.CompanyHome" />
+
         <activity android:name=".BusCompany.RegisterNewDriver">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -101,15 +109,13 @@
 
             <!-- Home -->
 
-
         </activity>
         <activity android:name=".Register.ResetPassword">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register.LoginUserActivity" />
         </activity>
-        <activity android:name=".Driver.MapsActivity">
-        </activity>
+        <activity android:name=".Driver.MapsActivity"></activity>
         <activity android:name=".Register.ProfileEdit_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -174,10 +180,11 @@
         ********
         -->
         <!-- here for map -->
-        <service android:name=".Driver.TrackerService"
+        <service
+            android:name=".Driver.TrackerService"
             android:enabled="true"
-            android:exported="true">
-        </service>
+            android:exported="true"></service>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

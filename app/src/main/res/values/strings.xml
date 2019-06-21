@@ -44,6 +44,7 @@
         <item>AAUJ-Borqen</item>
         <item>AAUJ-Zababdeh</item>
     </string-array>
+    <!--TODO: Replace this with split -->
     <string-array name="bus_city_destination">
         <item>Tulkarm</item>
         <item>Jenin</item>

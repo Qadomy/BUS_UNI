@@ -4,20 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Driver.CheckBookings"
+    tools:context=".Driver.DetailedBookings"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dates:"
-        android:textStyle="bold"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-     <android.support.v7.widget.RecyclerView
-            android:id="@+id/ticketDatesRecyclerView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/bookings_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">

@@ -8,11 +8,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.bus_uni.Booking.Book;
 import com.example.bus_uni.Booking.BookedTicket_Adapter;
+import com.example.bus_uni.Booking.TicketDatesAdapter;
+import com.example.bus_uni.BusSchedule.TicketAdpter;
 import com.example.bus_uni.R;
 import com.example.bus_uni.StreetsInformation.Post;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,8 +30,9 @@ public class CheckBookings extends AppCompatActivity {
 
     DatabaseReference mDatabaseReference;
     private RecyclerView mRecyclerView;
-    private BookedTicket_Adapter bookedTicket_adapter;
-    private ArrayList<Book> booked = new ArrayList<>();
+    private TicketDatesAdapter ticketDatesAdapter;
+    private ArrayList<String> ticketDates = new ArrayList<>();
+    private String busLine="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,26 +40,54 @@ public class CheckBookings extends AppCompatActivity {
         setContentView(R.layout.activity_check_bookings);
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.bookedTicketsRecycleView);
-        showBookedTicketList();
+        mRecyclerView =  findViewById(R.id.ticketDatesRecyclerView);
+        showTicketDatesList();
 
     }
 
-    private void showBookedTicketList() {
+    private void showTicketDatesList() {
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Booking");
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+        String current_uid=firebaseAuth.getCurrentUser().getUid();
+        //Toast.makeText(this,current_uid,Toast.LENGTH_LONG).show();
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        userDatabase.child(current_uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                String bus_line=dataSnapshot.child("bus_line").getValue().toString();
+                //Toast.makeText(CheckBookings.this,bus_line,Toast.LENGTH_LONG).show();
+                setBusLine(bus_line);
+                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Ticket");
+              //  Toast.makeText(CheckBookings.this,busLine,Toast.LENGTH_LONG).show();
+                mDatabaseReference.child(busLine).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String time="";
+                        for (DataSnapshot childSnap : snapshot.getChildren()) {
+                            for(DataSnapshot ch: childSnap.getChildren()) {
+                                if(ch.getKey().equals("leavingTime")) {
+                                    time = ch.getValue().toString();
+                                    break;
+                                }
 
-                    Book books = childSnapshot.getValue(Book.class);
-                    booked.add(books);
-                    showRecycleView();
+                               }
+                            ticketDates.add(time);
+                            //Ticket ticket = childSnapshot.getValue(Ticket.class);
+                            //tickets.add(ticket);
+                            showRecycleView();
 
 
 
-                }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
 
@@ -63,8 +96,14 @@ public class CheckBookings extends AppCompatActivity {
 
             }
         });
+
     }
 
+    void setBusLine(String bus_line){
+
+        busLine=bus_line;
+
+    }
     private void showRecycleView() {
 
         // here how we want to display the list of tickets
@@ -73,8 +112,8 @@ public class CheckBookings extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        bookedTicket_adapter = new BookedTicket_Adapter(booked, CheckBookings.this);
-        mRecyclerView.setAdapter(bookedTicket_adapter);
+        ticketDatesAdapter = new TicketDatesAdapter(ticketDates, CheckBookings.this);
+        mRecyclerView.setAdapter(ticketDatesAdapter);
         mRecyclerView.setVisibility(View.VISIBLE);
 
     }
