@@ -64,7 +64,8 @@ public class Home extends AppCompatActivity {
 
             case R.id.logout_menu:
                 // here when we press on Sign Out button in menu
-                firebaseAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+                finish();
 
                 Intent signOut = new Intent(Home.this, SignupForFree.class);
 
@@ -73,8 +74,8 @@ public class Home extends AppCompatActivity {
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 signOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signOut);
-                finish();
-                return true;
+
+                break;
 
             case R.id.connect_menu:
                 startActivity(new Intent(Home.this, ConnectWithUs.class));
@@ -88,6 +89,7 @@ public class Home extends AppCompatActivity {
                 Intent booking = new Intent(Home.this, BookingSeat.class);
                 startActivity(booking);
                 return true;
+
             case R.id.schedule:
                 Intent busSchedule = new Intent(Home.this, Bus_Schedule.class);
                 startActivity(busSchedule);
@@ -102,10 +104,12 @@ public class Home extends AppCompatActivity {
                     moveTaskToBack(true);
                 //TODO: This may be not necessary
                 System.exit(0);
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
 
